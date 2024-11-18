@@ -8,6 +8,7 @@ import { ServicesComponent } from './components/services/services.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatIcon} from '@angular/material/icon';
 import {NgOptimizedImage} from '@angular/common';
+import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {NgOptimizedImage} from '@angular/common';
     HomeComponent,
     AboutComponent,
     ServicesComponent,
+    DrawerNavbarComponent,
   ],
   imports: [
     BrowserModule,
