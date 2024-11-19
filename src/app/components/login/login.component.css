@@ -3,6 +3,11 @@
   box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .login-container {
   display: flex;
   flex-direction: row; /* Use row to align sections side-by-side */
@@ -63,9 +68,10 @@
 .content-container {
   display: flex;
   flex: 1;
-  height: calc(100vh - 50px); /* Adjust height to fit between lines */
+  height: calc(100vh - 75px); /* Adjust height to fit between lines */
   width: 100%;
   overflow: hidden; /* Prevent overflow within content container */
+  margin-top: 37.5px; /* Start the container below the second line */
 }
 
 /* Left Image Section */

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',  // The selector is the tag name for this component in your HTML
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']  // The path to the component's styles (CSS)
 })
 export class AppComponent {
-  title = 'My Angular App';  // An example property that can be used in the template
+  isLoginPage: boolean = false;
+
+  constructor(private router: Router) {
+    // Subscribe to route changes to check if we're on the login page
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isLoginPage = event.url === '/login';
+      }
+    });
+  }
 }
