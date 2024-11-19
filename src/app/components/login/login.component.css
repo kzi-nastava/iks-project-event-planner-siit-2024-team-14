@@ -1,0 +1,268 @@
+/* General Styles */
+* {
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row; /* Use row to align sections side-by-side */
+  min-height: 100vh;
+  font-family: 'Petrona', serif;
+  overflow: auto; /* Allow scrolling if necessary */
+  margin: 0;
+  padding: 0;
+}
+
+/* Decorative Lines */
+.decorative-lines {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.decorative-lines::before,
+.decorative-lines::after {
+  content: '';
+  height: 25px;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+}
+
+/* First Line */
+.decorative-lines::before {
+  top: 0;
+  background-color: #d9d9d9;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Second Line */
+.decorative-lines::after {
+  top: 12.5px;
+  background-color: #959d90;
+  opacity: 0.6;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Top Lines */
+.top-lines {
+  top: 0;
+}
+
+/* Bottom Lines */
+.bottom-lines {
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+/* Content Container */
+.content-container {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 50px); /* Adjust height to fit between lines */
+  width: 100%;
+  overflow: hidden; /* Prevent overflow within content container */
+}
+
+/* Left Image Section */
+.image-section {
+  flex: 1;
+  background: url('../../../assets/images/background.jpg') no-repeat center center;
+  background-size: cover;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+}
+
+/* Overlay Text */
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #D9D9D9;
+  text-align: center;
+  font-family: 'Petit Formal Script', cursive; /* Fallback to cursive if font fails to load */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin-bottom: 1rem; /* Adds space between logo and text */
+}
+
+/* Logo styling */
+.logo {
+  background-image: url('../../../assets/images/logo_beige.png');
+  background-size: contain; /* Ensure the logo fits the container */
+  background-repeat: no-repeat;
+  width: 50px; /* Adjust logo size */
+  height: 50px; /* Maintain the size ratio */
+  color: #D9D9D9; /* Apply color around logo if needed */
+}
+
+/* Title Styling */
+.overlay-text h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+}
+/* Form Section with Positioned Circles */
+.form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden; /* Prevent circles from overflowing */
+  width: 100%;
+}
+
+/* Add circles in the background */
+/* Top green */
+.form-section .circle-one {
+  content: '';
+  position: absolute;
+  top: 25%; /* Adjust position to place below the form */
+  right: 22%;
+  width: 150px;
+  height: 150px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+ /* Bottom green */
+.form-section .circle-two {
+  content: '';
+  position: absolute;
+  bottom: 15%; /* Place this circle closer to the bottom */
+  left: 22%;
+  width: 200px;
+  height: 200px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+/* Bottom beige */
+.form-section .circle-three {
+  content: '';
+  position: absolute;
+  bottom: 30%; /* Place this circle closer to the bottom */
+  left: 18%;
+  width: 150px;
+  height: 150px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* Top beige */
+.form-section .circle-four {
+  content: '';
+  position: absolute;
+  top: 40%; /* Place this circle closer to the bottom */
+  right: 20%;
+  width: 120px;
+  height: 120px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* Form Container (wrapper for h2 and form) */
+.form-container {
+  display: flex;
+  flex-direction: column; /* Stack h2 and form vertically */
+  justify-content: center;
+  align-items: center; /* Center both horizontally */
+  width: 100%; /* Full width of the form section */
+  max-width: 600px; /* You can adjust max-width to your preference */
+  margin: 0 auto;
+}
+
+/* Form Header (h2) */
+.form-container h2 {
+  font-family: 'Petrona', serif; /* Apply Petrona font */
+  color: #523D35; /* Brown color */
+  margin-bottom: 1.5rem; /* Adds space between the heading and form */
+  text-align: center; /* Ensure it's centered */
+  font-size: xx-large;
+}
+
+/* Form Card */
+.form-card {
+  background: #D9D9D9;
+  border-radius: 40px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem; /* Reduced padding */
+  text-align: center;
+  width: 100%; /* Allow for responsiveness */
+  max-width: 600px; /* Increased max-width to make the card wider */
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  text-align: center;
+  color: #523D35;
+}
+
+.form-group input {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #523D35;
+  border-radius: 4px;
+  background: #D9D9D9;
+  color: #523D35; /* Set text color */
+}
+
+.btn-confirm {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #6c4c4c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-confirm:hover {
+  background-color: #5a3e3e;
+}
+
+p {
+  margin-top: 1rem;
+  color: #555;
+  font-weight: 600;
+  position: relative;
+  font-size: large;
+}
+
+a {
+  color: #6c4c4c;
+  text-decoration: none;
+  font-weight: 1100;
+  position: relative;
+}
+
+a:hover {
+  text-decoration: underline;
+}
