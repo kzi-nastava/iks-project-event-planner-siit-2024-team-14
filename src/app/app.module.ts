@@ -9,6 +9,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatIcon} from '@angular/material/icon';
 import {NgOptimizedImage} from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.component';
+import { LoginComponent } from './components/login/login.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.
     AboutComponent,
     ServicesComponent,
     DrawerNavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     MatIcon,
-    NgOptimizedImage
+    NgOptimizedImage,
+    AppRoutingModule
   ],
   providers: [
     provideAnimationsAsync()

@@ -1,4 +1,8 @@
 <!-- src/app/app.component.html -->
-<app-navbar></app-navbar>  <!-- Add Navbar here -->
 
-<app-drawer-navbar></app-drawer-navbar>
+<!-- Only show navbar and drawer for non-login routes -->
+<app-navbar *ngIf="!isLoginPage"></app-navbar>
+<app-drawer-navbar *ngIf="!isLoginPage"></app-drawer-navbar>
+
+<!-- Main content area (where login will show) -->
+<router-outlet></router-outlet>

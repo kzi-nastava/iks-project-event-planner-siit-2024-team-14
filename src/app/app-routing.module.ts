@@ -3,11 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';  // Correct import path
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  // Default route
   { path: 'about', component: AboutComponent },
-  { path: 'services', component: ServicesComponent }
+  { path: 'services', component: ServicesComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Optional default route
+  { path: '**', redirectTo: '/home' }, // Fallback for unknown routes
 ];
 
 @NgModule({
