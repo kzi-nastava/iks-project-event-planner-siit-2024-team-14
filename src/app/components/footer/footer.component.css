@@ -1,0 +1,119 @@
+footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  background-color: #f5f5f5;
+  height: 350px;
+  margin-top: 80px; /* Udaljiti footer od ostatka sadržaja */
+}
+
+.left-section {
+  background-color: #d7d9d5;
+  border-radius: 200px 200px 0 0; /* Polukrug okrenut ka gore */
+  padding: 30px;
+  margin-left: -60px; /* Pomera levo */
+  width: 350px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.left-section h2 {
+  font-family: 'Petrona', serif;
+  color: #5b4534;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
+.left-section p {
+  font-family: 'Petrona', serif;
+  color: #5b4534;
+  font-size: 16px;
+  margin: 0;
+  padding: 5px 0;
+  text-align: center;
+}
+
+.right-section {
+  margin-left: 1200px; /* Pomera desnu sekciju sa strane */
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+.right-section h2 {
+  font-family: 'Petrona', serif;
+  color: #5b4534;
+  font-size: 22px;
+  margin-bottom: 25px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.social-icons i {
+  font-size: 28px;
+  color: #5b4534;
+  transition: color 0.3s ease;
+}
+
+.social-icons i:hover {
+  color: #8c7b6a;
+}
+
+/* Responsivnost */
+@media screen and (max-width: 1200px) {
+  footer {
+    padding: 40px 50px;
+  }
+
+  .left-section {
+    margin-left: -30px;
+    width: 280px;
+    height: 220px;
+  }
+
+  .right-section {
+    margin-left: 320px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  .left-section {
+    margin-left: 0;
+    width: 250px;
+    height: 200px;
+    text-align: center;
+  }
+
+  .right-section {
+    margin-left: 0;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: right;
+  }
+
+  .social-icons i {
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,41 @@
+<div class="events-section">
+  <h2 class="section-title">HOTTEST SERVICES AND PRODUCTS</h2>
+
+  <div class="carousel-wrapper">
+    <!-- Strelica za prethodni slajd -->
+    <div class="arrow left" (click)="prevSlide()">&#9664;</div>
+
+    <!-- Carousel sa karticama -->
+    <div class="carousel-container">
+      <div class="carousel" [style.transform]="getTransform()">
+        <div *ngFor="let event of hottestEvents" class="card">
+          <!-- Gornji deo kartice sa profilnom slikom i informacijama -->
+          <div class="card-header">
+            <img [src]="event.profileImage" alt="{{event.organizerName}}" class="profile-img">
+            <div class="organizer-info">
+              <h3 class="organizer-name">{{event.organizerName}}</h3>
+              <p class="organizer-role">Service and product provider</p>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <!-- Srednji deo kartice sa slikom događaja -->
+          <img [src]="event.imageUrl" alt="{{event.title}}" class="event-image">
+
+          <!-- Donji deo kartice sa detaljima o događaju -->
+          <div class="card-content">
+            <h3>{{event.title}}</h3>
+            <p>{{event.description}}</p>
+            <small>{{event.location}}</small>
+            <br>
+            <button class="view-more-btn">View More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strelica za sledeći slajd -->
+    <div class="arrow right" (click)="nextSlide()">&#9654;</div>
+  </div>
+</div>

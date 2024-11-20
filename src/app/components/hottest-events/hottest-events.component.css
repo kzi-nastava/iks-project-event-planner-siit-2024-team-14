@@ -1,0 +1,173 @@
+.events-section {
+  text-align: center;
+  padding: 40px;
+  background-color: #f9f9f9;
+  position: relative; /* Neophodno za pozicioniranje pseudo-elementa */
+  overflow: hidden; /* Sprečava da krugovi izađu izvan sekcije */
+  z-index: -1
+}
+
+/* Pseudo-elementi za krugove */
+.events-section::before,
+.events-section::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%; /* Oblikuje krugove */
+  z-index: -1; /* Iza sadržaja sekcije */
+}
+
+.events-section::before {
+  width: 500px; /* Veličina kruga */
+  height: 500px;
+  background-color: rgba(82, 61, 53, 0.1); /* Svetlo smeđa boja */
+  top: -150px; /* Pozicija iznad sekcije */
+  left: -200px; /* Pozicija levo */
+}
+
+.events-section::after {
+  width: 700px; /* Veličina kruga */
+  height: 700px;
+  background-color: rgba(149, 157, 144, 0.6); /* Još svetlija boja */
+  bottom: -200px; /* Pozicija ispod sekcije */
+  right: -250px; /* Pozicija desno */
+}
+
+.section-title, .section-title2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #523D35;
+  margin-bottom: 20px;
+}
+
+.section-title2 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Stil za strelice */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2em;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.arrow.left {
+  left: -60px; /* Pozicija levo od carousel-a */
+}
+
+.arrow.right {
+  right: -60px; /* Pozicija desno od carousel-a */
+}
+
+/* Stilovi za kartice */
+.card {
+  flex: 0 0 auto;
+  width: 350px;
+  height: auto;
+  margin: 0 8px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: #f5f5f5;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.organizer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.organizer-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.organizer-role {
+  font-size: 0.9em;
+  color: #888;
+  margin: 0;
+}
+
+.divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.view-more-btn {
+  background-color: #523D35;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-more-btn:hover {
+  background-color: #704d3a;
+}

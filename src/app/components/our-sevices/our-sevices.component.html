@@ -1,0 +1,38 @@
+<div class="events-list-section">
+
+  <div class="header-bar">
+    <h2 class="header-title">OUR SERVICES AND PRODUCTS</h2>
+    <div class="search-filter">
+      <div class="search-box">
+        <input type="text" placeholder="Enter search credentials" class="search-input" />
+        <span class="fas fa-search"></span>
+      </div>
+      <div class="filter-icon">
+        <span class="fas fa-sliders-h"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="events-list">
+    <div *ngFor="let event of filteredEvents" class="event-card">
+      <div class="event-header">
+        <div class="event-avatar">
+          <span>{{ getInitials(event.organizerName) }}</span>
+        </div>
+        <div class="event-details">
+          <h3>{{ event.organizerName }}</h3>
+          <p>Service and product provider</p>
+        </div>
+      </div>
+      <img [src]="event.imageUrl" alt="{{ event.title }}" class="event-image" />
+      <div class="event-content">
+        <h4>{{ event.title }}</h4>
+        <p>{{ event.description }}</p>
+        <small>{{ event.location }}</small>
+        <br />
+        <button>View More</button>
+      </div>
+    </div>
+  </div>
+  <button class="view-more-btn">View More</button>
+</div>
