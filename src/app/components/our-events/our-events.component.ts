@@ -12,33 +12,27 @@ export class OurEventsComponent {
     { organizerName: 'Dušan Kovačević', location: 'Petrovaradin, Serbia', title: 'EXIT Festival', description: 'Together, always <3', imageUrl: '../../../assets/images/event8.png' },
   ];
 
-  filteredEvents = [...this.eventList]; // Prikaz filtriranih događaja
-  searchQuery: string = ''; // Pretraga
-  selectedFilter: string = ''; // Filter lokacije
+  searchTerm: string = '';
+  filteredEvents: any[] = this.eventList; // Initially shows all events
 
-  // Filtriranje događaja
-  filterEvents() {
-    this.filteredEvents = this.eventList.filter((event) => {
-      const matchesSearch =
-        !this.searchQuery ||
-        event.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        event.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        event.organizerName.toLowerCase().includes(this.searchQuery.toLowerCase());
-
-      const matchesFilter =
-        !this.selectedFilter || event.location === this.selectedFilter;
-
-      return matchesSearch && matchesFilter;
-    });
+  // Method to handle filtering
+  onSearch() {
+    if (this.searchTerm.trim() === '') {
+      this.filteredEvents = this.eventList; // If the search term is empty, show all events
+    } else {
+      this.filteredEvents = this.eventList.filter(event =>
+        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        event.organizerName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        event.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        event.location.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
   }
 
-  // Metoda za inicijale
+  // Assuming you have this method to get initials
   getInitials(name: string): string {
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase();
+    const names = name.split(' ');
+    return names.length > 1 ? names[0][0] + names[1][0] : names[0][0];
   }
 
 }

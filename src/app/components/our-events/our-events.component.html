@@ -4,7 +4,8 @@
     <h2 class="header-title">OUR EVENTS</h2>
     <div class="search-filter">
       <div class="search-box">
-        <input type="text" placeholder="Enter search credentials" class="search-input" />
+        <!-- Add [(ngModel)] to bind the input value to the search term in the component -->
+        <input type="text" placeholder="Enter search credentials" class="search-input" [(ngModel)]="searchTerm" (input)="onSearch()" />
         <span class="fas fa-search"></span>
       </div>
       <div class="filter-icon">
