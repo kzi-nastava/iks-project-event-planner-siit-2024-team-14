@@ -27,7 +27,14 @@
           <div class="card-content">
             <h3>{{event.title}}</h3>
             <p>{{event.description}}</p>
-            <small>{{event.location}}</small>
+            <small>
+              <span class="fas fa-location-pin"></span> {{ event.location }}
+            </small>
+            <br>
+            <small>
+              <span class="fas fa-calendar-alt"></span> {{ event.date }}
+            </small>
+            <br />
             <br>
             <button class="view-more-btn">View More</button>
           </div>

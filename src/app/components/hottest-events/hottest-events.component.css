@@ -171,3 +171,8 @@
 .view-more-btn:hover {
   background-color: #704d3a;
 }
+
+.card-content small span, p span {
+  margin-right: 5px; /* Razmak između ikone i teksta */
+  color: #523D35; /* Braon boja */
+}

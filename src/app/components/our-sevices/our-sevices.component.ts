@@ -7,13 +7,15 @@ import { Component } from '@angular/core';
 })
 export class OurSevicesComponent {
   eventList = [
-    { organizerName: 'Eva Lolic', location: 'Niš, Serbia', title: 'Singer', description: 'Music lover', imageUrl: '../../../assets/images/service6.png' },
-    { organizerName: 'Natasa Mitrovic', location: 'Belgrade, Serbia', title: 'Marketing team', description: 'Burn your social medias', imageUrl: '../../../assets/images/service7.png' },
-    { organizerName: 'Zoran Petrovic', location: 'Petrovaradin, Serbia', title: 'Photobooth Rentals', description: 'Interactive photo booths with custom backdrops and props.', imageUrl: '../../../assets/images/service8.png' },
+    { organizerName: 'Eva Lolic', location: 'Niš, Serbia', title: 'Singer', description: 'Music lover', price:'60 000 din', imageUrl: '../../../assets/images/service6.png' },
+    { organizerName: 'Natasa Mitrovic', location: 'Belgrade, Serbia', title: 'Marketing team', description: 'Burn your social medias', price:'45 000 din', imageUrl: '../../../assets/images/service7.png' },
+    { organizerName: 'Zoran Petrovic', location: 'Petrovaradin, Serbia', title: 'Photobooth Rentals', description: 'Interactive photo booths with custom backdrops and props.', price:'10 000 din', imageUrl: '../../../assets/images/service8.png' },
   ];
 
   searchTerm: string = '';
   filteredEvents: any[] = this.eventList; // Initially shows all events
+
+  showFilters: boolean = false;
 
   // Method to handle filtering
   onSearch() {
@@ -33,6 +35,10 @@ export class OurSevicesComponent {
   getInitials(name: string): string {
     const names = name.split(' ');
     return names.length > 1 ? names[0][0] + names[1][0] : names[0][0];
+  }
+
+  toggleFilters() {
+    this.showFilters = !this.showFilters; // Prebaci između prikazivanja i sakrivanja filtera
   }
 
 }

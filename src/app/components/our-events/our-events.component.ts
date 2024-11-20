@@ -7,12 +7,13 @@ import { Component } from '@angular/core';
 })
 export class OurEventsComponent {
   eventList = [
-    { organizerName: 'Dragana Milošević', location: 'Niš, Serbia', title: 'Bakery Opening', description: 'Come with an empty stomach!', imageUrl: '../../../assets/images/event6.png' },
-    { organizerName: 'Nina Matijević', location: 'Belgrade, Serbia', title: 'Graduation Party', description: 'All college graduates welcome :)', imageUrl: '../../../assets/images/event7.png' },
-    { organizerName: 'Dušan Kovačević', location: 'Petrovaradin, Serbia', title: 'EXIT Festival', description: 'Together, always <3', imageUrl: '../../../assets/images/event8.png' },
+    { organizerName: 'Dragana Milošević', location: 'Niš, Serbia',date: '02.12.2024', title: 'Bakery Opening', description: 'Come with an empty stomach!', imageUrl: '../../../assets/images/event6.png' },
+    { organizerName: 'Nina Matijević', location: 'Belgrade, Serbia', date: '22.12.2024',  title: 'Graduation Party', description: 'All college graduates welcome :)', imageUrl: '../../../assets/images/event7.png' },
+    { organizerName: 'Dušan Kovačević', location: 'Petrovaradin, Serbia', date: '30.11.2024.',  title: 'EXIT Festival', description: 'Together, always <3', imageUrl: '../../../assets/images/event8.png' },
   ];
 
   searchTerm: string = '';
+  showFilters: boolean = false;
   filteredEvents: any[] = this.eventList; // Initially shows all events
 
   // Method to handle filtering
@@ -33,6 +34,10 @@ export class OurEventsComponent {
   getInitials(name: string): string {
     const names = name.split(' ');
     return names.length > 1 ? names[0][0] + names[1][0] : names[0][0];
+  }
+
+  toggleFilters() {
+    this.showFilters = !this.showFilters; // Prebaci između prikazivanja i sakrivanja filtera
   }
 
 }

@@ -8,11 +8,11 @@ import { Component } from '@angular/core';
 export class HottestServicesComponent {
 
   hottestEvents = [
-    { organizerName: 'Milos Markovic', location: 'Novi Sad, Serbia', title: 'Champagne', description: 'Sparkling wine', imageUrl: '../../../assets/images/service1.png', profileImage: '../../../assets/images/profile9.png'},
-    { organizerName: 'Katarina Peric', location: 'Novi Sad, Serbia', title: 'Horse riding lessons', description: 'For horse lovers', imageUrl: '../../../assets/images/service2.png', profileImage: '../../../assets/images/profile10.png' },
-    { organizerName: 'Nenad Bosiljcic', location: 'Novi Sad, Serbia', title: 'Rooftop theatre equipment', description: 'For the best movie night', imageUrl: '../../../assets/images/service3.png', profileImage: '../../../assets/images/profile11.png'},
-    { organizerName: 'Ivan Ivanovic', location: 'Novi Sad, Serbia', title: 'Catering service', description: 'The best food service in your town! :)', imageUrl: '../../../assets/images/service4.png', profileImage: '../../../assets/images/profile12.png'},
-    { organizerName: 'Anastasija Beric', location: 'Novi Sad, Serbia', title: 'Band', description: 'High-energy band playing modern favorites.', imageUrl: '../../../assets/images/service5.png', profileImage: '../../../assets/images/profile13.png'},
+    { organizerName: 'Milos Markovic', location: 'Novi Sad, Serbia', title: 'Champagne', description: 'Sparkling wine', price:'30 000 din', imageUrl: '../../../assets/images/service1.png', profileImage: '../../../assets/images/profile9.png'},
+    { organizerName: 'Katarina Peric', location: 'Novi Sad, Serbia', title: 'Horse riding lessons', description: 'For horse lovers', price:'6 000 din', imageUrl: '../../../assets/images/service2.png', profileImage: '../../../assets/images/profile10.png' },
+    { organizerName: 'Nenad Bosiljcic', location: 'Novi Sad, Serbia', title: 'Rooftop theatre equipment', description: 'For the best movie night', price:'15 000 din', imageUrl: '../../../assets/images/service3.png', profileImage: '../../../assets/images/profile11.png'},
+    { organizerName: 'Ivan Ivanovic', location: 'Novi Sad, Serbia', title: 'Catering service', description: 'The best food service in your town! :)', price:'20 000 din', imageUrl: '../../../assets/images/service4.png', profileImage: '../../../assets/images/profile12.png'},
+    { organizerName: 'Anastasija Beric', location: 'Novi Sad, Serbia', title: 'Band', description: 'High-energy band playing modern favorites.', price:'80 000 din', imageUrl: '../../../assets/images/service5.png', profileImage: '../../../assets/images/profile13.png'},
   ];
 
   currentSlide = 0;

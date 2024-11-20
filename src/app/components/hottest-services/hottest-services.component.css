@@ -173,6 +173,11 @@
   padding: 16px;
 }
 
+.card-content small span, p span {
+  margin-right: 5px; /* Razmak između ikone i teksta */
+  color: #523D35; /* Braon boja */
+}
+
 .view-more-btn {
   background-color: #523D35;
   color: #fff;

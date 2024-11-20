@@ -8,11 +8,37 @@
         <input type="text" placeholder="Enter search credentials" class="search-input" [(ngModel)]="searchTerm" (input)="onSearch()" />
         <span class="fas fa-search"></span>
       </div>
-      <div class="filter-icon">
+      <div class="filter-icon" (click)="toggleFilters()">
         <span class="fas fa-sliders-h"></span>
       </div>
     </div>
   </div>
+
+  <div class="filter-options" [ngClass]="{'show-filters': showFilters}">
+    <div class="filter-option">
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate">
+    </div>
+    <div class="filter-option">
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate">
+    </div>
+    <div class="filter-option">
+      <label for="city">City:</label>
+      <input type="text" id="city" placeholder="Enter city">
+    </div>
+    <div class="filter-option">
+      <label for="category">Category:</label>
+      <select id="category">
+        <option value="">All Categories</option>
+        <option value="Music">Music</option>
+        <option value="Art">Art</option>
+        <option value="Sports">Sports</option>
+        <option value="Education">Education</option>
+      </select>
+    </div>
+  </div>
+
 
   <div class="events-list">
     <div class="extra-circle"></div>
@@ -30,8 +56,15 @@
       <div class="event-content">
         <h4>{{ event.title }}</h4>
         <p>{{ event.description }}</p>
-        <small>{{ event.location }}</small>
+        <small>
+          <span class="fas fa-location-pin"></span> {{ event.location }}
+        </small>
+        <br>
+        <small>
+          <span class="fas fa-calendar-alt"></span> {{ event.date }}
+        </small>
         <br />
+        <br>
         <button>View More</button>
       </div>
     </div>

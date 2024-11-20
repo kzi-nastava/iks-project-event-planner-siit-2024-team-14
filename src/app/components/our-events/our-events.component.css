@@ -146,6 +146,11 @@
   color: #666;
 }
 
+.event-content small span {
+  margin-right: 5px; /* Razmak između ikone i teksta */
+  color: #523D35; /* Boja ikone, možeš promeniti po želji */
+}
+
 button {
   background-color: #523D35;
   color: white;
@@ -231,3 +236,35 @@ button:hover {
 .filter-icon .fa-sliders-h {
   color: #5a4033;
 }
+
+.filter-options {
+  display: none; /* Po defaultu su sakriveni */
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.filter-options.show-filters {
+  display: block; /* Kada je aktivno, prikazuju se */
+  transition: all 0.3s ease-in-out;
+}
+
+.filter-option {
+  margin-bottom: 10px;
+}
+
+.filter-option label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.filter-option input,
+.filter-option select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
