@@ -214,7 +214,7 @@ body {
 .form-container h2 {
   font-family: 'Petrona', serif; /* Apply Petrona font */
   color: #523D35; /* Brown color */
-  margin-bottom: 1.5rem; /* Adds space between the heading and form */
+  margin-bottom: 0.5rem; /* Adds space between the heading and form */
   text-align: center; /* Ensure it's centered */
   font-size: xx-large;
 }
@@ -267,7 +267,7 @@ body {
 }
 
 p {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   color: #555;
   font-weight: 600;
   position: relative;
