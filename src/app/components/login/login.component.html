@@ -39,9 +39,27 @@
             </form>
           </div>
         </div>
+
+        <!-- Popup Modal -->
         <p>
-          You don’t have an account? <a href="/register">Register here</a>
+          You don’t have an account?
+          <a href="#" (click)="openModal($event)">Register here</a>
         </p>
+
+        <!-- Modal -->
+        <div
+          id="registerModal"
+          class="modal"
+          [ngStyle]="{ display: showModal ? 'flex' : 'none' }"
+        >
+          <div class="modal-content">
+            <h2>Do you want to register as:</h2>
+            <button (click)="redirectTo('/registration-eo')">Event Organizer</button>
+            <button (click)="redirectTo('/registration-spp')">Service and Product Provider</button>
+            <button id="closeModal" (click)="closeModal()">Close</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
