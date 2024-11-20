@@ -1,16 +1,13 @@
-<app-navbar></app-navbar>
-<app-drawer-navbar></app-drawer-navbar>
-<app-hottest-events></app-hottest-events>
-<app-our-events></app-our-events>
-<div class="section-divider1"></div>
-<div class="section-divider2"></div>
-<app-hottest-services></app-hottest-services>
-<app-our-sevices></app-our-sevices>
-<app-footer></app-footer>
-
 <!-- Only show navbar and drawer for non-login and non-registration routes -->
 <app-navbar *ngIf="!(isLoginPage || isRegistrationPage)"></app-navbar>
 <app-drawer-navbar *ngIf="!(isLoginPage || isRegistrationPage)"></app-drawer-navbar>
+<app-hottest-events *ngIf="!(isLoginPage || isRegistrationPage)"></app-hottest-events>
+<app-our-events *ngIf="!(isLoginPage || isRegistrationPage)"></app-our-events>
+<div class="section-divider1"></div>
+<div class="section-divider2"></div>
+<app-hottest-services *ngIf="!(isLoginPage || isRegistrationPage)"></app-hottest-services>
+<app-our-sevices *ngIf="!(isLoginPage || isRegistrationPage)"></app-our-sevices>
+<app-footer *ngIf="!(isLoginPage || isRegistrationPage)"></app-footer>
 
 <!-- Main content area (where login and registration will show) -->
 <router-outlet></router-outlet>
