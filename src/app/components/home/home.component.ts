@@ -8,3 +8,4 @@ import { Component } from '@angular/core';
 export class HomeComponent {
   title = 'Welcome to the Home Page!';
 }
+
