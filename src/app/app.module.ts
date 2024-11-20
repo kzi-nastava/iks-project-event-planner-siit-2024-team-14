@@ -6,11 +6,21 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatIcon} from '@angular/material/icon';
-import {NgOptimizedImage} from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { NgOptimizedImage } from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.component';
+import {FormsModule} from '@angular/forms';
+import { HottestEventsComponent } from './components/hottest-events/hottest-events.component';
+import { OurEventsComponent } from './components/our-events/our-events.component';
+import { HottestServicesComponent } from './components/hottest-services/hottest-services.component';
+import { OurSevicesComponent } from './components/our-sevices/our-sevices.component';
+import {FooterComponent} from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
+import { OfferingsModule } from './offerings/offerings.module';
 import {AppRoutingModule} from './app-routing.module';
+import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
+import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+
 
 @NgModule({
   declarations: [
@@ -20,13 +30,25 @@ import {AppRoutingModule} from './app-routing.module';
     AboutComponent,
     ServicesComponent,
     DrawerNavbarComponent,
-    LoginComponent
+
+    HottestEventsComponent,
+    OurEventsComponent,
+    HottestServicesComponent,
+    OurSevicesComponent,
+    FooterComponent,
+
+    LoginComponent,
+    RegistrationEoComponent,
+    RegistrationSppComponent
+
   ],
   imports: [
     BrowserModule,
     MatIcon,
     NgOptimizedImage,
-    AppRoutingModule
+    AppRoutingModule,
+    OfferingsModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()
