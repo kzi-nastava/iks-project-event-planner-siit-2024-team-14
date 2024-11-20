@@ -143,7 +143,7 @@ body {
   content: '';
   position: absolute;
   top: 25%; /* Adjust position to place below the form */
-  right: 22%;
+  right: 15%;
   width: 150px;
   height: 150px;
   background-color: #959D90;
@@ -154,8 +154,8 @@ body {
 .form-section .circle-two {
   content: '';
   position: absolute;
-  bottom: 15%; /* Place this circle closer to the bottom */
-  left: 22%;
+  bottom: 20%; /* Place this circle closer to the bottom */
+  left: 15%;
   width: 200px;
   height: 200px;
   background-color: #959D90;
@@ -167,8 +167,8 @@ body {
 .form-section .circle-three {
   content: '';
   position: absolute;
-  bottom: 30%; /* Place this circle closer to the bottom */
-  left: 18%;
+  bottom: 35%; /* Place this circle closer to the bottom */
+  left: 10%;
   width: 150px;
   height: 150px;
   background-color: #D9D9D9;
@@ -181,7 +181,7 @@ body {
   content: '';
   position: absolute;
   top: 40%; /* Place this circle closer to the bottom */
-  right: 20%;
+  right: 15%;
   width: 120px;
   height: 120px;
   background-color: #D9D9D9;
@@ -215,6 +215,8 @@ body {
   border-radius: 40px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1.5rem; /* Reduced padding */
+  padding-right: 5rem;
+  padding-left: 5rem;
   text-align: center;
   width: 100%; /* Allow for responsiveness */
   max-width: 600px; /* Increased max-width to make the card wider */
