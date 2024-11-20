@@ -1,8 +1,6 @@
-<!-- src/app/app.component.html -->
-
-<!-- Only show navbar and drawer for non-login routes -->
-<app-navbar *ngIf="!isLoginPage"></app-navbar>
-<app-drawer-navbar *ngIf="!isLoginPage"></app-drawer-navbar>
-
-<!-- Main content area (where login will show) -->
+<!-- Only show navbar and drawer for non-login and non-registration routes -->
+<app-navbar *ngIf="!(isLoginPage || isRegistrationPage)"></app-navbar>
+<app-drawer-navbar *ngIf="!(isLoginPage || isRegistrationPage)"></app-drawer-navbar>
+<!-- Main content area (where login and registration will show) -->
 <router-outlet></router-outlet>
+
