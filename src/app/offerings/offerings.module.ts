@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AddServiceComponent } from './add-service/add-service.component';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
 
@@ -8,10 +7,12 @@ import { ServiceDetailsComponent } from './service-details/service-details.compo
 
 @NgModule({
   declarations: [
+    ServiceDetailsComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgOptimizedImage
   ]
 })
 export class OfferingsModule { }
