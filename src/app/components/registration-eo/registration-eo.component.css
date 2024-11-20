@@ -142,8 +142,8 @@ body {
 .form-section .circle-one {
   content: '';
   position: absolute;
-  top: 5%; /* Adjust position to place below the form */
-  right: 22%;
+  top: 3%; /* Adjust position to place below the form */
+  right: 12%;
   width: 150px;
   height: 150px;
   background-color: #959D90;
@@ -154,8 +154,8 @@ body {
 .form-section .circle-two {
   content: '';
   position: absolute;
-  bottom: 0%; /* Place this circle closer to the bottom */
-  left: 22%;
+  bottom: -5%; /* Place this circle closer to the bottom */
+  left: 10%;
   width: 200px;
   height: 200px;
   background-color: #959D90;
@@ -168,7 +168,7 @@ body {
   content: '';
   position: absolute;
   bottom: 15%; /* Place this circle closer to the bottom */
-  left: 18%;
+  left: 10%;
   width: 150px;
   height: 150px;
   background-color: #D9D9D9;
@@ -181,7 +181,7 @@ body {
   content: '';
   position: absolute;
   top: 20%; /* Place this circle closer to the bottom */
-  right: 20%;
+  right: 10%;
   width: 120px;
   height: 120px;
   background-color: #D9D9D9;
