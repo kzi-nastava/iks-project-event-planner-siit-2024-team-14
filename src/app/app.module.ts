@@ -6,11 +6,12 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatIcon} from '@angular/material/icon';
-import {NgOptimizedImage} from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { NgOptimizedImage } from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.component';
 import { LoginComponent } from './components/login/login.component';
-import {AppRoutingModule} from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
+import { OfferingsModule } from './offerings/offerings.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {AppRoutingModule} from './app-routing.module';
     BrowserModule,
     MatIcon,
     NgOptimizedImage,
-    AppRoutingModule
+    AppRoutingModule,
+    OfferingsModule
   ],
   providers: [
     provideAnimationsAsync()
