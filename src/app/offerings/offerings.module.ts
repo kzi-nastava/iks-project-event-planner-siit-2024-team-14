@@ -8,8 +8,6 @@ import { ServiceDetailsComponent } from './service-details/service-details.compo
 
 @NgModule({
   declarations: [
-    AddServiceComponent,
-    ServiceDetailsComponent
   ],
   imports: [
     CommonModule,
