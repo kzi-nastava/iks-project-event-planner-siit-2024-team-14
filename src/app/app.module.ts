@@ -47,7 +47,7 @@ import { RegistrationSppComponent } from './components/registration-spp/registra
     MatIcon,
     NgOptimizedImage,
     AppRoutingModule,
-    OfferingsModue,
+    OfferingsModule,
     FormsModule
   ],
   providers: [
