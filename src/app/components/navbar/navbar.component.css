@@ -2,7 +2,6 @@
 header {
   position: relative;
 }
-
 /* The background image covering the top of the screen */
 .header-background {
   background-image: url('../../../assets/images/background.jpg');
