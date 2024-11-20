@@ -7,3 +7,11 @@
 <app-hottest-services></app-hottest-services>
 <app-our-sevices></app-our-sevices>
 <app-footer></app-footer>
+
+<!-- Only show navbar and drawer for non-login and non-registration routes -->
+<app-navbar *ngIf="!(isLoginPage || isRegistrationPage)"></app-navbar>
+<app-drawer-navbar *ngIf="!(isLoginPage || isRegistrationPage)"></app-drawer-navbar>
+
+<!-- Main content area (where login and registration will show) -->
+<router-outlet></router-outlet>
+
