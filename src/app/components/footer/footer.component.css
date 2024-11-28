@@ -12,8 +12,10 @@ footer {
   background-color: #d7d9d5;
   border-radius: 200px 200px 0 0; /* Polukrug okrenut ka gore */
   padding: 30px;
+
   width: 300px;
   height: 300px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,6 +50,7 @@ footer {
   z-index: 1;
   flex: 1; /* Omogućava fleksibilan raspored */
   padding: 40px;
+
 }
 
 .right-section h2 {
