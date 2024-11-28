@@ -308,54 +308,120 @@ a:hover {
   background-color: #5a3e3e;
 }
 
-/* General responsive styles */
-@media screen and (max-width: 1366px) { /* 13-inch laptops (e.g., 1366x768 resolution) */
+/* Responsive Styles for Larger Screens */
+
+/* General Scaling for 13-inch laptops (1366px and smaller) */
+@media screen and (max-width: 1366px) {
   .overlay-text h1 {
-    font-size: 1.8rem; /* Slightly smaller font size */
+    font-size: 1.5rem; /* Smaller font for smaller laptops */
   }
-  .form-card {
-    padding-right: 3rem;
-    padding-left: 3rem; /* Adjust padding for smaller width */
-    max-width: 500px; /* Reduce card size */
+
+  .form-section .circle-one,
+  .form-section .circle-two,
+  .form-section .circle-three,
+  .form-section .circle-four {
+    width: 100px; /* Smaller circles */
+    height: 100px;
   }
+
+  .form-container h2 {
+    font-size: 1.8rem; /* Adjusted font size */
+  }
+
   .btn-confirm {
-    font-size: 0.9rem; /* Reduce button text size */
+    font-size: 0.9rem; /* Adjust button font size */
   }
 }
 
-@media screen and (min-width: 1367px) and (max-width: 1440px) { /* 14-inch laptops */
+/* Scaling for 14-inch laptops (1367px - 1440px) */
+@media screen and (min-width: 1367px) and (max-width: 1440px) {
   .overlay-text h1 {
-    font-size: 2rem; /* Keep the size moderate */
+    font-size: 2rem;
   }
-  .form-card {
-    padding-right: 4rem;
-    padding-left: 4rem; /* Adjust padding slightly */
-    max-width: 550px; /* Slightly wider form */
+
+  .form-section .circle-one,
+  .form-section .circle-two,
+  .form-section .circle-three,
+  .form-section .circle-four {
+    width: 120px;
+    height: 120px;
   }
+
+  .form-container h2 {
+    font-size: 2rem;
+  }
+
   .btn-confirm {
-    font-size: 1rem; /* Standard button size */
+    font-size: 1rem;
   }
 }
 
-@media screen and (min-width: 1441px) and (max-width: 1536px) { /* 15-inch laptops */
+/* Scaling for 15-inch laptops (1441px - 1536px) */
+@media screen and (min-width: 1441px) and (max-width: 1536px) {
   .overlay-text h1 {
-    font-size: 2.2rem; /* Larger font size for bigger screens */
+    font-size: 2.5rem;
   }
-  .form-card {
-    padding-right: 5rem;
-    padding-left: 5rem;
-    max-width: 600px; /* Full form width */
+
+  .form-section .circle-one,
+  .form-section .circle-two,
+  .form-section .circle-three,
+  .form-section .circle-four {
+    width: 150px;
+    height: 150px;
+  }
+
+  .form-container h2 {
+    font-size: 2.5rem;
+  }
+
+  .btn-confirm {
+    font-size: 1.2rem;
   }
 }
 
-@media screen and (min-width: 1537px) and (max-width: 1600px) { /* 16-inch laptops */
+/* Scaling for 16-inch laptops (1537px - 1600px) */
+@media screen and (min-width: 1537px) and (max-width: 1600px) {
   .overlay-text h1 {
-    font-size: 2.4rem; /* Bigger text size for large screens */
+    font-size: 3rem;
   }
-  .form-card {
-    max-width: 650px; /* Expand form width */
+
+  .form-section .circle-one,
+  .form-section .circle-two,
+  .form-section .circle-three,
+  .form-section .circle-four {
+    width: 180px;
+    height: 180px;
   }
+
+  .form-container h2 {
+    font-size: 3rem;
+  }
+
   .btn-confirm {
-    font-size: 1.1rem; /* Slightly larger button size */
+    font-size: 1.4rem;
   }
 }
+
+/* Scaling for Screens Larger than 1600px */
+@media screen and (min-width: 1601px) {
+  .overlay-text h1 {
+    font-size: 3.5rem;
+  }
+
+  .form-section .circle-one,
+  .form-section .circle-two,
+  .form-section .circle-three,
+  .form-section .circle-four {
+    width: 200px;
+    height: 200px;
+  }
+
+  .form-container h2 {
+    font-size: 3.5rem;
+  }
+
+  .btn-confirm {
+    font-size: 1.5rem;
+  }
+}
+
