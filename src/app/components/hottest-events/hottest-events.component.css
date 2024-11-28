@@ -100,7 +100,7 @@
 .card {
   flex: 0 0 auto;
   width: 100%;
-  max-width: 90%; /* Maksimalna širina za desktop */
+  max-width: 30%; /* Maksimalna širina za desktop */
   height: auto;
   margin: 0 8px;
   background-color: #fff;
