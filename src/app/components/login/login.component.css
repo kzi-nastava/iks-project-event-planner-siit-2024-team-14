@@ -411,6 +411,14 @@ a:hover {
     width: 110px;
     height: 110px;
   }
+
+  .form-container {
+    max-width: 500px; /* Slightly smaller on smaller screens */
+  }
+
+  .form-card {
+    max-width: 500px; /* Keep form card width smaller on smaller screens */
+  }
 }
 
 /* Scaling for 14-inch laptops (1367px - 1440px) */
@@ -433,6 +441,14 @@ a:hover {
   .form-section .circle-four {
     width: 140px;
     height: 140px;
+  }
+
+  .form-container {
+    max-width: 550px; /* Increase max width for slightly larger screens */
+  }
+
+  .form-card {
+    max-width: 550px; /* Keep form card width larger */
   }
 }
 
@@ -457,6 +473,14 @@ a:hover {
     width: 160px;
     height: 160px;
   }
+
+  .form-container {
+    max-width: 600px; /* Larger form container */
+  }
+
+  .form-card {
+    max-width: 600px; /* Larger form card for better layout */
+  }
 }
 
 /* Scaling for 16-inch laptops (1537px - 1600px) */
@@ -480,6 +504,14 @@ a:hover {
     width: 190px;
     height: 190px;
   }
+
+  .form-container {
+    max-width: 650px; /* Even larger form container */
+  }
+
+  .form-card {
+    max-width: 650px; /* Larger form card */
+  }
 }
 
 /* Scaling for Screens Larger than 1600px */
@@ -502,6 +534,14 @@ a:hover {
   .form-section .circle-four {
     width: 240px;
     height: 240px;
+  }
+
+  .form-container {
+    max-width: 700px; /* Max width increased on large screens */
+  }
+
+  .form-card {
+    max-width: 700px; /* Larger form card width */
   }
 }
 
