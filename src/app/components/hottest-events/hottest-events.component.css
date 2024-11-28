@@ -49,7 +49,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  max-width: 70%;
+  max-width: 90%;
   margin: auto;
 }
 
@@ -100,7 +100,7 @@
 .card {
   flex: 0 0 auto;
   width: 100%;
-  max-width: 350px; /* Maksimalna širina za desktop */
+  max-width: 90%; /* Maksimalna širina za desktop */
   height: auto;
   margin: 0 8px;
   background-color: #fff;
