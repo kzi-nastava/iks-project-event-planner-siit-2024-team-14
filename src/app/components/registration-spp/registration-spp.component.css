@@ -102,7 +102,7 @@ body {
   transform: translate(-50%, -50%);
   color: #D9D9D9;
   text-align: center;
-  font-family: 'Petit Formal Script', cursive; /* Fallback to cursive if font fails to load */
+  font-family: 'Petit Formal Script', cursive;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,17 +114,17 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1;
-  margin-bottom: 1rem; /* Adds space between logo and text */
+  margin-bottom: 1rem;
 }
 
 /* Logo styling */
 .logo {
   background-image: url('../../../assets/images/logo_beige.png');
-  background-size: contain; /* Ensure the logo fits the container */
+  background-size: contain;
   background-repeat: no-repeat;
-  width: 50px; /* Adjust logo size */
-  height: 50px; /* Maintain the size ratio */
-  color: #D9D9D9; /* Apply color around logo if needed */
+  width: 50px;
+  height: 50px;
+  color: #D9D9D9;
 }
 
 /* Title Styling */
@@ -133,6 +133,7 @@ body {
   font-weight: 500;
   margin: 0;
 }
+
 /* Form Section with Positioned Circles */
 .form-section {
   flex: 1;
@@ -143,7 +144,7 @@ body {
   padding: 1rem;
   position: relative;
   flex-direction: column;
-  overflow: hidden; /* Prevent circles from overflowing */
+  overflow: hidden;
   width: 100%;
 }
 
@@ -152,7 +153,7 @@ body {
 .form-section .circle-one {
   content: '';
   position: absolute;
-  top: 3%; /* Adjust position to place below the form */
+  top: 3%;
   right: 12%;
   width: 150px;
   height: 150px;
@@ -160,11 +161,12 @@ body {
   border-radius: 50%;
   opacity: 0.7;
 }
+
 /* Bottom green */
 .form-section .circle-two {
   content: '';
   position: absolute;
-  bottom: -5%; /* Place this circle closer to the bottom */
+  bottom: -5%;
   left: 10%;
   width: 200px;
   height: 200px;
@@ -177,7 +179,7 @@ body {
 .form-section .circle-three {
   content: '';
   position: absolute;
-  bottom: 15%; /* Place this circle closer to the bottom */
+  bottom: 15%;
   left: 10%;
   width: 150px;
   height: 150px;
@@ -190,7 +192,7 @@ body {
 .form-section .circle-four {
   content: '';
   position: absolute;
-  top: 20%; /* Place this circle closer to the bottom */
+  top: 20%;
   right: 10%;
   width: 120px;
   height: 120px;
@@ -199,23 +201,23 @@ body {
   opacity: 0.8;
 }
 
-/* Form Container (wrapper for h2 and form) */
+/* Form Container */
 .form-container {
   display: flex;
-  flex-direction: column; /* Stack h2 and form vertically */
+  flex-direction: column;
   justify-content: center;
-  align-items: center; /* Center both horizontally */
-  width: 100%; /* Full width of the form section */
-  max-width: 600px; /* You can adjust max-width to your preference */
+  align-items: center;
+  width: 100%;
+  max-width: 80%;
   margin: 0 auto;
 }
 
-/* Form Header (h2) */
+/* Form Header */
 .form-container h2 {
-  font-family: 'Petrona', serif; /* Apply Petrona font */
-  color: #523D35; /* Brown color */
-  margin-bottom: 0.5rem; /* Adds space between the heading and form */
-  text-align: center; /* Ensure it's centered */
+  font-family: 'Petrona', serif;
+  color: #523D35;
+  margin-bottom: 0.5rem;
+  text-align: center;
   font-size: xx-large;
 }
 
@@ -224,17 +226,18 @@ body {
   background: #D9D9D9;
   border-radius: 40px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem; /* Reduced padding */
+  padding: 1.5rem;
   padding-left: 3rem;
   padding-right: 3rem;
   text-align: center;
-  width: 100%; /* Allow for responsiveness */
-  max-width: 600px; /* Increased max-width to make the card wider */
+  width: 100%;
+  max-width: 600px;
   position: relative;
   box-sizing: border-box;
   margin: 0 auto;
 }
 
+/* Form Group */
 .form-group {
   margin-bottom: 0.5rem;
   text-align: center;
@@ -248,7 +251,7 @@ body {
   border: 1px solid #523D35;
   border-radius: 4px;
   background: #D9D9D9;
-  color: #523D35; /* Set text color */
+  color: #523D35;
 }
 
 .btn-confirm {
@@ -285,40 +288,25 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Responsive Styles for Circles and Larger Screens */
-
-/* General Scaling for 13-inch laptops (1366px and smaller) */
+/* Responsive Styles */
 @media screen and (max-width: 1366px) {
-  .form-section .circle-one {
-    width: 120px;  /* Larger circle */
+  .form-section .circle-one,
+  .form-section .circle-two,
+  .form-section .circle-three,
+  .form-section .circle-four {
+    width: 120px;
     height: 120px;
   }
 
-  .form-section .circle-two {
-    width: 150px;
-    height: 150px;
-  }
-
-  .form-section .circle-three {
-    width: 140px;
-    height: 140px;
-  }
-
-  .form-section .circle-four {
-    width: 110px;
-    height: 110px;
-  }
-
   .form-container {
-    max-width: 500px; /* Slightly smaller on smaller screens */
+    max-width: 500px;
   }
 
   .form-card {
-    max-width: 500px; /* Keep form card width smaller on smaller screens */
+    max-width: 500px;
   }
 }
 
-/* Scaling for 14-inch laptops (1367px - 1440px) */
 @media screen and (min-width: 1367px) and (max-width: 1440px) {
   .form-section .circle-one {
     width: 160px;
@@ -341,15 +329,14 @@ a:hover {
   }
 
   .form-container {
-    max-width: 550px; /* Increase max width for slightly larger screens */
+    max-width: 550px;
   }
 
   .form-card {
-    max-width: 550px; /* Keep form card width larger */
+    max-width: 550px;
   }
 }
 
-/* Scaling for 15-inch laptops (1441px - 1536px) */
 @media screen and (min-width: 1441px) and (max-width: 1536px) {
   .form-section .circle-one {
     width: 180px;
@@ -362,84 +349,32 @@ a:hover {
   }
 
   .form-section .circle-three {
-    width: 200px;
-    height: 200px;
+    width: 190px;
+    height: 190px;
   }
 
   .form-section .circle-four {
     width: 160px;
     height: 160px;
   }
-
-  .form-container {
-    max-width: 600px; /* Larger form container */
-  }
-
-  .form-card {
-    max-width: 600px; /* Larger form card for better layout */
-  }
 }
 
-/* Scaling for 16-inch laptops (1537px - 1600px) */
-@media screen and (min-width: 1537px) and (max-width: 1600px) {
-  .form-section .circle-one {
-    width: 220px;
-    height: 220px;
-  }
-
-  .form-section .circle-two {
-    width: 250px;
-    height: 250px;
-  }
-
-  .form-section .circle-three {
-    width: 230px;
-    height: 230px;
-  }
-
-  .form-section .circle-four {
-    width: 190px;
-    height: 190px;
+/* Mobile-First Adjustments */
+@media screen and (max-width: 768px) {
+  .image-section {
+    display: none; /* Hide the image section on smaller screens */
   }
 
   .form-container {
-    max-width: 650px; /* Even larger form container */
+    max-width: 95%;
   }
 
   .form-card {
-    max-width: 650px; /* Larger form card */
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .form-group input {
+    padding: 0.7rem;
   }
 }
-
-/* Scaling for Screens Larger than 1600px */
-@media screen and (min-width: 1601px) {
-  .form-section .circle-one {
-    width: 260px;
-    height: 260px;
-  }
-
-  .form-section .circle-two {
-    width: 300px;
-    height: 300px;
-  }
-
-  .form-section .circle-three {
-    width: 280px;
-    height: 280px;
-  }
-
-  .form-section .circle-four {
-    width: 240px;
-    height: 240px;
-  }
-
-  .form-container {
-    max-width: 700px; /* Max width increased on large screens */
-  }
-
-  .form-card {
-    max-width: 700px; /* Larger form card width */
-  }
-}
-
-
