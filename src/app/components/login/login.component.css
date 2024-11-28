@@ -130,7 +130,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
-  padding: 2%;
+  padding: 1rem;
   position: relative;
   flex-direction: column;
   overflow: hidden; /* Prevent circles from overflowing */
@@ -140,22 +140,24 @@ body {
 /* Add circles in the background */
 /* Top green */
 .form-section .circle-one {
+  content: '';
   position: absolute;
   top: 25%; /* Adjust position to place below the form */
   right: 15%;
-  width: 20%;
-  aspect-ratio: 1;
+  width: 150px;
+  height: 150px;
   background-color: #959D90;
   border-radius: 50%;
   opacity: 0.7;
 }
 /* Bottom green */
 .form-section .circle-two {
+  content: '';
   position: absolute;
   bottom: 20%; /* Place this circle closer to the bottom */
   left: 15%;
-  width: 25%;
-  aspect-ratio: 1;
+  width: 200px;
+  height: 200px;
   background-color: #959D90;
   border-radius: 50%;
   opacity: 0.7;
@@ -163,11 +165,12 @@ body {
 
 /* Bottom beige */
 .form-section .circle-three {
+  content: '';
   position: absolute;
   bottom: 35%; /* Place this circle closer to the bottom */
   left: 10%;
-  width: 20%;
-  aspect-ratio: 1;
+  width: 150px;
+  height: 150px;
   background-color: #D9D9D9;
   border-radius: 50%;
   opacity: 0.8;
@@ -179,8 +182,8 @@ body {
   position: absolute;
   top: 40%; /* Place this circle closer to the bottom */
   right: 15%;
-  width: 15%;
-  aspect-ratio: 1;
+  width: 120px;
+  height: 120px;
   background-color: #D9D9D9;
   border-radius: 50%;
   opacity: 0.8;
@@ -193,7 +196,7 @@ body {
   justify-content: center;
   align-items: center; /* Center both horizontally */
   width: 100%; /* Full width of the form section */
-  max-width: 90%; /* You can adjust max-width to your preference */
+  max-width: 600px; /* You can adjust max-width to your preference */
   margin: 0 auto;
 }
 
@@ -216,7 +219,7 @@ body {
   padding-left: 5rem;
   text-align: center;
   width: 100%; /* Allow for responsiveness */
-  max-width: 100%; /* Increased max-width to make the card wider */
+  max-width: 600px; /* Increased max-width to make the card wider */
   position: relative;
   box-sizing: border-box;
   margin: 0 auto;
@@ -236,20 +239,6 @@ body {
   border-radius: 4px;
   background: #D9D9D9;
   color: #523D35; /* Set text color */
-  font-size: 1.2rem;
-}
-
-
-@media (max-width: 1440px) { /* For 15-inch laptops (1440px width) */
-  .form-group input {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 1366px) { /* For 13-inch laptops (1366px width) */
-  .form-group input {
-    font-size: 0.8rem;
-  }
 }
 
 .btn-confirm {
@@ -317,4 +306,56 @@ a:hover {
 
 .modal-content button:hover {
   background-color: #5a3e3e;
+}
+
+/* General responsive styles */
+@media screen and (max-width: 1366px) { /* 13-inch laptops (e.g., 1366x768 resolution) */
+  .overlay-text h1 {
+    font-size: 1.8rem; /* Slightly smaller font size */
+  }
+  .form-card {
+    padding-right: 3rem;
+    padding-left: 3rem; /* Adjust padding for smaller width */
+    max-width: 500px; /* Reduce card size */
+  }
+  .btn-confirm {
+    font-size: 0.9rem; /* Reduce button text size */
+  }
+}
+
+@media screen and (min-width: 1367px) and (max-width: 1440px) { /* 14-inch laptops */
+  .overlay-text h1 {
+    font-size: 2rem; /* Keep the size moderate */
+  }
+  .form-card {
+    padding-right: 4rem;
+    padding-left: 4rem; /* Adjust padding slightly */
+    max-width: 550px; /* Slightly wider form */
+  }
+  .btn-confirm {
+    font-size: 1rem; /* Standard button size */
+  }
+}
+
+@media screen and (min-width: 1441px) and (max-width: 1536px) { /* 15-inch laptops */
+  .overlay-text h1 {
+    font-size: 2.2rem; /* Larger font size for bigger screens */
+  }
+  .form-card {
+    padding-right: 5rem;
+    padding-left: 5rem;
+    max-width: 600px; /* Full form width */
+  }
+}
+
+@media screen and (min-width: 1537px) and (max-width: 1600px) { /* 16-inch laptops */
+  .overlay-text h1 {
+    font-size: 2.4rem; /* Bigger text size for large screens */
+  }
+  .form-card {
+    max-width: 650px; /* Expand form width */
+  }
+  .btn-confirm {
+    font-size: 1.1rem; /* Slightly larger button size */
+  }
 }
