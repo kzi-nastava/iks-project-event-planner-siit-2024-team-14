@@ -130,7 +130,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
-  padding: 1rem;
+  padding: 2%;
   position: relative;
   flex-direction: column;
   overflow: hidden; /* Prevent circles from overflowing */
@@ -140,24 +140,22 @@ body {
 /* Add circles in the background */
 /* Top green */
 .form-section .circle-one {
-  content: '';
   position: absolute;
   top: 25%; /* Adjust position to place below the form */
   right: 15%;
-  width: 150px;
-  height: 150px;
+  width: 20%;
+  aspect-ratio: 1;
   background-color: #959D90;
   border-radius: 50%;
   opacity: 0.7;
 }
 /* Bottom green */
 .form-section .circle-two {
-  content: '';
   position: absolute;
   bottom: 20%; /* Place this circle closer to the bottom */
   left: 15%;
-  width: 200px;
-  height: 200px;
+  width: 25%;
+  aspect-ratio: 1;
   background-color: #959D90;
   border-radius: 50%;
   opacity: 0.7;
@@ -165,12 +163,11 @@ body {
 
 /* Bottom beige */
 .form-section .circle-three {
-  content: '';
   position: absolute;
   bottom: 35%; /* Place this circle closer to the bottom */
   left: 10%;
-  width: 150px;
-  height: 150px;
+  width: 20%;
+  aspect-ratio: 1;
   background-color: #D9D9D9;
   border-radius: 50%;
   opacity: 0.8;
@@ -182,8 +179,8 @@ body {
   position: absolute;
   top: 40%; /* Place this circle closer to the bottom */
   right: 15%;
-  width: 120px;
-  height: 120px;
+  width: 15%;
+  aspect-ratio: 1;
   background-color: #D9D9D9;
   border-radius: 50%;
   opacity: 0.8;
@@ -196,7 +193,7 @@ body {
   justify-content: center;
   align-items: center; /* Center both horizontally */
   width: 100%; /* Full width of the form section */
-  max-width: 600px; /* You can adjust max-width to your preference */
+  max-width: 90%; /* You can adjust max-width to your preference */
   margin: 0 auto;
 }
 
@@ -219,7 +216,7 @@ body {
   padding-left: 5rem;
   text-align: center;
   width: 100%; /* Allow for responsiveness */
-  max-width: 600px; /* Increased max-width to make the card wider */
+  max-width: 100%; /* Increased max-width to make the card wider */
   position: relative;
   box-sizing: border-box;
   margin: 0 auto;
@@ -239,6 +236,7 @@ body {
   border-radius: 4px;
   background: #D9D9D9;
   color: #523D35; /* Set text color */
+  font-size: clamp(0.5rem, 20%, 1rem); /* Responsive text size */
 }
 
 .btn-confirm {
