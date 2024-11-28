@@ -285,3 +285,161 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Responsive Styles for Circles and Larger Screens */
+
+/* General Scaling for 13-inch laptops (1366px and smaller) */
+@media screen and (max-width: 1366px) {
+  .form-section .circle-one {
+    width: 120px;  /* Larger circle */
+    height: 120px;
+  }
+
+  .form-section .circle-two {
+    width: 150px;
+    height: 150px;
+  }
+
+  .form-section .circle-three {
+    width: 140px;
+    height: 140px;
+  }
+
+  .form-section .circle-four {
+    width: 110px;
+    height: 110px;
+  }
+
+  .form-container {
+    max-width: 500px; /* Slightly smaller on smaller screens */
+  }
+
+  .form-card {
+    max-width: 500px; /* Keep form card width smaller on smaller screens */
+  }
+}
+
+/* Scaling for 14-inch laptops (1367px - 1440px) */
+@media screen and (min-width: 1367px) and (max-width: 1440px) {
+  .form-section .circle-one {
+    width: 160px;
+    height: 160px;
+  }
+
+  .form-section .circle-two {
+    width: 190px;
+    height: 190px;
+  }
+
+  .form-section .circle-three {
+    width: 170px;
+    height: 170px;
+  }
+
+  .form-section .circle-four {
+    width: 140px;
+    height: 140px;
+  }
+
+  .form-container {
+    max-width: 550px; /* Increase max width for slightly larger screens */
+  }
+
+  .form-card {
+    max-width: 550px; /* Keep form card width larger */
+  }
+}
+
+/* Scaling for 15-inch laptops (1441px - 1536px) */
+@media screen and (min-width: 1441px) and (max-width: 1536px) {
+  .form-section .circle-one {
+    width: 180px;
+    height: 180px;
+  }
+
+  .form-section .circle-two {
+    width: 220px;
+    height: 220px;
+  }
+
+  .form-section .circle-three {
+    width: 200px;
+    height: 200px;
+  }
+
+  .form-section .circle-four {
+    width: 160px;
+    height: 160px;
+  }
+
+  .form-container {
+    max-width: 600px; /* Larger form container */
+  }
+
+  .form-card {
+    max-width: 600px; /* Larger form card for better layout */
+  }
+}
+
+/* Scaling for 16-inch laptops (1537px - 1600px) */
+@media screen and (min-width: 1537px) and (max-width: 1600px) {
+  .form-section .circle-one {
+    width: 220px;
+    height: 220px;
+  }
+
+  .form-section .circle-two {
+    width: 250px;
+    height: 250px;
+  }
+
+  .form-section .circle-three {
+    width: 230px;
+    height: 230px;
+  }
+
+  .form-section .circle-four {
+    width: 190px;
+    height: 190px;
+  }
+
+  .form-container {
+    max-width: 650px; /* Even larger form container */
+  }
+
+  .form-card {
+    max-width: 650px; /* Larger form card */
+  }
+}
+
+/* Scaling for Screens Larger than 1600px */
+@media screen and (min-width: 1601px) {
+  .form-section .circle-one {
+    width: 260px;
+    height: 260px;
+  }
+
+  .form-section .circle-two {
+    width: 300px;
+    height: 300px;
+  }
+
+  .form-section .circle-three {
+    width: 280px;
+    height: 280px;
+  }
+
+  .form-section .circle-four {
+    width: 240px;
+    height: 240px;
+  }
+
+  .form-container {
+    max-width: 700px; /* Max width increased on large screens */
+  }
+
+  .form-card {
+    max-width: 700px; /* Larger form card width */
+  }
+}
+
+
