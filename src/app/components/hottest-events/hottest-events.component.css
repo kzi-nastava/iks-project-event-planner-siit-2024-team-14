@@ -49,13 +49,13 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  max-width: 1300px;
+  max-width: 90%;
   margin: auto;
 }
 
 .carousel-container {
   overflow: hidden;
-  width: 100%;
+  width: 90%;
 }
 
 .carousel {
@@ -100,8 +100,9 @@
 .card {
   flex: 0 0 auto;
   width: 100%;
-  max-width: 350px; /* Maksimalna širina za desktop */
-  height: auto;
+
+  max-width: 30%; /* Maksimalna širina za desktop */
+  height: 90%;
   margin: 0 8px;
   background-color: #fff;
   border-radius: 10px;
@@ -216,6 +217,7 @@
 
   .card {
     max-width: 250px; /* Još manja širina za mobilne uređaje */
+
     margin: 10px 5px; /* Manji razmaci između kartica */
   }
 

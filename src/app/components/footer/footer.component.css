@@ -6,16 +6,16 @@ footer {
   position: relative;
   background-color: #f5f5f5;
   height: auto; /* Visina se prilagođava sadržaju */
-  padding: 40px 20px; /* Unutrašnje margine */
-  margin-top: 80px; /* Udaljiti footer od ostatka sadržaja */
 }
 
 .left-section {
   background-color: #d7d9d5;
   border-radius: 200px 200px 0 0; /* Polukrug okrenut ka gore */
   padding: 30px;
-  width: 350px;
-  height: 400px;
+
+  width: 300px;
+  height: 300px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,6 +49,8 @@ footer {
   margin-left: 50px; /* Uklonjena apsolutna vrednost */
   z-index: 1;
   flex: 1; /* Omogućava fleksibilan raspored */
+  padding: 40px;
+
 }
 
 .right-section h2 {
