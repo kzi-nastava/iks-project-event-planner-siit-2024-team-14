@@ -2,24 +2,28 @@ footer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap; /* Omogućava presavijanje elemenata na manjim ekranima */
   position: relative;
   background-color: #f5f5f5;
-  height: 350px;
-  margin-top: 80px; /* Udaljiti footer od ostatka sadržaja */
+  height: auto; /* Visina se prilagođava sadržaju */
 }
 
 .left-section {
   background-color: #d7d9d5;
   border-radius: 200px 200px 0 0; /* Polukrug okrenut ka gore */
   padding: 30px;
-  margin-left: -60px; /* Pomera levo */
-  width: 350px;
-  height: 400px;
+
+  width: 300px;
+  height: 300px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-right: auto;
+  margin-left: -60px; /* Pomera levo */
   position: relative;
   z-index: 2;
+  text-align: center; /* Dodato za bolju preglednost na manjim ekranima */
 }
 
 .left-section h2 {
@@ -27,26 +31,26 @@ footer {
   color: #5b4534;
   font-size: 30px;
   font-weight: bold;
-  margin: 0;
-  text-align: center;
+  margin: 0 0 10px;
 }
 
 .left-section p {
   font-family: 'Petrona', serif;
   color: #5b4534;
   font-size: 16px;
-  margin: 0;
-  padding: 5px 0;
-  text-align: center;
+  margin: 5px 0;
 }
 
 .right-section {
-  margin-left: 1200px; /* Pomera desnu sekciju sa strane */
   text-align: right;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-left: 50px; /* Uklonjena apsolutna vrednost */
   z-index: 1;
+  flex: 1; /* Omogućava fleksibilan raspored */
+  padding: 40px;
+
 }
 
 .right-section h2 {
@@ -72,20 +76,21 @@ footer {
   color: #8c7b6a;
 }
 
-/* Responsivnost */
+/* Responsivni dizajn */
 @media screen and (max-width: 1200px) {
-  footer {
-    padding: 40px 50px;
-  }
-
   .left-section {
     margin-left: -30px;
-    width: 280px;
-    height: 220px;
+    width: 300px;
+    height: 300px;
   }
 
   .right-section {
-    margin-left: 320px;
+    margin-left: 20px;
+    text-align: center; /* Poravnanje za manje uređaje */
+  }
+
+  .social-icons {
+    justify-content: center;
   }
 }
 
@@ -93,27 +98,51 @@ footer {
   footer {
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
+    height: auto; /* Visina se prilagođava sadržaju */
   }
 
   .left-section {
-    margin-left: 0;
+    margin: 0 0 20px;
     width: 250px;
-    height: 200px;
+    height: 250px;
     text-align: center;
   }
 
   .right-section {
-    margin-left: 0;
-    margin-top: 20px;
+    margin: 0;
+    align-items: center;
     text-align: center;
   }
 
   .social-icons {
-    justify-content: right;
+    justify-content: center;
   }
 
   .social-icons i {
     font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .left-section {
+    width: 200px;
+    height: 200px;
+  }
+
+  .left-section h2 {
+    font-size: 24px;
+  }
+
+  .left-section p {
+    font-size: 14px;
+  }
+
+  .right-section h2 {
+    font-size: 18px;
+  }
+
+  .social-icons i {
+    font-size: 20px;
+    gap: 15px;
   }
 }
