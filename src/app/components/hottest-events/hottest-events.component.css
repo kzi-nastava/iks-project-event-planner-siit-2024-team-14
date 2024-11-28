@@ -197,11 +197,11 @@
   }
 
   .arrow.left {
-    left: 20px; /* Pomerene malo bliže */
+    left: 20px;
   }
 
   .arrow.right {
-    right: 20px; /* Pomerene malo bliže */
+    right: 20px;
   }
 }
 
@@ -216,7 +216,7 @@
 
   .card {
     max-width: 250px; /* Još manja širina za mobilne uređaje */
-    margin: 10px 5px; /* Manji razmaci između kartica */
+    margin: 10px 5px;
   }
 
   .arrow {
