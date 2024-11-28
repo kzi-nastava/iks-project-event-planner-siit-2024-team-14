@@ -101,7 +101,7 @@
   flex: 0 0 auto;
   width: 100%;
   max-width: 30%; /* Maksimalna širina za desktop */
-  height: auto;
+  height: 100%;
   margin: 0 8px;
   background-color: #fff;
   border-radius: 10px;
