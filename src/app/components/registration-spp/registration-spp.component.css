@@ -208,7 +208,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 80%;
+  padding: 2rem;
+  max-width: 90%;  /* Ensure it's responsive */
   margin: 0 auto;
 }
 
@@ -231,7 +232,7 @@ body {
   padding-right: 3rem;
   text-align: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;  /* Make the form max-width flexible */
   position: relative;
   box-sizing: border-box;
   margin: 0 auto;
@@ -246,7 +247,6 @@ body {
 
 .form-group input {
   width: 100%;
-  max-width: 100%;
   padding: 0.8rem;
   border: 1px solid #523D35;
   border-radius: 4px;
@@ -288,77 +288,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 1366px) {
-  .form-section .circle-one,
-  .form-section .circle-two,
-  .form-section .circle-three,
-  .form-section .circle-four {
-    width: 120px;
-    height: 120px;
-  }
-
-  .form-container {
-    max-width: 500px;
-  }
-
-  .form-card {
-    max-width: 500px;
-  }
-}
-
-@media screen and (min-width: 1367px) and (max-width: 1440px) {
-  .form-section .circle-one {
-    width: 160px;
-    height: 160px;
-  }
-
-  .form-section .circle-two {
-    width: 190px;
-    height: 190px;
-  }
-
-  .form-section .circle-three {
-    width: 170px;
-    height: 170px;
-  }
-
-  .form-section .circle-four {
-    width: 140px;
-    height: 140px;
-  }
-
-  .form-container {
-    max-width: 550px;
-  }
-
-  .form-card {
-    max-width: 550px;
-  }
-}
-
-@media screen and (min-width: 1441px) and (max-width: 1536px) {
-  .form-section .circle-one {
-    width: 180px;
-    height: 180px;
-  }
-
-  .form-section .circle-two {
-    width: 220px;
-    height: 220px;
-  }
-
-  .form-section .circle-three {
-    width: 190px;
-    height: 190px;
-  }
-
-  .form-section .circle-four {
-    width: 160px;
-    height: 160px;
-  }
-}
-
 /* Mobile-First Adjustments */
 @media screen and (max-width: 768px) {
   .image-section {
@@ -366,15 +295,41 @@ a:hover {
   }
 
   .form-container {
-    max-width: 95%;
+    max-width: 90%; /* Allow form to scale on mobile */
+    padding: 1rem;
   }
 
   .form-card {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 1rem;
   }
 
   .form-group input {
     padding: 0.7rem;
+  }
+
+  .btn-confirm {
+    padding: 1rem; /* Increase button size on mobile */
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .form-container {
+    max-width: 80%; /* Slightly narrower on larger tablets */
+  }
+
+  .form-card {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media screen and (min-width: 1367px) {
+  .form-container {
+    max-width: 600px; /* Larger form on bigger screens */
+  }
+
+  .form-card {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 }
