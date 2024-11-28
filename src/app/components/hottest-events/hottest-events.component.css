@@ -49,13 +49,13 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  max-width: 1300px;
+  max-width: 70%;
   margin: auto;
 }
 
 .carousel-container {
   overflow: hidden;
-  width: 100%;
+  width: 90%;
 }
 
 .carousel {
