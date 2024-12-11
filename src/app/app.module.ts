@@ -20,7 +20,13 @@ import { OfferingsModule } from './offerings/offerings.module';
 import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
-
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LinesComponent } from './components/decorations/lines/lines.component';
+import { InfoComponent } from './components/user-profile/info/info.component';
+import { UpcomingEventsComponent } from './components/user-profile/upcoming-events/upcoming-events.component';
+import { FavoriteEventsComponent } from './components/user-profile/favorite-events/favorite-events.component';
+import { FavoriteSolutionsComponent } from './components/user-profile/favorite-solutions/favorite-solutions.component';
+import { OccupancyCalendarComponent } from './components/user-profile/occupancy-calendar/occupancy-calendar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,14 @@ import { RegistrationSppComponent } from './components/registration-spp/registra
 
     LoginComponent,
     RegistrationEoComponent,
-    RegistrationSppComponent
+    RegistrationSppComponent,
+    UserProfileComponent,
+    LinesComponent,
+    InfoComponent,
+    UpcomingEventsComponent,
+    FavoriteEventsComponent,
+    FavoriteSolutionsComponent,
+    OccupancyCalendarComponent
 
   ],
   imports: [

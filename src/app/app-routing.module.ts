@@ -8,6 +8,7 @@ import { RegistrationEoComponent } from './components/registration-eo/registrati
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
 import { AddServiceComponent } from './offerings/add-service/add-service.component';
 import { ServiceDetailsComponent } from './offerings/service-details/service-details.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },
   { path: '**', redirectTo: '/home' }, // Fallback for unknown routes
+  { path: 'user-profile', component: UserProfileComponent }
 ];
 
 @NgModule({
