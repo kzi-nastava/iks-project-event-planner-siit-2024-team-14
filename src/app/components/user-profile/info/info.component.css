@@ -49,6 +49,10 @@
   font-family: 'Petrona', serif;
 }
 
+.edit-button:hover {
+  background-color: #D9D9D9;
+}
+
 .profile-info {
   flex-grow: 1; /* Occupy remaining space */
   width: 60%;
@@ -106,14 +110,26 @@
   background-color: #fff;
 }
 
+.profile-actions .edit-info:hover {
+  background-color: #D9D9D9;
+}
+
 .profile-actions .change-password {
   background: #523D35;
   color: #D9D9D9;
   border: none;
 }
 
+.profile-actions .change-password:hover {
+  background-color: #412c26;
+}
+
 .profile-actions .deactivate {
   background: #523D35;
   color: #D9D9D9;
   border: none;
+}
+
+.profile-actions .deactivate:hover {
+  background-color: #412c26;
 }
