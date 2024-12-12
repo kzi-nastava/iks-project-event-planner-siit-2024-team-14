@@ -1,0 +1,46 @@
+<div class="event-type-management">
+  <h2 class="section-title">Event types</h2>
+
+  <div class="carousel">
+    <!-- Previous Button -->
+    <button class="carousel-button left" (click)="prevEventType()">&#9664;</button>
+
+    <!-- Event Cards Wrapper -->
+    <div class="event-cards-wrapper">
+      <div class="event-cards" [style.transform]="'translateX(-' + (currentIndex * 30) + '%)'">
+        <div class="event-card" *ngFor="let event of eventTypes">
+          <img class="event-image" [src]="event.image" alt="{{ event.name }}">
+          <div class="event-details">
+            <h3>{{ event.name }}</h3>
+            <div class="event-actions">
+              <button class="btn" (click)="editEvent(event)">Edit</button>
+              <button class="btn" (click)="toggleStatus(event)">
+                {{ event.active ? 'Deactivate' : 'Activate' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next Button -->
+    <button class="carousel-button right" (click)="nextEventType()">&#9654;</button>
+  </div>
+
+  <!-- Add Event Button -->
+  <div class="add-button">
+    <button class="add-event-button" (click)="newEventType()">+</button>
+  </div>
+</div>
+
+<!-- Popup Component -->
+<div *ngIf="showPopup" class="popup-overlay">
+  <div class="popup">
+    <app-add></app-add>
+    <button class="close-popup-button" (click)="closePopup()">✖</button>
+  </div>
+</div>
+
+<div class="footer">
+  <app-footer></app-footer>
+</div>
