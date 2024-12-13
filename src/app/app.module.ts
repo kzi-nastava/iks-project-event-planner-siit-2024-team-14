@@ -20,6 +20,7 @@ import { OfferingsModule } from './offerings/offerings.module';
 import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+import { AdminCommentsComponent } from './components/admin-comments/admin-comments.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { RegistrationSppComponent } from './components/registration-spp/registra
 
     LoginComponent,
     RegistrationEoComponent,
-    RegistrationSppComponent
+    RegistrationSppComponent,
+    AdminCommentsComponent
 
   ],
   imports: [
