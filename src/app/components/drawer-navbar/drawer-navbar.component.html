@@ -1,18 +1,47 @@
-<!-- Burger icon for opening the sidebar -->
+<!-- Burger icon for opening the navigation sidebar -->
 <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
 
-<!-- Sidebar menu -->
+<!-- Navigation Sidebar -->
 <div class="sidebar" [class.open]="isSidebarOpen">
   <ul>
     <li>Home</li>
-    <li>My Events</li>
-    <li>Calendar</li>
-    <li>Invitations</li>
-    <li>Budget Planning</li>
-    <li>Favorite Services/Products</li>
-    <li>Messages</li>
+    <li>User Management</li>
+    <li>Event Types</li>
+    <li>Categories</li>
+    <li (click)="openComments()">Comments & Reviews</li>
+    <li>Reports</li>
     <li>Notifications</li>
     <li>Profile</li>
     <li>Log out</li>
   </ul>
+</div>
+
+<!-- Overlay for Comments & Reviews -->
+<div class="overlay" *ngIf="isCommentsOpen" (click)="closeComments()"></div>
+
+<!-- Comments & Reviews Sidebar -->
+<div class="sidebar comments-sidebar" [class.open]="isCommentsOpen">
+  <div class="sidebar-header">
+    <h2>Comments & Reviews</h2>
+    <button class="close-sidebar" (click)="closeComments()">&times;</button>
+  </div>
+
+  <!-- Skrolabilna sekcija za kartice -->
+  <div class="cards-container">
+    <div class="card" *ngFor="let comment of comments">
+      <div class="user-info">
+        <img src="https://via.placeholder.com/40" alt="User profile" />
+        <strong>{{ comment.username }}</strong>
+      </div>
+      <div class="stars">
+        <i class="fas fa-star" *ngFor="let star of comment.stars"></i>
+      </div>
+      <p class="review-text">{{ comment.text }}</p>
+      <p class="provider">Service and product provider: {{ comment.provider }}</p>
+      <div class="actions">
+        <button class="approve-btn" (click)="approveComment()">✔ Approve</button>
+        <button class="delete-btn" (click)="deleteComment()">🗑 Delete</button>
+      </div>
+    </div>
+  </div>
 </div>
