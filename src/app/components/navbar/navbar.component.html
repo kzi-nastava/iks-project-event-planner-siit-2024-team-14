@@ -4,7 +4,7 @@
     <!-- Rectangle with opacity and color -->
     <div class="header-overlay">
       <!-- Left burger icon for drawer navbar -->
-      <mat-icon class="burger-icon">menu</mat-icon>
+      <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
 
       <!-- Right profile icon -->
         <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
@@ -26,3 +26,5 @@
     </div>
   </div>
 </header>
+
+<app-drawer-navbar [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar>
