@@ -5,7 +5,7 @@
     <li>User Management</li>
     <li>Event Types</li>
     <li>Categories</li>
-    <li (click)="openComments()">Comments & Reviews</li>
+    <li (click)="toggleCommentsSidebar()">Comments & Reviews</li> <!-- Izmena -->
     <li>Reports</li>
     <li>Notifications</li>
     <li>Profile</li>
@@ -14,4 +14,4 @@
 </div>
 
 <!-- Comments Sidebar -->
-<app-admin-comments *ngIf="isCommentsOpen"></app-admin-comments>
+<app-admin-comments [isCommentsOpen]="isCommentsOpen"></app-admin-comments>  <!-- Prosleđivanje stanja -->
