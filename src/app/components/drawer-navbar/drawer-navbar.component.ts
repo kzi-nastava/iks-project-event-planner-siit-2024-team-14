@@ -23,6 +23,32 @@ export class DrawerNavbarComponent {
       text: 'Great experience! Highly recommend.',
       provider: 'Fancy Catering',
     },
+
+    {
+      username: 'Miloš Nikolić',
+      stars: [1, 1, 1, 1, 1],
+      text: 'Great experience! Highly recommend.',
+      provider: 'Fancy Catering',
+    },
+
+    {
+      username: 'Miloš Nikolić',
+      stars: [1, 1, 1, 1, 1],
+      text: 'Great experience! Highly recommend.',
+      provider: 'Fancy Catering',
+    },
+    {
+      username: 'Miloš Nikolić',
+      stars: [1, 1, 1, 1, 1],
+      text: 'Great experience! Highly recommend.',
+      provider: 'Fancy Catering',
+    },
+    {
+      username: 'Miloš Nikolić',
+      stars: [1, 1, 1, 1, 1],
+      text: 'Great experience! Highly recommend.',
+      provider: 'Fancy Catering',
+    },
     // Dodaj još komentara ovde za testiranje
   ];
 
