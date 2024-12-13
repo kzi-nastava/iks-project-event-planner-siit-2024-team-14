@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-drawer-navbar',
   templateUrl: './drawer-navbar.component.html',
   styleUrls: ['./drawer-navbar.component.css'],
 })
 export class DrawerNavbarComponent {
-  isSidebarOpen = false; // For navigation sidebar
+  @Input() isSidebarOpen: boolean = false;
   isCommentsOpen = false; // For comments sidebar
 
   // Sample comments data
