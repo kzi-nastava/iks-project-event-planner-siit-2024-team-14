@@ -1,0 +1,25 @@
+<!-- Comments & Reviews Sidebar -->
+<div class="sidebar notifications-sidebar" [class.open]="isNotificationsOpen">
+  <div class="sidebar-header">
+    <h2>Messages</h2>
+    <button class="mute-button" (click)="toggleMuteNotifications()">
+      <i [class]="isMuted ? 'fas fa-bell-slash' : 'fas fa-bell'"></i>
+    </button>
+    <button class="close-sidebar" (click)="closeNotifications()">&times;</button>
+  </div>
+
+  <!-- Scrollable section for cards -->
+  <div class="cards-container">
+    <div class="card" *ngFor="let notification of notifications">
+      <div class="card-content">
+        <img [src]="notification.image" alt="User profile" class="user-image" />
+        <div class="text-content">
+          <strong class="user-name">{{ notification.username }}</strong>
+          <p class="notification-text">{{ notification.message }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Overlay for Notifications -->
+<div class="overlay" *ngIf="isNotificationsOpen" (click)="closeNotifications()"></div>

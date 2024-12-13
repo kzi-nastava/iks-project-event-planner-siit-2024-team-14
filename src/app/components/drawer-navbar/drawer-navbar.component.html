@@ -7,7 +7,7 @@
     <li>Categories</li>
     <li (click)="toggleCommentsSidebar()">Comments & Reviews</li> <!-- Izmena -->
     <li>Reports</li>
-    <li>Notifications</li>
+    <li (click)="toggleNotificationsSidebar()">Notifications</li>
     <li>Profile</li>
     <li>Log out</li>
   </ul>
@@ -15,3 +15,4 @@
 
 <!-- Comments Sidebar -->
 <app-admin-comments [isCommentsOpen]="isCommentsOpen"></app-admin-comments>  <!-- Prosleđivanje stanja -->
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>

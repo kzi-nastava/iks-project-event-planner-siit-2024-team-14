@@ -10,9 +10,17 @@ export class DrawerNavbarComponent {
   isCommentsOpen = false;
   @Output() toggleComments = new EventEmitter<boolean>();
 
+  isNotificationsOpen = false;
+  @Output() toggleNotifications = new EventEmitter<boolean>();
+
   // Opens and closes comments sidebar
   toggleCommentsSidebar() {
     this.isCommentsOpen = !this.isCommentsOpen;
     this.toggleComments.emit(this.isCommentsOpen);
+  }
+
+  toggleNotificationsSidebar() {
+    this.isNotificationsOpen = !this.isNotificationsOpen;
+    this.toggleNotifications.emit(this.isNotificationsOpen);
   }
 }

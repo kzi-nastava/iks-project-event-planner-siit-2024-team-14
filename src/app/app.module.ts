@@ -21,6 +21,7 @@ import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
 import { AdminCommentsComponent } from './components/admin-comments/admin-comments.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { AdminCommentsComponent } from './components/admin-comments/admin-commen
     LoginComponent,
     RegistrationEoComponent,
     RegistrationSppComponent,
-    AdminCommentsComponent
+    AdminCommentsComponent,
+    NotificationsComponent
 
   ],
   imports: [
