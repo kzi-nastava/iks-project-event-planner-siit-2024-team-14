@@ -13,32 +13,5 @@
   </ul>
 </div>
 
-<!-- Overlay for Comments & Reviews -->
-<div class="overlay" *ngIf="isCommentsOpen" (click)="closeComments()"></div>
-
-<!-- Comments & Reviews Sidebar -->
-<div class="sidebar comments-sidebar" [class.open]="isCommentsOpen">
-  <div class="sidebar-header">
-    <h2>Comments & Reviews</h2>
-    <button class="close-sidebar" (click)="closeComments()">&times;</button>
-  </div>
-
-  <!-- Skrolabilna sekcija za kartice -->
-  <div class="cards-container">
-    <div class="card" *ngFor="let comment of comments">
-      <div class="user-info">
-        <img src="https://via.placeholder.com/40" alt="User profile" />
-        <strong>{{ comment.username }}</strong>
-      </div>
-      <div class="stars">
-        <i class="fas fa-star" *ngFor="let star of comment.stars"></i>
-      </div>
-      <p class="review-text">{{ comment.text }}</p>
-      <p class="provider">Service and product provider: {{ comment.provider }}</p>
-      <div class="actions">
-        <button class="approve-btn" (click)="approveComment()">✔ Approve</button>
-        <button class="delete-btn" (click)="deleteComment()">🗑 Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Comments Sidebar -->
+<app-admin-comments *ngIf="isCommentsOpen"></app-admin-comments>

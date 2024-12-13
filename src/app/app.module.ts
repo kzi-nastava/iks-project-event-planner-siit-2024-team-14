@@ -21,6 +21,7 @@ import { OfferingsModule } from './offerings/offerings.module';
 import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+import { AdminCommentsComponent } from './components/admin-comments/admin-comments.component';
 
 import { HttpClientModule } from '@angular/common/http';  // Import HttpClientModule
 
@@ -42,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';  // Import HttpClientMo
 
     LoginComponent,
     RegistrationEoComponent,
-    RegistrationSppComponent
+    RegistrationSppComponent,
+    AdminCommentsComponent
 
   ],
   imports: [
