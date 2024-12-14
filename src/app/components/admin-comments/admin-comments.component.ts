@@ -2,9 +2,11 @@ import { Component, Input } from '@angular/core';
 
 interface Comment {
   username: string;
-  stars: number[];
-  text: string;
+  stars: number[];  //rating
+  text: string;  //content
   provider: string;
+  status: string;
+  //date
 }
 
 @Component({
@@ -21,40 +23,47 @@ export class AdminCommentsComponent {
       stars: [1, 1, 1, 1],
       text: 'This was the worst service ever! The staff was horrible, and the whole thing was a waste of money.',
       provider: 'Hleb & Knife',
+      status: "pending"
     },
     {
       username: 'Miloš Nikolić',
       stars: [1, 1, 1, 1, 1],
       text: 'Great experience! Highly recommend.',
       provider: 'Fancy Catering',
+      status: "pending"
     },
     {
       username: 'Miloš Nikolić',
       stars: [1, 1, 1, 1],
       text: 'Great experience! Highly recommend.',
       provider: 'Fancy Catering',
+      status: "pending"
     },
     {
       username: 'Miloš Nikolić',
       stars: [1, 1, 1],
       text: 'Great experience! Highly recommend.',
       provider: 'Fancy Catering',
+      status: "pending"
     },
     {
       username: 'Miloš Nikolić',
       stars: [1, 1, 1, 1, 1],
       text: 'Great experience! Highly recommend.',
       provider: 'Fancy Catering',
+      status: "accepted"
     }
   ];
 
   // Approves a comment
-  approveComment() {
+  approveComment(comment: Comment) {
+    comment.status = 'accepted';  //needs real change in db
     alert('Comment approved!');
   }
 
   // Deletes a comment
-  deleteComment() {
+  deleteComment(comment: Comment) {
+    comment.status = 'declined';   //needs real change in db
     alert('Comment deleted!');
   }
 
