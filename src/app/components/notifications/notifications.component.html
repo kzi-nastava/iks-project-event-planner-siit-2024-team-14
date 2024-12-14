@@ -1,7 +1,7 @@
 <!-- Comments & Reviews Sidebar -->
 <div class="sidebar notifications-sidebar" [class.open]="isNotificationsOpen">
   <div class="sidebar-header">
-    <h2>Messages</h2>
+    <h2>Notifications</h2>
     <button class="mute-button" (click)="toggleMuteNotifications()">
       <i [class]="isMuted ? 'fas fa-bell-slash' : 'fas fa-bell'"></i>
     </button>
@@ -10,7 +10,7 @@
 
   <!-- Scrollable section for cards -->
   <div class="cards-container">
-    <div class="card" *ngFor="let notification of notifications">
+    <div class="card" *ngFor="let notification of notifications" [class.unread]="!notification.isRead">
       <div class="card-content">
         <img [src]="notification.image" alt="User profile" class="user-image" />
         <div class="text-content">

@@ -4,6 +4,7 @@ interface Notification {
   username: string;
   message: string;
   image: string;
+  isRead: boolean;
 }
 
 
@@ -21,22 +22,26 @@ export class NotificationsComponent {
     {
       username: 'Ana Jovanovic',
       message: 'Your event Birthday party is starting in 1 hour! Make sure everything is ready and check all final details...',
-      image: 'https://via.placeholder.com/40'
+      image: 'https://via.placeholder.com/40',
+      isRead: false
     },
     {
       username: 'Petar Petrovic',
       message: 'Your event Birthday party is starting in 1 hour! Make sure everything is ready and check all final details...',
-      image: 'https://via.placeholder.com/40'
+      image: 'https://via.placeholder.com/40',
+      isRead: false
     },
     {
       username: 'Mila Milanovic',
       message: 'Your event Birthday party is starting in 1 hour! Make sure everything is ready and check all final details...',
-      image: 'https://via.placeholder.com/40'
+      image: 'https://via.placeholder.com/40',
+      isRead: true
     },
     {
       username: 'Hleb & Kifle',
       message: 'Your event Birthday party is starting in 1 hour! Make sure everything is ready and check all final details...',
-      image: 'https://via.placeholder.com/40'
+      image: 'https://via.placeholder.com/40',
+      isRead: true
     }
   ];
 
@@ -53,9 +58,15 @@ export class NotificationsComponent {
     }
   }
 
-  // Metoda za zatvaranje komentara
+
   closeNotifications() {
     this.isNotificationsOpen = false;
+
+    //NEEDS TO CHANGE IN DATA BASE -> notification.IsRead = true
+    this.notifications = this.notifications.map(notification => ({
+      ...notification,
+      isRead: true
+    }));
   }
 
 }
