@@ -1,0 +1,26 @@
+<form [formGroup]="form">
+  <div>
+    <label for="name">Name:</label>
+    <input
+      id="name"
+      formControlName="name"
+      type="text"
+      placeholder="Enter name"
+      required/>
+    <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+      <small *ngIf="form.get('name')?.hasError('required')">Name is required.</small>
+      <small *ngIf="form.get('name')?.hasError('minlength')">Name must be at least 3 characters long.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+
+  <div>
+    <button type="submit" (click)="onSubmitCategory()" [disabled]="form.invalid">
+      {{category ? "Update" : "Create"}}
+    </button>
+  </div>
+</form>
