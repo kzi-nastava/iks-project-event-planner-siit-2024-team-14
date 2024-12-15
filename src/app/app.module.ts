@@ -6,7 +6,6 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MatIcon } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.component';
 import {FormsModule} from '@angular/forms';
@@ -20,6 +19,7 @@ import { OfferingsModule } from './offerings/offerings.module';
 import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+import {MaterialModule} from './infrastructure/material/material.module';
 
 
 @NgModule({
@@ -44,9 +44,9 @@ import { RegistrationSppComponent } from './components/registration-spp/registra
   ],
   imports: [
     BrowserModule,
-    MatIcon,
     NgOptimizedImage,
     AppRoutingModule,
+    MaterialModule,
     OfferingsModule,
     FormsModule
   ],
