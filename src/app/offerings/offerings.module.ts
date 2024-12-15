@@ -5,6 +5,7 @@ import { ServiceDetailsComponent } from "./service-details/service-details.compo
 import { AddServiceComponent } from "./add-service/add-service.component";
 import {MaterialModule} from '../infrastructure/material/material.module';
 import {CategoryFormComponent} from './category-form/category-form.component';
+import {CategoryExpansionPanelComponent} from './category-expansion-panel/category-expansion-panel.component';
 
 
 
@@ -12,7 +13,8 @@ import {CategoryFormComponent} from './category-form/category-form.component';
   declarations: [
     ServiceDetailsComponent,
     AddServiceComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    CategoryExpansionPanelComponent,
   ],
   imports: [
     CommonModule,
