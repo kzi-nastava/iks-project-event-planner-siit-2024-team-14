@@ -12,6 +12,7 @@
           <img class="event-image" [src]="event.image" alt="{{ event.name }}">
           <div class="event-details">
             <h3>{{ event.name }}</h3>
+            <p class="event-description">{{ event.description }}</p> <!-- Added description -->
             <div class="event-actions">
               <button class="btn" (click)="editEvent(event)">Edit</button>
               <button class="btn" (click)="toggleStatus(event)">
@@ -33,13 +34,26 @@
   </div>
 </div>
 
-<!-- Popup Component -->
+<!-- Create Popup -->
 <div *ngIf="showPopup" class="popup-overlay">
   <div class="popup">
     <app-add></app-add>
     <button class="close-popup-button" (click)="closePopup()">✖</button>
   </div>
 </div>
+
+<!-- Edit Popup -->
+<div *ngIf="showPopup" class="popup-overlay">
+  <div class="popup">
+    <app-edit
+      [eventData]="selectedEvent"
+      (save)="saveEvent($event)"
+      (delete)="deleteEvent()">
+    </app-edit>
+    <button class="close-popup-button" (click)="closePopup()">✖</button>
+  </div>
+</div>
+
 
 <div class="footer">
   <app-footer></app-footer>

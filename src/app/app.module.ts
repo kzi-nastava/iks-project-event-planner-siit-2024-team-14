@@ -22,6 +22,7 @@ import { RegistrationEoComponent } from './components/registration-eo/registrati
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
 import { EventTypeManagementComponent } from './components/event-type-management/event-type-management.component';
 import { AddComponent } from './components/event-type-management/add/add.component';
+import { EditComponent } from './components/event-type-management/edit/edit.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AddComponent } from './components/event-type-management/add/add.compone
     RegistrationEoComponent,
     RegistrationSppComponent,
     EventTypeManagementComponent,
-    AddComponent
+    AddComponent,
+    EditComponent
 
   ],
   imports: [
