@@ -1,0 +1,38 @@
+<form (ngSubmit)="onSubmit(categoryForm)" #categoryForm="ngForm" class="mat-elevation-z1 mat-display-small">
+  <!-- Name -->
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <!-- Maybe add validation for alphanumeric only name? -->
+    <input matInput type="text"
+           id="add-category-name"
+           name="name"
+           required
+           minlength="3"
+           maxlength="100"
+           [(ngModel)]="model.name"
+           #name="ngModel"
+    />
+
+    @if (name.touched && name.invalid) {
+      <mat-error *ngIf="name.errors?.['required']">Name is required</mat-error>
+      <mat-error *ngIf="name.errors?.['minlength'] as minLengthError">Name must have at least {{ minLengthError.requiredLength }} characters</mat-error>
+    }
+  </mat-form-field>
+
+  <!-- Description -->
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput
+              id="add-category-description"
+              name="description"
+              maxlength="500"
+              [(ngModel)]="model.description">
+      </textarea>
+  </mat-form-field>
+
+  <!-- Actions -->
+  <div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="categoryForm.invalid">Create</button>
+    <button mat-button color="secondary" type="reset">Reset</button>
+  </div>
+</form>

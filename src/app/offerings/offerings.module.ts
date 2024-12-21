@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ServiceDetailsComponent } from "./service-details/service-details.component";
 import { AddServiceComponent } from "./add-service/add-service.component";
 import {MaterialModule} from '../infrastructure/material/material.module';
-import {CategoryFormComponent} from './category-form/category-form.component';
 import {CategoryExpansionPanelComponent} from './category-expansion-panel/category-expansion-panel.component';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 
 
@@ -13,13 +16,20 @@ import {CategoryExpansionPanelComponent} from './category-expansion-panel/catego
   declarations: [
     ServiceDetailsComponent,
     AddServiceComponent,
-    CategoryFormComponent,
+    AddCategoryComponent,
     CategoryExpansionPanelComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    RouterOutlet,
+    RouterLink,
+  ],
+  exports: [
   ]
 })
 export class OfferingsModule { }
