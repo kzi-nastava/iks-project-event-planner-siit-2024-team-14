@@ -1,0 +1,37 @@
+mat-accordion {
+
+}
+
+.popup-overlay {
+  position: fixed; /* Ensures the overlay covers the entire screen */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex; /* Center the popup container */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.popup-container {
+  background-color: #fff; /* White background for the popup */
+  padding: 20px; /* Add padding inside the popup */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 500px; /* Limit the width */
+  width: 90%; /* Responsive width */
+  position: relative; /* For positioning the close button */
+}
+
+.popup-overlay button {
+  position: absolute; /* Position the close button */
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+

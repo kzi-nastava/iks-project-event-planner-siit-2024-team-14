@@ -8,6 +8,8 @@ import { RegistrationEoComponent } from './components/registration-eo/registrati
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
 import { AddServiceComponent } from './offerings/add-service/add-service.component';
 import { ServiceDetailsComponent } from './offerings/service-details/service-details.component';
+import {CategoriesDashboardComponent} from './offerings/categories-dashboard/categories-dashboard.component';
+import {AddCategoryComponent} from './offerings/add-category/add-category.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,14 @@ const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },
   { path: 'services/:id', component: ServiceDetailsComponent },
+  {
+    path: 'categories',
+    component: CategoriesDashboardComponent,
+    canActivate: [], // TODO: add guard to allow only admin role to access this
+    children: [
+      { path: 'add', component: AddCategoryComponent, outlet: 'popup'},
+    ]
+  },
   { path: 'login', component: LoginComponent },
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },

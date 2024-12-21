@@ -21,7 +21,7 @@ export class CategoryService {
     return this.httpClient.get<Category[]>(this.baseURL);
   }
 
-  delete(category: Category): Observable<Object> {
-    return this.httpClient.delete(`${this.baseURL}/${category.id}`);
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.baseURL}/${id}`);
   }
 }

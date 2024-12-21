@@ -1,0 +1,23 @@
+<mat-accordion multi>
+  <mat-action-row>
+    <button mat-icon-button color="primary" aria-label="Add Category" (click)="showAddCategory()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-action-row>
+
+  <app-category-expansion-panel *ngFor="let category of categories"
+    [category]="category"
+    (delete)="deleteCategory($event)"
+    (edit)="editCategory($event)">
+  </app-category-expansion-panel>
+</mat-accordion>
+
+
+<div *ngIf="isPopupVisible()" class="popup-overlay">
+  <div class="popup-container mat-elevation-z7">
+    <button mat-icon-button (click)="hidePopup()">Close</button>
+    <!-- Outlet for create and edit forms -->
+    <router-outlet name="popup"/>
+  </div>
+</div>
+

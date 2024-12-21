@@ -9,6 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import {RouterLink, RouterOutlet} from "@angular/router";
+import {CategoriesDashboardComponent} from './categories-dashboard/categories-dashboard.component';
+import {CategoryManagementComponent} from './category-management/category-management.component';
 
 
 
@@ -18,6 +20,8 @@ import {RouterLink, RouterOutlet} from "@angular/router";
     AddServiceComponent,
     AddCategoryComponent,
     CategoryExpansionPanelComponent,
+    CategoriesDashboardComponent,
+    CategoryManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +34,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
     RouterLink,
   ],
   exports: [
+    CategoriesDashboardComponent
   ]
 })
 export class OfferingsModule { }

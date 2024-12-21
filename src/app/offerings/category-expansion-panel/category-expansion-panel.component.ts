@@ -16,7 +16,6 @@ export class CategoryExpansionPanelComponent {
 
 
   deleteCategory() {
-    // TODO: Display a confirmation popup
     this.delete.emit(this.category);
   }
 

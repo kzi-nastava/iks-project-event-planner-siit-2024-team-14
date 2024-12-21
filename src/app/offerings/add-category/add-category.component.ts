@@ -29,9 +29,10 @@ export class AddCategoryComponent {
       this.categoryService.add(this.model).subscribe({
         next: createdCategory => {
           console.log("Created category: ", createdCategory);
+          this.router.navigate(['categories']).then(); // idk where to go, maybe back (this seems appropriate (not the hardcoded path part))
         },
         error: err => {
-          console.error("Error: ", err);
+          console.error("Failed to create category: ", err);
         },
       });
 
