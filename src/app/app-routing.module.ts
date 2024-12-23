@@ -25,6 +25,7 @@ const routes: Routes = [
     canActivate: [], // TODO: add guard to allow only admin role to access this
     children: [
       { path: 'add', component: AddCategoryComponent, outlet: 'popup'},
+      { path: '**', redirectTo: ''},
     ]
   },
   { path: 'login', component: LoginComponent },
