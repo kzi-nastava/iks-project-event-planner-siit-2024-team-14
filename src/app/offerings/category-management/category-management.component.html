@@ -13,11 +13,14 @@
 </mat-accordion>
 
 
-<div *ngIf="isPopupVisible()" class="popup-overlay">
+<div *ngIf="isPopupVisible" class="popup-overlay">
   <div class="popup-container mat-elevation-z7">
-    <button mat-icon-button (click)="hidePopup()">Close</button>
+    <button mat-icon-button color="primary" aria-label="Close" (click)="hidePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
     <!-- Outlet for create and edit forms -->
-    <router-outlet name="popup"/>
+    <router-outlet name="popup"></router-outlet>
   </div>
 </div>
+
 
