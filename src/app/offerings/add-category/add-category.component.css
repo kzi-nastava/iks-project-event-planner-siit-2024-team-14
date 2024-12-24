@@ -14,9 +14,3 @@ form {
     justify-content: space-between;
   }
 }
-
-.loading {
-  cursor: progress;
-}
-
-

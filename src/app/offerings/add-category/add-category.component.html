@@ -3,12 +3,12 @@
   <!-- -->
   <div *ngSwitchCase="'created'">
     <p>{{ successMsg }}</p>
-    <button mat-raised-button (click)="goBack()">Ok</button>
+    <button mat-raised-button [routerLink]="['/categories']">Ok</button>
   </div>
 
   <div *ngSwitchCase="'error'">
     <p>{{ errorMsg }}</p>
-    <button mat-raised-button (click)="goBack()">Ok</button>
+    <button mat-raised-button (click)="ngOnInit() // Maybe add restart method">Ok</button>
   </div>
 
 

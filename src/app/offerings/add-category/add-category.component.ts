@@ -1,9 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Category} from '../model/category.model';
-import {Observable} from 'rxjs';
 import {CategoryService} from '../category.service';
-import {Router} from '@angular/router';
-import {Location} from '@angular/common';
+import {isFunction} from 'rxjs/internal/util/isFunction';
 
 
 @Component({
@@ -17,11 +15,11 @@ export class AddCategoryComponent implements OnInit {
 
   status!: '' | 'submitted' | 'created' | 'error';
 
-  errorMsg = 'Oops! An error occurred while trying to create a category.';
-  successMsg = 'Successfully added a new category.';
+  successMsg: string | null = null;
+  errorMsg: string | null = null;
 
 
-  constructor(private categoryService: CategoryService, private router: Router) { }
+  constructor(private categoryService: CategoryService) { }
 
 
   ngOnInit(): void {
@@ -38,15 +36,8 @@ export class AddCategoryComponent implements OnInit {
     if (categoryForm.valid) {
 
       this.categoryService.add(this.model).subscribe({
-        next: createdCategory => {
-          console.log("Created category: ", createdCategory);
-          this.status = 'created';
-          this.successMsg = `Successfully added a new category: "${createdCategory.name}"`;
-        },
-        error: err => {
-          console.log("Failed to create category: ", err);
-          this.status = 'error';
-        },
+        next: this.successHandler.bind(this),
+        error: this.errorHandler.bind(this),
       });
 
       this.status = 'submitted';
@@ -57,18 +48,17 @@ export class AddCategoryComponent implements OnInit {
   }
 
 
-  goBack() {
-    switch (this.status) {
-      case 'error':
-      {
-        this.ngOnInit();
-        return;
-      }
-      case "created":
-      {
-        this.router.navigate(['/categories']).then();
-        return;
-      }
-    }
+
+  protected successHandler(response: Category): void {
+    this.status = 'created';
+    this.errorMsg = null;
+    this.successMsg = `Successfully added a new category: "${response.name}"`;
+  }
+
+
+  protected errorHandler(err: any): void {
+    this.status = 'error';
+    this.errorMsg = err?.message ?? 'Oops! Failed to create a new category.';
+    this.successMsg = null;
   }
 }
