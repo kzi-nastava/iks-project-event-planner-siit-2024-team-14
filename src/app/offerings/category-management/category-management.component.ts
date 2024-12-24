@@ -36,7 +36,7 @@ export class CategoryManagementComponent implements OnInit, OnDestroy {
 
   loadCategories() {
     this.categoryService.getAll().subscribe({
-      next: categories => this.categories = categories,
+      next: categories => this.categories = [...categories, {} as Category],
       error: _ => console.log('Failed to load categories.')
     });
   }
@@ -61,8 +61,13 @@ export class CategoryManagementComponent implements OnInit, OnDestroy {
   }
 
 
-  editCategory(category: Category) {
-    console.log('TODO: Implement category edit.');
+  showEditCategory(category: Category) {
+    this.router.navigate(
+      [{ outlets: { popup: [category.id, 'edit'] } }],
+      {
+        skipLocationChange: true,
+        relativeTo: this.route,
+      }).then();
   }
 
   deleteCategory(category: Category) {

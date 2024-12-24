@@ -10,6 +10,7 @@ import { AddServiceComponent } from './offerings/add-service/add-service.compone
 import { ServiceDetailsComponent } from './offerings/service-details/service-details.component';
 import {CategoriesDashboardComponent} from './offerings/categories-dashboard/categories-dashboard.component';
 import {AddCategoryComponent} from './offerings/add-category/add-category.component';
+import {EditCategoryComponent} from './offerings/edit-category/edit-category.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
     canActivate: [], // TODO: add guard to allow only admin role to access this
     children: [
       { path: 'add', component: AddCategoryComponent, outlet: 'popup'},
+      { path: ':id/edit', component: EditCategoryComponent, outlet: 'popup'},
       { path: '**', redirectTo: ''},
     ]
   },
