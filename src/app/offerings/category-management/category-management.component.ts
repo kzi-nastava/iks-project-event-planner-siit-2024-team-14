@@ -3,6 +3,7 @@ import { Category } from '../model/category.model';
 import {CategoryService} from '../category.service';
 import {Observable, Subscription} from 'rxjs';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {HasId} from '../model/has-id.model';
 
 @Component({
   selector: 'app-category-management',
@@ -10,11 +11,11 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
   styleUrl: './category-management.component.css'
 })
 export class CategoryManagementComponent implements OnInit, OnDestroy {
-  categories: Category[] = [];
-  selectedCategory: Category | undefined;
+  categories: (Category & HasId)[] = [];
 
   isPopupVisible!: boolean;
   private routerSubscription?: Subscription;
+
 
 
 
@@ -36,27 +37,29 @@ export class CategoryManagementComponent implements OnInit, OnDestroy {
 
   loadCategories() {
     this.categoryService.getAll().subscribe({
-      next: categories => this.categories = [...categories, {} as Category],
+      next: categories => this.categories = [...categories],
       error: _ => console.log('Failed to load categories.')
     });
   }
+
 
   showAddCategory() {
     this.router.navigate(
       [{ outlets: { popup: ['add'] } }],
       {
         skipLocationChange: true,
-        relativeTo: this.route
+        relativeTo: this.route,
+        state: {},
       }).then();
   }
 
+
   hidePopup() {
-    // TODO: figure out if, and how to preserve form state
     this.router.navigate(
       [{ outlets: { popup: null } }],
       {
         skipLocationChange: true,
-        relativeTo: this.route
+        relativeTo: this.route,
       }).then();
   }
 
@@ -67,16 +70,12 @@ export class CategoryManagementComponent implements OnInit, OnDestroy {
       {
         skipLocationChange: true,
         relativeTo: this.route,
+        state: {...category},
       }).then();
   }
 
-  deleteCategory(category: Category) {
-    console.log('TODO: Implement delete category');
-    const id: number = category.id ?? -1; // TODO: Fix
-    this.categoryService.delete(id).subscribe({
-      next: value => console.log('Deleted category'),
-      error: err => console.error('Failed to delete category'),
-    });
+  deleteCategory(id: number) {
+    this.categoryService.delete(id);
   }
 
   ngOnDestroy(): void {

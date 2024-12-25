@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Category} from '../model/category.model';
+import {HasId} from '../model/has-id.model';
 
 
 @Component({
@@ -8,15 +9,15 @@ import {Category} from '../model/category.model';
   styleUrls: ['./category-expansion-panel.component.css',]
 })
 export class CategoryExpansionPanelComponent {
-  @Input({required: true}) category!: Category;
+  @Input({required: true}) category!: Category & HasId;
 
-  @Output() delete = new EventEmitter<Category>();
+  @Output() delete = new EventEmitter<number>();
   @Output() edit = new EventEmitter<Category>();
 
 
 
   deleteCategory() {
-    this.delete.emit(this.category);
+    this.delete.emit(this.category.id);
   }
 
   editCategory() {
