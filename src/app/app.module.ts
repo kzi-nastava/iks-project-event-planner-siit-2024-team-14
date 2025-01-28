@@ -20,7 +20,7 @@ import { OfferingsModule } from './offerings/offerings.module';
 import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import { RegistrationSppComponent } from './components/registration-spp/registra
     NgOptimizedImage,
     AppRoutingModule,
     OfferingsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()
