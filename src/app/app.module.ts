@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';  // Correct import
 import { HomeComponent } from './components/home/home.component';
@@ -20,6 +21,8 @@ import { OfferingsModule } from './offerings/offerings.module';
 import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+
+import { HttpClientModule } from '@angular/common/http';  // Import HttpClientModule
 
 
 @NgModule({
@@ -44,6 +47,9 @@ import { RegistrationSppComponent } from './components/registration-spp/registra
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,  // Add ReactiveFormsModule
+    HttpClientModule,
+
     MatIcon,
     NgOptimizedImage,
     AppRoutingModule,

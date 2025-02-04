@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
+import { Login } from '../../interfaces/login.model';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +10,52 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  showModal = false; // To track modal visibility
+  // State for modal visibility
+  showModal = false;
 
-  constructor(private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
+  // Reactive Form Definition
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required)
+  });
+
+  // Login Function
+  login(): void {
+    if (this.loginForm.valid) {
+      const loginData: Login = {
+        email: this.loginForm.value.email || '',
+        password: this.loginForm.value.password || ''
+      };
+
+      // Send login data to the backend
+      this.loginService.login(loginData).subscribe({
+        next: (response: any) => {
+          // Print the response in the console
+          console.log('Login successful:', response);
+
+          // Store the token
+          localStorage.setItem('user', response.token);
+
+          // Navigate to home page
+          this.router.navigate(['home']);
+        },
+        error: (err) => {
+          console.error('Login failed:', err);
+          alert('Login failed. Please check your credentials.');
+        }
+      });
+    } else {
+      alert('Please fill out the form correctly.');
+    }
+  }
+
+
+  // Modal Controls
   openModal(event: MouseEvent): void {
-    event.preventDefault();  // Prevent any default behavior like navigation
-    this.showModal = true;    // Show the modal
+    event.preventDefault();
+    this.showModal = true;
   }
 
   closeModal(): void {
@@ -21,7 +63,7 @@ export class LoginComponent {
   }
 
   redirectTo(route: string): void {
-    this.router.navigate([route], {replaceUrl: true});
+    this.router.navigate([route], { replaceUrl: true });
     this.closeModal();
   }
 }

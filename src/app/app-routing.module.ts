@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './components/home/home.component';  // Correct import path
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
@@ -13,6 +14,7 @@ import { ServiceDetailsComponent } from './offerings/service-details/service-det
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },  // Default redirect to /home
   { path: 'home', component: HomeComponent },  // Home component route
+  { path: 'login', component: LoginComponent },         // Login route
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },
@@ -27,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
