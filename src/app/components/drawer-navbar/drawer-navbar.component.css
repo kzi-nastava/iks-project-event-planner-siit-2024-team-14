@@ -1,0 +1,51 @@
+/* Sidebar styling */
+.sidebar {
+  position: fixed;
+  top: 120px; /* Positioned right after the beige header rectangle */
+  left: -250px; /* Initially hidden off-screen */
+  width: 250px;
+  height: calc(100vh - 120px); /* Adjust height to fit below the header */
+  background-color: #ebe3d6; /* Beige color */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar.open {
+  left: 0; /* Slide in */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 15px;
+  font-family: 'Petrona', sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+  color: #523D35;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar li:hover {
+  background-color: #d9d2c3; /* Slightly darker beige on hover */
+}
+
+/* Burger icon */
+.burger-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #523D35;
+  z-index: 5; /* Above the sidebar */
+  padding: 5px;
+}

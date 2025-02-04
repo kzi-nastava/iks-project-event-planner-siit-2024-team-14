@@ -1,13 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { HomeComponent } from './components/home/home.component';  // Correct import path
+import { AboutComponent } from './components/about/about.component';
+import { ServicesComponent } from './components/services/services.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component'
+import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
+import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+import { AddServiceComponent } from './offerings/add-service/add-service.component';
+import { ServiceDetailsComponent } from './offerings/service-details/service-details.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redirect to login on empty path
+  { path: '', redirectTo: '/home', pathMatch: 'full' },  // Default redirect to /home
+  { path: 'home', component: HomeComponent },  // Home component route
   { path: 'login', component: LoginComponent },         // Login route
-  { path: 'home', component: HomeComponent }
-  // Add other routes if needed
+  { path: 'about', component: AboutComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'services/add', component: AddServiceComponent },
+  { path: 'services/:id', component: ServiceDetailsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registration-eo', component: RegistrationEoComponent },
+  { path: 'registration-spp', component: RegistrationSppComponent },
+  { path: '**', redirectTo: '/home' }, // Fallback for unknown routes
 ];
 
 @NgModule({

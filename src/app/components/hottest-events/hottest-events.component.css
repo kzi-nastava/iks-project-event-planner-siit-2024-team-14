@@ -1,0 +1,264 @@
+.events-section {
+  text-align: center;
+  padding: 40px 20px; /* Manji padding za manje ekrane */
+  background-color: #f9f9f9;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Pseudo-elementi za krugove */
+.events-section::before,
+.events-section::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.events-section::before {
+  width: 500px;
+  height: 500px;
+  background-color: rgba(82, 61, 53, 0.1);
+  top: -150px;
+  left: -200px;
+}
+
+.events-section::after {
+  width: 700px;
+  height: 700px;
+  background-color: rgba(149, 157, 144, 0.6);
+  bottom: -200px;
+  right: -250px;
+}
+
+.section-title, .section-title2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #523D35;
+  margin-bottom: 20px;
+}
+
+.section-title2 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 90%;
+  margin: auto;
+}
+
+.carousel-container {
+  overflow: hidden;
+  width: 90%;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Stil za strelice */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2em;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.arrow.left {
+  left: 10px; /* Prilagodjeno za manje ekrane */
+}
+
+.arrow.right {
+  right: 10px; /* Prilagodjeno za manje ekrane */
+}
+
+/* Stilovi za kartice */
+.card {
+  flex: 0 0 auto;
+  width: 100%;
+
+  max-width: 30%; /* Maksimalna širina za desktop */
+  height: 90%;
+  margin: 0 8px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: #f5f5f5;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.organizer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.organizer-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.organizer-role {
+  font-size: 0.9em;
+  color: #888;
+  margin: 0;
+}
+
+.divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.view-more-btn {
+  background-color: #523D35;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-more-btn:hover {
+  background-color: #704d3a;
+}
+
+.card-content small span, p span {
+  margin-right: 5px;
+  color: #523D35;
+}
+
+/* Responsivni dizajn */
+@media (max-width: 1024px) {
+  .events-section::before,
+  .events-section::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .arrow {
+    font-size: 1.5em;
+    width: 40px;
+    height: 40px;
+  }
+
+  .card {
+    max-width: 300px; /* Manja širina za tablete */
+  }
+
+  .arrow.left {
+    left: 20px; /* Pomerene malo bliže */
+  }
+
+  .arrow.right {
+    right: 20px; /* Pomerene malo bliže */
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title, .section-title2 {
+    font-size: 1.5em;
+  }
+
+  .carousel-wrapper {
+    padding: 0 10px;
+  }
+
+  .card {
+    max-width: 250px; /* Još manja širina za mobilne uređaje */
+
+    margin: 10px 5px; /* Manji razmaci između kartica */
+  }
+
+  .arrow {
+    font-size: 1.2em;
+    width: 35px;
+    height: 35px;
+  }
+
+  .arrow.left {
+    left: 10px;
+  }
+
+  .arrow.right {
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .arrow {
+    font-size: 1em;
+    width: 30px;
+    height: 30px;
+  }
+
+  .events-section::before,
+  .events-section::after {
+    display: none; /* Sakrij pozadinske krugove */
+  }
+
+  .section-title, .section-title2 {
+    font-size: 1.2em;
+  }
+
+  .card {
+    max-width: 200px; /* Smanjene kartice za vrlo male ekrane */
+    margin: 10px auto;
+  }
+
+  .view-more-btn {
+    width: 100%;
+    padding: 10px;
+  }
+}
