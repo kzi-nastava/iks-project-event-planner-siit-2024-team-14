@@ -10,7 +10,7 @@
           <div class="card-header">
             <img [src]="'../../../assets/images/profile.png'" alt="{{event.name}}" class="profile-img">
             <div class="organizer-info">
-              <h3 class="organizer-name">{{event.name}}</h3>
+              <h3 class="organizer-name">{{ event.organizerFirstName }} {{ event.organizerLastName }}</h3>
               <p class="organizer-role">Event organizer</p>
             </div>
           </div>
@@ -24,10 +24,7 @@
               <span class="fas fa-location-pin"></span> {{ event.location }}
             </small>
             <br>
-            <small>
-              <span class="fas fa-calendar-alt"></span> {{ event.startDate }}
-            </small>
-            <br /><br>
+            <small><span class="fas fa-calendar-alt"></span> from {{ event.startDate }} to {{ event.endDate }}</small><br /><br />
             <button class="view-more-btn">View More</button>
           </div>
         </div>

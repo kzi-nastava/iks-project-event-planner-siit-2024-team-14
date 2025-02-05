@@ -1,43 +1,104 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventService } from '../../services/our-events.service';
+import {HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-our-events',
   templateUrl: './our-events.component.html',
-  styleUrl: './our-events.component.css'
+  styleUrls: ['./our-events.component.css']
 })
-export class OurEventsComponent {
-  eventList = [
-    { organizerName: 'Dragana Milošević', location: 'Niš, Serbia',date: '02.12.2024', title: 'Bakery Opening', description: 'Come with an empty stomach!', imageUrl: '../../../assets/images/event6.png' },
-    { organizerName: 'Nina Matijević', location: 'Belgrade, Serbia', date: '22.12.2024',  title: 'Graduation Party', description: 'All college graduates welcome :)', imageUrl: '../../../assets/images/event7.png' },
-    { organizerName: 'Dušan Kovačević', location: 'Petrovaradin, Serbia', date: '30.11.2024.',  title: 'EXIT Festival', description: 'Together, always <3', imageUrl: '../../../assets/images/event8.png' },
-  ];
+export class OurEventsComponent implements OnInit {
+  eventsList: any[] = []; // Lista svih događaja
+  filteredEvents: any[] = []; // Lista filtriranih događaja (pretraga + filtriranje)
+  searchTerm: string = ''; // String za pretragu
+  startDate: string = ''; // Startni datum za filtriranje
+  endDate: string = ''; // Krajni datum za filtriranje
+  category: string = ''; // Kategorija za filtriranje
+  page: number = 0; // Trenutna stranica
+  totalEvents: number = 0; // Ukupno događaja
+  pageSize: number = 10; // Broj događaja po stranici
+  totalPages: number = 0; // Ukupno stranica
+  showFilters: boolean = false; // Da li su filteri prikazani
 
-  searchTerm: string = '';
-  showFilters: boolean = false;
-  filteredEvents: any[] = this.eventList; // Initially shows all events
+  constructor(private eventService: EventService) {}
 
-  // Method to handle filtering
+  ngOnInit() {
+    this.loadEvents();
+  }
+
+  // Učitavanje svih događaja sa servera
+  loadEvents() {
+    this.eventService.getAllEvents()
+      .subscribe(response => {
+        this.eventsList = response;  // Početno učitaj sve događaje (ako je response već lista)
+        this.totalEvents = response.length;  // Ako je response samo lista, koristi duzinu
+        this.totalPages = Math.ceil(this.totalEvents / this.pageSize);  // Izračunavanje ukupnih stranica
+        this.filteredEvents = [...this.eventsList];  // Početno postavi sve događaje kao filtrirane
+
+      });
+  }
+
+  // Pretraga događaja po imenu, organizatoru, opisu itd.
   onSearch() {
-    if (this.searchTerm.trim() === '') {
-      this.filteredEvents = this.eventList; // If the search term is empty, show all events
-    } else {
-      this.filteredEvents = this.eventList.filter(event =>
-        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        event.organizerName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        event.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        event.location.toLowerCase().includes(this.searchTerm.toLowerCase())
+    this.filteredEvents = this.eventsList.filter(event =>
+      event.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      event.organizerFirstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      event.organizerLastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      event.description.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  applyFilters() {
+    this.page = 0;
+
+    // Kreiranje HttpParams samo sa postojećim parametrima
+    let params = new HttpParams()
+      .set('page', this.page.toString())
+      .set('size', this.pageSize.toString());
+
+    if (this.startDate) {
+      params = params.set('startDate', this.startDate);
+    }
+
+    if (this.endDate) {
+      params = params.set('endDate', this.endDate);
+    }
+
+    if (this.category) {
+      params = params.set('category', this.category);
+    }
+
+    // Poziv backend servisa sa filtriranim parametrima
+    this.eventService.getFilteredEvents(params)
+      .subscribe(
+        response => {
+          this.eventsList = response.content;
+          this.totalEvents = response.totalElements;
+          this.totalPages = Math.ceil(this.totalEvents / this.pageSize);
+          this.filteredEvents = [...this.eventsList];
+        },
+        error => {
+          console.error('Error applying filters:', error);
+        }
       );
+  }
+
+// Promeni stranicu
+  onPageChange(page: number) {
+    this.page = page;
+    this.loadEvents();
+  }
+
+  getInitials(organizerFirstName: string, organizerLastName: string): string {
+    if (organizerFirstName && organizerLastName) {
+      return organizerFirstName.charAt(0).toUpperCase() + organizerLastName.charAt(0).toUpperCase();
+    } else {
+      return ''; // Ako nema organizatora, vrati prazan string
     }
   }
 
-  // Assuming you have this method to get initials
-  getInitials(name: string): string {
-    const names = name.split(' ');
-    return names.length > 1 ? names[0][0] + names[1][0] : names[0][0];
-  }
-
+  // Funkcija za otvaranje/zatvaranje filtera
   toggleFilters() {
-    this.showFilters = !this.showFilters; // Prebaci između prikazivanja i sakrivanja filtera
+    this.showFilters = !this.showFilters;
   }
-
 }

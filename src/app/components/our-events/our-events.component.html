@@ -1,10 +1,8 @@
 <div class="events-list-section">
-
   <div class="header-bar">
     <h2 class="header-title">OUR EVENTS</h2>
     <div class="search-filter">
       <div class="search-box">
-        <!-- Add [(ngModel)] to bind the input value to the search term in the component -->
         <input type="text" placeholder="Enter search credentials" class="search-input" [(ngModel)]="searchTerm" (input)="onSearch()" />
         <span class="fas fa-search"></span>
       </div>
@@ -17,19 +15,15 @@
   <div class="filter-options" [ngClass]="{'show-filters': showFilters}">
     <div class="filter-option">
       <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate">
+      <input type="date" id="startDate" [(ngModel)]="startDate" />
     </div>
     <div class="filter-option">
       <label for="endDate">End Date:</label>
-      <input type="date" id="endDate">
-    </div>
-    <div class="filter-option">
-      <label for="city">City:</label>
-      <input type="text" id="city" placeholder="Enter city">
+      <input type="date" id="endDate" [(ngModel)]="endDate" />
     </div>
     <div class="filter-option">
       <label for="category">Category:</label>
-      <select id="category">
+      <select id="category" [(ngModel)]="category">
         <option value="">All Categories</option>
         <option value="Music">Music</option>
         <option value="Art">Art</option>
@@ -37,37 +31,35 @@
         <option value="Education">Education</option>
       </select>
     </div>
+    <button (click)="applyFilters()">Apply Filters</button>
   </div>
 
-
   <div class="events-list">
-    <div class="extra-circle"></div>
     <div *ngFor="let event of filteredEvents" class="event-card">
       <div class="event-header">
         <div class="event-avatar">
-          <span>{{ getInitials(event.organizerName) }}</span>
+          <span>{{ getInitials(event.organizerFirstName, event.organizerLastName) }}</span>
         </div>
         <div class="event-details">
-          <h3>{{ event.organizerName }}</h3>
+          <h3>{{ event.organizerFirstName + ' ' + event.organizerLastName }}</h3>
           <p>Event organizer</p>
         </div>
       </div>
-      <img [src]="event.imageUrl" alt="{{ event.title }}" class="event-image" />
+      <img [src]="event.imageUrl" alt="{{ event.name }}" class="event-image" />
       <div class="event-content">
-        <h4>{{ event.title }}</h4>
+        <h4>{{ event.name }}</h4>
         <p>{{ event.description }}</p>
-        <small>
-          <span class="fas fa-location-pin"></span> {{ event.location }}
-        </small>
-        <br>
-        <small>
-          <span class="fas fa-calendar-alt"></span> {{ event.date }}
-        </small>
-        <br />
-        <br>
+        <small><span class="fas fa-location-pin"></span> {{ event.location }}</small><br />
+        <small><span class="fas fa-calendar-alt"></span> from {{ event.startDate }} to {{ event.endDate }}</small><br /><br />
         <button>View More</button>
       </div>
     </div>
   </div>
-  <button class="view-more-btn">View More</button>
+ <br>
+  <br>
+  <div class="pagination">
+    <button (click)="onPageChange(page - 1)" [disabled]="page <= 0">Previous</button>
+    <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+    <button (click)="onPageChange(page + 1)" [disabled]="page >= totalPages - 1">Next</button>
+  </div>
 </div>

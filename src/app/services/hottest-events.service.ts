@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface EventModel { // Promenjeno iz 'Event' u 'EventModel'
+export interface EventModel {
   id: number;
+  organizerFirstName: string;
+  organizerLastName: string;
   name: string;
   description: string;
   location: string;

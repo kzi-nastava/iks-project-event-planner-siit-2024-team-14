@@ -7,7 +7,7 @@ import { HottestEventsService, EventModel } from '../../services/hottest-events.
   styleUrl: './hottest-events.component.css'
 })
 export class HottestEventsComponent implements OnInit {
-  hottestEvents: EventModel[] = []; // Ispravljeno
+  hottestEvents: EventModel[] = [];
 
   currentSlide = 0;
 
