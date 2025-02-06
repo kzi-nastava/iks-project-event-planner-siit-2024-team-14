@@ -36,15 +36,16 @@
 
   <div class="events-list">
     <div *ngFor="let event of filteredEvents" class="event-card">
-      <div class="event-header">
-        <div class="event-avatar">
-          <span>{{ getInitials(event.organizerFirstName, event.organizerLastName) }}</span>
-        </div>
-        <div class="event-details">
-          <h3>{{ event.organizerFirstName + ' ' + event.organizerLastName }}</h3>
-          <p>Event organizer</p>
+      <div class="card-header">
+        <img [src]="event.organizerProfilePicture" alt="{{event.name}}" class="profile-img">
+        <div class="organizer-info">
+          <h3 class="organizer-name">{{ event.organizerFirstName }} {{ event.organizerLastName }}</h3>
+          <p class="organizer-role">Event organizer</p>
         </div>
       </div>
+
+      <hr class="divider">
+
       <img [src]="event.imageUrl" alt="{{ event.name }}" class="event-image" />
       <div class="event-content">
         <h4>{{ event.name }}</h4>

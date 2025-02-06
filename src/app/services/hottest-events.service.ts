@@ -11,6 +11,8 @@ export interface EventModel {
   location: string;
   startDate: string;
   endDate: string;
+  imageUrl: string;
+  organizerProfilePicture: string;
 }
 
 @Injectable({

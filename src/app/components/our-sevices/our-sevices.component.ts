@@ -1,44 +1,95 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SolutionService} from '../../services/our-services.service';
+import {HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-our-sevices',
   templateUrl: './our-sevices.component.html',
   styleUrl: './our-sevices.component.css'
 })
-export class OurSevicesComponent {
-  eventList = [
-    { organizerName: 'Eva Lolic', location: 'Niš, Serbia', title: 'Singer', description: 'Music lover', price:'60 000 din', imageUrl: '../../../assets/images/service6.png' },
-    { organizerName: 'Natasa Mitrovic', location: 'Belgrade, Serbia', title: 'Marketing team', description: 'Burn your social medias', price:'45 000 din', imageUrl: '../../../assets/images/service7.png' },
-    { organizerName: 'Zoran Petrovic', location: 'Petrovaradin, Serbia', title: 'Photobooth Rentals', description: 'Interactive photo booths with custom backdrops and props.', price:'10 000 din', imageUrl: '../../../assets/images/service8.png' },
-  ];
 
-  searchTerm: string = '';
-  filteredEvents: any[] = this.eventList; // Initially shows all events
+export class OurSevicesComponent implements OnInit {
+  solutionsList: any[] = []; // Lista svih događaja
+  filteredSolutions: any[] = []; // Lista filtriranih događaja (pretraga + filtriranje)
+  searchTerm: string = ''; // String za pretragu
+  category: string = ''; // Kategorija za filtriranje
+  page: number = 0; // Trenutna stranica
+  totalSolutions: number = 0; // Ukupno događaja
+  pageSize: number = 10; // Broj događaja po stranici
+  totalPages: number = 0; // Ukupno stranica
+  showFilters: boolean = false; // Da li su filteri prikazani
 
-  showFilters: boolean = false;
+  constructor(private solutionService: SolutionService) {}
 
-  // Method to handle filtering
+  ngOnInit() {
+    this.loadSolutions();
+  }
+
+  // Učitavanje svih događaja sa servera
+  loadSolutions() {
+    this.solutionService.getAllSolutions()
+      .subscribe(response => {
+        this.solutionsList = response;  // Početno učitaj sve događaje (ako je response već lista)
+        this.totalSolutions = response.length;  // Ako je response samo lista, koristi duzinu
+        this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);  // Izračunavanje ukupnih stranica
+        this.filteredSolutions = [...this.solutionsList];  // Početno postavi sve događaje kao filtrirane
+
+      });
+  }
+
+  // Pretraga događaja po imenu, organizatoru, opisu itd.
   onSearch() {
-    if (this.searchTerm.trim() === '') {
-      this.filteredEvents = this.eventList; // If the search term is empty, show all events
-    } else {
-      this.filteredEvents = this.eventList.filter(event =>
-        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        event.organizerName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        event.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        event.location.toLowerCase().includes(this.searchTerm.toLowerCase())
+    this.filteredSolutions = this.solutionsList.filter(solution =>
+      solution.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      solution.providerCompanyName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      solution.price.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      solution.location.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      solution.description.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  applyFilters() {
+    this.page = 0;
+
+    // Kreiranje HttpParams samo sa postojećim parametrima
+    let params = new HttpParams()
+      .set('page', this.page.toString())
+      .set('size', this.pageSize.toString());
+
+
+    if (this.category) {
+      params = params.set('category', this.category);
+    }
+
+    // Poziv backend servisa sa filtriranim parametrima
+    this.solutionService.getFilteredSolutions(params)
+      .subscribe(
+        response => {
+          this.solutionsList = response.content;
+          this.totalSolutions = response.totalElements;
+          this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
+          this.filteredSolutions = [...this.solutionsList];
+        },
+        error => {
+          console.error('Error applying filters:', error);
+        }
       );
+  }
+
+  onPageChange(page: number) {
+    this.page = page;
+    this.loadSolutions();
+  }
+
+  getInitials(providerCompanyName: string): string {
+    if (providerCompanyName) {
+      return providerCompanyName.charAt(0).toUpperCase();
+    } else {
+      return '';
     }
   }
 
-  // Assuming you have this method to get initials
-  getInitials(name: string): string {
-    const names = name.split(' ');
-    return names.length > 1 ? names[0][0] + names[1][0] : names[0][0];
-  }
-
   toggleFilters() {
-    this.showFilters = !this.showFilters; // Prebaci između prikazivanja i sakrivanja filtera
+    this.showFilters = !this.showFilters;
   }
-
 }

@@ -1,24 +1,26 @@
-import { Component } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
+import { HottestSolutionsService, SolutionModel } from '../../services/hottest-services.service';
 @Component({
   selector: 'app-hottest-services',
   templateUrl: './hottest-services.component.html',
   styleUrl: './hottest-services.component.css'
 })
-export class HottestServicesComponent {
+export class HottestServicesComponent implements OnInit {
 
-  hottestEvents = [
-    { organizerName: 'Milos Markovic', location: 'Novi Sad, Serbia', title: 'Champagne', description: 'Sparkling wine', price:'30 000 din', imageUrl: '../../../assets/images/service1.png', profileImage: '../../../assets/images/profile9.png'},
-    { organizerName: 'Katarina Peric', location: 'Novi Sad, Serbia', title: 'Horse riding lessons', description: 'For horse lovers', price:'6 000 din', imageUrl: '../../../assets/images/service2.png', profileImage: '../../../assets/images/profile10.png' },
-    { organizerName: 'Nenad Bosiljcic', location: 'Novi Sad, Serbia', title: 'Rooftop theatre equipment', description: 'For the best movie night', price:'15 000 din', imageUrl: '../../../assets/images/service3.png', profileImage: '../../../assets/images/profile11.png'},
-    { organizerName: 'Ivan Ivanovic', location: 'Novi Sad, Serbia', title: 'Catering service', description: 'The best food service in your town! :)', price:'20 000 din', imageUrl: '../../../assets/images/service4.png', profileImage: '../../../assets/images/profile12.png'},
-    { organizerName: 'Anastasija Beric', location: 'Novi Sad, Serbia', title: 'Band', description: 'High-energy band playing modern favorites.', price:'80 000 din', imageUrl: '../../../assets/images/service5.png', profileImage: '../../../assets/images/profile13.png'},
-  ];
+  hottestSolutions: SolutionModel[] = [];
 
   currentSlide = 0;
 
+  constructor(private solutionsService: HottestSolutionsService) {}
+
+  ngOnInit() {
+    this.solutionsService.getTopSolutions().subscribe((solutions: SolutionModel[]) => {
+      this.hottestSolutions = solutions;
+    });
+  }
+
   nextSlide() {
-    if (this.currentSlide < this.hottestEvents.length - 4) {
+    if (this.currentSlide < this.hottestSolutions.length - 4) {
       this.currentSlide += 1.5;
     }
   }

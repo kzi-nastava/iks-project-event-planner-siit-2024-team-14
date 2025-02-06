@@ -8,12 +8,12 @@
     <!-- Carousel sa karticama -->
     <div class="carousel-container">
       <div class="carousel" [style.transform]="getTransform()">
-        <div *ngFor="let event of hottestEvents" class="card">
+        <div *ngFor="let solution of hottestSolutions" class="card">
           <!-- Gornji deo kartice sa profilnom slikom i informacijama -->
           <div class="card-header">
-            <img [src]="event.profileImage" alt="{{event.organizerName}}" class="profile-img">
+            <!-- <img [src]="solution.profileImage" alt="{{solution.providerCompanyName}}" class="profile-img"> -->
             <div class="organizer-info">
-              <h3 class="organizer-name">{{event.organizerName}}</h3>
+              <h3 class="organizer-name">{{solution.providerCompanyName}}</h3>
               <p class="organizer-role">Service and product provider</p>
             </div>
           </div>
@@ -21,14 +21,14 @@
           <hr class="divider">
 
           <!-- Srednji deo kartice sa slikom događaja -->
-          <img [src]="event.imageUrl" alt="{{event.title}}" class="event-image">
+          <img [src]="solution.imageUrl" alt="{{solution.name}}" class="event-image">
 
           <!-- Donji deo kartice sa detaljima o događaju -->
           <div class="card-content">
-            <h3>{{event.title}}</h3>
-            <p>{{event.description}}</p>
-            <p><span  class="fas fa-tag"></span>{{event.price}}</p>
-            <small>{{event.location}}</small>
+            <h3>{{solution.name}}</h3>
+            <p>{{solution.description}}</p>
+            <p><span  class="fas fa-tag"></span>{{solution.price}}</p>
+            <small>{{solution.location}}</small>
             <br>
             <button class="view-more-btn">View More</button>
           </div>
