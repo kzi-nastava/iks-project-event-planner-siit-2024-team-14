@@ -1,10 +1,9 @@
 <div class="events-list-section">
-
   <div class="header-bar">
     <h2 class="header-title">OUR SERVICES AND PRODUCTS</h2>
     <div class="search-filter">
       <div class="search-box">
-         <input type="text" placeholder="Enter search credentials" class="search-input" [(ngModel)]="searchTerm" (input)="onSearch()" />
+        <input type="text" placeholder="Enter search credentials" class="search-input" [(ngModel)]="searchTerm" (input)="onSearch()" />
         <span class="fas fa-search"></span>
       </div>
       <div class="filter-icon" (click)="toggleFilters()">
@@ -16,15 +15,11 @@
   <div class="filter-options" [ngClass]="{'show-filters': showFilters}">
     <div class="filter-option">
       <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate">
+      <input type="date" id="startDate" [(ngModel)]="startDate" />
     </div>
     <div class="filter-option">
       <label for="endDate">End Date:</label>
-      <input type="date" id="endDate">
-    </div>
-    <div class="filter-option">
-      <label for="city">City:</label>
-      <input type="text" id="city" placeholder="Enter city">
+      <input type="date" id="endDate" [(ngModel)]="endDate" />
     </div>
     <div class="filter-option">
       <label for="category">Category:</label>
@@ -37,14 +32,23 @@
       </select>
     </div>
     <div class="filter-option">
+      <label for="type">Type:</label>
+      <select id="type" [(ngModel)]="solutionType">
+        <option value="">All Types</option>
+        <option value="Product">Product</option>
+        <option value="Service">Service</option>
+      </select>
+    </div>
+    <div class="filter-option">
       <label>Price Range:</label>
       <div class="price-range">
-        <input type="number" id="minPrice" placeholder="Min Price" step="0.01">
+        <input type="number" id="minPrice" placeholder="Min Price" step="0.01" [(ngModel)]="minPrice" />
         <span>to</span>
-        <input type="number" id="maxPrice" placeholder="Max Price" step="0.01">
+        <input type="number" id="maxPrice" placeholder="Max Price" step="0.01" [(ngModel)]="maxPrice" />
         <span class="fas fa-dollar-sign"></span>
       </div>
     </div>
+
     <button (click)="applyFilters()">Apply Filters</button>
   </div>
 
@@ -63,8 +67,9 @@
       <div class="event-content">
         <h4>{{ solution.name }}</h4>
         <p>{{ solution.description }}</p>
-        <small>{{ solution.location }}</small>
-        <p><span  class="fas fa-tag"></span>{{solution.price}}</p>
+        <small>{{ solution.location }}</small> <br>
+        <small>{{ solution.solutionType }}</small>
+        <p><span class="fas fa-tag"></span>{{ solution.price }}</p>
         <br />
         <button>View More</button>
       </div>

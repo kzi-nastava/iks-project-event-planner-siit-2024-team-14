@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {SolutionService} from '../../services/our-services.service';
-import {HttpParams} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { SolutionService } from '../../services/our-services.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-our-sevices',
@@ -9,15 +9,20 @@ import {HttpParams} from '@angular/common/http';
 })
 
 export class OurSevicesComponent implements OnInit {
-  solutionsList: any[] = []; // Lista svih događaja
-  filteredSolutions: any[] = []; // Lista filtriranih događaja (pretraga + filtriranje)
-  searchTerm: string = ''; // String za pretragu
-  category: string = ''; // Kategorija za filtriranje
-  page: number = 0; // Trenutna stranica
-  totalSolutions: number = 0; // Ukupno događaja
-  pageSize: number = 10; // Broj događaja po stranici
-  totalPages: number = 0; // Ukupno stranica
-  showFilters: boolean = false; // Da li su filteri prikazani
+  solutionsList: any[] = [];
+  filteredSolutions: any[] = [];
+  searchTerm: string = '';
+  category: string = '';
+  startDate: string = '';
+  endDate: string = '';
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
+  solutionType: string = '';
+  page: number = 0;
+  totalSolutions: number = 0;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  showFilters: boolean = false;
 
   constructor(private solutionService: SolutionService) {}
 
@@ -25,24 +30,21 @@ export class OurSevicesComponent implements OnInit {
     this.loadSolutions();
   }
 
-  // Učitavanje svih događaja sa servera
   loadSolutions() {
     this.solutionService.getAllSolutions()
       .subscribe(response => {
-        this.solutionsList = response;  // Početno učitaj sve događaje (ako je response već lista)
-        this.totalSolutions = response.length;  // Ako je response samo lista, koristi duzinu
-        this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);  // Izračunavanje ukupnih stranica
-        this.filteredSolutions = [...this.solutionsList];  // Početno postavi sve događaje kao filtrirane
-
+        this.solutionsList = response;
+        this.totalSolutions = response.length;
+        this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
+        this.filteredSolutions = [...this.solutionsList];
       });
   }
 
-  // Pretraga događaja po imenu, organizatoru, opisu itd.
   onSearch() {
     this.filteredSolutions = this.solutionsList.filter(solution =>
       solution.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       solution.providerCompanyName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      solution.price.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      solution.price.toString().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       solution.location.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       solution.description.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
@@ -51,45 +53,42 @@ export class OurSevicesComponent implements OnInit {
   applyFilters() {
     this.page = 0;
 
-    // Kreiranje HttpParams samo sa postojećim parametrima
     let params = new HttpParams()
       .set('page', this.page.toString())
       .set('size', this.pageSize.toString());
 
+    if (this.category) params = params.set('category', this.category);
+    if (this.startDate) params = params.set('startDate', this.startDate);
+    if (this.endDate) params = params.set('endDate', this.endDate);
+    if (this.minPrice !== null) params = params.set('minPrice', this.minPrice.toString());
+    if (this.maxPrice !== null) params = params.set('maxPrice', this.maxPrice.toString());
+    if (this.solutionType) params = params.set('type', this.solutionType);
 
-    if (this.category) {
-      params = params.set('category', this.category);
-    }
-
-    // Poziv backend servisa sa filtriranim parametrima
-    this.solutionService.getFilteredSolutions(params)
-      .subscribe(
-        response => {
-          this.solutionsList = response.content;
-          this.totalSolutions = response.totalElements;
-          this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
-          this.filteredSolutions = [...this.solutionsList];
-        },
-        error => {
-          console.error('Error applying filters:', error);
-        }
-      );
+    this.solutionService.getFilteredSolutions(params).subscribe(
+      response => {
+        this.solutionsList = response.content;
+        this.totalSolutions = response.totalElements;
+        this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
+        this.filteredSolutions = [...this.solutionsList];
+      },
+      error => {
+        console.error('Error applying filters:', error);
+      }
+    );
   }
 
   onPageChange(page: number) {
-    this.page = page;
-    this.loadSolutions();
-  }
-
-  getInitials(providerCompanyName: string): string {
-    if (providerCompanyName) {
-      return providerCompanyName.charAt(0).toUpperCase();
-    } else {
-      return '';
+    if (page >= 0 && page < this.totalPages) {
+      this.page = page;
+      this.applyFilters();
     }
   }
 
   toggleFilters() {
     this.showFilters = !this.showFilters;
+  }
+
+  getInitials(providerCompanyName: string): string {
+    return providerCompanyName ? providerCompanyName.charAt(0).toUpperCase() : '';
   }
 }

@@ -12,6 +12,7 @@ export interface SolutionModel {
   price: string;
   discount: string;
   imageUrl: string;
+  solutionType: string;
 }
 
 @Injectable({
