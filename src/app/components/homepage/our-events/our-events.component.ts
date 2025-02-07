@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../../services/our-events.service';
+import { EventService } from '../../../services/our-events.service';
 import {HttpParams} from '@angular/common/http';
 
 @Component({
