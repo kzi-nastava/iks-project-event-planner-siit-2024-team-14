@@ -1,183 +1,93 @@
-/* Sekcija za događaje */
 .events-list-section {
   text-align: center;
-  padding: 20px 10px;
-  background-color: #f5f5f5; /* Blaga siva pozadina */
-  position: relative; /* Potrebno za pozicioniranje pseudo-elemenata */
-  overflow: hidden;   /* Sakriva delove krugova koji izlaze izvan sekcije */
+  padding: 20px 15px; /* Manji padding */
+  background-color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
   z-index: 0;
 }
 
-/* Pseudo-elementi za krugove */
 .events-list-section::before,
-.events-list-section::after {
+.events-list-section::after,
+.events-list-section .extra-circle,
+.events-list-section .extra-circle-two,
+.events-list-section .extra-circle-three {
   content: "";
   position: absolute;
-  border-radius: 50%; /* Oblikuje krugove */
-  z-index: 0; /* Iza sadržaja sekcije */
+  border-radius: 50%;
+  z-index: -1;
 }
 
-/* Krug u gornjem levom kutu */
 .events-list-section::before {
-  width: 350px;
-  height: 350px;
+  width: 250px; /* Manji krug */
+  height: 250px;
   background-color: rgba(149, 157, 144, 0.6);
-  /* Smeđa sa providnošću */
   top: -50px;
-  left: -200px;
-  transform: rotate(20deg); /* Rotiraj krug za efekat */
+  left: -100px;
 }
 
-/* Krug u donjem desnom kutu */
 .events-list-section::after {
-  width:450px;
-  height: 450px;
-  background-color: rgba(82, 61, 53, 0.1); /* Svetlija siva sa providnošću */
-  bottom: -50px;
-  right: -150px;
-  transform: rotate(-20deg); /* Rotiraj krug za efekat */
+  width: 220px;
+  height: 220px;
+  background-color: rgba(82, 61, 53, 0.15);
+  bottom: -70px;
+  right: -40px;
+}
+
+.events-list-section .extra-circle {
+  width: 100px;
+  height: 100px;
+  background-color: rgba(82, 61, 53, 0.12);
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.events-list-section .extra-circle-two {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(149, 157, 144, 0.6);
+  top: -40px;
+  right: -60px;
+}
+
+.events-list-section .extra-circle-three {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(82, 61, 53, 0.1);
+  bottom: -100px;
+  left: -60px;
 }
 
 .section-title {
-  justify-content: left;
-  font-size: 2em;
+  font-size: 14px; /* Srednji naslov */
   font-weight: bold;
   font-family: 'Petrona', sans-serif;
   color: #523D35;
-  margin-bottom: 20px;
-}
-
-.events-list {
-  display: flex;
-  justify-content: center;
-  text-align: left;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.event-card {
-  width: 300px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-}
-
-.event-content small span, .event-content p span {
-  margin-right: 5px; /* Razmak između ikone i teksta */
-  color: #523D35; /* Braon boja */
-}
-
-.event-header {
-  display: flex;
-  padding: 16px;
-  width: 100%;
-}
-
-.event-avatar {
-  width: 50px;
-  height: 50px;
-  background-color: #523D35; /* Tamno braon pozadina */
-  color: white;
-  font-size: 1.2em;
-  font-weight: bold;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-}
-
-.event-details h3 {
-  font-size: 1.2em;
-  margin: 0;
-  color: #523D35;
-}
-
-.event-details p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #8c7364;
-}
-
-.event-image {
-  width: 100%;
-  height: auto;
-  max-height: 200px;
-  object-fit: cover;
-}
-
-.event-content {
-  padding: 10px;
-  text-align: left;
-}
-
-.event-content h4 {
-  font-size: 1.2em;
-  margin-bottom: 8px;
-  color: #523D35;
-}
-
-.event-content p {
-  font-size: 0.9em;
-  margin-bottom: 8px;
-  color: #666;
-}
-
-button {
-  background-color: #523D35;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #412c26;
-}
-
-.view-more-btn {
-  margin-top: 20px;
-  background-color: #523D35;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-size: 1em;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.view-more-btn:hover {
-  background-color: #412c26;
+  margin-bottom: 10px; /* Manja margina */
 }
 
 .header-bar {
-  position: relative;           /* Omogućava apsolutno pozicioniranje unutar bara */
+  position: relative;
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 15px;
 }
 
 .header-title {
-  font-size: 2rem;              /* Veličina fonta naslova */
-  font-family: 'Petrona', serif; /* Font po uzoru na sliku */
-  color: #523D35;               /* Boja naslova */
-  position: absolute;           /* Apsolutno pozicioniranje */
-  left: 50%;                    /* Pomeri na 50% širine */
-  transform: translateX(-50%);  /* Centriraj na osnovu sredine elementa */
-  margin: 0;                    /* Ukloni margine */
+  font-size: 1.5rem;
+  font-family: 'Petrona', serif;
+  color: #523D35;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
 }
 
 .search-filter {
   display: flex;
-  gap: 15px;                    /* Razmak između pretrage i filtera */
-  margin-left: auto;            /* Postavi ih skroz desno */
+  gap: 10px;
+  margin-left: auto;
 }
 
 .search-box {
@@ -214,7 +124,7 @@ button:hover {
 }
 
 .filter-options {
-  display: none; /* Po defaultu su sakriveni */
+  display: none;
   margin-top: 20px;
   padding: 10px;
   background-color: #f9f9f9;
@@ -222,7 +132,7 @@ button:hover {
 }
 
 .filter-options.show-filters {
-  display: block; /* Kada je aktivno, prikazuju se */
+  display: block;
   transition: all 0.3s ease-in-out;
 }
 
@@ -232,38 +142,146 @@ button:hover {
 
 .filter-option label {
   display: block;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-bottom: 5px;
 }
 
 .filter-option input,
 .filter-option select {
   width: 100%;
-  padding: 8px;
+  padding: 6px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-/* Stil za price range (od-do) */
-.price-range {
+
+.events-list {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.event-card {
+  width: 17%; /* Kartice zauzimaju 20% širine */
+  height: 370px; /* Manja visina kartica */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px; /* Manji razmak između kartica */
+}
+
+.card-header {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centriranje sadržaja */
-  gap: 8px;
-  width: 100%; /* Da zauzme celu širinu roditeljskog elementa */
+  padding: 6px; /* Manji padding */
+  background-color: #f5f5f5;
 }
 
-.price-range input {
-  width: 80px;
-  text-align: center; /* Centriranje teksta unutar inputa */
+.organizer-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
 }
 
-.price-range span {
-  font-size: 1.2em;
-  color: #523D35; /* Braon boja */
+.organizer-name {
+  font-size: 0.9em; /* Font za ime */
+  font-weight: bold;
+  margin-bottom: 1px;
 }
 
-.price-range .fa-dollar-sign {
-  font-size: 1.2em;
-  color: #523D35; /* Braon boja */
+.organizer-role {
+  font-size: 0.75em;
+  color: #888;
+  margin-top: 1px;
 }
 
+.divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.event-image {
+  width: 100%;
+  height: 120px; /* Manja visina slike */
+  object-fit: cover;
+}
+
+.event-content {
+  padding: 6px; /* Manji padding */
+  text-align: left;
+  flex-grow: 1;
+}
+
+.event-content h4 {
+  font-size: 0.9em; /* Manji font za naziv događaja */
+  margin-bottom: 6px;
+  color: #523D35;
+}
+
+.event-content p {
+  font-size: 0.75em;
+  margin-bottom: 6px;
+  color: #666;
+}
+
+.event-content small span {
+  margin-right: 5px;
+  color: #523D35;
+}
+
+
+button {
+  background-color: #523D35;
+  color: white;
+  border: none;
+  padding: 4px 8px; /* Manji padding za dugme */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #412c26;
+}
+
+.view-more-btn {
+  background-color: #523D35;
+  color: white;
+  width: 50%; /* Manja širina dugmeta */
+  padding: 6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+  bottom: 15px; /* Manji razmak od donje ivice */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.view-more-btn:hover {
+  background-color: #704d3a;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #523D35;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #412c26;
+}

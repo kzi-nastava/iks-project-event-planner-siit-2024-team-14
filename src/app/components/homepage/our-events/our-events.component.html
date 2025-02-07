@@ -37,7 +37,7 @@
   <div class="events-list">
     <div *ngFor="let event of filteredEvents" class="event-card">
       <div class="card-header">
-        <img [src]="event.organizerProfilePicture" alt="{{event.name}}" class="profile-img">
+        <img [src]="event.organizerProfilePicture" alt="{{event.name}}" class="event-avatar">
         <div class="organizer-info">
           <h3 class="organizer-name">{{ event.organizerFirstName }} {{ event.organizerLastName }}</h3>
           <p class="organizer-role">Event organizer</p>

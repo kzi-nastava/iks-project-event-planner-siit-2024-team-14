@@ -62,22 +62,19 @@
   <div class="events-list">
     <div *ngFor="let solution of filteredSolutions" class="event-card">
       <div class="event-header">
-        <div class="event-avatar">
-          <span>{{ getInitials(solution.providerCompanyName) }}</span>
-        </div>
         <div class="event-details">
-          <h3>{{ solution.providerCompanyName }}</h3>
-          <p>Service and product provider</p>
+          <h3 class="organizer-name">{{ solution.providerCompanyName }}</h3>
+          <p class="organizer-role">Service and product provider</p>
         </div>
       </div>
       <img [src]="solution.imageUrl" alt="{{ solution.name }}" class="event-image" />
       <div class="event-content">
         <h4>{{ solution.name }}</h4>
         <p>{{ solution.description }}</p>
-        <small>{{ solution.location }}</small> <br>
-        <small>{{ solution.solutionType }}</small>
-        <p><span class="fas fa-tag"></span>{{ solution.price }}</p>
-        <br />
+        <small> <span class="fas fa-map-marker-alt" ></span> {{ solution.location }} </small><br>
+        <small> <span class="fas fa-cogs"></span>{{ solution.solutionType }}</small>  <br>
+        <small> <span class="fas fa-tag"></span>{{ solution.price }}</small><br>
+        <br>
         <button>View More</button>
       </div>
     </div>
