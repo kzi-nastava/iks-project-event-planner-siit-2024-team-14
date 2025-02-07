@@ -22,6 +22,13 @@
       <input type="date" id="endDate" [(ngModel)]="endDate" />
     </div>
     <div class="filter-option">
+      <label for="location">City:</label>
+      <select id="location" [(ngModel)]="location">
+        <option value="">All Cities</option>
+        <option *ngFor="let city of locations" [value]="city">{{ city }}</option>
+      </select>
+    </div>
+    <div class="filter-option">
       <label for="category">Category:</label>
       <select id="category" [(ngModel)]="category">
         <option value="">All Categories</option>

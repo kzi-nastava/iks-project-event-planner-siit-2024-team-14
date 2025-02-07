@@ -15,6 +15,7 @@ export class OurSevicesComponent implements OnInit {
   category: string = '';
   startDate: string = '';
   endDate: string = '';
+  location: string = '';
   minPrice: number | null = null;
   maxPrice: number | null = null;
   solutionType: string = '';
@@ -24,10 +25,13 @@ export class OurSevicesComponent implements OnInit {
   totalPages: number = 0;
   showFilters: boolean = false;
 
+  locations: string[] = []; // Lista gradova
+
   constructor(private solutionService: SolutionService) {}
 
   ngOnInit() {
     this.loadSolutions();
+    this.fetchLocations();
   }
 
   loadSolutions() {
@@ -40,6 +44,17 @@ export class OurSevicesComponent implements OnInit {
       });
   }
 
+  fetchLocations() {
+    this.solutionService.getAllLocations().subscribe(
+      (data: string[]) => {
+        this.locations = data;
+      },
+      error => {
+        console.error('Error fetching locations:', error);
+      }
+    );
+  }
+
   onSearch() {
     this.filteredSolutions = this.solutionsList.filter(solution =>
       solution.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -50,6 +65,7 @@ export class OurSevicesComponent implements OnInit {
     );
   }
 
+
   applyFilters() {
     this.page = 0;
 
@@ -57,12 +73,19 @@ export class OurSevicesComponent implements OnInit {
       .set('page', this.page.toString())
       .set('size', this.pageSize.toString());
 
-    if (this.category) params = params.set('category', this.category);
+    if (this.category && this.category.trim() !== '') params = params.set('category', this.category);
     if (this.startDate) params = params.set('startDate', this.startDate);
     if (this.endDate) params = params.set('endDate', this.endDate);
-    if (this.minPrice !== null) params = params.set('minPrice', this.minPrice.toString());
-    if (this.maxPrice !== null) params = params.set('maxPrice', this.maxPrice.toString());
-    if (this.solutionType) params = params.set('type', this.solutionType);
+    if (this.minPrice != null) params = params.set('minPrice', this.minPrice.toString());
+    if (this.maxPrice != null) params = params.set('maxPrice', this.maxPrice.toString());
+    if (this.location && this.location.trim() !== '') {
+      params = params.set('location', this.location);
+    }
+
+    // Dodaj log za proveru vrednosti solutionType
+    console.log('Selected solution type:', this.solutionType);
+
+    if (this.solutionType && this.solutionType.trim() !== '') params = params.set('type', this.solutionType);
 
     this.solutionService.getFilteredSolutions(params).subscribe(
       response => {

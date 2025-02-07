@@ -19,4 +19,8 @@ export class SolutionService {
   getFilteredSolutions(params: HttpParams): Observable<any> {
     return this.http.get<any>(this.filterUrl, { params });
   }
+
+  getAllLocations(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:8080/api/solutions/locations');
+  }
 }
