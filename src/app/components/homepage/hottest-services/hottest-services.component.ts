@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { HottestSolutionsService, SolutionModel } from '../../../services/hottest-services.service';
+import { HottestSolutionsService, SolutionModel } from './hottest-services.service';
 @Component({
   selector: 'app-hottest-services',
   templateUrl: './hottest-services.component.html',

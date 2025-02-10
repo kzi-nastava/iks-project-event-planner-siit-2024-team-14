@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SolutionService } from '../../../services/our-services.service';
+import { SolutionService } from './our-services.service';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
@@ -26,12 +26,14 @@ export class OurSevicesComponent implements OnInit {
   showFilters: boolean = false;
 
   locations: string[] = []; // Lista gradova
+  categories: string[] = []; // Lista za filter
 
   constructor(private solutionService: SolutionService) {}
 
   ngOnInit() {
     this.loadSolutions();
     this.fetchLocations();
+    this.fetchCategories();
   }
 
   loadSolutions() {
@@ -51,6 +53,17 @@ export class OurSevicesComponent implements OnInit {
       },
       error => {
         console.error('Error fetching locations:', error);
+      }
+    );
+  }
+
+  fetchCategories() {
+    this.solutionService.getAllCategories().subscribe(
+      (data: string[]) => {
+        this.categories = data;
+      },
+      error => {
+        console.error('Error fetching categories:', error);
       }
     );
   }
@@ -81,9 +94,6 @@ export class OurSevicesComponent implements OnInit {
     if (this.location && this.location.trim() !== '') {
       params = params.set('location', this.location);
     }
-
-    // Dodaj log za proveru vrednosti solutionType
-    console.log('Selected solution type:', this.solutionType);
 
     if (this.solutionType && this.solutionType.trim() !== '') params = params.set('type', this.solutionType);
 

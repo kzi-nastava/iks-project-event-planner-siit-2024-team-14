@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {SolutionModel} from './hottest-services.service';
+import {SolutionModel} from '../hottest-services/hottest-services.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,9 @@ export class SolutionService {
 
   getAllLocations(): Observable<string[]> {
     return this.http.get<string[]>('http://localhost:8080/api/solutions/locations');
+  }
+
+  getAllCategories(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:8080/api/solutions/categories');
   }
 }

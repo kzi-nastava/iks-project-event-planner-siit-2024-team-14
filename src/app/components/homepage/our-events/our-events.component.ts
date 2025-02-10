@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../../../services/our-events.service';
+import { EventService } from './our-events.service';
 import {HttpParams} from '@angular/common/http';
 
 @Component({
@@ -13,6 +13,7 @@ export class OurEventsComponent implements OnInit {
   searchTerm: string = ''; // String za pretragu
   startDate: string = ''; // Startni datum za filtriranje
   endDate: string = ''; // Krajni datum za filtriranje
+  location: string = '';
   category: string = ''; // Kategorija za filtriranje
   page: number = 0; // Trenutna stranica
   totalEvents: number = 0; // Ukupno događaja
@@ -20,10 +21,15 @@ export class OurEventsComponent implements OnInit {
   totalPages: number = 0; // Ukupno stranica
   showFilters: boolean = false; // Da li su filteri prikazani
 
+  locations: string[] = []; // Lista gradova
+  categories: string[] = []; // Lista za filter
+
   constructor(private eventService: EventService) {}
 
   ngOnInit() {
     this.loadEvents();
+    this.fetchLocations();
+    this.fetchCategories();
   }
 
   // Učitavanje svih događaja sa servera
@@ -36,6 +42,28 @@ export class OurEventsComponent implements OnInit {
         this.filteredEvents = [...this.eventsList];  // Početno postavi sve događaje kao filtrirane
 
       });
+  }
+
+  fetchLocations() {
+    this.eventService.getAllLocations().subscribe(
+      (data: string[]) => {
+        this.locations = data;
+      },
+      error => {
+        console.error('Error fetching locations:', error);
+      }
+    );
+  }
+
+  fetchCategories() {
+    this.eventService.getAllCategories().subscribe(
+      (data: string[]) => {
+        this.categories = data;
+      },
+      error => {
+        console.error('Error fetching categories:', error);
+      }
+    );
   }
 
   // Pretraga događaja po imenu, organizatoru, opisu itd.
@@ -64,11 +92,12 @@ export class OurEventsComponent implements OnInit {
       params = params.set('endDate', this.endDate);
     }
 
-    if (this.category) {
-      params = params.set('category', this.category);
+    if (this.category && this.category.trim() !== '') params = params.set('category', this.category);
+
+    if (this.location && this.location.trim() !== '') {
+      params = params.set('location', this.location);
     }
 
-    // Poziv backend servisa sa filtriranim parametrima
     this.eventService.getFilteredEvents(params)
       .subscribe(
         response => {

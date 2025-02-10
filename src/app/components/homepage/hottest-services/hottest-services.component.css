@@ -161,6 +161,16 @@
   padding: 10px; /* Manji padding */
 }
 
+.event-content small span {
+  margin-right: 5px;
+  color: #523D35;
+}
+
+small span {
+  margin-right: 5px;
+  color: #523D35;
+}
+
 .view-more-btn {
   background-color: #523D35;
   color: #fff;
