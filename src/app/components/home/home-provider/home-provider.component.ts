@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home-guest-provider',
+  selector: 'app-home-provider',
   templateUrl: './home-provider.component.html',
   styleUrls: ['./home-provider.component.css']
 })
