@@ -45,14 +45,11 @@ import {AdminCommentsComponent} from './components/admin-comments/admin-comments
   imports: [
     BrowserModule,
     HttpClientModule,
-
     MatIcon,
     NgOptimizedImage,
     AppRoutingModule,
-    ReactiveFormsModule
-    OfferingsModule,
+    ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync()
