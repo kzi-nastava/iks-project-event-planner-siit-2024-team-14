@@ -1,0 +1,38 @@
+<header>
+  <!-- Background image -->
+  <div class="header-background">
+    <!-- Rectangle with opacity and color -->
+    <div class="header-overlay">
+      <!-- Left burger icon for drawer navbar -->
+      <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
+
+      <!-- Right profile icon -->
+      <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
+
+      <!-- Centered logo -->
+      <div class="logo-container">
+        <img class="logo">
+      </div>
+
+      <!-- "Event Planner" text -->
+      <div class="event-planner">
+        <h1>Event Planner</h1>
+      </div>
+
+      <!-- Navigation links -->
+      <div class="nav-links">
+        <a href="#">HOME</a> | <a href="#">PROFILE</a> | <a href="#">SETTINGS</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<app-drawer-navbar-guest [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-guest>
+
+<app-hottest-events></app-hottest-events>
+<app-our-events></app-our-events>
+<div class="section-divider1"></div>
+<div class="section-divider2"></div>
+<app-hottest-services></app-hottest-services>
+<app-our-sevices></app-our-sevices>
+<app-footer></app-footer>

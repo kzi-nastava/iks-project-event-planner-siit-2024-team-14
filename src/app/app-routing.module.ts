@@ -1,30 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';  // Correct import path
+import { HomeComponent } from './components/home/home-guest/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
-import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
-import { AddServiceComponent } from './offerings/add-service/add-service.component';
-import { ServiceDetailsComponent } from './offerings/service-details/service-details.component';
-
+import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
+import { RegistrationSppComponent } from './components/registration/registration-spp/registration-spp.component';
+import { ActivationComponent } from './components/registration/activation/activation.component'; // Make sure this is correctly imported
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },  // Default redirect to /home
-  { path: 'home', component: HomeComponent },  // Home component route
+  { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
+  { path: 'home-guest', component: HomeComponent },  // Home component route
+  { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
-  { path: 'services/add', component: AddServiceComponent },
-  { path: 'services/:id', component: ServiceDetailsComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },
-  { path: '**', redirectTo: '/home' }, // Fallback for unknown routes
+  { path: 'activate', component: ActivationComponent }, // Ensure this route exists
+  { path: '**', redirectTo: '/home-guest' }  // Fallback route
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,61 +1,48 @@
-import { Component, Input } from '@angular/core';
-
-interface Comment {
-  username: string;
-  stars: number[];
-  text: string;
-  provider: string;
-}
+import { Component, Input, OnInit } from '@angular/core';
+import { CommentService, CommentModel } from './admin-comments.service';
 
 @Component({
   selector: 'app-admin-comments',
   templateUrl: './admin-comments.component.html',
   styleUrls: ['./admin-comments.component.css']
 })
-export class AdminCommentsComponent {
+export class AdminCommentsComponent implements OnInit {
   @Input() isCommentsOpen: boolean = false; // Prima stanje otvaranja komentara
+  comments: CommentModel[] = [];
 
-  comments: Comment[] = [
-    {
-      username: 'Petar Petrović',
-      stars: [1, 1, 1, 1],
-      text: 'This was the worst service ever! The staff was horrible, and the whole thing was a waste of money.',
-      provider: 'Hleb & Knife',
-    },
-    {
-      username: 'Miloš Nikolić',
-      stars: [1, 1, 1, 1, 1],
-      text: 'Great experience! Highly recommend.',
-      provider: 'Fancy Catering',
-    },
-    {
-      username: 'Miloš Nikolić',
-      stars: [1, 1, 1, 1],
-      text: 'Great experience! Highly recommend.',
-      provider: 'Fancy Catering',
-    },
-    {
-      username: 'Miloš Nikolić',
-      stars: [1, 1, 1],
-      text: 'Great experience! Highly recommend.',
-      provider: 'Fancy Catering',
-    },
-    {
-      username: 'Miloš Nikolić',
-      stars: [1, 1, 1, 1, 1],
-      text: 'Great experience! Highly recommend.',
-      provider: 'Fancy Catering',
-    }
-  ];
+  constructor(private commentService: CommentService) {}
 
-  // Approves a comment
-  approveComment() {
-    alert('Comment approved!');
+  ngOnInit(): void {
+    // Dohvati sve komentare sa statusom 'pending'
+    this.loadPendingComments();
   }
 
-  // Deletes a comment
-  deleteComment() {
-    alert('Comment deleted!');
+  // Metoda za učitavanje komentara
+  loadPendingComments() {
+    this.commentService.getAllComments().subscribe((comments) => {
+      this.comments = comments;
+    });
+  }
+
+  // Kreiranje niza zvezdica prema ratingu komentara
+  createStarsArray(rating: number): number[] {
+    return new Array(rating).fill(0); // Vraća niz sa toliko elemenata koliko je ocena
+  }
+
+  // Odobravanje komentara
+  approveComment(comment: CommentModel) {
+    this.commentService.updateCommentStatus(comment.id, 'accepted').subscribe(() => {
+      comment.status = 'accepted';  // Promeni status na frontu
+      alert('Comment approved!');
+    });
+  }
+
+  // Brisanje komentara (logičko brisanje)
+  deleteComment(comment: CommentModel) {
+    this.commentService.updateCommentStatus(comment.id, 'deleted').subscribe(() => {
+      comment.status = 'deleted';  // Promeni status na frontu
+      alert('Comment deleted!');
+    });
   }
 
   // Metoda za zatvaranje komentara

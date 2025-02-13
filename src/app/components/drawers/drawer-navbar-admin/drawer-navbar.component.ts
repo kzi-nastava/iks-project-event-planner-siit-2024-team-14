@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 @Component({
-  selector: 'app-drawer-navbar',
+  selector: 'app-drawer-navbar-admin',
   templateUrl: './drawer-navbar.component.html',
   styleUrls: ['./drawer-navbar.component.css'],
 })
