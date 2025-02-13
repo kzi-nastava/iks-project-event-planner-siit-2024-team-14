@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home-admin',
-  templateUrl: './home-admin.component.html',
-  styleUrls: ['./home-admin.component.css']
+  selector: 'app-home-guest-provider',
+  templateUrl: './home-provider.component.html',
+  styleUrls: ['./home-provider.component.css']
 })
-export class HomeAdminComponent {
+export class HomeProviderComponent {
   title = 'Welcome to the Home Page!';
   isSidebarOpen: boolean = false;
   toggleSidebar(): void {

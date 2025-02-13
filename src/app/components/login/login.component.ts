@@ -38,7 +38,7 @@ export class LoginComponent {
           // Store the token
           localStorage.setItem('user', response.token);
 
-          // Navigate to home page
+          // Navigate to home-guest page
           this.router.navigate(['home']);
         },
         error: (err) => {
