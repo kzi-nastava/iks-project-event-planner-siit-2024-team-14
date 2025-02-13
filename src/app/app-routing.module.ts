@@ -7,7 +7,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration/registration-spp/registration-spp.component';
 import { ActivationComponent } from './components/registration/activation/activation.component'; // Make sure this is correctly imported
-import { NavbarComponent } from './components/navbar/navbar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },  // Default redirect to /home

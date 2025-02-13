@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-home-organizer',
+  templateUrl: './home-organizer.component.html',
+  styleUrls: ['./home-organizer.component.css']
 })
-export class HomeComponent {
+export class HomeOrganizerComponent {
   title = 'Welcome to the Home Page!';
   isSidebarOpen: boolean = false;
-
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
     console.log('Sidebar toggled!', this.isSidebarOpen);
