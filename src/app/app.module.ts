@@ -11,17 +11,16 @@ import { MatIcon } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HottestEventsComponent } from './components/hottest-events/hottest-events.component';
-import { HottestServicesComponent } from './components/hottest-services/hottest-services.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { HottestEventsComponent } from './components/homepage/hottest-events/hottest-events.component';
+import { OurEventsComponent } from './components/homepage/our-events/our-events.component';
+import { HottestServicesComponent } from './components/homepage/hottest-services/hottest-services.component';
+import { OurSevicesComponent } from './components/homepage/our-sevices/our-sevices.component';
+import {FooterComponent} from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
-import { OurEventsComponent}  from './components/our-events/our-events.component';
-import { OurSevicesComponent} from './components/our-sevices/our-sevices.component';
-
-import { HttpClientModule } from '@angular/common/http';  // Import HttpClientModule
-
+import { HttpClientModule } from '@angular/common/http';
+import {AdminCommentsComponent} from './components/admin-comments/admin-comments.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';  // Import HttpClientMo
     AboutComponent,
     ServicesComponent,
     DrawerNavbarComponent,
-
+    AdminCommentsComponent,
     HottestEventsComponent,
     HottestServicesComponent,
     FooterComponent,
@@ -50,8 +49,10 @@ import { HttpClientModule } from '@angular/common/http';  // Import HttpClientMo
     MatIcon,
     NgOptimizedImage,
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule
+    OfferingsModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync()
