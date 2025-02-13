@@ -1,4 +1,4 @@
-<!-- Comments & Reviews Sidebar -->
+<!-- Sidebar for Notifications -->
 <div class="sidebar notifications-sidebar" [class.open]="isNotificationsOpen">
   <div class="sidebar-header">
     <h2>Notifications</h2>
@@ -21,5 +21,6 @@
     </div>
   </div>
 </div>
+
 <!-- Overlay for Notifications -->
 <div class="overlay" *ngIf="isNotificationsOpen" (click)="closeNotifications()"></div>

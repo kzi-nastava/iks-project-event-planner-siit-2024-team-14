@@ -20,7 +20,10 @@ import { OfferingsModule } from './offerings/offerings.module';
 import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+
 import { HttpClientModule } from '@angular/common/http';
+import {AdminCommentsComponent} from './components/admin-comments/admin-comments.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { HttpClientModule } from '@angular/common/http';
 
     LoginComponent,
     RegistrationEoComponent,
-    RegistrationSppComponent
+    RegistrationSppComponent,
+    AdminCommentsComponent,
+    NotificationsComponent
 
   ],
   imports: [
