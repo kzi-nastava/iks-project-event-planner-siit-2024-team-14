@@ -27,15 +27,11 @@ export class HottestEventsService {
     // Preuzimanje grada iz localStorage
     const userCity = localStorage.getItem('userCity');
 
-    // Provera da li postoji grad korisnika
-    if (userCity!== null) {
-      // Dodavanje grada u URL, kodiranje specijalnih karaktera
-      const url = `${this.apiUrl}?city=${encodeURIComponent(userCity)}`;
-      return this.http.get<EventModel[]>(url);
-    } else {
-      // Ako nema grada, vraćamo sve događaje
-      return this.http.get<EventModel[]>(this.apiUrl);
-    }
+    // Ako postoji grad korisnika, koristi ga u URL-u
+    const city = userCity ? encodeURIComponent(userCity) : 'Novi Sad';  // Ako nema grada, koristi Novi Sad
 
+    const url = `${this.apiUrl}?city=${city}`;
+
+    return this.http.get<EventModel[]>(url);
   }
 }

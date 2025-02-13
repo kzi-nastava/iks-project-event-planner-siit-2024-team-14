@@ -28,14 +28,11 @@ export class HottestSolutionsService {
     const userCity = localStorage.getItem('userCity');
 
     // Ako postoji grad korisnika, koristi ga u URL-u
-    if (userCity !== null) {
-      const url = `${this.apiUrl}?city=${encodeURIComponent(userCity)}`;
-      return this.http.get<SolutionModel[]>(url);
-    } else {
-      // Ako nema grada, koristi Novi Sad kao podrazumevani grad
-      const url = `${this.apiUrl}?city=Novi%20Sad`;
-      return this.http.get<SolutionModel[]>(url);
-    }
+    const city = userCity ? encodeURIComponent(userCity) : 'Novi Sad';  // Ako nema grada, koristi Novi Sad
+
+    const url = `${this.apiUrl}?city=${city}`;
+
+    return this.http.get<SolutionModel[]>(url);
   }
 
 }
