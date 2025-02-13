@@ -6,13 +6,17 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatIcon} from '@angular/material/icon';
-import {NgOptimizedImage} from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { NgOptimizedImage } from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.component';
 import { LoginComponent } from './components/login/login.component';
-import {AppRoutingModule} from './app-routing.module';
-import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
-import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+import { AppRoutingModule } from './app-routing.module';
+import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
+import { RegistrationSppComponent } from './components/registration/registration-spp/registration-spp.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ActivationComponent } from './components/registration/activation/activation.component';
+import { SuccessfulComponent } from './components/registration/successful/successful.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +28,18 @@ import { RegistrationSppComponent } from './components/registration-spp/registra
     DrawerNavbarComponent,
     LoginComponent,
     RegistrationEoComponent,
-    RegistrationSppComponent
+    RegistrationSppComponent,
+    ActivationComponent,
+    SuccessfulComponent
   ],
   imports: [
     BrowserModule,
-    MatIcon,
+    MatIconModule,
     NgOptimizedImage,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()

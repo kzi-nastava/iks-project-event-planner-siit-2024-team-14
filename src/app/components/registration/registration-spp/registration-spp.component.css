@@ -87,7 +87,7 @@ body {
 /* Left Image Section */
 .image-section {
   flex: 1;
-  background: url('../../../assets/images/background.jpg') no-repeat center center;
+  background: url('../../../../assets/images/background.jpg') no-repeat center center;
   background-size: cover;
   height: 100%;
   object-fit: cover;
@@ -119,7 +119,7 @@ body {
 
 /* Logo styling */
 .logo {
-  background-image: url('../../../assets/images/logo_beige.png');
+  background-image: url('../../../../assets/images/logo_beige.png');
   background-size: contain; /* Ensure the logo fits the container */
   background-repeat: no-repeat;
   width: 50px; /* Adjust logo size */
