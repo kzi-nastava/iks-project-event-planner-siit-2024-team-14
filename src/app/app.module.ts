@@ -46,13 +46,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     ReactiveFormsModule,  // Add ReactiveFormsModule
     HttpClientModule,
-
     MatIcon,
     NgOptimizedImage,
     AppRoutingModule,
     OfferingsModule,
     FormsModule,
-    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()
