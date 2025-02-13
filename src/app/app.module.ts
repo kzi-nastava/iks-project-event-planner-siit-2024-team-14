@@ -22,6 +22,7 @@ import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
 import { HttpClientModule } from '@angular/common/http';
+import {AdminCommentsComponent} from './components/admin-comments/admin-comments.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     AboutComponent,
     ServicesComponent,
     DrawerNavbarComponent,
-
+    AdminCommentsComponent,
     HottestEventsComponent,
     OurEventsComponent,
     HottestServicesComponent,
@@ -53,7 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     OfferingsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync()
