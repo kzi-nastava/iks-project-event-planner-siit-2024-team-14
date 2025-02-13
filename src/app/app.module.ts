@@ -40,7 +40,9 @@ import {AdminCommentsComponent} from './components/admin-comments/admin-comments
     RegistrationEoComponent,
     RegistrationSppComponent,
     ActivationComponent,
-    SuccessfulComponent
+    SuccessfulComponent,
+    OurEventsComponent,
+    OurSevicesComponent
   ],
   imports: [
     BrowserModule,
@@ -48,12 +50,8 @@ import {AdminCommentsComponent} from './components/admin-comments/admin-comments
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-    OurEventsComponent,
-    MatIcon,
-    OfferingsModule,
-    OurSevicesComponent
-
+    HttpClientModule,
+    MatIcon
   ],
   providers: [
     provideAnimationsAsync()
