@@ -1,5 +1,5 @@
 <div class="events-section">
-  <h2 class="section-title">HOTTEST EVENTS</h2>
+  <h2 class="section-title">HOTTEST SERVICES AND PRODUCTS</h2>
 
   <div class="carousel-wrapper">
     <!-- Strelica za prethodni slajd -->
@@ -8,33 +8,27 @@
     <!-- Carousel sa karticama -->
     <div class="carousel-container">
       <div class="carousel" [style.transform]="getTransform()">
-        <div *ngFor="let event of hottestEvents" class="card">
+        <div *ngFor="let solution of hottestSolutions" class="card">
           <!-- Gornji deo kartice sa profilnom slikom i informacijama -->
           <div class="card-header">
-            <img [src]="event.profileImage" alt="{{event.organizerName}}" class="profile-img">
+            <!-- <img [src]="solution.profileImage" alt="{{solution.providerCompanyName}}" class="profile-img"> -->
             <div class="organizer-info">
-              <h3 class="organizer-name">{{event.organizerName}}</h3>
-              <p class="organizer-role">Event organizer</p>
+              <h3 class="organizer-name">{{solution.providerCompanyName}}</h3>
+              <p class="organizer-role">Service and product provider</p>
             </div>
           </div>
 
           <hr class="divider">
 
           <!-- Srednji deo kartice sa slikom događaja -->
-          <img [src]="event.imageUrl" alt="{{event.title}}" class="event-image">
+          <img [src]="solution.imageUrl" alt="{{solution.name}}" class="event-image">
 
           <!-- Donji deo kartice sa detaljima o događaju -->
           <div class="card-content">
-            <h3>{{event.title}}</h3>
-            <p>{{event.description}}</p>
-            <small>
-              <span class="fas fa-location-pin"></span> {{ event.location }}
-            </small>
-            <br>
-            <small>
-              <span class="fas fa-calendar-alt"></span> {{ event.date }}
-            </small>
-            <br />
+            <h3>{{solution.name}}</h3>
+            <p>{{solution.description}}</p>
+            <small><span  class="fas fa-tag"></span>{{solution.price}} din</small><br>
+            <small><span class="fas fa-location-pin"></span>{{solution.location}}</small>
             <br>
             <button class="view-more-btn">View More</button>
           </div>
