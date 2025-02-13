@@ -35,6 +35,8 @@ import {AdminCommentsComponent} from './components/admin-comments/admin-comments
     AdminCommentsComponent,
     HottestEventsComponent,
     HottestServicesComponent,
+    OurSevicesComponent,
+    OurEventsComponent,
     FooterComponent,
     LoginComponent,
     RegistrationEoComponent,
@@ -48,12 +50,9 @@ import {AdminCommentsComponent} from './components/admin-comments/admin-comments
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-    OurEventsComponent,
-    MatIcon,
-    OfferingsModule,
-    OurSevicesComponent
-
+    HttpClientModule,
+    MatIcon
+    //OfferingsModule,
   ],
   providers: [
     provideAnimationsAsync()
