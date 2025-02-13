@@ -1,26 +1,21 @@
-/* Sidebar styling */
+/* Sidebar */
 .sidebar {
   position: fixed;
-  top: 120px; /* Positioned right after the beige header rectangle */
-  left: -250px; /* Initially hidden off-screen */
-  width: 250px;
-  height: calc(100vh - 120px); /* Adjust height to fit below the header */
-  background-color: #ebe3d6; /* Beige color */
+  top: 120px;
+  height: calc(100vh - 120px);
+  background-color: #ebe3d6;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-  transition: left 0.3s ease;
   z-index: 4;
   display: flex;
   flex-direction: column;
   padding: 20px;
   box-sizing: border-box;
-}
-
-.sidebar.open {
-  left: 0; /* Slide in */
+  overflow-y: auto;
+  transition: transform 0.3s ease;
 }
 
 .sidebar ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -29,13 +24,22 @@
   padding: 15px;
   font-family: 'Petrona', sans-serif;
   font-size: 18px;
+  color: #523d35;
   cursor: pointer;
-  color: #523D35;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .sidebar li:hover {
-  background-color: #d9d2c3; /* Slightly darker beige on hover */
+  background-color: #d9d2c3;
+}
+
+.sidebar:not(.comments-sidebar) {
+  left: -250px;
+  width: 250px;
+}
+
+.sidebar.open:not(.comments-sidebar) {
+  left: 0;
 }
 
 /* Burger icon */
@@ -46,6 +50,6 @@
   font-size: 30px;
   cursor: pointer;
   color: #523D35;
-  z-index: 5; /* Above the sidebar */
+  z-index: 5;
   padding: 5px;
 }

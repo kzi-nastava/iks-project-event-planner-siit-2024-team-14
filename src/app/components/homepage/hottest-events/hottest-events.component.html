@@ -1,0 +1,36 @@
+<div class="events-section">
+  <h2 class="section-title">HOTTEST EVENTS</h2>
+
+  <div class="carousel-wrapper">
+    <div class="arrow left" (click)="prevSlide()">&#9664;</div>
+
+    <div class="carousel-container">
+      <div class="carousel" [style.transform]="getTransform()">
+        <div *ngFor="let event of hottestEvents" class="card">
+          <div class="card-header">
+            <img [src]="event.organizerProfilePicture" alt="{{event.name}}" class="profile-img">
+            <div class="organizer-info">
+              <h3 class="organizer-name">{{ event.organizerFirstName }} {{ event.organizerLastName }}</h3>
+              <p class="organizer-role">Event organizer</p>
+            </div>
+          </div>
+
+          <hr class="divider">
+          <img [src]="event.imageUrl" alt="{{ event.name }}" class="event-image" />
+          <div class="card-content">
+            <h3>{{event.name}}</h3>
+            <p>{{event.description}}</p>
+            <small>
+              <span class="fas fa-location-pin"></span> {{ event.location }}
+            </small>
+            <br>
+            <small><span class="fas fa-calendar-alt"></span> from {{ event.startDate }} to {{ event.endDate }}</small><br /><br />
+            <button class="view-more-btn">View More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow right" (click)="nextSlide()">&#9654;</div>
+  </div>
+</div>

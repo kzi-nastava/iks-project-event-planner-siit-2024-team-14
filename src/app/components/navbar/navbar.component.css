@@ -2,19 +2,18 @@
 header {
   position: relative;
 }
-
 /* The background image covering the top of the screen */
 .header-background {
   background-image: url('../../../assets/images/background.jpg');
   background-size: cover;
   background-position: center center;
-  height: 300px;  /* Fixed height for background */
+  height: 400px;  /* Fixed height for background */
   width: 100%;
 }
 
 /* Rectangle on top of the background */
 .header-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

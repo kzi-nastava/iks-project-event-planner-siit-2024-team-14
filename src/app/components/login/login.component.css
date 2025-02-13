@@ -143,19 +143,19 @@ body {
   content: '';
   position: absolute;
   top: 25%; /* Adjust position to place below the form */
-  right: 22%;
+  right: 15%;
   width: 150px;
   height: 150px;
   background-color: #959D90;
   border-radius: 50%;
   opacity: 0.7;
 }
- /* Bottom green */
+/* Bottom green */
 .form-section .circle-two {
   content: '';
   position: absolute;
-  bottom: 15%; /* Place this circle closer to the bottom */
-  left: 22%;
+  bottom: 20%; /* Place this circle closer to the bottom */
+  left: 15%;
   width: 200px;
   height: 200px;
   background-color: #959D90;
@@ -167,8 +167,8 @@ body {
 .form-section .circle-three {
   content: '';
   position: absolute;
-  bottom: 30%; /* Place this circle closer to the bottom */
-  left: 18%;
+  bottom: 35%; /* Place this circle closer to the bottom */
+  left: 10%;
   width: 150px;
   height: 150px;
   background-color: #D9D9D9;
@@ -181,7 +181,7 @@ body {
   content: '';
   position: absolute;
   top: 40%; /* Place this circle closer to the bottom */
-  right: 20%;
+  right: 15%;
   width: 120px;
   height: 120px;
   background-color: #D9D9D9;
@@ -215,6 +215,8 @@ body {
   border-radius: 40px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1.5rem; /* Reduced padding */
+  padding-right: 5rem;
+  padding-left: 5rem;
   text-align: center;
   width: 100%; /* Allow for responsiveness */
   max-width: 600px; /* Increased max-width to make the card wider */
@@ -245,7 +247,7 @@ body {
   background-color: #6c4c4c;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 1rem;
 }
@@ -271,6 +273,276 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.modal {
+  display: none; /* Default is hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #D9D9D9;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modal-content button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #6c4c4c;
+  color: #D9D9D9;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #5a3e3e;
+}
+
+/* Responsive Styles for Larger Screens */
+
+/* General Scaling for 13-inch laptops (1366px and smaller) */
+@media screen and (max-width: 1366px) {
+  .overlay-text h1 {
+    font-size: 1.5rem; /* Smaller font for smaller laptops */
+  }
+
+  .form-section .circle-one,
+  .form-section .circle-two,
+  .form-section .circle-three,
+  .form-section .circle-four {
+    width: 100px; /* Smaller circles */
+    height: 100px;
+  }
+
+  .form-container h2 {
+    font-size: 1.8rem; /* Adjusted font size */
+  }
+
+  .btn-confirm {
+    font-size: 0.9rem; /* Adjust button font size */
+  }
+}
+
+/* Scaling for 14-inch laptops (1367px - 1440px) */
+@media screen and (min-width: 1367px) and (max-width: 1440px) {
+  .overlay-text h1 {
+    font-size: 2rem;
+  }
+
+  .form-section .circle-one,
+  .form-section .circle-two,
+  .form-section .circle-three,
+  .form-section .circle-four {
+    width: 120px;
+    height: 120px;
+  }
+
+  .form-container h2 {
+    font-size: 2rem;
+  }
+
+  .btn-confirm {
+    font-size: 1rem;
+  }
+}
+
+/* Scaling for 15-inch laptops (1441px - 1536px) */
+@media screen and (min-width: 1441px) and (max-width: 1536px) {
+  .overlay-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .form-section .circle-one {
+    width: 20%;
+    height: 20%;
+  }
+  .form-section .circle-two {
+    width: 15%;
+    height: 15%;
+  }
+  .form-section .circle-tree {
+    width: 25%;
+    height: 25%;
+  }
+  .form-section .circle-four {
+    width: 15%;
+    height: 15%;
+  }
+
+  .form-container h2 {
+    font-size: 2.5rem;
+  }
+
+  .btn-confirm {
+    font-size: 1.2rem;
+  }
+}
+
+/* Responsive Styles for Circles and Larger Screens */
+
+/* General Scaling for 13-inch laptops (1366px and smaller) */
+@media screen and (max-width: 1366px) {
+  .form-section .circle-one {
+    width: 120px;  /* Larger circle */
+    height: 120px;
+  }
+
+  .form-section .circle-two {
+    width: 150px;
+    height: 150px;
+  }
+
+  .form-section .circle-three {
+    width: 140px;
+    height: 140px;
+  }
+
+  .form-section .circle-four {
+    width: 110px;
+    height: 110px;
+  }
+
+  .form-container {
+    max-width: 500px; /* Slightly smaller on smaller screens */
+  }
+
+  .form-card {
+    max-width: 500px; /* Keep form card width smaller on smaller screens */
+  }
+}
+
+/* Scaling for 14-inch laptops (1367px - 1440px) */
+@media screen and (min-width: 1367px) and (max-width: 1440px) {
+  .form-section .circle-one {
+    width: 160px;
+    height: 160px;
+  }
+
+  .form-section .circle-two {
+    width: 190px;
+    height: 190px;
+  }
+
+  .form-section .circle-three {
+    width: 170px;
+    height: 170px;
+  }
+
+  .form-section .circle-four {
+    width: 140px;
+    height: 140px;
+  }
+
+  .form-container {
+    max-width: 550px; /* Increase max width for slightly larger screens */
+  }
+
+  .form-card {
+    max-width: 550px; /* Keep form card width larger */
+  }
+}
+
+/* Scaling for 15-inch laptops (1441px - 1536px) */
+@media screen and (min-width: 1441px) and (max-width: 1536px) {
+  .form-section .circle-one {
+    width: 180px;
+    height: 180px;
+  }
+
+  .form-section .circle-two {
+    width: 220px;
+    height: 220px;
+  }
+
+  .form-section .circle-three {
+    width: 200px;
+    height: 200px;
+  }
+
+  .form-section .circle-four {
+    width: 160px;
+    height: 160px;
+  }
+
+  .form-container {
+    max-width: 600px; /* Larger form container */
+  }
+
+  .form-card {
+    max-width: 600px; /* Larger form card for better layout */
+  }
+}
+
+/* Scaling for 16-inch laptops (1537px - 1600px) */
+@media screen and (min-width: 1537px) and (max-width: 1600px) {
+  .form-section .circle-one {
+    width: 220px;
+    height: 220px;
+  }
+
+  .form-section .circle-two {
+    width: 250px;
+    height: 250px;
+  }
+
+  .form-section .circle-three {
+    width: 230px;
+    height: 230px;
+  }
+
+  .form-section .circle-four {
+    width: 190px;
+    height: 190px;
+  }
+
+  .form-container {
+    max-width: 650px; /* Even larger form container */
+  }
+
+  .form-card {
+    max-width: 650px; /* Larger form card */
+  }
+}
+
+/* Scaling for Screens Larger than 1600px */
+@media screen and (min-width: 1601px) {
+  .form-section .circle-one {
+    width: 260px;
+    height: 260px;
+  }
+
+  .form-section .circle-two {
+    width: 300px;
+    height: 300px;
+  }
+
+  .form-section .circle-three {
+    width: 280px;
+    height: 280px;
+  }
+
+  .form-section .circle-four {
+    width: 240px;
+    height: 240px;
+  }
+
+  .form-container {
+    max-width: 700px; /* Max width increased on large screens */
+  }
+
+  .form-card {
+    max-width: 700px; /* Larger form card width */
+  }
 }
 
 
