@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule, PACKAGE_ROOT_URL} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,15 +10,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatIcon } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawer-navbar/drawer-navbar.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HottestEventsComponent } from './components/homepage/hottest-events/hottest-events.component';
 import { OurEventsComponent } from './components/homepage/our-events/our-events.component';
 import { HottestServicesComponent } from './components/homepage/hottest-services/hottest-services.component';
 import { OurSevicesComponent } from './components/homepage/our-sevices/our-sevices.component';
 import {FooterComponent} from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
-import { OfferingsModule } from './offerings/offerings.module';
-import {AppRoutingModule} from './app-routing.module';
 import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,24 +32,24 @@ import {AdminCommentsComponent} from './components/admin-comments/admin-comments
     DrawerNavbarComponent,
     AdminCommentsComponent,
     HottestEventsComponent,
-    OurEventsComponent,
     HottestServicesComponent,
-    OurSevicesComponent,
     FooterComponent,
 
     LoginComponent,
     RegistrationEoComponent,
-    RegistrationSppComponent
+    RegistrationSppComponent,
+    OurEventsComponent,
+    OurSevicesComponent
 
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,  // Add ReactiveFormsModule
     HttpClientModule,
 
     MatIcon,
     NgOptimizedImage,
     AppRoutingModule,
+    ReactiveFormsModule
     OfferingsModule,
     FormsModule,
     HttpClientModule,
