@@ -1,0 +1,117 @@
+<div class="registration-container">
+  <div class="decorative-lines top-lines"></div>
+
+  <div class="content-container">
+    <div class="image-section">
+      <div class="overlay-text">
+        <div class="logo-container">
+          <div class="logo"></div>
+        </div>
+        <h1>Event Planner</h1>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="circle-one"></div>
+      <div class="circle-two"></div>
+      <div class="circle-three"></div>
+      <div class="circle-four"></div>
+
+      <div class="form-container">
+        <h2>Registration</h2>
+
+        <div class="circle-background">
+          <div class="form-card">
+            <form [formGroup]="registrationForm" (ngSubmit)="register()">
+              <!-- Email -->
+              <div class="form-group">
+                <input id="email" formControlName="email" type="email" placeholder="E-mail address" />
+                <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+                  <span *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</span>
+                  <span *ngIf="registrationForm.get('email')?.errors?.['email']">Please enter a valid email.</span>
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <input id="password" formControlName="password" type="password" placeholder="Password" />
+                <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+                  <span *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</span>
+                </div>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group">
+                <input id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Confirm password" />
+                <div *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched">
+                  <span *ngIf="registrationForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</span>
+                </div>
+              </div>
+
+              <!-- Company Name -->
+              <div class="form-group">
+                <input id="companyName" formControlName="companyName" type="text" placeholder="Company/organization name" />
+                <div *ngIf="registrationForm.get('companyName')?.invalid && registrationForm.get('companyName')?.touched">
+                  <span *ngIf="registrationForm.get('companyName')?.errors?.['required']">Company name is required.</span>
+                </div>
+              </div>
+
+              <!-- Company Description -->
+              <div class="form-group">
+                <input id="companyDescription" formControlName="companyDescription" type="text" placeholder="Company/organization description" />
+                <div *ngIf="registrationForm.get('companyDescription')?.invalid && registrationForm.get('companyDescription')?.touched">
+                  <span *ngIf="registrationForm.get('companyDescription')?.errors?.['required']">Description is required.</span>
+                </div>
+              </div>
+
+              <!-- Address -->
+              <div class="form-group">
+                <input id="address" formControlName="address" type="text" placeholder="Address" />
+                <div *ngIf="registrationForm.get('address')?.invalid && registrationForm.get('address')?.touched">
+                  <span *ngIf="registrationForm.get('address')?.errors?.['required']">Address is required.</span>
+                </div>
+              </div>
+
+              <!-- City -->
+              <div class="form-group">
+                <input id="city" formControlName="city" type="text" placeholder="City" />
+                <div *ngIf="registrationForm.get('city')?.invalid && registrationForm.get('city')?.touched">
+                  <span *ngIf="registrationForm.get('city')?.errors?.['required']">City is required.</span>
+                </div>
+              </div>
+
+              <!-- Phone Number -->
+              <div class="form-group">
+                <input id="phoneNumber" formControlName="phoneNumber" type="tel" placeholder="Phone number" />
+                <div *ngIf="registrationForm.get('phoneNumber')?.invalid && registrationForm.get('phoneNumber')?.touched">
+                  <span *ngIf="registrationForm.get('phoneNumber')?.errors?.['required']">Phone number is required.</span>
+                </div>
+              </div>
+
+              <!-- Photo -->
+              <div class="form-group">
+                <input id="photo" formControlName="photo" type="file" accept="image/*" />
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn-confirm">Confirm</button>
+            </form>
+          </div>
+        </div>
+
+        <p>
+          You already have an account? <a href="/login">Login here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="decorative-lines bottom-lines"></div>
+</div>
+
+<!-- Success Modal -->
+<app-successful
+  *ngIf="showModal"
+  [message]="'Now you need to activate your account via email. After that, log in and enjoy!'"
+  (close)="closeModal()"
+></app-successful>
