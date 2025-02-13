@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule, PACKAGE_ROOT_URL} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,9 +17,10 @@ import { HottestServicesComponent } from './components/homepage/hottest-services
 import { OurSevicesComponent } from './components/homepage/our-sevices/our-sevices.component';
 import {FooterComponent} from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
-import { OfferingsModule } from './offerings/offerings.module';
-import { RegistrationEoComponent } from './components/registration-eo/registration-eo.component';
-import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
+import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
+import { RegistrationSppComponent } from './components/registration/registration-spp/registration-spp.component';
+import { ActivationComponent } from './components/registration/activation/activation.component';
+import { SuccessfulComponent } from './components/registration/successful/successful.component';
 import { HttpClientModule } from '@angular/common/http';
 import {AdminCommentsComponent} from './components/admin-comments/admin-comments.component';
 
@@ -33,24 +34,26 @@ import {AdminCommentsComponent} from './components/admin-comments/admin-comments
     DrawerNavbarComponent,
     AdminCommentsComponent,
     HottestEventsComponent,
-    OurEventsComponent,
     HottestServicesComponent,
-    OurSevicesComponent,
     FooterComponent,
     LoginComponent,
     RegistrationEoComponent,
-    RegistrationSppComponent
-
+    RegistrationSppComponent,
+    ActivationComponent,
+    SuccessfulComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,  // Add ReactiveFormsModule
-    MatIcon,
     NgOptimizedImage,
     AppRoutingModule,
-    OfferingsModule,
     FormsModule,
-    HttpClientModule,
+    ReactiveFormsModule,
+    HttpClientModule
+    OurEventsComponent,
+    MatIcon,
+    OfferingsModule,
+    OurSevicesComponent
+
   ],
   providers: [
     provideAnimationsAsync()
