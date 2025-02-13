@@ -39,7 +39,7 @@ export class LoginComponent {
           localStorage.setItem('user', response.token);
 
           // Navigate to home-guest page
-          this.router.navigate(['home']);
+          this.router.navigate(['home-guest']);
         },
         error: (err) => {
           alert('Login failed. Please check your credentials.');
