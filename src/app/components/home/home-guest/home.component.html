@@ -7,7 +7,7 @@
       <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
 
       <!-- Right profile icon -->
-        <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
+      <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
 
       <!-- Centered logo -->
       <div class="logo-container">
@@ -27,4 +27,12 @@
   </div>
 </header>
 
-<app-drawer-navbar [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar>
+<app-drawer-navbar-guest [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-guest>
+
+<app-hottest-events></app-hottest-events>
+<app-our-events></app-our-events>
+<div class="section-divider1"></div>
+<div class="section-divider2"></div>
+<app-hottest-services></app-hottest-services>
+<app-our-sevices></app-our-sevices>
+<app-footer></app-footer>

@@ -14,9 +14,18 @@ export class HottestServicesComponent implements OnInit {
   constructor(private solutionsService: HottestSolutionsService) {}
 
   ngOnInit() {
-    this.solutionsService.getTopSolutions().subscribe((solutions: SolutionModel[]) => {
-      this.hottestSolutions = solutions;
-    });
+    this.loadTopSolutions();
+  }
+
+  loadTopSolutions(): void {
+    this.solutionsService.getTopSolutions().subscribe(
+      (data) => {
+        this.hottestSolutions = data;
+      },
+      (error) => {
+        console.error('Error loading events:', error);
+      }
+    );
   }
 
   nextSlide() {

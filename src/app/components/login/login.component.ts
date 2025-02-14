@@ -35,11 +35,15 @@ export class LoginComponent {
           // Print the response in the console
           console.log('Login successful:', response);
 
-          // Store the token
-          localStorage.setItem('user', response.token);
+          // Čuvanje tokena i korisničkih podataka u localStorage
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          localStorage.setItem('userCity', response.user.city);
 
-          // Navigate to home page
-          this.router.navigate(['home']);
+          // Redirekt na osnovu uloge korisnika
+          this.redirectUser(response.user.role);
+
+
         },
         error: (err) => {
           alert('Login failed. Please check your credentials.');
@@ -65,4 +69,21 @@ export class LoginComponent {
     this.router.navigate([route], { replaceUrl: true });
     this.closeModal();
   }
+
+  redirectUser(role: string): void {
+    switch (role) {
+      case 'Admin':
+        this.router.navigate(['home-admin']);
+        break;
+      case 'EventOrganizer':
+        this.router.navigate(['home-organizer']);
+        break;
+      case 'ServiceAndProductProvider':
+        this.router.navigate(['home-provider']);
+        break;
+      default:
+        this.router.navigate(['home-guest']);
+    }
+  }
+
 }
