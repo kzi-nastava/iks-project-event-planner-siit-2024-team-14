@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
+    localStorage.clear();
     // Check if the current route is 'login' or 'registration-eo'/'registration-spp'
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd) // Only check for when navigation ends

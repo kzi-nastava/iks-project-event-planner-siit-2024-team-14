@@ -19,11 +19,19 @@ export interface EventModel {
   providedIn: 'root'
 })
 export class HottestEventsService {
-  private apiUrl = 'http://localhost:8080/api/events/top5?city=Novi%20Sad';
+  private apiUrl = 'http://localhost:8080/api/events/top5';
 
   constructor(private http: HttpClient) {}
 
-  getTopEvents(): Observable<EventModel[]> { // Takođe promenjen tip
-    return this.http.get<EventModel[]>(this.apiUrl);
+  getTopEvents(): Observable<EventModel[]> {
+    // Preuzimanje grada iz localStorage
+    const userCity = localStorage.getItem('userCity');
+
+    // Ako postoji grad korisnika, koristi ga u URL-u
+    const city = userCity ? encodeURIComponent(userCity) : 'Novi Sad';  // Ako nema grada, koristi Novi Sad
+
+    const url = `${this.apiUrl}?city=${city}`;
+
+    return this.http.get<EventModel[]>(url);
   }
 }

@@ -1,0 +1,15 @@
+<!-- Navigation Sidebar -->
+<div class="sidebar" [class.open]="isSidebarOpen">
+  <ul>
+    <li>My services/products</li>
+    <li>Bookings</li>
+    <li>Reviews and ratings</li>
+    <li>Categories</li>
+    <li (click)="toggleNotificationsSidebar()">Notifications</li> <!-- Izmena -->
+    <li>Messages</li>
+    <li>Log out</li>
+  </ul>
+</div>
+
+<!-- Comments Sidebar -->
+<app-admin-comments [isCommentsOpen]="isCommentsOpen"></app-admin-comments>  <!-- Prosleđivanje stanja -->

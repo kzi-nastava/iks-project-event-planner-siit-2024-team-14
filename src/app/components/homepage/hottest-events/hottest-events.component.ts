@@ -14,9 +14,18 @@ export class HottestEventsComponent implements OnInit {
   constructor(private eventsService: HottestEventsService) {}
 
   ngOnInit() {
-    this.eventsService.getTopEvents().subscribe((events: EventModel[]) => { // Ispravljeno
-      this.hottestEvents = events;
-    });
+    this.loadTopEvents();
+  }
+
+  loadTopEvents(): void {
+    this.eventsService.getTopEvents().subscribe(
+      (data) => {
+        this.hottestEvents = data;
+      },
+      (error) => {
+        console.error('Error loading events:', error);
+      }
+    );
   }
 
   nextSlide() {
