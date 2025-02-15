@@ -4,14 +4,6 @@ import { Router } from '@angular/router';
 import { RegistrationSppService } from './registration-spp.service';
 import {RegistrationSpp} from '../../../interfaces/registration-spp.model';
 
-function confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
-  const password = control.get('password')?.value;
-  const confirmPassword = control.get('confirmPassword')?.value;
-  return password && confirmPassword && password !== confirmPassword
-    ? { passwordsDoNotMatch: true }
-    : null;
-}
-
 @Component({
   selector: 'app-registration-spp',
   templateUrl: './registration-spp.component.html',
@@ -72,7 +64,6 @@ export class RegistrationSppComponent {
       alert('Please fill out the form correctly.');
     }
   }
-
 
   closeModal() {
     this.showModal = false; // Close modal (handled by SuccessfulComponent)

@@ -35,15 +35,12 @@ export class LoginComponent {
           // Print the response in the console
           console.log('Login successful:', response);
 
-          // Čuvanje tokena i korisničkih podataka u localStorage
+          // Saving token and user data u localStorage
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
           localStorage.setItem('userCity', response.user.city);
 
-          // Redirekt na osnovu uloge korisnika
           this.redirectUser(response.user.role);
-
-
         },
         error: (err) => {
           alert('Login failed. Please check your credentials.');
