@@ -21,12 +21,17 @@ export class ActivationComponent implements OnInit {
     // Extract token from the query parameters
     this.route.queryParams.subscribe((params) => {
       const token = params['token'];
+      const role = params['role'];
+
+      console.log('Params: ', params);
+
+      console.log('The role is: ', role);
 
       if (token) {
-        console.log('Activation link clicked with token:', token);
+        console.log('Activation link clicked with token: ', token);
 
         // Call the activation service to validate the token
-        this.activationService.activateAccount(token).subscribe(
+        this.activationService.activateAccount(token, role).subscribe(
           (response: any) => {
             this.activationMessage = response.message || 'Your account has been activated successfully!';
             this.isSuccess = true;
