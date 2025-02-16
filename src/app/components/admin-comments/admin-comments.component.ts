@@ -35,6 +35,7 @@ export class AdminCommentsComponent implements OnInit {
       comment.status = 'accepted';  // Promeni status na frontu
       alert('Comment approved!');
     });
+
   }
 
   // Brisanje komentara (logičko brisanje)

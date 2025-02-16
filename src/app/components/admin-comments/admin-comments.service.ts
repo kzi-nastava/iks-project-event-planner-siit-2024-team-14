@@ -8,6 +8,7 @@ export interface CommentModel {
   rating: number;
   date: string;
   status: string;
+  commenterId: number;
   commenterFirstName: string;
   commenterLastName: string;
   commenterProfilePicture: string;

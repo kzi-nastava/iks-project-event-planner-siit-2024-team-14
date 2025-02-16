@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ActivationService } from './activation.service';
+import {ActivationService} from './activation.service';
 
 @Component({
   selector: 'app-activation',

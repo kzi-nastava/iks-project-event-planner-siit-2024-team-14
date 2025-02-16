@@ -35,21 +35,26 @@ export class LoginComponent {
           // Print the response in the console
           console.log('Login successful:', response);
 
-          // Store the token
-          localStorage.setItem('user', response.token);
+          // Saving token and user data in localStorage
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          localStorage.setItem('userCity', response.user.city);
 
-          // Navigate to home-guest page
-          this.router.navigate(['home-guest']);
+          this.redirectUser(response.user.role);
         },
         error: (err) => {
-          alert('Login failed. Please check your credentials.');
+          // Check if the error response contains a message and display it
+          if (err?.error?.message) {
+            alert(err.error.message); // Show the error message from the response
+          } else {
+            alert('Login failed. Please check your credentials.'); // Default message
+          }
         }
       });
     } else {
       alert('Please fill out the form correctly.');
     }
   }
-
 
   // Modal Controls
   openModal(event: MouseEvent): void {
@@ -65,4 +70,21 @@ export class LoginComponent {
     this.router.navigate([route], { replaceUrl: true });
     this.closeModal();
   }
+
+  redirectUser(role: string): void {
+    switch (role) {
+      case 'Admin':
+        this.router.navigate(['home-admin']);
+        break;
+      case 'EventOrganizer':
+        this.router.navigate(['home-organizer']);
+        break;
+      case 'ServiceAndProductProvider':
+        this.router.navigate(['home-provider']);
+        break;
+      default:
+        this.router.navigate(['home-guest']);
+    }
+  }
+
 }

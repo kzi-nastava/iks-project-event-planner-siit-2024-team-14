@@ -6,11 +6,17 @@ import { ServicesComponent } from './components/services/services.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration/registration-spp/registration-spp.component';
-import { ActivationComponent } from './components/registration/activation/activation.component'; // Make sure this is correctly imported
+import { ActivationComponent } from './components/registration/activation/activation.component';
+import {HomeProviderComponent} from './components/home/home-provider/home-provider.component';
+import {HomeOrganizerComponent} from './components/home/home-organizer/home-organizer.component';
+import {HomeAdminComponent} from './components/home/home-admin/home-admin.component'; // Make sure this is correctly imported
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
   { path: 'home-guest', component: HomeComponent },  // Home component route
+  { path: 'home-provider', component: HomeProviderComponent },
+  { path: 'home-organizer', component: HomeOrganizerComponent },
+  { path: 'home-admin', component: HomeAdminComponent },
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
