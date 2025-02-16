@@ -1,11 +1,15 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { WebSocketService } from './websocket.service'; // Importuj WebSocket servis
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { NotificationService } from './notifications.service';
+import { WebSocketService } from './websocket.service';
 
-interface Notification {
-  username: string;
+export interface Notification {
+  id: number;
   message: string;
-  image: string;
+  date: string;  // Backend vraća string
   isRead: boolean;
+  userId: number;
+  commentId: number | null;
+  eventId: number | null;
 }
 
 @Component({
@@ -14,44 +18,62 @@ interface Notification {
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit, OnDestroy {
-  @Input() isNotificationsOpen: boolean = false;
-  notifications: Notification[] = []; // Array za notifikacije
+  notifications: Notification[] = [];
 
+  @Input() isNotificationsOpen = false;
   isMuted = false;
+  private userId: number | null = null;
 
-  constructor(private websocketService: WebSocketService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private websocketService: WebSocketService
+  ) {}
 
-  ngOnInit() {
-    // Poveži se na WebSocket server kada komponenta bude inicijalizovana
-    this.websocketService.connect();
+  ngOnInit(): void {
+    this.userId = this.getUserIdFromLocalStorage();
 
-    // Slušaj za nove notifikacije putem WebSocket-a
-    this.websocketService.getNotifications().subscribe((notification) => {
-      this.notifications.push(notification); // Dodaj novu notifikaciju
-    });
-  }
-
-  ngOnDestroy() {
-    // Prekini vezu kada komponenta bude uništena
-    this.websocketService.disconnect();
-  }
-
-  toggleMuteNotifications() {
-    this.isMuted = !this.isMuted;
-    if (this.isMuted) {
-      console.log('Notifications muted');
-    } else {
-      console.log('Notifications unmuted');
+    if (this.userId !== null) {
+      this.loadNotifications();
+      this.websocketService.getNotifications(this.userId).subscribe(
+        (newNotification: Notification) => {
+          this.notifications.push(newNotification);
+        },
+        (error) => console.error('Greška u WebSocket pretplati', error)
+      );
     }
   }
 
-  closeNotifications() {
-    this.isNotificationsOpen = false;
+  getUserIdFromLocalStorage(): number | null {
+    const userIdFromStorage = localStorage.getItem("userId");
+    if (userIdFromStorage) {
+      const parsedUserId = parseInt(userIdFromStorage, 10);
+      return isNaN(parsedUserId) ? null : parsedUserId;
+    }
+    return null;
+  }
 
-    // Kada se zatvore obaveštenja, označavaju se kao pročitana
-    this.notifications = this.notifications.map(notification => ({
-      ...notification,
-      isRead: true
-    }));
+  loadNotifications(): void {
+    if (this.userId !== null) {
+      this.notificationService.getNotifications(this.userId).subscribe(
+        (data) => this.notifications = data,
+        (error) => console.error('Greška pri učitavanju notifikacija', error)
+      );
+    }
+  }
+
+  toggleNotifications(): void {
+    this.isNotificationsOpen = !this.isNotificationsOpen;
+  }
+
+  toggleMuteNotifications(): void {
+    this.isMuted = !this.isMuted;
+  }
+
+  closeNotifications(): void {
+    this.isNotificationsOpen = false;
+  }
+
+  ngOnDestroy(): void {
+    this.websocketService.disconnect();
   }
 }

@@ -12,15 +12,15 @@
   <div class="cards-container">
     <div class="card" *ngFor="let notification of notifications" [class.unread]="!notification.isRead">
       <div class="card-content">
-        <img [src]="notification.image" alt="User profile" class="user-image" />
+        <!--<img [src]="notification.image" alt="User profile" class="user-image" />-->
         <div class="text-content">
-          <strong class="user-name">{{ notification.username }}</strong>
-          <p class="notification-text">{{ notification.message }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          <!-- <strong class="user-name">{{ notification.username }}</strong>-->
+           <p class="notification-text">{{ notification.message }}</p>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 
-<!-- Overlay for Notifications -->
+ <!-- Overlay for Notifications -->
 <div class="overlay" *ngIf="isNotificationsOpen" (click)="closeNotifications()"></div>

@@ -1,48 +1,46 @@
 import { Injectable } from '@angular/core';
-import { Client, IMessage, StompConfig, StompSubscription } from '@stomp/stompjs';
-import { Subject } from 'rxjs';
+import { Client, IMessage } from '@stomp/stompjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
-  private client: Client;
-  private notificationsSubject = new Subject<any>(); // Subject za real-time notifikacije
+  private stompClient: Client;
+  private notificationSubject = new Subject<any>();
 
   constructor() {
-    this.client = new Client({
-      brokerURL: 'ws://localhost:8080/ws', // Zameni sa tvojim WS URL-om
-      reconnectDelay: 5000, // Automatski pokušaj ponovne konekcije
+    this.stompClient = new Client({
+      brokerURL: 'ws://localhost:8080/ws',
+      reconnectDelay: 5000, // Automatski reconnect ako se veza prekine
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
+      debug: (msg: string) => console.log(`[WebSocket Debug]: ${msg}`)
+    });
+
+    this.stompClient.onConnect = () => {
+      console.log('WebSocket povezan.');
+    };
+
+    this.stompClient.onWebSocketError = (error) => {
+      console.error('Greška u WebSocket konekciji:', error);
+    };
+
+    this.stompClient.activate(); // Aktivacija veze
+  }
+
+  getNotifications(userId: number): Observable<any> {
+    return new Observable((observer) => {
+      this.stompClient.subscribe(`/topic/notifications/${userId}`, (message: IMessage) => {
+        observer.next(JSON.parse(message.body));
+      });
     });
   }
 
-  // Metoda za pretplatu na notifikacije
-  getNotifications() {
-    return this.notificationsSubject.asObservable();
-  }
-
-  // Povezivanje na WebSocket i slušanje na notifikacije
-  connect() {
-    this.client.onConnect = () => {
-      this.client.subscribe('/topic/notifications', (message: IMessage) => {
-        this.notificationsSubject.next(JSON.parse(message.body)); // Primanje i emitovanje notifikacija
-      });
-    };
-
-    this.client.onStompError = (frame) => {
-      console.error('Greška STOMP:', frame.headers['message']);
-      console.error('Detalji:', frame.body);
-    };
-
-    this.client.activate(); // Aktivacija konekcije
-  }
-
-  // Prekidanje WebSocket konekcije
-  disconnect() {
-    if (this.client.active) {
-      this.client.deactivate(); // Prekid konekcije
+  disconnect(): void {
+    if (this.stompClient) {
+      this.stompClient.deactivate();
+      console.log('WebSocket isključen.');
     }
   }
 }
