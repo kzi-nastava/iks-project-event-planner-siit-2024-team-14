@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
 import {Service} from '../model/service.model';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Offering} from '../model/offering.model';
+
 
 @Component({
   selector: 'app-service-details',
@@ -9,22 +9,26 @@ import {Offering} from '../model/offering.model';
   styleUrl: './service-details.component.css'
 })
 export class ServiceDetailsComponent implements OnInit {
-  protected service?: Offering;
+  service: Service = {id: -1} as Service;
 
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
     this.route.params.subscribe(params =>
     {
       const id = +params['id'];
-      if(!isNaN(id)) {
-        this.service = {id: Number(id), isDeleted: false, name: 'Horse Riding Lessons'};
-      }
-    });
+      // TODO: Load service data instead
+      this.service = {
+        id: id,
+        name: 'Luxury Wedding Photography',
+        category: {name: 'Photography', description: '...'},
+        description: 'Professional wedding photography package including pre-wedding, ceremony, and reception coverage.',
+        specificities: 'Includes 200 edited photos, online gallery, and a printed album.',
+        applicableEventTypes: [{name: 'Wedding', description: ''}, {name: 'sth'}],
+        price: 2000.12222,
+        discount: 0.1} as unknown as Service;
+    })
   }
-
-  protected readonly JSON = JSON;
 }
-
