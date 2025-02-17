@@ -31,7 +31,7 @@ export class AdminCommentsComponent implements OnInit {
 
   // Odobravanje komentara
   approveComment(comment: CommentModel) {
-    this.commentService.updateCommentStatus(comment.id, 'accepted').subscribe(() => {
+    this.commentService.approveCommentStatus(comment.id, 'accepted').subscribe(() => {
       comment.status = 'accepted';  // Promeni status na frontu
       alert('Comment approved!');
     });
@@ -40,7 +40,7 @@ export class AdminCommentsComponent implements OnInit {
 
   // Brisanje komentara (logičko brisanje)
   deleteComment(comment: CommentModel) {
-    this.commentService.updateCommentStatus(comment.id, 'deleted').subscribe(() => {
+    this.commentService.deleteCommentStatus(comment.id, 'deleted').subscribe(() => {
       comment.status = 'deleted';  // Promeni status na frontu
       alert('Comment deleted!');
     });

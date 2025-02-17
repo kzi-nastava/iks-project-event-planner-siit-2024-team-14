@@ -17,3 +17,4 @@ export class NotificationService {
     return this.http.get<Notification[]>(`${this.apiUrl}?userId=${userId}`);
   }
 }
+

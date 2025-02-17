@@ -71,6 +71,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   closeNotifications(): void {
     this.isNotificationsOpen = false;
+
   }
 
   ngOnDestroy(): void {
