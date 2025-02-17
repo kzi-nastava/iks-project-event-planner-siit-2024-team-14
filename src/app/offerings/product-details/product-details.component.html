@@ -1,0 +1,31 @@
+<article>
+  <h2> {{ product.name }} </h2>
+  <p> {{ product.description }} </p>
+
+  <dl>
+    <dt>Category:</dt>
+    <dd>
+      <details>
+        <summary> {{ product.category.name }} </summary>
+        {{ product.category.description }}
+      </details>
+    </dd>
+
+    <dt>Applicable event types:</dt>
+    <dd>
+      <ul>
+        <li *ngFor="let type of product.applicableEventTypes"> {{ type.name }} </li>
+      </ul>
+    </dd>
+
+    <dt>Price:</dt>
+    <dd>
+      <span [ngStyle]="product.discount > 0 ? {'text-decoration': 'line-through', 'font-style': 'italic'} : null">
+        {{ product.price | currency }}
+      </span>
+      <b *ngIf="product.discount > 0">
+        {{ product.price * (1 - product.discount) | currency}} ({{ product.discount | percent }} off)
+      </b>
+    </dd>
+  </dl>
+</article>
