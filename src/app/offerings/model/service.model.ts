@@ -19,4 +19,6 @@ export interface Service extends Offering {
   sessionDuration: number;
   reservationPeriod: number;
   cancellationPeriod: number;
+
+  provider: any;
 }

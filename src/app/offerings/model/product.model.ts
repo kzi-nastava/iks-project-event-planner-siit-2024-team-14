@@ -7,5 +7,5 @@ export interface Product extends Offering {
   discount: number
   category: Category
   applicableEventTypes: EventType[];
-
+  provider: any;
 }

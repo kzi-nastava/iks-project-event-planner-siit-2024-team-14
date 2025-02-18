@@ -45,5 +45,13 @@
           : 'Your reservation will be immediately accepted.'
       }}
     </dd>
+
+    <dt>Provided by:</dt>
+    <dd>
+      <a [routerLink]="['/users', service.provider.id]">
+        <img [src]="service.provider.profileImage || 'assets/images/logo.png'" alt="{{ service.provider.name | titlecase }} profile image"/>
+      </a>
+      <span>{{ (service.provider.name | titlecase) || service.provider.email }}</span>
+    </dd>
   </dl>
 </article>
