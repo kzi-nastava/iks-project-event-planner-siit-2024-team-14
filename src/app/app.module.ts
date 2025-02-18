@@ -30,8 +30,6 @@ import {DrawerNavbarProviderComponent} from './components/drawers/drawer-navbar-
 import {DrawerNavbarGuestComponent} from './components/drawers/drawer-navbar-guest/drawer-navbar-guest.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 
-import { WebSocketService } from './components/notifications/websocket.service';
-
 @NgModule({
   declarations: [
     AppComponent,     // Declare the root component
@@ -68,8 +66,7 @@ import { WebSocketService } from './components/notifications/websocket.service';
     FormsModule,
   ],
   providers: [
-    provideAnimationsAsync(),
-    WebSocketService
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]  // Root component that Angular bootstraps
 })

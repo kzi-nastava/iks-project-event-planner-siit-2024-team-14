@@ -16,5 +16,9 @@ export class NotificationService {
   getNotifications(userId: number): Observable<Notification[]> {
     return this.http.get<Notification[]>(`${this.apiUrl}?userId=${userId}`);
   }
+
+  markAllAsRead(userId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/mark-all-as-read?userId=${userId}`, {});
+  }
 }
 

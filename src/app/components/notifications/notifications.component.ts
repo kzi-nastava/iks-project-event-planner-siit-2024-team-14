@@ -1,11 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NotificationService } from './notifications.service';
-import { WebSocketService } from './websocket.service';
 
 export interface Notification {
   id: number;
   message: string;
-  date: string;  // Backend vraća string
+  date: string;
   isRead: boolean;
   userId: number;
   commentId: number | null;
@@ -17,29 +16,22 @@ export interface Notification {
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })
-export class NotificationsComponent implements OnInit, OnDestroy {
+export class NotificationsComponent implements OnInit {
   notifications: Notification[] = [];
-
   @Input() isNotificationsOpen = false;
   isMuted = false;
   private userId: number | null = null;
 
   constructor(
     private notificationService: NotificationService,
-    private websocketService: WebSocketService
   ) {}
 
   ngOnInit(): void {
     this.userId = this.getUserIdFromLocalStorage();
 
     if (this.userId !== null) {
+      // Učitavanje postojećih notifikacija
       this.loadNotifications();
-      this.websocketService.getNotifications(this.userId).subscribe(
-        (newNotification: Notification) => {
-          this.notifications.push(newNotification);
-        },
-        (error) => console.error('Greška u WebSocket pretplati', error)
-      );
     }
   }
 
@@ -61,20 +53,17 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleNotifications(): void {
-    this.isNotificationsOpen = !this.isNotificationsOpen;
-  }
-
   toggleMuteNotifications(): void {
     this.isMuted = !this.isMuted;
   }
 
   closeNotifications(): void {
     this.isNotificationsOpen = false;
-
+    if (this.userId !== null) {
+      this.notificationService.markAllAsRead(this.userId).subscribe(() => {
+        this.notifications.forEach(notification => notification.isRead = true);
+      }, error => console.error('Greška pri označavanju notifikacija kao pročitanih', error));
+    }
   }
 
-  ngOnDestroy(): void {
-    this.websocketService.disconnect();
-  }
 }
