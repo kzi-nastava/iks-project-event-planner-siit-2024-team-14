@@ -1,0 +1,17 @@
+<!-- Navigation Sidebar -->
+<div class="sidebar" [class.open]="isSidebarOpen">
+  <ul>
+    <li>Home</li>
+    <li>User Management</li>
+    <li>Event Types</li>
+    <li>Categories</li>
+    <li (click)="toggleCommentsSidebar()">Comments & Reviews</li> <!-- Izmena -->
+    <li>Reports</li>
+    <li>Notifications</li>
+    <li>Profile</li>
+    <li>Log out</li>
+  </ul>
+</div>
+
+<!-- Comments Sidebar -->
+<app-admin-comments [isCommentsOpen]="isCommentsOpen"></app-admin-comments>  <!-- Prosleđivanje stanja -->
