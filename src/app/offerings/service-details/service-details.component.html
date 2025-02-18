@@ -35,11 +35,11 @@
 
     <dt>Reservation details:</dt>
     <dd>
-      Reservations for this service must be made {{-1}} days in advance, and may be canceled up to {{-1}} days before.
+      Reservations for this service must be made {{ service.reservationPeriod }} days in advance, and may be canceled up to {{ service.cancellationPeriod }} days before.
       {{
         service.sessionDuration ?
-          'Session duration for this service is ' + -1 + ' minutes.'
-          : 'This service may be reserved for at least ' + -1 + ' minutes, and up to ' + -1 + ' minutes.'
+          'Session duration for this service is ' + service.sessionDuration + ' minutes.'
+          : 'This service may be reserved for at least ' + service.minDuration + ' minutes, and up to ' + service.maxDuration + ' minutes.'
       }}
       {{
         service.reservationPolicy === 'manual' ?

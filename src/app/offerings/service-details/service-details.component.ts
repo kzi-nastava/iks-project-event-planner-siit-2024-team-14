@@ -28,6 +28,7 @@ export class ServiceDetailsComponent implements OnInit {
         specificities: 'Includes 200 edited photos, online gallery, and a printed album.',
         applicableEventTypes: [{name: 'Wedding', description: ''}, {name: 'sth'}],
         price: 2000.12222,
+        provider: {email: 'mail@mail.com', id: 1, name: 'aleksa Cetkovic'},
         discount: 0.1} as unknown as Service;
     })
   }

@@ -16,7 +16,9 @@ export interface Service extends Offering {
   reservationPolicy: 'manual' | 'auto';
   isAvailable: boolean;
 
-  sessionDuration: number;
+  sessionDuration?: number;
+  minDuration?: number;
+  maxDuration?: number;
   reservationPeriod: number;
   cancellationPeriod: number;
 
