@@ -72,7 +72,7 @@
         <small> <span class="fas fa-cogs"></span>{{ solution.solutionType }}</small>  <br>
         <small> <span class="fas fa-tag"></span>{{ solution.price }} din</small><br>
         <br>
-        <button>View More</button>
+        <button [routerLink]="['Service' === solution.solutionType ? '/services' : '/products', solution.id]">View More</button>
       </div>
     </div>
   </div>

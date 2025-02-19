@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
 import {Service} from '../model/service.model';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Offering} from '../model/offering.model';
+import {ServiceService} from '../service.service';
+
 
 @Component({
   selector: 'app-service-details',
@@ -9,22 +10,21 @@ import {Offering} from '../model/offering.model';
   styleUrl: './service-details.component.css'
 })
 export class ServiceDetailsComponent implements OnInit {
-  protected service?: Offering;
+  service: Service = {id: -1} as Service;
 
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private serviceService: ServiceService) { }
 
 
   ngOnInit(): void {
     this.route.params.subscribe(params =>
     {
       const id = +params['id'];
-      if(!isNaN(id)) {
-        this.service = {id: Number(id), isDeleted: false, name: 'Horse Riding Lessons'};
-      }
-    });
+
+      this.serviceService.getById(id).subscribe({
+        next: service => this.service = service,
+        error: err => console.log('Failed to fetch service data.')
+      })
+    })
   }
-
-  protected readonly JSON = JSON;
 }
-
