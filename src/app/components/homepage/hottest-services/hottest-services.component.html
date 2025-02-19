@@ -30,7 +30,7 @@
             <small><span  class="fas fa-tag"></span>{{solution.price}} din</small><br>
             <small><span class="fas fa-location-pin"></span>{{solution.location}}</small>
             <br>
-            <button class="view-more-btn">View More</button>
+            <button class="view-more-btn" [routerLink]="['Service' === solution.solutionType ? '/services' : '/products', solution.id]">View More</button>
           </div>
         </div>
       </div>
