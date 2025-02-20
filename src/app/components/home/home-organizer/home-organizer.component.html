@@ -6,8 +6,15 @@
       <!-- Left burger icon for drawer navbar -->
       <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
 
-      <!-- Right profile icon -->
-      <mat-icon class="profile-icon" routerLink="/organizer-profile">account_circle</mat-icon>
+      <!-- Right profile, notifications, and messages icons -->
+      <div class="header-icons">
+        <div class="notifications-container">
+          <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
+          <span *ngIf="unreadCount > 0" class="unread-count">{{ unreadCount }}</span>
+        </div>
+        <mat-icon class="messages-icon" routerLink="/messages">message</mat-icon>
+        <mat-icon class="profile-icon" routerLink="/organizer-profile">account_circle</mat-icon>
+      </div>
 
       <!-- Centered logo -->
       <div class="logo-container">
@@ -28,6 +35,8 @@
 </header>
 
 <app-drawer-navbar-organizer [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-organizer>
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+
 <app-hottest-events></app-hottest-events>
 <app-our-events></app-our-events>
 <div class="section-divider1"></div>

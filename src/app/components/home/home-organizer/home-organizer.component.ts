@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {NotificationService} from '../../notifications/notifications.service';
 import {HomeOrganizerService} from "./home-organizer.service";
 
 @Component({
@@ -7,19 +8,25 @@ import {HomeOrganizerService} from "./home-organizer.service";
   styleUrls: ['./home-organizer.component.css']
 })
 export class HomeOrganizerComponent implements OnInit {
-  title = 'Welcome to the Home Page!';
   isSidebarOpen: boolean = false;
+  isNotificationsOpen: boolean = false;
   user: any;
 
-  constructor(private userService: HomeOrganizerService) {}
+  unreadCount: number = 0;
 
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    console.log('Sidebar toggled!', this.isSidebarOpen);
-  }
+  constructor(private notificationService: NotificationService, private userService: HomeOrganizerService) {}
 
   ngOnInit(): void {
-    const storedUser = localStorage.getItem('user');
+    const userId = this.getUserIdFromLocalStorage();
+
+    if (userId !== null) {
+      this.loadUnreadNotificationCount(userId);
+      this.notificationService.unreadNotificationCount$.subscribe(count => {
+        this.unreadCount = count;
+      });
+    }
+
+     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.user = JSON.parse(storedUser); // Assign to class property
     }
@@ -29,6 +36,29 @@ export class HomeOrganizerComponent implements OnInit {
     } else {
       console.error('User ID not found in localStorage');
     }
+
+
+  }
+
+  getUserIdFromLocalStorage(): number | null {
+    const userIdFromStorage = localStorage.getItem("userId");
+    if (userIdFromStorage) {
+      const parsedUserId = parseInt(userIdFromStorage, 10);
+      return isNaN(parsedUserId) ? null : parsedUserId;
+    }
+    return null;
+  }
+
+  loadUnreadNotificationCount(userId: number): void {
+    this.notificationService.loadUnreadNotificationsCount(userId);
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    console.log('Sidebar toggled!', this.isSidebarOpen);
+  }
+  openNotifications() : void {
+    this.isNotificationsOpen = !this.isNotificationsOpen;  
   }
 
   fetchUserDetails(userId: number): void {
