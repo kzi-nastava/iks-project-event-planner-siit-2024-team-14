@@ -8,7 +8,10 @@
 
       <!-- Right profile, notifications, and messages icons -->
       <div class="header-icons">
-        <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
+        <div class="notifications-container">
+          <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
+          <span *ngIf="unreadCount > 0" class="unread-count">{{ unreadCount }}</span>
+        </div>
         <mat-icon class="messages-icon" routerLink="/messages">message</mat-icon>
         <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
       </div>
