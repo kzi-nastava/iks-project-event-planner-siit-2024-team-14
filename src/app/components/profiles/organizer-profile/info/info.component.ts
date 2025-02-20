@@ -17,8 +17,7 @@ export class InfoComponent implements OnInit {
   oldPasswordDoesNotMatch: boolean = false;  // Flag to check password match
 
 
-  constructor(private infoService: InfoService,
-              private fb: FormBuilder) {}
+  constructor(private infoService: InfoService) {}
 
   ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
@@ -29,6 +28,13 @@ export class InfoComponent implements OnInit {
 
   get fullName(): string {
     return this.user ? `${this.user.name} ${this.user.surname}` : 'User Name';
+  }
+
+  // Method to get profile photo URL
+  getProfilePhotoUrl(): string {
+    const photoFileName = this.user?.profilePhoto;
+    console.log(photoFileName);
+    return photoFileName ? `http://localhost:8080/api/organizers/get-photo/${photoFileName}` : '../../../../../assets/images/profile6.jpg';
   }
 
   /* UPDATE ----------------------------------------------------------------------- */

@@ -1,8 +1,8 @@
 <div class="profile-container">
   <div class="profile-photo-container">
-    <img [src]="user?.profileImage || '../../../../../assets/images/profile6.jpg'"
-         alt="Profile photo"
-         class="profile-photo">
+      <img [src]="getProfilePhotoUrl()"
+           alt="Profile photo"
+           class="profile-photo">
     <button class="edit-button">
       <i class="fa fa-pencil"></i> Edit profile photo
     </button>
