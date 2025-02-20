@@ -7,5 +7,5 @@ export interface RegistrationEo {
   address: string;
   city: string;
   phoneNumber: number;
-  photo: string | null; // File input for the photo (image)
+  photo: File | null; // File input for the photo (image)
 }

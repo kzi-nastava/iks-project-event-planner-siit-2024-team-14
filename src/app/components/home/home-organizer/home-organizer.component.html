@@ -13,7 +13,7 @@
           <span *ngIf="unreadCount > 0" class="unread-count">{{ unreadCount }}</span>
         </div>
         <mat-icon class="messages-icon" routerLink="/messages">message</mat-icon>
-        <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
+        <mat-icon class="profile-icon" routerLink="/organizer-profile">account_circle</mat-icon>
       </div>
 
       <!-- Centered logo -->
@@ -28,7 +28,7 @@
 
       <!-- Navigation links -->
       <div class="nav-links">
-        <a href="#">HOME</a> | <a href="#">PROFILE</a> | <a href="#">SETTINGS</a>
+        <a routerLink="/home-organizer">HOME</a> | <a routerLink="/organizer-profile">PROFILE</a> | <a href="#">SETTINGS</a>
       </div>
     </div>
   </div>

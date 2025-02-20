@@ -1,8 +1,18 @@
-/* The main header area */
+/* Apply Petrona font globally */
+body {
+  font-family: 'Petrona', serif;
+}
+
+.decorative-lines {
+  align-self: flex-start; /* Align the lines element */
+  width: 100%; /* Make it span the full width */
+  border-top: 2px solid #ddd; /* Optional: Add a visual line */
+}
+
+/* NAVBAR ------------------------------------------------------------------------------ */
 header {
   position: relative;
 }
-
 /* The background image covering the top of the screen */
 .header-background {
   background-image: url('../../../../assets/images/background.jpg');
@@ -44,50 +54,21 @@ header {
   padding: 5px;
 }
 
-.header-icons {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-/* Poseban kontejner za notifikacije */
-.notifications-container {
-  position: relative;  /* Važno: ovo omogućava da se .unread-count pozicionira u odnosu na ovu div-u */
-  display: inline-flex; /* Da bi ikonice ostale u istom redu */
-}
-
-.notifications-icon,
-.messages-icon,
+/* Profile icon on the right */
 .profile-icon {
-  font-size: 30px;
+  position: absolute;
+  top: 20px;             /* Adjust the top value to ensure the icon isn't too close to the top edge */
+  right: 20px;           /* Keep it to the right edge */
+  font-size: 30px;       /* Adjust size as needed */
   cursor: pointer;
   color: #523D35;
-  z-index: 2;
-  padding: 5px;
+  z-index: 3;            /* Ensure it stays on top of other elements */
+  padding: 5px;          /* Add some padding to prevent clipping */
 }
 
-.notifications-icon:hover,
-.messages-icon:hover,
 .profile-icon:hover {
-  color: #d9d9d9;
+  color: #d9d9d9; /* Slight color change on hover */
 }
-
-/* Nepročitane notifikacije - kružić sa brojem */
-.unread-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: white;
-  color: #d9d9d9;
-  border-radius: 50%;
-  padding: 3px 6px;
-  font-size: 12px;
-  z-index: 3;
-}
-
 
 /* Logo container */
 .logo-container {
@@ -134,3 +115,5 @@ header {
 .nav-links a:hover {
   text-decoration: underline;
 }
+
+

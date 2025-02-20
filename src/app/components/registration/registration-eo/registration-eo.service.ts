@@ -13,10 +13,7 @@ export class RegistrationEoService {
 
   constructor(private http: HttpClient) { }
 
-  register(data: RegistrationEo): Observable<any> {
-    return this.http.post(this.apiUrl, data, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true  // This sends credentials (cookies, etc.)
-    });
+  register(formData: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, formData); // Ensure the backend supports multipart/form-data
   }
 }

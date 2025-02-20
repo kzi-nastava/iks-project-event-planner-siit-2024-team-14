@@ -10,8 +10,8 @@ import {RegistrationEo} from '../../../interfaces/registration-eo.model';
   styleUrls: ['./registration-eo.component.css']
 })
 export class RegistrationEoComponent {
-
   showModal = false;
+  selectedFile: File | null = null;
 
   constructor(
     private registrationService: RegistrationEoService, private router: Router) {}
@@ -28,13 +28,24 @@ export class RegistrationEoComponent {
     photo: new FormControl(null)
   })
 
+  // Handle file selection
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
   register() {
     console.log('Form Submitted');
     console.log(this.registrationForm.value);  // Logs the current form data
 
     if (this.registrationForm.valid) {
       console.log('Valid form');
-      const registrationData: RegistrationEo = {
+      const formData = new FormData();
+
+      // Prepare dto as JSON string and append it as a part
+      const dto = {
         email: this.registrationForm.value.email || '',
         password: this.registrationForm.value.password || '',
         confirmPassword: this.registrationForm.value.confirmPassword || '',
@@ -42,18 +53,26 @@ export class RegistrationEoComponent {
         surname: this.registrationForm.value.surname || '',
         address: this.registrationForm.value.address || '',
         city: this.registrationForm.value.city || '',
-        phoneNumber: Number(this.registrationForm.value.phoneNumber) || 0,
-        photo: this.registrationForm.value.photo || null
+        phoneNumber: this.registrationForm.value.phoneNumber || ''
       };
 
-      console.log('Before subscribe');
-      this.registrationService.register(registrationData).subscribe({
+      formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
+
+      // Append the photo file as 'photo'
+      if (this.selectedFile) {
+        const email = this.registrationForm.value.email || '';
+        const filename = `${email}.png`; // Name the file based on email
+        formData.append('photo', this.selectedFile, filename);
+      }
+
+      // Send form data to backend
+      this.registrationService.register(formData).subscribe({
         next: (response: any) => {
           console.log('Registration successful: ', response);
-          this.showModal = true;  // Show the success modal
+          this.showModal = true;
         },
         error: (err) => {
-          if (err.status === 409) {  // Assuming 409 is the HTTP status for duplicate email
+          if (err.status === 409) {  // HTTP status for duplicate email
             alert('User with that email address already exists');
           } else {
             alert('Registration failed. Please check your credentials.');
@@ -65,8 +84,8 @@ export class RegistrationEoComponent {
     }
   }
 
+
   closeModal() {
     this.showModal = false; // Close modal (handled by SuccessfulComponent)
   }
-
 }
