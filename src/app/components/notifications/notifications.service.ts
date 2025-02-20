@@ -20,5 +20,15 @@ export class NotificationService {
   markAllAsRead(userId: number): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/mark-all-as-read?userId=${userId}`, {});
   }
+
+  toggleMuteNotifications(userId: number, isMuted: boolean): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/mute-notifications?userId=${userId}&muted=${isMuted}`, {});
+
+  }
+
+  toggleMuteNotificationsStatus(userId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/mute-notifications/status?userId=${userId}`);
+  }
+
 }
 

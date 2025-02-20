@@ -30,8 +30,14 @@ export class NotificationsComponent implements OnInit {
     this.userId = this.getUserIdFromLocalStorage();
 
     if (this.userId !== null) {
-      // Učitavanje postojećih notifikacija
       this.loadNotifications();
+
+      this.notificationService.toggleMuteNotificationsStatus(this.userId).subscribe(
+        (status) => {
+          this.isMuted = status;
+        },
+        (error) => console.error('Error during reading mutation status for user.', error)
+      );
     }
   }
 
@@ -48,13 +54,24 @@ export class NotificationsComponent implements OnInit {
     if (this.userId !== null) {
       this.notificationService.getNotifications(this.userId).subscribe(
         (data) => this.notifications = data,
-        (error) => console.error('Greška pri učitavanju notifikacija', error)
+        (error) => console.error('Error during loading notifications.', error)
       );
     }
   }
 
   toggleMuteNotifications(): void {
-    this.isMuted = !this.isMuted;
+    if (this.userId !== null) {
+      const newMutedState = !this.isMuted;
+      this.notificationService.toggleMuteNotifications(this.userId, newMutedState)
+        .subscribe(() => {
+          this.isMuted = newMutedState;
+          console.log(`Notifications are now ${this.isMuted ? 'muted' : 'unmuted'}`);
+        }, error => {
+          console.error('Error during changing mutation status', error);
+        });
+    } else {
+      console.error('Can not find user with that user id');
+    }
   }
 
   closeNotifications(): void {
@@ -62,7 +79,7 @@ export class NotificationsComponent implements OnInit {
     if (this.userId !== null) {
       this.notificationService.markAllAsRead(this.userId).subscribe(() => {
         this.notifications.forEach(notification => notification.isRead = true);
-      }, error => console.error('Greška pri označavanju notifikacija kao pročitanih', error));
+      }, error => console.error('Error during changing read status', error));
     }
   }
 
