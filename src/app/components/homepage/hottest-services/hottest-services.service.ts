@@ -1,19 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {SolutionModel} from '../../../interfaces/solution.model';
 
-export interface SolutionModel {
-  id: number;
-  providerCompanyName: string;
-  providerLastName: string;
-  name: string;
-  description: string;
-  location: string;
-  price: string;
-  discount: string;
-  imageUrl: string;
-  solutionType: string;
-}
 
 @Injectable({
   providedIn: 'root'

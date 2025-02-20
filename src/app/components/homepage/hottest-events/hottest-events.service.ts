@@ -1,19 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {EventModel} from '../../../interfaces/event.model';
 
-export interface EventModel {
-  id: number;
-  organizerFirstName: string;
-  organizerLastName: string;
-  name: string;
-  description: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-  imageUrl: string;
-  organizerProfilePicture: string;
-}
+
 
 @Injectable({
   providedIn: 'root'
