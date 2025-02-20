@@ -1,0 +1,41 @@
+<article>
+  <h2> {{ product.name }} </h2>
+  <p> {{ product.description }} </p>
+
+  <br/>
+
+  <dl>
+    <dt>Category:</dt>
+    <dd>
+      <details>
+        <summary> {{ product.category.name }} </summary>
+        {{ product.category.description }}
+      </details>
+    </dd>
+
+    <dt>Applicable event types:</dt>
+    <dd>
+      <ul>
+        <li *ngFor="let type of product.applicableEventTypes"> {{ type.name }} </li>
+      </ul>
+    </dd>
+
+    <dt>Price:</dt>
+    <dd>
+      <span [ngStyle]="product.discount > 0 ? {'text-decoration': 'line-through', 'font-style': 'italic'} : null">
+        {{ product.price | currency }}
+      </span>
+      <b *ngIf="product.discount > 0">
+        {{ product.price * (1 - product.discount) | currency}} ({{ product.discount | percent }} off)
+      </b>
+    </dd>
+  </dl>
+
+  <dt>Provided by:</dt>
+  <dd>
+    <a [routerLink]="['/users', product.provider.id]">
+      <img [src]="product.provider.profileImage || 'assets/images/logo.png'" alt="{{ product.provider.name | titlecase }} profile image"/>
+    </a>
+    <span>{{ (product.provider.name | titlecase) || product.provider.email }}</span>
+  </dd>
+</article>

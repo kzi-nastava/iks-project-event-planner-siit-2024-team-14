@@ -1,0 +1,59 @@
+<article>
+  <h2> {{ service.name }} </h2>
+  <p> {{ service.description }} </p>
+
+  <br/>
+
+  <dl>
+    <dt>Category:</dt>
+    <dd>
+      <details>
+        <summary> {{ service.category.name }} </summary>
+        {{ service.category.description }}
+      </details>
+    </dd>
+
+    <dt>Specificities:</dt>
+    <dd> {{ service.specificities }} </dd>
+
+    <dt>Applicable event types:</dt>
+    <dd>
+      <ul>
+        <li *ngFor="let type of service.applicableEventTypes"> {{ type.name }} </li>
+      </ul>
+    </dd>
+
+    <dt>Price:</dt>
+    <dd>
+      <span [ngStyle]="service.discount > 0 ? {'text-decoration': 'line-through', 'font-style': 'italic'} : null">
+        {{ service.price | currency }}
+      </span>
+      <b *ngIf="service.discount > 0">
+        {{ service.price * (1 - service.discount) | currency}} ({{ service.discount | percent }} off)
+      </b>
+    </dd>
+
+    <dt>Reservation details:</dt>
+    <dd>
+      Reservations for this service must be made {{ service.reservationPeriod }} days in advance, and may be canceled up to {{ service.cancellationPeriod }} days before.
+      {{
+        service.sessionDuration ?
+          'Session duration for this service is ' + service.sessionDuration + ' minutes.'
+          : 'This service may be reserved for at least ' + service.minDuration + ' minutes, and up to ' + service.maxDuration + ' minutes.'
+      }}
+      {{
+        service.reservationPolicy === 'manual' ?
+          'The provider must review reservations before accepting them.'
+          : 'Your reservation will be immediately accepted.'
+      }}
+    </dd>
+
+    <dt>Provided by:</dt>
+    <dd>
+      <a [routerLink]="['/users', service.provider.id]">
+        <img [src]="service.provider.profileImage || 'assets/images/logo.png'" alt="{{ service.provider.name | titlecase }} profile image"/>
+      </a>
+      <span>{{ (service.provider.name | titlecase) || service.provider.email }}</span>
+    </dd>
+  </dl>
+</article>

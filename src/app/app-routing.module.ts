@@ -10,6 +10,9 @@ import { ActivationComponent } from './components/registration/activation/activa
 import {HomeProviderComponent} from './components/home/home-provider/home-provider.component';
 import {HomeOrganizerComponent} from './components/home/home-organizer/home-organizer.component';
 import {HomeAdminComponent} from './components/home/home-admin/home-admin.component'; // Make sure this is correctly imported
+import {AddServiceComponent} from './offerings/add-service/add-service.component';
+import {ServiceDetailsComponent} from './offerings/service-details/service-details.component';
+import {ProductDetailsComponent} from './offerings/product-details/product-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -20,6 +23,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
+  { path: 'services/add', component: AddServiceComponent },
+  { path: 'services/:id', component: ServiceDetailsComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },
   { path: 'activate', component: ActivationComponent }, // Ensure this route exists

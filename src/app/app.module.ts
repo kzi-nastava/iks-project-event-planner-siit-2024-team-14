@@ -29,6 +29,8 @@ import {DrawerNavbarOrganizerComponent} from './components/drawers/drawer-navbar
 import {DrawerNavbarProviderComponent} from './components/drawers/drawer-navbar-provider/drawer-navbar-provider.component';
 import {DrawerNavbarGuestComponent} from './components/drawers/drawer-navbar-guest/drawer-navbar-guest.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
+import {OfferingsModule} from './offerings/offerings.module';
+
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import {NotificationsComponent} from './components/notifications/notifications.c
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    OfferingsModule,
   ],
   providers: [
     provideAnimationsAsync()
