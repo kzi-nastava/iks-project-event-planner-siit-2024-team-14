@@ -21,17 +21,39 @@
 
       <!-- Navigation links -->
       <div class="nav-links">
-        <a routerLink="/home-organizer">HOME</a> | <a routerLink="/organizer-profile">PROFILE</a> | <a href="#">SETTINGS</a>
+        <a href="/home-organizer">HOME</a> | <a href="organizer-profile">PROFILE</a> | <a href="#">SETTINGS</a>
       </div>
     </div>
   </div>
 </header>
 
-<app-drawer-navbar-organizer [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-organizer>
-<app-hottest-events></app-hottest-events>
-<app-our-events></app-our-events>
-<div class="section-divider1"></div>
-<div class="section-divider2"></div>
-<app-hottest-services></app-hottest-services>
-<app-our-sevices></app-our-sevices>
-<app-footer></app-footer>
+<app-info></app-info>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-upcoming-events></app-upcoming-events>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-favorite-events></app-favorite-events>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-favorite-solutions></app-favorite-solutions>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-occupancy-calendar></app-occupancy-calendar>
+
+<!-- Footer -->
+<footer>
+  <app-footer></app-footer>
+</footer>
