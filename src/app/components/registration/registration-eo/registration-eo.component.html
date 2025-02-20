@@ -89,9 +89,9 @@
                 </div>
               </div>
 
-              <!-- Photo -->
+              <!-- Photo Upload -->
               <div class="form-group">
-                <input id="photo" formControlName="photo" type="file" accept="image/*" />
+                <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" />
               </div>
 
               <!-- Submit Button -->
