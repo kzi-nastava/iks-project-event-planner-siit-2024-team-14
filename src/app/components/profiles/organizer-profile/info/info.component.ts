@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditEO } from '../../../../interfaces/edit-eo.model';
 import { InfoService } from './info.service';
 import { ChangePassword } from '../../../../interfaces/change-password.model';
@@ -15,9 +15,10 @@ export class InfoComponent implements OnInit {
   showPasswordModal = false;
   passwordsDoNotMatch: boolean = false;  // Flag to check password match
   oldPasswordDoesNotMatch: boolean = false;  // Flag to check password match
+  selectedFile: File | null = null;
 
-
-  constructor(private infoService: InfoService) {}
+  constructor(private infoService: InfoService,
+              private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
@@ -36,6 +37,7 @@ export class InfoComponent implements OnInit {
     console.log(photoFileName);
     return photoFileName ? `http://localhost:8080/api/organizers/get-photo/${photoFileName}` : '../../../../../assets/images/profile6.jpg';
   }
+
 
   /* UPDATE ----------------------------------------------------------------------- */
   openUpdateModal(event: MouseEvent): void {
@@ -109,6 +111,9 @@ export class InfoComponent implements OnInit {
 
   closePasswordModal(): void {
     this.showPasswordModal = false;
+
+    // Reset the password form
+    this.passwordForm.reset();
   }
 
   passwordForm = new FormGroup({
@@ -161,4 +166,73 @@ export class InfoComponent implements OnInit {
     }
   }
 
+  /* CHANGE PROFILE PHOTO ------------------------------------------------ */
+
+  openFileInput(): void {
+    const fileInput: HTMLInputElement | null = document.getElementById('photo') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
+    }
+  }
+
+  // Handle the file selection
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+
+      // Create a temporary image URL for immediate display
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        // Set the profile photo to the selected file for immediate display
+        this.user.profilePhoto = e.target.result;
+
+        // Update the user data in localStorage
+        localStorage.setItem('user', JSON.stringify(this.user));
+
+        // Trigger change detection to update the view
+        this.cdRef.detectChanges();
+      };
+      reader.readAsDataURL(file);
+
+      // Proceed with uploading the image
+      this.changeProfilePhoto();
+    }
+  }
+
+  changeProfilePhoto() {
+    if (this.selectedFile) {
+      const email = this.user.email || ''; // Get the user's email (or a fallback)
+      const filename = `${email}.png`; // Generate a filename based on the email
+
+      // Create FormData to send the image file
+      const photoData = new FormData();
+      photoData.append('photo', this.selectedFile, filename);
+
+      // Call the service to upload the profile photo
+      this.infoService.changeProfilePhoto(photoData, this.user.id).subscribe({
+        next: (response: any) => {
+          // Assuming the server returns a new image URL or success message
+          console.log('Image uploaded successfully:', response);
+
+          // Even though the filename is the same, the backend might return the file's URL (or filename) from the server
+          // Update the profile photo URL (in case the backend returns a new one)
+          const updatedImageUrl = response.imageUrl || filename;
+
+          // Update the user's profile photo URL in the frontend
+          this.user.profilePhoto = updatedImageUrl;
+
+          // Save the updated user data to localStorage
+          localStorage.setItem('user', JSON.stringify(this.user));
+
+          // Trigger change detection again to update the view
+          this.cdRef.detectChanges();
+        },
+        error: (err: any) => {
+          console.error('Error uploading profile photo:', err);
+          // Handle the error, maybe revert to the previous profile photo if needed
+        }
+      });
+    }
+  }
 }

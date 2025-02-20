@@ -18,4 +18,8 @@ export class InfoService {
   changePassword(data: ChangePassword): Observable<any> {
     return this.http.put<any>(`http://localhost:8080/api/users/changePassword`, data);
   }
+
+  changeProfilePhoto(data: FormData, id: number): Observable<any> {
+    return this.http.put<any>(`http://localhost:8080/api/organizers/update-photo/${id}`, data);
+  }
 }
