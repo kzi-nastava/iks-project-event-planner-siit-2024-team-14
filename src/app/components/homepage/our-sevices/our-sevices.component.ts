@@ -120,8 +120,4 @@ export class OurSevicesComponent implements OnInit {
   toggleFilters() {
     this.showFilters = !this.showFilters;
   }
-
-  getInitials(providerCompanyName: string): string {
-    return providerCompanyName ? providerCompanyName.charAt(0).toUpperCase() : '';
-  }
 }

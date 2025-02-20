@@ -12,7 +12,7 @@ import {HomeOrganizerComponent} from './components/home/home-organizer/home-orga
 import {HomeAdminComponent} from './components/home/home-admin/home-admin.component'; // Make sure this is correctly imported
 import {AddServiceComponent} from './offerings/add-service/add-service.component';
 import {ServiceDetailsComponent} from './offerings/service-details/service-details.component';
-import {OrganizerProfileComponent} from './components/profiles/organizer-profile/organizer-profile.component';
+import {ProductDetailsComponent} from './offerings/product-details/product-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -25,10 +25,10 @@ const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },
   { path: 'services/:id', component: ServiceDetailsComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },
   { path: 'activate', component: ActivationComponent }, // Ensure this route exists
-  { path: 'organizer-profile', component: OrganizerProfileComponent },
   { path: '**', redirectTo: '/home-guest' }  // Fallback route
 ];
 

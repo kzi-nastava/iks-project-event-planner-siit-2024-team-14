@@ -7,12 +7,13 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 export class DrawerNavbarOrganizerComponent {
   @Input() isSidebarOpen: boolean = false;
-  isCommentsOpen = false;
-  @Output() toggleComments = new EventEmitter<boolean>();
 
-  // Opens and closes comments sidebar
+  isNotificationsOpen = false;
+  @Output() toggleNotifications = new EventEmitter<boolean>();
+
   toggleNotificationsSidebar() {
-    this.isCommentsOpen = !this.isCommentsOpen;
-    this.toggleComments.emit(this.isCommentsOpen);
+    this.isNotificationsOpen = !this.isNotificationsOpen;
+    this.toggleNotifications.emit(this.isNotificationsOpen);
   }
+
 }
