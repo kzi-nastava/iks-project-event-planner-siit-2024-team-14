@@ -28,7 +28,9 @@ import {HomeProviderComponent} from './components/home/home-provider/home-provid
 import {DrawerNavbarOrganizerComponent} from './components/drawers/drawer-navbar-organizer/drawer-navbar-organizer.component';
 import {DrawerNavbarProviderComponent} from './components/drawers/drawer-navbar-provider/drawer-navbar-provider.component';
 import {DrawerNavbarGuestComponent} from './components/drawers/drawer-navbar-guest/drawer-navbar-guest.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
 import {OfferingsModule} from './offerings/offerings.module';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import {OfferingsModule} from './offerings/offerings.module';
     RegistrationEoComponent,
     RegistrationSppComponent,
     ActivationComponent,
-    SuccessfulComponent
+    SuccessfulComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,

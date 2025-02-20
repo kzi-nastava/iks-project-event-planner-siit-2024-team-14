@@ -8,6 +8,7 @@ export interface CommentModel {
   rating: number;
   date: string;
   status: string;
+  commenterId: number;
   commenterFirstName: string;
   commenterLastName: string;
   commenterProfilePicture: string;
@@ -29,7 +30,12 @@ export class CommentService {
   }
 
   // Ažuriraj status komentara (odobri ili obriši)
-  updateCommentStatus(commentId: number, status: string): Observable<void> {
+  approveCommentStatus(commentId: number, status: string): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/approve`, { commentId, status });
+  }
+
+  // Ažuriraj status komentara (odobri ili obriši)
+  deleteCommentStatus(commentId: number, status: string): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/delete`, { commentId, status });
   }
 }

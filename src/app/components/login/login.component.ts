@@ -39,6 +39,7 @@ export class LoginComponent {
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
           localStorage.setItem('userCity', response.user.city);
+          localStorage.setItem('userId', response.user.id);
 
           this.redirectUser(response.user.role);
         },
