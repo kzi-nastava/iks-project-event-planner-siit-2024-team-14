@@ -7,7 +7,11 @@
       <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
 
       <!-- Right profile icon -->
-      <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
+      <div class="header-icons">
+        <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
+        <mat-icon class="messages-icon" routerLink="/messages">message</mat-icon>
+        <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
+      </div>
 
       <!-- Centered logo -->
       <div class="logo-container">
@@ -27,6 +31,7 @@
   </div>
 </header>
 <app-drawer-navbar-provider [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-provider>
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
 
 <app-hottest-events></app-hottest-events>
 <app-our-events></app-our-events>

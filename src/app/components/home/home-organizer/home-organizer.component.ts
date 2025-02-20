@@ -8,9 +8,15 @@ import { Component } from '@angular/core';
 export class HomeOrganizerComponent {
   title = 'Welcome to the Home Page!';
   isSidebarOpen: boolean = false;
+  isNotificationsOpen: boolean = false;
+
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
     console.log('Sidebar toggled!', this.isSidebarOpen);
+  }
+
+  openNotifications() : void {
+    this.isNotificationsOpen = !this.isNotificationsOpen;
   }
 }
 

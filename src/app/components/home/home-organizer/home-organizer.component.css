@@ -2,6 +2,7 @@
 header {
   position: relative;
 }
+
 /* The background image covering the top of the screen */
 .header-background {
   background-image: url('../../../../assets/images/background.jpg');
@@ -43,20 +44,29 @@ header {
   padding: 5px;
 }
 
-/* Profile icon on the right */
-.profile-icon {
+/* Header icons container (profile, notifications, messages) */
+.header-icons {
   position: absolute;
-  top: 20px;             /* Adjust the top value to ensure the icon isn't too close to the top edge */
-  right: 20px;           /* Keep it to the right edge */
-  font-size: 30px;       /* Adjust size as needed */
-  cursor: pointer;
-  color: #523D35;
-  z-index: 3;            /* Ensure it stays on top of other elements */
-  padding: 5px;          /* Add some padding to prevent clipping */
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between icons */
 }
 
-.profile-icon:hover {
-  color: #d9d9d9; /* Slight color change on hover */
+/* Profile icon */
+.profile-icon, .notifications-icon, .messages-icon {
+  font-size: 30px;
+  cursor: pointer;
+  color: #523D35;
+  z-index: 3;  /* Ensure it stays on top of other elements */
+  padding: 5px;
+}
+
+.profile-icon:hover,
+.notifications-icon:hover,
+.messages-icon:hover {
+  color: #d9d9d9; /* Change color on hover for all icons */
 }
 
 /* Logo container */
