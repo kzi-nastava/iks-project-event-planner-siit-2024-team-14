@@ -74,6 +74,9 @@
       <div class="form-group">
         <input formControlName="oldPassword" type="password" placeholder="Enter old password" />
       </div>
+      <div *ngIf="oldPasswordDoesNotMatch" class="error-message">
+        Old password do not match.
+      </div>
       <div class="form-group">
         <input formControlName="password" type="password" placeholder="Enter new password" />
       </div>

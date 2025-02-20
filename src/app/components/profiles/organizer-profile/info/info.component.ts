@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditEO } from '../../../../interfaces/edit-eo.model';
-import { HttpClient } from '@angular/common/http';
 import { InfoService } from './info.service';
 import { ChangePassword } from '../../../../interfaces/change-password.model';
 
@@ -15,6 +14,8 @@ export class InfoComponent implements OnInit {
   showUpdateModal = false;
   showPasswordModal = false;
   passwordsDoNotMatch: boolean = false;  // Flag to check password match
+  oldPasswordDoesNotMatch: boolean = false;  // Flag to check password match
+
 
   constructor(private infoService: InfoService,
               private fb: FormBuilder) {}
@@ -142,9 +143,13 @@ export class InfoComponent implements OnInit {
           }
         },
         error: (err: any) => {
-          // If there is an error, show failure alert
           console.error('Error changing password:', err);
-          alert('Error changing password!' + err);
+
+          // Check if error response exists and contains a message
+          const errorMessage = err?.error?.message || 'An unexpected error occurred';
+
+          this.oldPasswordDoesNotMatch = true;
+          return;
         }
       });
     }
