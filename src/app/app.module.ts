@@ -30,7 +30,21 @@ import {DrawerNavbarProviderComponent} from './components/drawers/drawer-navbar-
 import {DrawerNavbarGuestComponent} from './components/drawers/drawer-navbar-guest/drawer-navbar-guest.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {OfferingsModule} from './offerings/offerings.module';
-
+import { OrganizerProfileComponent} from './components/profiles/organizer-profile/organizer-profile.component';
+import {InfoComponent} from './components/profiles/organizer-profile/info/info.component';
+import {LinesComponent} from './components/decorations/lines/lines.component';
+import {
+  UpcomingEventsComponent
+} from './components/profiles/organizer-profile/upcoming-events/upcoming-events.component';
+import {
+  FavoriteEventsComponent
+} from './components/profiles/organizer-profile/favorite-events/favorite-events.component';
+import {
+  FavoriteSolutionsComponent
+} from './components/profiles/organizer-profile/favorite-solutions/favorite-solutions.component';
+import {
+  OccupancyCalendarComponent
+} from './components/profiles/organizer-profile/occupancy-calendar/occupancy-calendar.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +70,14 @@ import {OfferingsModule} from './offerings/offerings.module';
     RegistrationSppComponent,
     ActivationComponent,
     SuccessfulComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    OrganizerProfileComponent,
+    InfoComponent,
+    LinesComponent,
+    UpcomingEventsComponent,
+    FavoriteEventsComponent,
+    FavoriteSolutionsComponent,
+    OccupancyCalendarComponent
   ],
   imports: [
     BrowserModule,
