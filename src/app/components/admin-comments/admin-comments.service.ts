@@ -1,20 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface CommentModel {
-  id: number;
-  content: string;
-  rating: number;
-  date: string;
-  status: string;
-  commenterId: number;
-  commenterFirstName: string;
-  commenterLastName: string;
-  commenterProfilePicture: string;
-  solution: string;
-  solutionProvider: string;
-}
+import {CommentModel} from '../../interfaces/comment.model';
 
 @Injectable({
   providedIn: 'root'

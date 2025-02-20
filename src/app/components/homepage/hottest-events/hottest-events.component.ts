@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HottestEventsService, EventModel } from './hottest-events.service';
+import { HottestEventsService} from './hottest-events.service';
+import {EventModel} from '../../../interfaces/event.model';
 
 @Component({
   selector: 'app-hottest-events',
