@@ -12,6 +12,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ServiceDetailsComponent implements OnInit {
   service: Service = {id: -1} as Service;
+  role: string | null | undefined;
 
   isPopupOpen: boolean = false;
   reservation = {
@@ -26,6 +27,8 @@ export class ServiceDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.role = localStorage.getItem('role');
+    alert(this.role)
     this.route.params.subscribe(params =>
     {
       const id = +params['id'];

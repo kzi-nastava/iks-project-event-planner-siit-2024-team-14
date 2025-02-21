@@ -51,7 +51,9 @@
   </dl>
 </article>
 
-<button (click)="openReservationPopup()">Book Service</button>
+<button *ngIf="role === 'EventOrganizer'" (click)="openReservationPopup()">Book Service</button>
+
+
 <div class="modal" [class.show]="isPopupOpen">
   <div class="modal-content">
     <span class="close" (click)="closeReservationPopup()">&times;</span>
