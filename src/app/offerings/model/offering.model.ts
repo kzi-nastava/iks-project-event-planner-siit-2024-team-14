@@ -6,7 +6,7 @@ import {BaseEntity} from './base-entity.model';
  * to display quick information cards for services/products in the application UI.
  */
 export interface Offering extends BaseEntity {
-  name: string;
+  name?: string;
   description?: string;
   coverImageURL?: string;
 }

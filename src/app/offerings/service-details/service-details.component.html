@@ -1,9 +1,6 @@
 <article>
-  <h2> {{ service.name }} </h2>
-  <p> {{ service.description }} </p>
-
-  <br/>
-
+  <h2>{{ service.name }} </h2>
+  <p>{{ service.description }} </p>
   <dl>
     <dt>Category:</dt>
     <dd>
@@ -12,9 +9,6 @@
         {{ service.category.description }}
       </details>
     </dd>
-
-    <dt>Specificities:</dt>
-    <dd> {{ service.specificities }} </dd>
 
     <dt>Applicable event types:</dt>
     <dd>
@@ -29,7 +23,7 @@
         {{ service.price | currency }}
       </span>
       <b *ngIf="service.discount > 0">
-        {{ service.price * (1 - service.discount) | currency}} ({{ service.discount | percent }} off)
+        {{ service.price * (100 - service.discount) / 100  | currency}} ({{ service.discount }}% off)
       </b>
     </dd>
 
@@ -37,12 +31,12 @@
     <dd>
       Reservations for this service must be made {{ service.reservationPeriod }} days in advance, and may be canceled up to {{ service.cancellationPeriod }} days before.
       {{
-        service.sessionDuration ?
-          'Session duration for this service is ' + service.sessionDuration + ' minutes.'
+        service.duration ?
+          'Session duration for this service is ' + service.duration + ' minutes.'
           : 'This service may be reserved for at least ' + service.minDuration + ' minutes, and up to ' + service.maxDuration + ' minutes.'
       }}
       {{
-        service.reservationPolicy === 'manual' ?
+        service.reservationType === 'MANUAL' ?
           'The provider must review reservations before accepting them.'
           : 'Your reservation will be immediately accepted.'
       }}
@@ -51,9 +45,33 @@
     <dt>Provided by:</dt>
     <dd>
       <a [routerLink]="['/users', service.provider.id]">
-        <img [src]="service.provider.profileImage || 'assets/images/logo.png'" alt="{{ service.provider.name | titlecase }} profile image"/>
+        <span>{{ (service.provider.companyName | titlecase) || service.provider.email }}</span>
       </a>
-      <span>{{ (service.provider.name | titlecase) || service.provider.email }}</span>
     </dd>
   </dl>
 </article>
+
+<button *ngIf="role === 'EventOrganizer'" (click)="openReservationPopup()">Book Service</button>
+
+
+<div class="modal" [class.show]="isPopupOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeReservationPopup()">&times;</span>
+    <h2>Book Service: {{ service.name }}</h2>
+
+    <form (ngSubmit)="submitReservation()">
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="reservation.date" name="date" required [min]="minDate">
+
+      <label>Start Time:</label>
+      <input type="time" [(ngModel)]="reservation.startTime" name="startTime" required>
+
+      <label>End Time:</label>
+      <input type="time" [(ngModel)]="reservation.endTime" name="endTime" required>
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+</div>
+
+
