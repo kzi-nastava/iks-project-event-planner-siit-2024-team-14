@@ -6,17 +6,15 @@ export interface Service extends Offering {
   // TODO: Revisit.
   category: Category;
   applicableEventTypes: EventType[];
-
-  specificities: string;
   price: number;
   discount: number;
   imageURLs: string[];
 
-  visibility: 'public' | 'private' | 'pending';
-  reservationPolicy: 'manual' | 'auto';
+  visibility: string;
+  reservationType: string;
   isAvailable: boolean;
 
-  sessionDuration?: number;
+  duration?: number;
   minDuration?: number;
   maxDuration?: number;
   reservationPeriod: number;
