@@ -11,7 +11,6 @@ export class HomeOrganizerComponent implements OnInit {
   isSidebarOpen: boolean = false;
   isNotificationsOpen: boolean = false;
   user: any;
-
   unreadCount: number = 0;
 
   constructor(private notificationService: NotificationService, private userService: HomeOrganizerService) {}
@@ -26,7 +25,7 @@ export class HomeOrganizerComponent implements OnInit {
       });
     }
 
-     const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.user = JSON.parse(storedUser); // Assign to class property
     }
@@ -36,10 +35,7 @@ export class HomeOrganizerComponent implements OnInit {
     } else {
       console.error('User ID not found in localStorage');
     }
-
-
   }
-
   getUserIdFromLocalStorage(): number | null {
     const userIdFromStorage = localStorage.getItem("userId");
     if (userIdFromStorage) {
@@ -58,7 +54,7 @@ export class HomeOrganizerComponent implements OnInit {
     console.log('Sidebar toggled!', this.isSidebarOpen);
   }
   openNotifications() : void {
-    this.isNotificationsOpen = !this.isNotificationsOpen;  
+    this.isNotificationsOpen = !this.isNotificationsOpen;
   }
 
   fetchUserDetails(userId: number): void {
