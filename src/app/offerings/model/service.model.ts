@@ -4,6 +4,7 @@ import { EventType } from './event-type.model';
 
 export interface Service extends Offering {
   // TODO: Revisit.
+  id: number;
   category: Category;
   applicableEventTypes: EventType[];
   price: number;
@@ -14,11 +15,15 @@ export interface Service extends Offering {
   reservationType: string;
   isAvailable: boolean;
 
-  duration?: number;
-  minDuration?: number;
-  maxDuration?: number;
+  duration?: string;
+  minDuration?: string;
+  maxDuration?: string;
   reservationPeriod: number;
   cancellationPeriod: number;
+
+  durationInMinutes: number;
+  minDurationInMinutes: number;
+  maxDurationInMinutes: number;
 
   provider: any;
 }
