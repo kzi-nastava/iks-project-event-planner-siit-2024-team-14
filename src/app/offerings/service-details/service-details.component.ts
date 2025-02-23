@@ -18,17 +18,15 @@ export class ServiceDetailsComponent implements OnInit {
   userEvents: EventModel[] = [];
   selectedEventId: number | null = null;
   availableStartTimes: string[] = [];
-  availableEndTimes: string[] = [];
 
   reservation = {
     serviceId: 0,
     date: '',
     startTime: '',
-    endTime: 0,
+    duration: 0,
     eventId: 0
   };
   minDate: string = '';
-  unavailableTimes: { startTime: string; endTime: string }[] = [];
 
   constructor(private route: ActivatedRoute, private serviceService: ServiceService, private http: HttpClient) { }
 
@@ -46,14 +44,13 @@ export class ServiceDetailsComponent implements OnInit {
         next: service => {
           this.service = service;
           this.reservation.serviceId = service.id;
-          console.log(this.service);
 
           // Convert duration, minDuration, and maxDuration to minutes for calculation
           if (service.duration) {
             const durationInMinutes = this.convertDurationToMinutes(service.duration);
             // You can now use the durationInMinutes for any calculation
             this.service.durationInMinutes = durationInMinutes;
-            this.reservation.endTime = this.service.durationInMinutes;
+            this.reservation.duration = this.service.durationInMinutes;
           }
 
           if (service.minDuration) {
@@ -132,44 +129,27 @@ export class ServiceDetailsComponent implements OnInit {
   }
 
   onDateChange(): void {
+    this.reservation.startTime = '';
     if (this.reservation.date) {
-      this.serviceService.getUnavailableTimes(this.service.id, this.reservation.date).subscribe(bookings => {
-        this.unavailableTimes = bookings.map(b => ({ startTime: b.startTime, endTime: b.endTime }));
-        this.updateAvailableTimes();
-      });
+      let durationParam = this.service.durationInMinutes || null;
+
+      this.serviceService.getAvailableStartTimes(this.service.id, this.reservation.date, durationParam)
+        .subscribe(availableTimes => {
+          this.availableStartTimes = availableTimes;
+        });
     }
   }
 
-  updateAvailableTimes(): void {
-    this.availableStartTimes = [];
-    this.availableEndTimes = [];
-    const startOfDay = new Date(this.reservation.date);
-    startOfDay.setHours(8, 0, 0, 0);
-
-    for (let hour = 8; hour < 18; hour++) {
-      for (let minute = 0; minute < 60; minute += 30) {
-        const startTime = new Date(startOfDay);
-        startTime.setHours(hour, minute);
-
-        const endTime = new Date(startTime);
-        endTime.setMinutes(endTime.getMinutes() + 30);
-
-        const startTimeStr = startTime.toISOString().slice(11, 16);
-        const endTimeStr = endTime.toISOString().slice(11, 16);
-
-        const isUnavailable = this.unavailableTimes.some(u => u.startTime === startTimeStr && u.endTime === endTimeStr);
-        if (!isUnavailable) {
-          this.availableStartTimes.push(startTimeStr);
-          this.availableEndTimes.push(endTimeStr);
-        }
-      }
-    }
+  onDurationChange(): void {
+    let durationParam = this.reservation.duration|| null;
+    this.serviceService.getAvailableStartTimes(this.service.id, this.reservation.date, durationParam)
+      .subscribe(availableTimes => {
+        this.availableStartTimes = availableTimes;
+      });
   }
 
   generateDurationOptions(minDuration: number, maxDuration: number): number[] {
     const options = [];
-
-    // Preporučujemo da pretvorimo min i max duration u minute
     for (let i = minDuration; i <= maxDuration; i += 30) {
       options.push(i);
     }
@@ -177,15 +157,30 @@ export class ServiceDetailsComponent implements OnInit {
     return options;
   }
 
-
   submitReservation(): void {
-    this.http.post('http://localhost:8080/api/services/reserve', this.reservation)
+    // Kreiramo objekat za slanje
+    const bookingRequest = {
+      serviceId: this.reservation.serviceId,
+      eventId: this.reservation.eventId,
+      bookingDate: this.reservation.date,  // Pretpostavljam da je datum u formatu "yyyy-MM-dd"
+      startTime: this.reservation.startTime,  // Formatirano kao string, npr. "08:00"
+      duration: this.reservation.duration  // Pretpostavljam da je duration u minutima, npr. 60
+    };
+
+    // Poslati zahtev
+    this.http.post('http://localhost:8080/api/bookings/reserve', bookingRequest, { responseType: 'text' })
       .subscribe({
         next: response => {
+          console.log(response); // Ovdje proveri kako izgleda raw response
           alert('Service booked successfully!');
           this.closeReservationPopup();
         },
-        error: err => alert('Failed to book service.')
+        error: err => {
+          console.error('Error occurred:', err);
+          alert('Failed to book service.');
+        }
       });
   }
+
+
 }

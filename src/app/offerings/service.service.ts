@@ -21,8 +21,13 @@ export class ServiceService {
     return this.httpClient.get<Service>(this.baseURL + id);
   }
 
-  getUnavailableTimes(serviceId: number, date: string) {
-    return this.httpClient.get<BookingService[]>(`http://localhost:8080/api/bookings/available-times?serviceId=${serviceId}&date=${date}`);
+  getAvailableStartTimes(serviceId: number, date: string, duration: number | null) {
+    let url = `http://localhost:8080/api/bookings/available-start-times?serviceId=${serviceId}&date=${date}`;
+    if (duration !== null) {
+      url += `&duration=${duration}`;
+    }
+    return this.httpClient.get<string[]>(url);
   }
+
 
 }
