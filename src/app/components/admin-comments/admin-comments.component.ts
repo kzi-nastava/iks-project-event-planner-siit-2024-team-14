@@ -8,13 +8,12 @@ import {CommentModel} from '../../interfaces/comment.model';
   styleUrls: ['./admin-comments.component.css']
 })
 export class AdminCommentsComponent implements OnInit {
-  @Input() isCommentsOpen: boolean = false; // Prima stanje otvaranja komentara
+  @Input() isCommentsOpen: boolean = false;
   comments: CommentModel[] = [];
 
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {
-    // Dohvati sve komentare sa statusom 'pending'
     this.loadPendingComments();
   }
 
@@ -25,29 +24,25 @@ export class AdminCommentsComponent implements OnInit {
     });
   }
 
-  // Kreiranje niza zvezdica prema ratingu komentara
   createStarsArray(rating: number): number[] {
-    return new Array(rating).fill(0); // Vraća niz sa toliko elemenata koliko je ocena
+    return new Array(rating).fill(0);
   }
 
-  // Odobravanje komentara
   approveComment(comment: CommentModel) {
     this.commentService.approveCommentStatus(comment.id, 'accepted').subscribe(() => {
-      comment.status = 'accepted';  // Promeni status na frontu
+      comment.status = 'accepted';
       alert('Comment approved!');
     });
 
   }
 
-  // Brisanje komentara (logičko brisanje)
   deleteComment(comment: CommentModel) {
     this.commentService.deleteCommentStatus(comment.id, 'deleted').subscribe(() => {
-      comment.status = 'deleted';  // Promeni status na frontu
+      comment.status = 'deleted';
       alert('Comment deleted!');
     });
   }
 
-  // Metoda za zatvaranje komentara
   closeComments() {
     this.isCommentsOpen = false;
   }
