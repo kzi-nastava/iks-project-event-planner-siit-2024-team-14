@@ -4,23 +4,26 @@ import { EventType } from './event-type.model';
 
 export interface Service extends Offering {
   // TODO: Revisit.
+  id: number;
   category: Category;
   applicableEventTypes: EventType[];
-
-  specificities: string;
   price: number;
   discount: number;
   imageURLs: string[];
 
-  visibility: 'public' | 'private' | 'pending';
-  reservationPolicy: 'manual' | 'auto';
+  visibility: string;
+  reservationType: string;
   isAvailable: boolean;
 
-  sessionDuration?: number;
-  minDuration?: number;
-  maxDuration?: number;
+  duration?: string;
+  minDuration?: string;
+  maxDuration?: string;
   reservationPeriod: number;
   cancellationPeriod: number;
+
+  durationInMinutes: number;
+  minDurationInMinutes: number;
+  maxDurationInMinutes: number;
 
   provider: any;
 }

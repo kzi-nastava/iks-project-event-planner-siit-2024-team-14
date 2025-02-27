@@ -3,6 +3,8 @@ article {
   margin: 20px auto;
   padding: 20px;
   border-radius: 8px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -81,4 +83,90 @@ img {
 span {
   vertical-align: middle;
   font-weight: bold;
+}
+
+/* Poboljšan stil za modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 450px; /* Povećana širina modala */
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  overflow-y: auto; /* Dodato za scroll ako je sadržaj veći */
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #523D35;
+}
+
+h2 {
+  color: #523D35;
+  margin-bottom: 20px;
+  font-size: 22px; /* Povećana veličina fonta */
+}
+
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+  text-align: left;
+  color: #444;
+  font-size: 16px; /* Uvećana veličina fonta za bolje čitanje */
+}
+
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button {
+  background-color: #523D35;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-size: 18px; /* Povećana veličina fonta */
+  cursor: pointer;
+  transition: 0.3s;
+  width: 50%; /* Povećana širina dugmeta */
+  display: block;
+  margin: 20px auto 0;
+}
+
+button:hover {
+  background-color: #3e2b24;
+}
+
+/* Dodato za marginu ispod forme */
+form {
+  display: flex;
+  flex-direction: column;
 }

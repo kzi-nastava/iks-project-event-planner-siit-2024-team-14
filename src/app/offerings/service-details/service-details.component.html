@@ -1,9 +1,6 @@
 <article>
-  <h2> {{ service.name }} </h2>
-  <p> {{ service.description }} </p>
-
-  <br/>
-
+  <h2>{{ service.name }} </h2>
+  <p>{{ service.description }} </p>
   <dl>
     <dt>Category:</dt>
     <dd>
@@ -12,9 +9,6 @@
         {{ service.category.description }}
       </details>
     </dd>
-
-    <dt>Specificities:</dt>
-    <dd> {{ service.specificities }} </dd>
 
     <dt>Applicable event types:</dt>
     <dd>
@@ -29,7 +23,7 @@
         {{ service.price | currency }}
       </span>
       <b *ngIf="service.discount > 0">
-        {{ service.price * (1 - service.discount) | currency}} ({{ service.discount | percent }} off)
+        {{ service.price * (100 - service.discount) / 100  | currency}} ({{ service.discount }}% off)
       </b>
     </dd>
 
@@ -37,23 +31,63 @@
     <dd>
       Reservations for this service must be made {{ service.reservationPeriod }} days in advance, and may be canceled up to {{ service.cancellationPeriod }} days before.
       {{
-        service.sessionDuration ?
-          'Session duration for this service is ' + service.sessionDuration + ' minutes.'
-          : 'This service may be reserved for at least ' + service.minDuration + ' minutes, and up to ' + service.maxDuration + ' minutes.'
+        service.duration ?
+          'Session duration for this service is ' + service.durationInMinutes + ' minutes.'
+          : service.minDurationInMinutes && service.maxDurationInMinutes ?
+            'This service may be reserved for at least ' + service.minDurationInMinutes + ' minutes, and up to ' + service.maxDurationInMinutes + ' minutes.'
+            : 'No duration information available.'
       }}
       {{
-        service.reservationPolicy === 'manual' ?
+        service.reservationType === 'MANUAL' ?
           'The provider must review reservations before accepting them.'
           : 'Your reservation will be immediately accepted.'
       }}
     </dd>
 
+
     <dt>Provided by:</dt>
     <dd>
       <a [routerLink]="['/users', service.provider.id]">
-        <img [src]="service.provider.profileImage || 'assets/images/logo.png'" alt="{{ service.provider.name | titlecase }} profile image"/>
+        <span>{{ (service.provider.companyName | titlecase) || service.provider.email }}</span>
       </a>
-      <span>{{ (service.provider.name | titlecase) || service.provider.email }}</span>
     </dd>
   </dl>
 </article>
+
+
+<button *ngIf="role === 'EventOrganizer'" (click)="openReservationPopup()" class="open-popup-btn">
+  Book Service
+</button>
+<div class="modal" [class.show]="isPopupOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeReservationPopup()">&times;</span>
+    <h2>Book Service: {{ service?.name }}</h2>
+
+    <form (ngSubmit)="submitReservation()">
+      <label for="event">Select Event:</label>
+      <select id="event" [(ngModel)]="selectedEventId" name="event" required (change)="onEventChange()">
+        <option *ngFor="let event of userEvents" [value]="event.id">{{ event.name }}</option>
+      </select>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" [(ngModel)]="reservation.date" name="date" required readonly>
+
+      <label for="endTime" *ngIf="service.durationInMinutes != null">Duration:</label>
+      <input *ngIf="service.durationInMinutes" id="duration" type="number" [(ngModel)]="reservation.duration" [min]="service.durationInMinutes" [max]="service.durationInMinutes" name="endTime" required readonly> minutes
+
+      <label for="endTime" *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes">Select Duration:</label>
+      <select *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes" id="endTime" [(ngModel)]="reservation.duration" name="endTime" required (change)="onDurationChange()">
+        <option *ngFor="let time of generateDurationOptions(service.minDurationInMinutes, service.maxDurationInMinutes)" [value]="time">{{ time }} minutes</option>
+      </select>
+
+      <label for="startTime">Start Time:</label>
+      <!-- Onemogućujemo startTime dok trajanje nije izabrano -->
+      <select id="startTime" [(ngModel)]="reservation.startTime" name="startTime" [disabled]="!reservation.duration" required>
+        <option *ngFor="let time of availableStartTimes" [value]="time">{{ time }}</option>
+      </select>
+
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+</div>

@@ -1,11 +1,13 @@
 <div class="profile-container">
-  <div class="profile-photo-container">
+  <div class="profile-photo-container" >
       <img [src]="getProfilePhotoUrl()"
            alt="Profile photo"
            class="profile-photo">
-    <button class="edit-button">
+    <button class="edit-button" (click)="openFileInput()">
       <i class="fa fa-pencil"></i> Edit profile photo
     </button>
+      <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
+
   </div>
 
   <div class="profile-info">

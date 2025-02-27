@@ -68,12 +68,18 @@ export class NotificationsComponent implements OnInit {
   }
 
   closeNotifications(): void {
-    this.isNotificationsOpen = false;
     if (this.userId !== null) {
       this.notificationService.markAllAsRead(this.userId).subscribe(() => {
         this.notifications.forEach(notification => notification.isRead = true);
+
+        // Ažuriramo broj nepročitanih, ali samo ako userId postoji
+        if (this.userId !== null) {
+          this.notificationService.loadUnreadNotificationsCount(this.userId);
+        }
       }, error => console.error('Error during changing read status', error));
     }
+    this.isNotificationsOpen = false;
   }
+
 
 }
