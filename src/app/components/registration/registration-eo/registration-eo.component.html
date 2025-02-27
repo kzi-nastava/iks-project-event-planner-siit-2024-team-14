@@ -113,6 +113,8 @@
 <!-- Success Modal -->
 <app-successful
   *ngIf="showModal"
-  [message]="'Now you need to activate your account via email. After that, log in and enjoy!'"
+  [isVisible]="showModal"
+  [modalTitle]="modalTitle"
+  [message]="modalMessage"
   (close)="closeModal()"
 ></app-successful>

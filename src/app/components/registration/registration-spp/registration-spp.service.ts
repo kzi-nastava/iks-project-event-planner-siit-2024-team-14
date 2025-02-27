@@ -12,10 +12,7 @@ export class RegistrationSppService {
 
   constructor(private http: HttpClient) {}
 
-  register(data: RegistrationSpp): Observable<any> {
-    return this.http.post(this.apiUrl, data, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true  // This sends credentials (cookies, etc.)
-    });
+  register(formData: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, formData);
   }
 }

@@ -90,7 +90,8 @@
 
               <!-- Photo -->
               <div class="form-group">
-                <input id="photo" formControlName="photo" type="file" accept="image/*" />
+                <input id="photo" formControlName="file" type="file" accept="image/*" (change)="onFilesSelected($event)" multiple />
+                <p *ngIf="selectedFiles.length > 0">Selected files: {{ selectedFiles.length }} of 3</p>
               </div>
 
               <!-- Submit Button -->
@@ -112,6 +113,8 @@
 <!-- Success Modal -->
 <app-successful
   *ngIf="showModal"
-  [message]="'Now you need to activate your account via email. After that, log in and enjoy!'"
+  [isVisible]="showModal"
+  [modalTitle]="modalTitle"
+  [message]="modalMessage"
   (close)="closeModal()"
 ></app-successful>

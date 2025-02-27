@@ -14,6 +14,6 @@ export class RegistrationEoService {
   constructor(private http: HttpClient) { }
 
   register(formData: FormData): Observable<any> {
-    return this.http.post(this.apiUrl, formData); // Ensure the backend supports multipart/form-data
+    return this.http.post(this.apiUrl, formData);
   }
 }
