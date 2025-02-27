@@ -10,11 +10,14 @@ import {RegistrationSpp} from '../../../interfaces/registration-spp.model';
   styleUrls: ['./registration-spp.component.css']
 })
 export class RegistrationSppComponent {
+  showModal = false;
+  modalTitle: string = 'Registration in progress...';  // Default title
+  modalMessage: string = 'Please wait while we process your registration.';
+  showOkButton = false;
+  selectedFile: File | null = null;
 
-  showModal = false; // Controls modal visibility
-
-  constructor(
-    private registrationService: RegistrationSppService, private router: Router) {}
+  constructor(private registrationService: RegistrationSppService,
+              private router: Router) {}
 
   registrationForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -25,16 +28,28 @@ export class RegistrationSppComponent {
     address: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
-    photo: new FormControl(null)
+    photos: new FormControl(null)
   })
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
   register() {
-    console.log('Form Submitted');
-    console.log(this.registrationForm.value);  // Logs the current form data
+    console.log(this.registrationForm.value);
 
     if (this.registrationForm.valid) {
-      console.log('Valid form');
-      const registrationData: RegistrationSpp = {
+      this.modalMessage = "Loading...";
+      this.showModal = true;
+      this.showOkButton = false;
+      this.modalTitle = 'Registration in progress...';
+      this.modalMessage = 'Please wait while we process your registration.';
+
+      const formData = new FormData();
+      const dto = {
         email: this.registrationForm.value.email || '',
         password: this.registrationForm.value.password || '',
         confirmPassword: this.registrationForm.value.confirmPassword || '',
@@ -42,12 +57,18 @@ export class RegistrationSppComponent {
         companyDescription: this.registrationForm.value.companyDescription || '',
         address: this.registrationForm.value.address || '',
         city: this.registrationForm.value.city || '',
-        phoneNumber: Number(this.registrationForm.value.phoneNumber) || 0,
-        photo: this.registrationForm.value.photo || null
+        phoneNumber: this.registrationForm.value.phoneNumber || ''
       };
 
-      console.log('Before subscribe');
-      this.registrationService.register(registrationData).subscribe({
+      formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
+
+      if (this.selectedFile) {
+        const email = this.registrationForm.value.email || '';
+        const filename = `${email}.png`; // Name the file based on email
+        formData.append('photo', this.selectedFile, filename);
+      }
+
+      this.registrationService.register(formData).subscribe({
         next: (response: any) => {
           console.log('Registration successful: ', response);
           this.showModal = true;  // Show the success modal

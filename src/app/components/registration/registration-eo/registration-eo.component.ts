@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import {FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors, FormControl} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrationEoService } from './registration-eo.service';
-import {RegistrationEo} from '../../../interfaces/registration-eo.model';
 
 @Component({
   selector: 'app-registration-eo',
@@ -11,10 +10,12 @@ import {RegistrationEo} from '../../../interfaces/registration-eo.model';
 })
 export class RegistrationEoComponent {
   showModal = false;
+  modalTitle: string = 'Registration in progress...';  // Default title
+  modalMessage: string = 'Please wait while we process your registration.';
+  showOkButton = false;
   selectedFile: File | null = null;
 
-  constructor(
-    private registrationService: RegistrationEoService, private router: Router) {}
+  constructor(private registrationService: RegistrationEoService, private router: Router) {}
 
   registrationForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -25,8 +26,8 @@ export class RegistrationEoComponent {
     address: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
-    photo: new FormControl(null)
-  })
+    photo: new FormControl(null)  // Optional photo control
+  });
 
   // Handle file selection
   onFileSelected(event: any) {
@@ -37,14 +38,16 @@ export class RegistrationEoComponent {
   }
 
   register() {
-    console.log('Form Submitted');
-    console.log(this.registrationForm.value);  // Logs the current form data
+    console.log(this.registrationForm.value);
 
     if (this.registrationForm.valid) {
-      console.log('Valid form');
-      const formData = new FormData();
+      // Show loading modal
+      this.modalMessage = "Loading...";
+      this.showModal = true;
+      this.showOkButton = false;
+      this.modalTitle = 'Registration in progress...';
 
-      // Prepare dto as JSON string and append it as a part
+      const formData = new FormData();
       const dto = {
         email: this.registrationForm.value.email || '',
         password: this.registrationForm.value.password || '',
@@ -56,23 +59,26 @@ export class RegistrationEoComponent {
         phoneNumber: this.registrationForm.value.phoneNumber || ''
       };
 
+      // Append form data
       formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
 
-      // Append the photo file as 'photo'
+      // Append photo if available (optional)
       if (this.selectedFile) {
         const email = this.registrationForm.value.email || '';
-        const filename = `${email}.png`; // Name the file based on email
+        const filename = `${email}.png`;  // Use email as the filename
         formData.append('photo', this.selectedFile, filename);
       }
 
-      // Send form data to backend
+      // Call the registration service
       this.registrationService.register(formData).subscribe({
         next: (response: any) => {
           console.log('Registration successful: ', response);
-          this.showModal = true;
+          this.modalTitle = 'Registration Successful';
+          this.modalMessage = "Now you need to activate your account via email. After that, log in and enjoy!";
+          this.showOkButton = true;  // Show "OK" button when registration is successful
         },
         error: (err) => {
-          if (err.status === 409) {  // HTTP status for duplicate email
+          if (err.status === 409) {
             alert('User with that email address already exists');
           } else {
             alert('Registration failed. Please check your credentials.');
@@ -84,8 +90,7 @@ export class RegistrationEoComponent {
     }
   }
 
-
   closeModal() {
-    this.showModal = false; // Close modal (handled by SuccessfulComponent)
+    this.showModal = false;  // Close modal when OK is clicked
   }
 }

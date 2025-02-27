@@ -1,6 +1,6 @@
-<div class="modal">
+<div class="modal-overlay" *ngIf="isVisible">
   <div class="modal-content">
-    <h2>Successful registration</h2>
+    <h2>{{ modalTitle }}</h2>
     <p>{{ message }}</p>
     <button (click)="closeModal()">OK</button>
   </div>
