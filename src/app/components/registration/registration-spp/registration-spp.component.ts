@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrationSppService } from './registration-spp.service';
-import {RegistrationSpp} from '../../../interfaces/registration-spp.model';
+import { RegistrationSpp } from '../../../interfaces/registration-spp.model';
 
 @Component({
   selector: 'app-registration-spp',
@@ -14,7 +14,7 @@ export class RegistrationSppComponent {
   modalTitle: string = 'Registration in progress...';  // Default title
   modalMessage: string = 'Please wait while we process your registration.';
   showOkButton = false;
-  selectedFile: File | null = null;
+  selectedFiles: File[] = [];
 
   constructor(private registrationService: RegistrationSppService,
               private router: Router) {}
@@ -29,12 +29,21 @@ export class RegistrationSppComponent {
     city: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
     photos: new FormControl(null)
-  })
+  });
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
+  onFilesSelected(event: any) {
+    const files: FileList = event.target.files;
+
+    const totalSelectedFiles = files.length + this.selectedFiles.length;
+
+    if (totalSelectedFiles > 3) {
+      alert('You can select a maximum of 3 photos.');
+      const filesToAdd = Array.from(files).slice(0, 3 - this.selectedFiles.length);
+      this.selectedFiles.push(...filesToAdd);
+    } else {
+      for (let i = 0; i < files.length; i++) {
+        this.selectedFiles.push(files[i]);
+      }
     }
   }
 
@@ -62,16 +71,18 @@ export class RegistrationSppComponent {
 
       formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
 
-      if (this.selectedFile) {
+      this.selectedFiles.forEach(file => {
         const email = this.registrationForm.value.email || '';
-        const filename = `${email}.png`; // Name the file based on email
-        formData.append('photo', this.selectedFile, filename);
-      }
+        const filename = `${email}-${file.name}`; // Name the file based on email
+        formData.append('photos', file, filename);
+      });
 
       this.registrationService.register(formData).subscribe({
         next: (response: any) => {
           console.log('Registration successful: ', response);
-          this.showModal = true;  // Show the success modal
+          this.modalTitle = 'Registration Successful';
+          this.modalMessage = "Now you need to activate your account via email. After that, log in and enjoy!";
+          this.showOkButton = true;
         },
         error: (err) => {
           if (err.status === 409) {  // Assuming 409 is the HTTP status for duplicate email
@@ -87,7 +98,6 @@ export class RegistrationSppComponent {
   }
 
   closeModal() {
-    this.showModal = false; // Close modal (handled by SuccessfulComponent)
+    this.showModal = false;
   }
-
 }

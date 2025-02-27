@@ -41,7 +41,6 @@ export class RegistrationEoComponent {
     console.log(this.registrationForm.value);
 
     if (this.registrationForm.valid) {
-      // Show loading modal
       this.modalMessage = "Loading...";
       this.showModal = true;
       this.showOkButton = false;
@@ -59,23 +58,20 @@ export class RegistrationEoComponent {
         phoneNumber: this.registrationForm.value.phoneNumber || ''
       };
 
-      // Append form data
       formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
 
-      // Append photo if available (optional)
       if (this.selectedFile) {
         const email = this.registrationForm.value.email || '';
-        const filename = `${email}.png`;  // Use email as the filename
+        const filename = `${email}.png`;
         formData.append('photo', this.selectedFile, filename);
       }
 
-      // Call the registration service
       this.registrationService.register(formData).subscribe({
         next: (response: any) => {
           console.log('Registration successful: ', response);
           this.modalTitle = 'Registration Successful';
           this.modalMessage = "Now you need to activate your account via email. After that, log in and enjoy!";
-          this.showOkButton = true;  // Show "OK" button when registration is successful
+          this.showOkButton = true;
         },
         error: (err) => {
           if (err.status === 409) {
