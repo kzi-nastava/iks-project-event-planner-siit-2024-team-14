@@ -45,6 +45,9 @@ import {
 import {
   OccupancyCalendarComponent
 } from './components/profiles/organizer-profile/occupancy-calendar/occupancy-calendar.component';
+import {
+  BookingServiceRequestsComponent
+} from './components/booking-service-requests/booking-service-requests.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import {
     DrawerNavbarProviderComponent,
     DrawerNavbarGuestComponent,
     AdminCommentsComponent,
+    BookingServiceRequestsComponent,
     HottestEventsComponent,
     HottestServicesComponent,
     OurSevicesComponent,

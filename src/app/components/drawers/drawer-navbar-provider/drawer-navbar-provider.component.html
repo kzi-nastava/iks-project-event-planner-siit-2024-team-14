@@ -5,10 +5,13 @@
     <li>Bookings</li>
     <li>Reviews and ratings</li>
     <li>Categories</li>
-    <li (click)="toggleNotificationsSidebar()">Notifications</li> <!-- Izmena -->
+    <li (click)="toggleBookingRequestsSidebar()">Booking service requests</li>
+
+    <li (click)="toggleNotificationsSidebar()">Notifications</li>
     <li>Messages</li>
     <li>Log out</li>
   </ul>
 </div>
 
 <app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+<app-booking-service-requests [isBookingRequestsOpen] = "isBookingRequestsOpen"></app-booking-service-requests>

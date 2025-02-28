@@ -29,7 +29,7 @@
 
     <dt>Reservation details:</dt>
     <dd>
-      Reservations for this service must be made {{ service.reservationPeriod }} days in advance, and may be canceled up to {{ service.cancellationPeriod }} days before.
+      Reservations for this service must be made {{ service.reservationPeriodInDays }} days in advance, and may be canceled up to {{ service.cancellationPeriodInDays }} days before.
       {{
         service.duration ?
           'Session duration for this service is ' + service.durationInMinutes + ' minutes.'

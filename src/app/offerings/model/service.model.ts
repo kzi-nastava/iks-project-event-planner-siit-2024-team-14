@@ -18,12 +18,14 @@ export interface Service extends Offering {
   duration?: string;
   minDuration?: string;
   maxDuration?: string;
-  reservationPeriod: number;
-  cancellationPeriod: number;
+  reservationPeriod: string;
+  cancellationPeriod: string;
 
   durationInMinutes: number;
   minDurationInMinutes: number;
   maxDurationInMinutes: number;
+  reservationPeriodInDays: number;
+  cancellationPeriodInDays: number;
 
   provider: any;
 }
