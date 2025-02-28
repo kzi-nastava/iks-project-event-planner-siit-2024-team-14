@@ -7,7 +7,7 @@ import {EventModel} from '../../../interfaces/event.model';
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = 'http://localhost:8080/api/events/all?city=Novi%20Sad';
+  private apiUrl = 'http://localhost:8080/api/events/all';
   private filterUrl = 'http://localhost:8080/api/events/filter';
 
   constructor(private http: HttpClient) {}

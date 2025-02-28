@@ -3,7 +3,7 @@ import { EventService } from './our-events.service';
 import {HttpParams} from '@angular/common/http';
 
 @Component({
-  selector: 'app-our-events',
+  selector: 'app-all-events',
   templateUrl: './our-events.component.html',
   styleUrls: ['./our-events.component.css']
 })
