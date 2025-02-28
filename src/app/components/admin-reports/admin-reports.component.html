@@ -1,0 +1,29 @@
+<!-- Comments & Reviews Sidebar -->
+<div class="sidebar reports-sidebar" [class.open]="isReportsOpen">
+  <div class="sidebar-header">
+    <h2>User reports</h2>
+    <button class="close-sidebar" (click)="closeReports()">&times;</button>
+  </div>
+
+  <div class="cards-container">
+    <div *ngFor="let report of reports">
+      <div class="card" *ngIf="report.status === 'pending'">
+
+        <div class="report-details">
+          <p><strong>Reported User:</strong> {{ report.reportedUserName }}</p>
+          <p><strong>Reason:</strong> {{ report.reason }}</p>
+          <p><strong>Blocker:</strong> {{ report.blockerName }}</p>
+          <p><strong>Status:</strong> {{ report.status | uppercase }}</p>
+        </div>
+
+        <div class="actions">
+          <button class="approve-btn" (click)="approveReport(report)">✔ Approve</button>
+          <button class="delete-btn" (click)="deleteReport(report)">🗑 Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay for Comments & Reviews -->
+<div class="overlay" *ngIf="isReportsOpen" (click)="closeReports()"></div>

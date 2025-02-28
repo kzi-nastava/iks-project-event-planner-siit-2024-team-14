@@ -49,6 +49,7 @@ import {
   BookingServiceRequestsComponent
 } from './components/booking-service-requests/booking-service-requests.component';
 import {AllBookingsProviderComponent} from './components/all-bookings-provider/all-bookings-provider.component';
+import {AdminReportsComponent} from './components/admin-reports/admin-reports.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {AllBookingsProviderComponent} from './components/all-bookings-provider/a
     DrawerNavbarProviderComponent,
     DrawerNavbarGuestComponent,
     AdminCommentsComponent,
+    AdminReportsComponent,
     BookingServiceRequestsComponent,
     AllBookingsProviderComponent,
     HottestEventsComponent,
