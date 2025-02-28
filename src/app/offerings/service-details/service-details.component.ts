@@ -111,7 +111,6 @@ export class ServiceDetailsComponent implements OnInit {
     const minAllowedDate = new Date();
     minAllowedDate.setDate(today.getDate() + reservationPeriodInDays);
 
-    alert(today)
     if (eventStartDate < today) {
       this.resetReservation('This event has already ended.');
     } else if (eventStartDate < minAllowedDate) {
@@ -158,10 +157,12 @@ export class ServiceDetailsComponent implements OnInit {
       reservationType: this.reservation.reservationType
     };
 
+    this.closeReservationPopup();
+
+
     this.http.post('http://localhost:8080/api/bookings/reserve', bookingRequest, { responseType: 'text' })
       .subscribe({
         next: () => {
-          this.closeReservationPopup();
           alert('Service booked successfully!');
           this.resetReservationForm();
         },

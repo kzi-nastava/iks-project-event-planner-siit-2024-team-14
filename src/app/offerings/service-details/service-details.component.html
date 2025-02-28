@@ -73,15 +73,14 @@
       <input type="date" id="date" [(ngModel)]="reservation.date" name="date" required readonly>
 
       <label for="endTime" *ngIf="service.durationInMinutes != null">Duration:</label>
-      <input *ngIf="service.durationInMinutes" id="duration" type="number" [(ngModel)]="reservation.duration" [min]="service.durationInMinutes" [max]="service.durationInMinutes" name="endTime" required readonly> minutes
+      <input *ngIf="service.durationInMinutes" id="duration" type="number" [(ngModel)]="reservation.duration" [min]="service.durationInMinutes" [max]="service.durationInMinutes" name="endTime" required readonly>
 
-      <label for="endTime" *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes">Select Duration:</label>
+      <label for="endTime" *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes"></label>
       <select *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes" id="endTime" [(ngModel)]="reservation.duration" name="endTime" required (change)="onDurationChange()">
         <option *ngFor="let time of generateDurationOptions(service.minDurationInMinutes, service.maxDurationInMinutes)" [value]="time">{{ time }} minutes</option>
       </select>
 
       <label for="startTime">Start Time:</label>
-      <!-- Onemogućujemo startTime dok trajanje nije izabrano -->
       <select id="startTime" [(ngModel)]="reservation.startTime" name="startTime" [disabled]="!reservation.duration" required>
         <option *ngFor="let time of availableStartTimes" [value]="time">{{ time }}</option>
       </select>
