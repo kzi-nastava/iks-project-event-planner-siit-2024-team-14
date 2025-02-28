@@ -61,7 +61,7 @@
 <div class="modal" [class.show]="isPopupOpen">
   <div class="modal-content">
     <span class="close" (click)="closeReservationPopup()">&times;</span>
-    <h2>Book Service: {{ service.name }}</h2>
+    <h2>Book Service: {{ service?.name }}</h2>
 
     <form (ngSubmit)="submitReservation()">
       <label for="event">Select Event:</label>

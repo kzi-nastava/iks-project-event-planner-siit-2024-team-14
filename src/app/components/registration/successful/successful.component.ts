@@ -7,13 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./successful.component.css']
 })
 export class SuccessfulComponent {
-  @Input() message: string = 'Operation Successful'; // Default message
-  @Output() close = new EventEmitter<void>(); // Event when user clicks OK
+  @Input() message: string = 'Operation Successful';
+  @Output() close = new EventEmitter<void>();
+  @Input() modalTitle: string = 'Registration';
+  @Input() isVisible: boolean = false;
 
   constructor(private router: Router) {}
 
   closeModal() {
-    this.close.emit(); // Notify parent component
-    this.router.navigate(['login']); // Redirect to login
+    this.close.emit();
+    this.router.navigate(['login']);
   }
 }
