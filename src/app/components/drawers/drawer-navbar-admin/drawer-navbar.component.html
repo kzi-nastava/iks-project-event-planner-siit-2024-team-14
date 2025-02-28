@@ -5,7 +5,7 @@
     <li>User Management</li>
     <li>Event Types</li>
     <li>Categories</li>
-    <li (click)="toggleCommentsSidebar()">Comments & Reviews</li> <!-- Izmena -->
+    <li (click)="toggleCommentsSidebar()">Comments & reviews requests</li>
     <li>Reports</li>
     <li (click)="toggleNotificationsSidebar()">Notifications</li>
     <li>Profile</li>
@@ -14,5 +14,5 @@
 </div>
 
 <!-- Comments Sidebar -->
-<app-admin-comments [isCommentsOpen]="isCommentsOpen"></app-admin-comments>  <!-- Prosleđivanje stanja -->
+<app-admin-comments [isCommentsOpen]="isCommentsOpen"></app-admin-comments>
 <app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
