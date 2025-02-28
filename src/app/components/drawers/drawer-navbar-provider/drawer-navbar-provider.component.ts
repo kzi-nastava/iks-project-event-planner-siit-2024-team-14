@@ -13,6 +13,9 @@ export class DrawerNavbarProviderComponent {
   isBookingRequestsOpen = false;
   @Output() toggleBookingRequests = new EventEmitter<boolean>();
 
+  isBookingsOpen = false;
+  @Output() toggleBookings = new EventEmitter<boolean>();
+
   toggleNotificationsSidebar() {
     this.isNotificationsOpen = !this.isNotificationsOpen;
     this.toggleNotifications.emit(this.isNotificationsOpen);
@@ -21,5 +24,10 @@ export class DrawerNavbarProviderComponent {
   toggleBookingRequestsSidebar() {
     this.isBookingRequestsOpen = !this.isBookingRequestsOpen;
     this.toggleBookingRequests.emit(this.isBookingRequestsOpen);
+  }
+
+  toggleBookingsSidebar() {
+    this.isBookingsOpen = !this.isBookingsOpen;
+    this.toggleBookings.emit(this.isBookingsOpen);
   }
 }

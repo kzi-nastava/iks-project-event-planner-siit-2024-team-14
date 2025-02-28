@@ -1,9 +1,9 @@
 export interface BookingServiceRequestModel{
-  id: number
+  id: number;
+  service: String;
+  event: String;
   bookingDate: string;
   confirmed: string;
   startTime: string;
   duration: number;
-  service: number;
-  event: number;
 }
