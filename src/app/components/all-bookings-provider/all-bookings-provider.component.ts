@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {AllBookingsProviderService} from './all-bookings-provider.service';
-import {BookingServiceRequestModel} from '../../interfaces/booking-service-request.model';
-
+import { AllBookingsProviderService } from './all-bookings-provider.service';
+import { BookingServiceRequestModel } from '../../interfaces/booking-service-request.model';
 
 @Component({
   selector: 'app-all-bookings-provider',
@@ -15,11 +14,8 @@ export class AllBookingsProviderComponent implements OnInit {
   constructor(private allBookingsProviderService: AllBookingsProviderService) {}
 
   ngOnInit(): void {
-    this.loadAll();
-  }
-
-  loadAll() {
-    this.allBookingsProviderService.getAllBookings().subscribe((bookings) => {
+    this.allBookingsProviderService.loadAllBookings();
+    this.allBookingsProviderService.bookings$.subscribe((bookings) => {
       this.bookings = bookings;
     });
   }
@@ -40,5 +36,4 @@ export class AllBookingsProviderComponent implements OnInit {
         return '';
     }
   }
-
 }
