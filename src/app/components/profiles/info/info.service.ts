@@ -32,4 +32,7 @@ export class InfoService {
     return this.http.get<string[]>(`http://localhost:8080/api/providers/get-photos/${id}`);
   }
 
+  changePhoto(data: FormData, id: number, photoIndex: number): Observable<any> {
+    return this.http.put<any>(`http://localhost:8080/api/providers/update-photo/${id}?photoIndex=${photoIndex}`, data);
+  }
 }
