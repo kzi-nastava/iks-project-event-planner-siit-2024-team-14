@@ -3,7 +3,7 @@ import { SolutionService } from './our-services.service';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
-  selector: 'app-our-sevices',
+  selector: 'app-all-sevices',
   templateUrl: './our-sevices.component.html',
   styleUrl: './our-sevices.component.css'
 })

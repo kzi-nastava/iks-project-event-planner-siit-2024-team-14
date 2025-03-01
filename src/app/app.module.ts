@@ -11,9 +11,9 @@ import { NgOptimizedImage } from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawers/drawer-navbar-admin/drawer-navbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HottestEventsComponent } from './components/homepage/hottest-events/hottest-events.component';
-import { OurEventsComponent } from './components/homepage/our-events/our-events.component';
+import { OurEventsComponent } from './components/homepage/all-events/our-events.component';
 import { HottestServicesComponent } from './components/homepage/hottest-services/hottest-services.component';
-import { OurSevicesComponent } from './components/homepage/our-sevices/our-sevices.component';
+import { OurSevicesComponent } from './components/homepage/all-sevices/our-sevices.component';
 import {FooterComponent} from './components/homepage/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
@@ -31,13 +31,24 @@ import {DrawerNavbarGuestComponent} from './components/drawers/drawer-navbar-gue
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {OfferingsModule} from './offerings/offerings.module';
 import { OrganizerProfileComponent} from './components/profiles/organizer-profile/organizer-profile.component';
+import {InfoComponent} from './components/profiles/organizer-profile/info/info.component';
 import {LinesComponent} from './components/decorations/lines/lines.component';
-import {UpcomingEventsComponent} from './components/profiles/upcoming-events/upcoming-events.component';
-import {FavoriteEventsComponent} from './components/profiles/favorite-events/favorite-events.component';
-import {FavoriteSolutionsComponent} from './components/profiles/favorite-solutions/favorite-solutions.component';
-import {OccupancyCalendarComponent} from './components/profiles/occupancy-calendar/occupancy-calendar.component';
-import { ProviderProfileComponent } from './components/profiles/provider-profile/provider-profile.component';
-import {InfoComponent} from './components/profiles/info/info.component';
+import {
+  UpcomingEventsComponent
+} from './components/profiles/organizer-profile/upcoming-events/upcoming-events.component';
+import {
+  FavoriteEventsComponent
+} from './components/profiles/organizer-profile/favorite-events/favorite-events.component';
+import {
+  FavoriteSolutionsComponent
+} from './components/profiles/organizer-profile/favorite-solutions/favorite-solutions.component';
+import {
+  OccupancyCalendarComponent
+} from './components/profiles/organizer-profile/occupancy-calendar/occupancy-calendar.component';
+import {
+  BookingServiceRequestsComponent
+} from './components/booking-service-requests/booking-service-requests.component';
+import {AllBookingsProviderComponent} from './components/all-bookings-provider/all-bookings-provider.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +64,8 @@ import {InfoComponent} from './components/profiles/info/info.component';
     DrawerNavbarProviderComponent,
     DrawerNavbarGuestComponent,
     AdminCommentsComponent,
+    BookingServiceRequestsComponent,
+    AllBookingsProviderComponent,
     HottestEventsComponent,
     HottestServicesComponent,
     OurSevicesComponent,
@@ -70,8 +83,7 @@ import {InfoComponent} from './components/profiles/info/info.component';
     UpcomingEventsComponent,
     FavoriteEventsComponent,
     FavoriteSolutionsComponent,
-    OccupancyCalendarComponent,
-    ProviderProfileComponent,
+    OccupancyCalendarComponent
   ],
   imports: [
     BrowserModule,

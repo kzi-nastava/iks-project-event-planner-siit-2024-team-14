@@ -7,7 +7,7 @@ import {SolutionModel} from '../../../interfaces/solution.model';
   providedIn: 'root'
 })
 export class SolutionService {
-  private apiUrl = 'http://localhost:8080/api/solutions/all?city=Novi%20Sad';
+  private apiUrl = 'http://localhost:8080/api/solutions/all';
   private filterUrl = 'http://localhost:8080/api/solutions/filter';
 
   constructor(private http: HttpClient) {}
