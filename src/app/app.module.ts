@@ -39,6 +39,7 @@ import { FavoriteSolutionsComponent } from './components/profiles/favorite-solut
 import { OccupancyCalendarComponent } from './components/profiles/occupancy-calendar/occupancy-calendar.component';
 import { BookingServiceRequestsComponent } from './components/booking-service-requests/booking-service-requests.component';
 import { AllBookingsProviderComponent } from './components/all-bookings-provider/all-bookings-provider.component';
+import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { AllBookingsProviderComponent } from './components/all-bookings-provider
     UpcomingEventsComponent,
     FavoriteEventsComponent,
     FavoriteSolutionsComponent,
-    OccupancyCalendarComponent
+    OccupancyCalendarComponent,
+    ProviderProfileComponent
   ],
   imports: [
     BrowserModule,
