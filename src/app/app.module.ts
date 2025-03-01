@@ -31,24 +31,15 @@ import {DrawerNavbarGuestComponent} from './components/drawers/drawer-navbar-gue
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {OfferingsModule} from './offerings/offerings.module';
 import { OrganizerProfileComponent} from './components/profiles/organizer-profile/organizer-profile.component';
-import {InfoComponent} from './components/profiles/organizer-profile/info/info.component';
-import {LinesComponent} from './components/decorations/lines/lines.component';
-import {
-  UpcomingEventsComponent
-} from './components/profiles/organizer-profile/upcoming-events/upcoming-events.component';
-import {
-  FavoriteEventsComponent
-} from './components/profiles/organizer-profile/favorite-events/favorite-events.component';
-import {
-  FavoriteSolutionsComponent
-} from './components/profiles/organizer-profile/favorite-solutions/favorite-solutions.component';
-import {
-  OccupancyCalendarComponent
-} from './components/profiles/organizer-profile/occupancy-calendar/occupancy-calendar.component';
-import {
-  BookingServiceRequestsComponent
-} from './components/booking-service-requests/booking-service-requests.component';
-import {AllBookingsProviderComponent} from './components/all-bookings-provider/all-bookings-provider.component';
+import { InfoComponent } from './components/profiles/info/info.component';
+import { LinesComponent } from './components/decorations/lines/lines.component';
+import { UpcomingEventsComponent } from './components/profiles/upcoming-events/upcoming-events.component';
+import { FavoriteEventsComponent } from './components/profiles/favorite-events/favorite-events.component';
+import { FavoriteSolutionsComponent } from './components/profiles/favorite-solutions/favorite-solutions.component';
+import { OccupancyCalendarComponent } from './components/profiles/occupancy-calendar/occupancy-calendar.component';
+import { BookingServiceRequestsComponent } from './components/booking-service-requests/booking-service-requests.component';
+import { AllBookingsProviderComponent } from './components/all-bookings-provider/all-bookings-provider.component';
+import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +74,8 @@ import {AllBookingsProviderComponent} from './components/all-bookings-provider/a
     UpcomingEventsComponent,
     FavoriteEventsComponent,
     FavoriteSolutionsComponent,
-    OccupancyCalendarComponent
+    OccupancyCalendarComponent,
+    ProviderProfileComponent
   ],
   imports: [
     BrowserModule,

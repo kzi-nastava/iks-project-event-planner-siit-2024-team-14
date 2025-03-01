@@ -1,19 +1,18 @@
 <div class="profile-container">
-  <div class="profile-photo-container" >
-      <img [src]="getProfilePhotoUrl()"
-           alt="Profile photo"
-           class="profile-photo">
+  <div class="profile-photo-container">
+    <img [src]="getProfilePhotoUrl()" alt="Profile photo" class="profile-photo">
     <button class="edit-button" (click)="openFileInput()">
       <i class="fa fa-pencil"></i> Edit profile photo
     </button>
-      <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
-
+    <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
   </div>
 
   <div class="profile-info">
-    <h3>{{ fullName || 'User Name' }}</h3>
-    <p>Event Organizer</p>
+    <h3>{{ user?.role === 'EventOrganizer' ? (fullName || 'User Name') : (user?.name || 'Company Name') }}</h3>
+    <p>{{ user?.role === 'EventOrganizer' ? 'Event Organizer' : 'Service and Product Provider' }}</p>
     <ul>
+      <li *ngIf="user?.role === 'ServiceAndProductProvider'"><strong>Name:</strong> {{ user?.name || 'No name provided' }}</li>
+      <li *ngIf="user?.role === 'ServiceAndProductProvider'"><strong>Description:</strong> {{ user?.description || 'No description provided' }}</li>
       <li><strong>Email:</strong> {{ user?.email || 'No email available' }}</li>
       <li><strong>Address:</strong> {{ user?.address || 'No address provided' }}</li>
       <li><strong>City:</strong> {{ user?.city || 'No city provided' }}</li>
@@ -32,19 +31,19 @@
 <!-- Update Modal Popup -->
 <div class="update-modal-overlay" *ngIf="showUpdateModal" (click)="closeUpdateModal()">
   <div class="update-modal-content" (click)="$event.stopPropagation()">
-
-    <div class="circle-one-update"></div>
-    <div class="circle-two-update"></div>
-    <div class="circle-three-update"></div>
-    <div class="circle-four-update"></div>
-
     <h2> Edit Your Information </h2>
-    <form [formGroup]="editForm" (ngSubmit)="edit()">
-      <div class="form-group">
+    <form [formGroup]="editForm" (ngSubmit)="submitUpdateForm()">
+      <div *ngIf="user?.role === 'EventOrganizer'" class="form-group">
         <input formControlName="name" type="text" placeholder="Enter your name" />
       </div>
-      <div class="form-group">
+      <div *ngIf="user?.role === 'EventOrganizer'" class="form-group">
         <input formControlName="surname" type="text" placeholder="Enter your surname" />
+      </div>
+      <div *ngIf="user?.role === 'ServiceAndProductProvider'" class="form-group">
+        <input formControlName="name" type="text" placeholder="Enter your company name" />
+      </div>
+      <div *ngIf="user?.role === 'ServiceAndProductProvider'" class="form-group">
+        <input formControlName="description" type="text" placeholder="Enter your description" />
       </div>
       <div class="form-group">
         <input formControlName="address" type="text" placeholder="Enter your address" />
@@ -55,22 +54,15 @@
       <div class="form-group">
         <input formControlName="phoneNumber" type="tel" placeholder="Enter your phone number" />
       </div>
-      <button type="submit" class="btn-confirm-upd">Confirm</button>
+      <button type="button" class="btn-confirm-update" (click)="submitUpdateForm()">Confirm</button>
       <button type="button" class="btn-close" (click)="closeUpdateModal()">Close</button>
     </form>
   </div>
 </div>
 
-
 <!-- Password Modal Popup -->
 <div class="change-password-modal-overlay" *ngIf="showPasswordModal" (click)="closePasswordModal()">
   <div class="change-password-modal-content" (click)="$event.stopPropagation()">
-
-    <div class="circle-one-password"></div>
-    <div class="circle-two-password"></div>
-    <div class="circle-three-password"></div>
-    <div class="circle-four-password"></div>
-
     <h2> Change Password </h2>
     <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
       <div class="form-group">
@@ -93,4 +85,3 @@
     </form>
   </div>
 </div>
-
