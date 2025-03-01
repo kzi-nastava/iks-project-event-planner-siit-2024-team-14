@@ -1,0 +1,119 @@
+/* Apply Petrona font globally */
+body {
+  font-family: 'Petrona', serif;
+}
+
+.decorative-lines {
+  align-self: flex-start; /* Align the lines element */
+  width: 100%; /* Make it span the full width */
+  border-top: 2px solid #ddd; /* Optional: Add a visual line */
+}
+
+/* NAVBAR ------------------------------------------------------------------------------ */
+header {
+  position: relative;
+}
+/* The background image covering the top of the screen */
+.header-background {
+  background-image: url('../../../../assets/images/background.jpg');
+  background-size: cover;
+  background-position: center center;
+  height: 250px;  /* Fixed height for background */
+  width: 100%;
+}
+
+/* Rectangle on top of the background */
+.header-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 120px;  /* Minimum height, but flexible */
+  background-color: #959D90;
+  opacity: 0.85;
+  display: flex;
+  justify-content: center;  /* Center content horizontally */
+  align-items: center;     /* Center content vertically */
+  flex-direction: column;  /* Stack content vertically */
+  padding: 0 20px;
+  color: white;
+  text-align: center;
+  z-index: 1;
+  box-sizing: border-box;  /* Ensures padding doesn’t cause overflow */
+}
+
+/* Burger icon on the left */
+.burger-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #523D35;
+  z-index: 3; /* Higher z-index to ensure visibility */
+  padding: 5px;
+}
+
+/* Profile icon on the right */
+.profile-icon {
+  position: absolute;
+  top: 20px;             /* Adjust the top value to ensure the icon isn't too close to the top edge */
+  right: 20px;           /* Keep it to the right edge */
+  font-size: 30px;       /* Adjust size as needed */
+  cursor: pointer;
+  color: #523D35;
+  z-index: 3;            /* Ensure it stays on top of other elements */
+  padding: 5px;          /* Add some padding to prevent clipping */
+}
+
+.profile-icon:hover {
+  color: #d9d9d9; /* Slight color change on hover */
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+/* Logo styling (adjusted to ensure visibility) */
+.logo {
+  background-image: url('../../../../assets/images/logo.png');
+  background-size: contain;  /* Ensure the logo fits the container */
+  background-repeat: no-repeat;
+  width: 50px; /* Adjust logo size */
+  height: 50px; /* Maintain the size ratio */
+  color: #523D35;  /* Apply color around logo if needed */
+}
+
+/* Event Planner text */
+.event-planner h1 {
+  font-family: 'Petit Formal Script', cursive;
+  font-size: 30px;
+  margin: 5px 0;
+  color: #523D35;
+}
+
+/* Navigation links */
+.nav-links {
+  font-family: 'Petrona', sans-serif;
+  font-size: 14px;
+  z-index: 1;
+  margin-top: 5px;
+  color: #523D35;
+}
+
+.nav-links a {
+  color: #523D35;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+

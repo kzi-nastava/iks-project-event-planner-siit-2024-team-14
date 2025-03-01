@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationService} from '../../notifications/notifications.service';
+import {HomeProviderService} from './home-provider.service';
 
 @Component({
   selector: 'app-home-provider',
@@ -7,13 +8,12 @@ import {NotificationService} from '../../notifications/notifications.service';
   styleUrls: ['./home-provider.component.css']
 })
 export class HomeProviderComponent implements OnInit {
-  title = 'Welcome to the Home Page!';
   isSidebarOpen: boolean = false;
   isNotificationsOpen:  boolean = false;
-
+  user: any;
   unreadCount: number = 0;
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(private notificationService: NotificationService, private userService: HomeProviderService) {}
 
   ngOnInit(): void {
     const userId = this.getUserIdFromLocalStorage();
@@ -23,6 +23,17 @@ export class HomeProviderComponent implements OnInit {
       this.notificationService.unreadNotificationCount$.subscribe(count => {
         this.unreadCount = count;
       });
+    }
+
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser); // Assign to class property
+    }
+
+    if (this.user && this.user.id) {
+      this.fetchUserDetails(this.user.id); // Fetch user details
+    } else {
+      console.error('User ID not found in localStorage');
     }
   }
 
@@ -45,6 +56,19 @@ export class HomeProviderComponent implements OnInit {
   }
   openNotifications() : void {
     this.isNotificationsOpen = !this.isNotificationsOpen;
+  }
+
+  fetchUserDetails(userId: number): void {
+    this.userService.getProviderById(userId).subscribe(
+      (response: any) => {
+        localStorage.setItem('user', JSON.stringify(response.provider)); // Store new data
+        this.user = response.provider; // Update this.user with new data
+        console.log('User details updated:', this.user);
+      },
+      (error: any) => {
+        console.error('Error fetching user details:', error);
+      }
+    );
   }
 }
 
