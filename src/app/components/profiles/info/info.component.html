@@ -1,13 +1,37 @@
 <div class="profile-container">
   <div class="profile-photo-container">
-    <img [src]="getProfilePhotoUrl()" alt="Profile photo" class="profile-photo">
-    <button class="edit-button" (click)="openFileInput()">
-      <i class="fa fa-pencil"></i> Edit profile photo
-    </button>
-    <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
+    <!-- Event Organizer: Single Profile Photo -->
+    <ng-container *ngIf="user?.role === 'EventOrganizer'; else sppPhotos">
+      <img [src]="getProfilePhotoUrl()" alt="Profile photo" class="profile-photo">
+      <button class="edit-button" (click)="openFileInput()">
+        <i class="fa fa-pencil"></i> Edit profile photo
+      </button>
+      <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
+    </ng-container>
+
+    <!-- Service and Product Provider: Photo Carousel -->
+    <ng-template #sppPhotos>
+      <div class="photo-carousel">
+        <button class="carousel-btn left" (click)="prevPhoto()">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+
+        <img *ngIf="photos.length > 0 && photos.length < 4" [src]="photos[currentPhotoIndex]" alt="Company photo" class="profile-photo">
+        <button class="edit-button-photos" (click)="openFileInputForSPP(currentPhotoIndex)">
+          <i class="fa fa-pencil"></i> Edit photo
+        </button>
+
+        <button class="carousel-btn right" (click)="nextPhoto()">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    </ng-template>
+
+    <input id="photo-carousel" type="file" accept="image/*" (change)="onFileSelectedForSPP($event)" style="display: none;" />
+
   </div>
 
-  <div class="profile-info">
+  <div class="profile-info" [ngStyle]="{'left': user?.role === 'EventOrganizer' ? '-10%' : '0'}">
     <h3>{{ user?.role === 'EventOrganizer' ? (fullName || 'User Name') : (user?.name || 'Company Name') }}</h3>
     <p>{{ user?.role === 'EventOrganizer' ? 'Event Organizer' : 'Service and Product Provider' }}</p>
     <ul>
@@ -31,6 +55,10 @@
 <!-- Update Modal Popup -->
 <div class="update-modal-overlay" *ngIf="showUpdateModal" (click)="closeUpdateModal()">
   <div class="update-modal-content" (click)="$event.stopPropagation()">
+    <div class="circle-one-update"></div>
+    <div class="circle-two-update"></div>
+    <div class="circle-three-update"></div>
+    <div class="circle-four-update"></div>
     <h2> Edit Your Information </h2>
     <form [formGroup]="editForm" (ngSubmit)="submitUpdateForm()">
       <div *ngIf="user?.role === 'EventOrganizer'" class="form-group">
@@ -63,6 +91,10 @@
 <!-- Password Modal Popup -->
 <div class="change-password-modal-overlay" *ngIf="showPasswordModal" (click)="closePasswordModal()">
   <div class="change-password-modal-content" (click)="$event.stopPropagation()">
+    <div class="circle-one-password"></div>
+    <div class="circle-two-password"></div>
+    <div class="circle-three-password"></div>
+    <div class="circle-four-password"></div>
     <h2> Change Password </h2>
     <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
       <div class="form-group">

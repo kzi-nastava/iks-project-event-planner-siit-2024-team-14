@@ -17,7 +17,8 @@ export class InfoComponent implements OnInit {
   passwordsDoNotMatch: boolean = false;
   oldPasswordDoesNotMatch: boolean = false;
   selectedFile: File | null = null;
-  photos: string[] = []; // Store URLs of photos
+  photos: string[] = [];
+  selectedPhotoIndex: number = -1;
 
   constructor(private infoService: InfoService, private cdRef: ChangeDetectorRef) {}
 
@@ -51,7 +52,7 @@ export class InfoComponent implements OnInit {
     console.log(photoFileName);
     return photoFileName
       ? `http://localhost:8080/api/organizers/get-photo/${this.user.id}?timestamp=${new Date().getTime()}`
-      : '../../../../../assets/images/profile6.jpg';
+      : '../../../../../assets/images/no_photo.jpg';
   }
 
 
@@ -253,15 +254,100 @@ export class InfoComponent implements OnInit {
 
   // photos - SPP -----
 
-  fetchPhotos(): void {
-    if (this.user?.role === 'ServiceAndProductProvider') {
-      this.infoService.getPhotos(this.user.id).subscribe({
-        next: (photos: string[]) => {
-          this.photos = photos; // Store the photo URLs
-          this.cdRef.detectChanges();
-        },
-        error: (err: any) => console.error('Error fetching photos:', err)
-      });
+  currentPhotoIndex = 0;
+
+  prevPhoto(): void {
+    if (this.photos.length > 1) {
+      this.currentPhotoIndex = (this.currentPhotoIndex - 1 + this.photos.length) % this.photos.length;
     }
   }
+
+  nextPhoto(): void {
+    if (this.photos.length > 1) {
+      this.currentPhotoIndex = (this.currentPhotoIndex + 1) % this.photos.length;
+    }
+  }
+
+  fetchPhotos(): void {
+    const storedPhotos = localStorage.getItem('photos');
+
+    // Check if photos are already in localStorage
+    if (storedPhotos) {
+      // Load the photos from localStorage (immediate)
+      this.photos = JSON.parse(storedPhotos);
+      this.cdRef.detectChanges();
+    } else {
+      // If no photos in localStorage, fetch from the server
+      if (this.user?.role === 'ServiceAndProductProvider') {
+        this.infoService.getPhotos(this.user.id).subscribe({
+          next: (photos: string[]) => {
+            this.photos = photos; // Store the photo URLs from the server
+            localStorage.setItem('photos', JSON.stringify(this.photos)); // Store in localStorage
+            this.cdRef.detectChanges();
+          },
+          error: (err: any) => console.error('Error fetching photos:', err)
+        });
+      }
+    }
+  }
+
+
+  openFileInputForSPP(photoIndex: number): void {
+    this.selectedPhotoIndex = photoIndex;  // Fixing typo
+    const fileInput: HTMLInputElement | null = document.getElementById('photo-carousel') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();  // Trigger the file input
+    }
+  }
+
+  onFileSelectedForSPP(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        // Store image URL for preview
+        this.photos[this.selectedPhotoIndex] = e.target.result;  // Use selectedPhotoIndex
+
+        // Log the photos array before storing in localStorage
+        console.log('Photos array before storing in localStorage:', this.photos);
+
+        // Store the photos temporarily in localStorage for immediate preview
+        localStorage.setItem('photos', JSON.stringify(this.photos));
+
+        // Log localStorage data to verify it has been updated
+        console.log('Stored photos in localStorage:', localStorage.getItem('photos'));
+
+        // Update the view immediately
+        this.cdRef.detectChanges();
+      };
+      reader.readAsDataURL(file);
+
+      this.changePhotoSPP();
+    }
+  }
+
+  changePhotoSPP(): void {
+    if (this.selectedFile) {
+      const email = this.user.email || '';
+      const filename = `${email}.png`;
+
+      const photoData = new FormData();
+      photoData.set('photo', this.selectedFile, filename);
+
+      this.infoService.changePhoto(photoData, this.user.id, this.selectedPhotoIndex).subscribe({
+        next: (response: any) => {
+          console.log('Image uploaded successfully:', response);
+          const updatedImageUrl = response.imageUrl || filename;
+          this.user.photos[this.selectedPhotoIndex] = updatedImageUrl;
+          localStorage.setItem('user', JSON.stringify(this.user));
+          this.cdRef.detectChanges();
+        },
+        error: (err: any) => {
+          console.error('Error uploading photo:', err);
+        }
+      })
+    }
+  }
+
 }
