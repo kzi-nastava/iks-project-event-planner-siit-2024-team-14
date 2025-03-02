@@ -14,6 +14,10 @@ import {AddServiceComponent} from './offerings/add-service/add-service.component
 import {ServiceDetailsComponent} from './offerings/service-details/service-details.component';
 import {ProductDetailsComponent} from './offerings/product-details/product-details.component';
 import {OrganizerProfileComponent} from './components/profiles/organizer-profile/organizer-profile.component';
+import {EventDetailsComponent} from './event-details/event-details.component';
+import {
+  ViewOrganizerProfileComponent
+} from './components/profiles/view-organizer-profile/view-organizer-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -31,7 +35,9 @@ const routes: Routes = [
   { path: 'registration-spp', component: RegistrationSppComponent },
   { path: 'activate', component: ActivationComponent }, // Ensure this route exists
   { path: 'organizer-profile', component: OrganizerProfileComponent },
-  { path: '**', redirectTo: '/home-guest' }  // Fallback route
+  { path: 'events/:id', component: EventDetailsComponent },
+  {path: 'view-organizer-profile/:id', component: ViewOrganizerProfileComponent },
+  { path: '**', redirectTo: '/home-guest' } ,
 ];
 
 @NgModule({
