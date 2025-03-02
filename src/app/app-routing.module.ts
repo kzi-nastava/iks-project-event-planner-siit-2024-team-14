@@ -18,6 +18,9 @@ import {EventDetailsComponent} from './event-details/event-details.component';
 import {
   ViewOrganizerProfileComponent
 } from './components/profiles/view-organizer-profile/view-organizer-profile.component';
+import {
+  ViewProviderProfileComponent
+} from './components/profiles/view-provider-profile/view-provider-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -37,6 +40,7 @@ const routes: Routes = [
   { path: 'organizer-profile', component: OrganizerProfileComponent },
   { path: 'events/:id', component: EventDetailsComponent },
   {path: 'view-organizer-profile/:id', component: ViewOrganizerProfileComponent },
+  {path: 'view-provider-profile/:id', component: ViewProviderProfileComponent },
   { path: '**', redirectTo: '/home-guest' } ,
 ];
 

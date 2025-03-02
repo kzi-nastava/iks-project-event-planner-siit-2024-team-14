@@ -42,6 +42,9 @@ import {AllBookingsProviderComponent} from './components/all-bookings-provider/a
 import {AdminReportsComponent} from './components/admin-reports/admin-reports.component';
 import {ViewOrganizerProfileComponent} from './components/profiles/view-organizer-profile/view-organizer-profile.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import {
+  ViewProviderProfileComponent
+} from './components/profiles/view-provider-profile/view-provider-profile.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +82,8 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     FavoriteSolutionsComponent,
     OccupancyCalendarComponent,
     ViewOrganizerProfileComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    ViewProviderProfileComponent
   ],
   imports: [
     BrowserModule,
