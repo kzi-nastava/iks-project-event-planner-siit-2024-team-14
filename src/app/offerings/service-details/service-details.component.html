@@ -47,7 +47,7 @@
 
     <dt>Provided by:</dt>
     <dd>
-      <a [routerLink]="['/users', service.provider.id]">
+      <a [routerLink]="['/view-provider-profile', service.providerId]">
         <span>{{ (service.provider.companyName | titlecase) || service.provider.email }}</span>
       </a>
     </dd>

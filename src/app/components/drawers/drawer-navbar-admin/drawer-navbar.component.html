@@ -6,13 +6,13 @@
     <li>Event Types</li>
     <li>Categories</li>
     <li (click)="toggleCommentsSidebar()">Comments & reviews requests</li>
-    <li>Reports</li>
+    <li (click)="toggleReportsSidebar()">Reports</li>
     <li (click)="toggleNotificationsSidebar()">Notifications</li>
     <li>Profile</li>
     <li>Log out</li>
   </ul>
 </div>
 
-<!-- Comments Sidebar -->
 <app-admin-comments [isCommentsOpen]="isCommentsOpen"></app-admin-comments>
 <app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+<app-admin-reports [isReportsOpen] = "isReportsOpen"></app-admin-reports>

@@ -28,4 +28,5 @@ export interface Service extends Offering {
   cancellationPeriodInDays: number;
 
   provider: any;
+  providerId: number;
 }

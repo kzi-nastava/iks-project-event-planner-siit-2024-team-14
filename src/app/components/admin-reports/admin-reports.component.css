@@ -1,5 +1,5 @@
 /* Comments Sidebar */
-.comments-sidebar {
+.reports-sidebar {
   right: -400px;
   width: 400px;
   background-color: #716D64;
@@ -14,7 +14,7 @@
   flex-direction: column;
 }
 
-.comments-sidebar.open {
+.reports-sidebar.open {
   transform: translateX(-400px);
 }
 
@@ -22,12 +22,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   padding: 10px;
 }
 
 .sidebar-header h2 {
-  font-size: 18px;
+  font-size: 20px;
   font-family: 'Petrona', sans-serif;
   color: #523D35;
 }
@@ -44,7 +44,7 @@
 .cards-container {
   flex: 1;
   overflow-y: auto;
-  max-height: calc(100vh - 150px); /* Adjust height to fit within sidebar */
+  max-height: calc(100vh - 180px); /* Adjust height to fit within sidebar */
   padding-right: 10px; /* Space for scrollbar */
 }
 
@@ -68,58 +68,44 @@
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 15px;
+  font-family: 'Petrona', sans-serif;
+  color: #523D35;
 }
 
-.card .user-info {
+.card .report-details {
+  margin-bottom: 15px;
+}
+
+.card .report-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.card .actions {
   display: flex;
-  align-items: center;
-  font-family: 'Petrona', sans-serif;
-  color: #523D35;
-}
-
-.card .user-info img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.card .stars {
-  display: flex;
-  gap: 2px;
-  margin: 10px 0;
-}
-
-.card .stars i {
-  color: #523D35;
-}
-
-.card .review-text {
-  font-family: 'Petrona', sans-serif;
-  color: #523D35;
-}
-
-.card .provider {
-  font-family: 'Petrona', sans-serif;
-  color: #523D35;
-  font-style: italic;
+  justify-content: space-between;
 }
 
 .card .actions button {
-  font-family: 'Petrona', sans-serif;
-  background: none;
-  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
   cursor: pointer;
-  padding: 5px 10px;
+  border: none;
 }
 
 .card .approve-btn {
-  color: #523D35;
+  background-color: #523D35;
+  color: white;
 }
 
 .card .delete-btn {
-  color: #523D35;
+  background-color: #523D35;
+  color: white;
+}
+
+.card .approve-btn:hover, .card .delete-btn:hover {
+  opacity: 0.8;
 }
 
 /* Overlay Styling */
