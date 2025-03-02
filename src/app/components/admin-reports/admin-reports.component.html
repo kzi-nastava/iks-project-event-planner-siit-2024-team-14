@@ -1,18 +1,18 @@
 <!-- Comments & Reviews Sidebar -->
 <div class="sidebar reports-sidebar" [class.open]="isReportsOpen">
   <div class="sidebar-header">
-    <h2>User reports</h2>
+    <h2>User reports requests</h2>
     <button class="close-sidebar" (click)="closeReports()">&times;</button>
   </div>
 
   <div class="cards-container">
     <div *ngFor="let report of reports">
-      <div class="card" *ngIf="report.status === 'pending'">
+      <div class="card" *ngIf="report.status === 'PENDING'">
 
         <div class="report-details">
-          <p><strong>Reported User:</strong> {{ report.reportedUserName }}</p>
+          <p><strong>Reported User:</strong> {{ report.reportedUser }}</p>
           <p><strong>Reason:</strong> {{ report.reason }}</p>
-          <p><strong>Blocker:</strong> {{ report.blockerName }}</p>
+          <p><strong>Blocker:</strong> {{ report.sender }}</p>
           <p><strong>Status:</strong> {{ report.status | uppercase }}</p>
         </div>
 
