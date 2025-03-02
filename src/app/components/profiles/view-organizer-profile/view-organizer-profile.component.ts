@@ -58,15 +58,17 @@ export class ViewOrganizerProfileComponent implements OnInit{
     }
 
     const reportData = {
-      reportedUserId: this.user.id,
-      reason: this.reportReason
+      senderId: localStorage.getItem("userId"),  // ID korisnika koji šalje prijavu
+      reportedUserId: this.user.id,  // ID korisnika koji je prijavljen
+      reason: this.reportReason  // Razlog prijave
     };
 
-    this.http.post('/api/reports', reportData).subscribe(response => {
+    this.http.post('http://localhost:8080/api/reports', reportData).subscribe(response => {
       alert("Report submitted successfully!");
       this.closeReportForm();
     }, error => {
       alert("Error submitting report.");
     });
   }
+
 }
