@@ -47,6 +47,7 @@
     </ul>
     <div class="profile-actions">
       <button class="report" (click)="openReportForm()">Report user</button>
+      <button class="chat" (click)="toggleChat()">Chat with provider</button>
     </div>
   </div>
 </div>
@@ -85,5 +86,4 @@
   </div>
 </div>
 
-
-
+<app-chat-sidebar [chaterName]=user.companyName [chaterId]=user.id [isOpen]="isChatOpen"></app-chat-sidebar>

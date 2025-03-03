@@ -168,11 +168,12 @@ header {
 /* PROFILE ACTIONS */
 .profile-actions {
   display: flex;
-  margin-top: 10px; /* Razmak od informacija */
+  margin-top: 10px;
 }
 
 .profile-actions .report {
   padding: 10px 15px;
+  margin: 2px;
   font-family: 'Petrona', serif;
   font-size: 14px;
   font-weight: bold;
@@ -190,6 +191,29 @@ header {
 }
 
 .profile-actions .report:active {
+  transform: scale(0.95); /* Klik efekat */
+}
+
+.profile-actions .chat {
+  padding: 10px 15px;
+  margin: 2px;
+  font-family: 'Petrona', serif;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  background: #523D35;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-actions .chat:hover {
+  background-color: #523D28;
+  transform: scale(1.05); /* Blago povećanje */
+}
+
+.profile-actions .chat:active {
   transform: scale(0.95); /* Klik efekat */
 }
 

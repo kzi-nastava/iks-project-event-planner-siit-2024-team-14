@@ -14,6 +14,7 @@ export class ViewProviderProfileComponent implements OnInit{
   isSidebarOpen: boolean = false;
   showReportForm = false;
   reportReason: string = '';
+  isChatOpen: boolean = false;
 
   constructor(private route: ActivatedRoute, private viewProviderProfileService: ViewProviderProfileService, private http: HttpClient) {}
 
@@ -26,6 +27,9 @@ export class ViewProviderProfileComponent implements OnInit{
     }
   }
 
+  toggleChat() {
+    this.isChatOpen = !this.isChatOpen;
+  }
 
   // Method to get profile photo URL
   getProfilePhotoUrl(): string {

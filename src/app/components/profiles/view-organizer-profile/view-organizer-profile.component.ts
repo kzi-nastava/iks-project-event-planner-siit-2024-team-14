@@ -15,6 +15,12 @@ export class ViewOrganizerProfileComponent implements OnInit{
   showReportForm = false;
   reportReason: string = '';
 
+  isChatOpen: boolean = false;
+
+  toggleChat() {
+    this.isChatOpen = !this.isChatOpen;
+  }
+
   constructor(private route: ActivatedRoute, private viewOrganizerProfileService: ViewOrganizerProfileService, private http: HttpClient) {}
 
   ngOnInit(): void {

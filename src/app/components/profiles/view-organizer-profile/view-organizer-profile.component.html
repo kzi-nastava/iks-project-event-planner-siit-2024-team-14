@@ -46,6 +46,7 @@
     </ul>
     <div class="profile-actions">
       <button class="report" (click)="openReportForm()">Report user</button>
+      <button class="chat" (click)="toggleChat()">Chat with organizer</button>
     </div>
   </div>
 </div>
@@ -83,6 +84,9 @@
     <button (click)="closeReportForm()">Cancel</button>
   </div>
 </div>
+
+
+<app-chat-sidebar [chaterName]="fullName" [chaterPhotoUrl] = getProfilePhotoUrl() [chaterId]=user.id [isOpen]="isChatOpen"></app-chat-sidebar>
 
 
 
