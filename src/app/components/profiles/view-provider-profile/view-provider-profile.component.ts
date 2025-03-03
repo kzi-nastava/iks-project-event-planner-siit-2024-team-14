@@ -14,6 +14,8 @@ export class ViewProviderProfileComponent implements OnInit{
   isSidebarOpen: boolean = false;
   showReportForm = false;
   reportReason: string = '';
+  isChatOpen: boolean = false;
+  loggedUserId: number | null = null;
 
   constructor(private route: ActivatedRoute, private viewProviderProfileService: ViewProviderProfileService, private http: HttpClient) {}
 
@@ -24,8 +26,16 @@ export class ViewProviderProfileComponent implements OnInit{
         this.user = user;
       });
     }
+
+    const userIdFromStorage = localStorage.getItem('userId');
+    if (userIdFromStorage) {
+      this.loggedUserId = parseInt(userIdFromStorage, 10);
+    }
   }
 
+  toggleChat() {
+    this.isChatOpen = !this.isChatOpen;
+  }
 
   // Method to get profile photo URL
   getProfilePhotoUrl(): string {
@@ -68,4 +78,5 @@ export class ViewProviderProfileComponent implements OnInit{
     });
   }
 
+  protected readonly localStorage = localStorage;
 }

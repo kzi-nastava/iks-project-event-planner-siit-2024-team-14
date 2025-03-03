@@ -45,8 +45,9 @@
       <li><strong>City:</strong> {{ user.city || 'No city provided' }}</li>
       <li><strong>Phone number:</strong> {{ user.phoneNumber || 'No phone number' }}</li>
     </ul>
-    <div class="profile-actions">
+    <div class="profile-actions" *ngIf="loggedUserId !== null">
       <button class="report" (click)="openReportForm()">Report user</button>
+      <button class="chat" (click)="toggleChat()">Chat with provider</button>
     </div>
   </div>
 </div>
@@ -79,11 +80,10 @@
 
   <textarea [(ngModel)]="reportReason" placeholder="Enter reason for report..."></textarea>
 
-  <div class="popup-buttons">
+  <div class="popup-buttons" *ngIf="localStorage.getItem('userId')">
     <button (click)="submitReport()">Submit</button>
     <button (click)="closeReportForm()">Cancel</button>
   </div>
 </div>
 
-
-
+<app-chat-sidebar [chaterName]=user.companyName [chaterId]=user.id [isOpen]="isChatOpen"></app-chat-sidebar>

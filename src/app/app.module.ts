@@ -44,6 +44,7 @@ import { OccupancyCalendarComponent } from './components/profiles/occupancy-cale
 import { BookingServiceRequestsComponent } from './components/booking-service-requests/booking-service-requests.component';
 import { AllBookingsProviderComponent } from './components/all-bookings-provider/all-bookings-provider.component';
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
+import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import {ProviderProfileComponent} from './components/profiles/provider-profile/p
     ViewOrganizerProfileComponent,
     EventDetailsComponent,
     ViewProviderProfileComponent,
-    ProviderProfileComponent
+    ProviderProfileComponent,
+    ChatSidebarComponent
   ],
   imports: [
     BrowserModule,
