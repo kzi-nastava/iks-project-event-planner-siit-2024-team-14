@@ -15,6 +15,7 @@ export class ViewProviderProfileComponent implements OnInit{
   showReportForm = false;
   reportReason: string = '';
   isChatOpen: boolean = false;
+  loggedUserId: number | null = null;
 
   constructor(private route: ActivatedRoute, private viewProviderProfileService: ViewProviderProfileService, private http: HttpClient) {}
 
@@ -24,6 +25,11 @@ export class ViewProviderProfileComponent implements OnInit{
       this.viewProviderProfileService.getOrganizerById(userId).subscribe(user => {
         this.user = user;
       });
+    }
+
+    const userIdFromStorage = localStorage.getItem('userId');
+    if (userIdFromStorage) {
+      this.loggedUserId = parseInt(userIdFromStorage, 10);
     }
   }
 
@@ -72,4 +78,5 @@ export class ViewProviderProfileComponent implements OnInit{
     });
   }
 
+  protected readonly localStorage = localStorage;
 }

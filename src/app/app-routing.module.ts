@@ -40,7 +40,7 @@ const routes: Routes = [
   {path: 'view-organizer-profile/:id', component: ViewOrganizerProfileComponent },
   {path: 'view-provider-profile/:id', component: ViewProviderProfileComponent },
   { path: 'provider-profile', component: ProviderProfileComponent },
-  { path: '**', redirectTo: '/home-guest' }  // Fallback route
+  { path: '**', redirectTo: '/home-guest' }
 ];
 
 @NgModule({

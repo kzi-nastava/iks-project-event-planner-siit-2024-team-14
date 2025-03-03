@@ -16,6 +16,7 @@ export class ViewOrganizerProfileComponent implements OnInit{
   reportReason: string = '';
 
   isChatOpen: boolean = false;
+  loggedUserId: number | null = null;
 
   toggleChat() {
     this.isChatOpen = !this.isChatOpen;
@@ -29,6 +30,10 @@ export class ViewOrganizerProfileComponent implements OnInit{
       this.viewOrganizerProfileService.getOrganizerById(userId).subscribe(user => {
         this.user = user;
       });
+    }
+    const userIdFromStorage = localStorage.getItem('userId');
+    if (userIdFromStorage) {
+      this.loggedUserId = parseInt(userIdFromStorage, 10);
     }
   }
 
@@ -77,4 +82,5 @@ export class ViewOrganizerProfileComponent implements OnInit{
     });
   }
 
+  protected readonly localStorage = localStorage;
 }
