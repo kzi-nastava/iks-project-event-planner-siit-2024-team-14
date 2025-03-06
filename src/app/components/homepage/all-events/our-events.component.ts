@@ -8,21 +8,22 @@ import {HttpParams} from '@angular/common/http';
   styleUrls: ['./our-events.component.css']
 })
 export class OurEventsComponent implements OnInit {
-  eventsList: any[] = []; // Lista svih događaja
-  filteredEvents: any[] = []; // Lista filtriranih događaja (pretraga + filtriranje)
-  searchTerm: string = ''; // String za pretragu
-  startDate: string = ''; // Startni datum za filtriranje
-  endDate: string = ''; // Krajni datum za filtriranje
+  eventsList: any[] = [];
+  blockedUserIds: number[] = [];
+  filteredEvents: any[] = [];
+  searchTerm: string = '';
+  startDate: string = '';
+  endDate: string = '';
   location: string = '';
-  category: string = ''; // Kategorija za filtriranje
-  page: number = 0; // Trenutna stranica
-  totalEvents: number = 0; // Ukupno događaja
-  pageSize: number = 10; // Broj događaja po stranici
-  totalPages: number = 0; // Ukupno stranica
-  showFilters: boolean = false; // Da li su filteri prikazani
+  category: string = '';
+  page: number = 0;
+  totalEvents: number = 0;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  showFilters: boolean = false;
 
-  locations: string[] = []; // Lista gradova
-  categories: string[] = []; // Lista za filter
+  locations: string[] = [];
+  categories: string[] = [];
 
   constructor(private eventService: EventService) {}
 
@@ -34,14 +35,28 @@ export class OurEventsComponent implements OnInit {
 
   // Učitavanje svih događaja sa servera
   loadEvents() {
-    this.eventService.getAllEvents()
-      .subscribe(response => {
-        this.eventsList = response;  // Početno učitaj sve događaje (ako je response već lista)
-        this.totalEvents = response.length;  // Ako je response samo lista, koristi duzinu
-        this.totalPages = Math.ceil(this.totalEvents / this.pageSize);  // Izračunavanje ukupnih stranica
-        this.filteredEvents = [...this.eventsList];  // Početno postavi sve događaje kao filtrirane
+    this.eventService.getBlockedUsers().subscribe(
+      (blockedUsers) => {
+        this.blockedUserIds = blockedUsers;
 
-      });
+        this.eventService.getAllEvents().subscribe(
+          (response) => {
+            this.eventsList = response.filter(event =>
+              !this.blockedUserIds.includes(event.organizerId)
+            );
+            this.totalEvents = this.eventsList.length;
+            this.totalPages = Math.ceil(this.totalEvents / this.pageSize);
+            this.filteredEvents = [...this.eventsList];
+          },
+          (error) => {
+            console.error('Error loading events:', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error loading blocked users:', error);
+      }
+    );
   }
 
   fetchLocations() {
@@ -66,7 +81,6 @@ export class OurEventsComponent implements OnInit {
     );
   }
 
-  // Pretraga događaja po imenu, organizatoru, opisu itd.
   onSearch() {
     this.filteredEvents = this.eventsList.filter(event =>
       event.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -112,21 +126,11 @@ export class OurEventsComponent implements OnInit {
       );
   }
 
-// Promeni stranicu
   onPageChange(page: number) {
     this.page = page;
     this.loadEvents();
   }
 
-  getInitials(organizerFirstName: string, organizerLastName: string): string {
-    if (organizerFirstName && organizerLastName) {
-      return organizerFirstName.charAt(0).toUpperCase() + organizerLastName.charAt(0).toUpperCase();
-    } else {
-      return ''; // Ako nema organizatora, vrati prazan string
-    }
-  }
-
-  // Funkcija za otvaranje/zatvaranje filtera
   toggleFilters() {
     this.showFilters = !this.showFilters;
   }

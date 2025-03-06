@@ -26,7 +26,7 @@ export class HottestEventsService {
     const userId = localStorage.getItem('userId');
 
     if (!userId) {
-      return of([]); // Vraća Observable sa praznim nizom ako userId nije postavljen
+      return of([]);
     }
     return this.http.get<number[]>(`${this.blockedUsersUrl}?userId=${userId}`);
   }

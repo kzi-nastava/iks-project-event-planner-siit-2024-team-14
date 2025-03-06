@@ -25,10 +25,8 @@ export class HottestEventsComponent implements OnInit {
         if (this.blockedUserIds && this.blockedUserIds.length > 1) {
           this.eventsService.getTopEvents().subscribe(
             (data) => {
-
               this.hottestEvents = data.filter(event =>
                 !this.blockedUserIds.includes(event.organizerId)
-
               );
             },
             (error) => {
