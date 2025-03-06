@@ -1,0 +1,383 @@
+.user-profile {
+  top: -100%;
+  display: flex;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 20%;
+  position: relative;
+  top: 0;
+  left: -5%;
+  font-family: 'Petrona', serif;
+  color: #523D35;
+}
+
+.profile-photo-container {
+  position: relative; /* Keeps the photo and button together */
+  left: 12%;
+}
+
+.profile-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 35%; /* Circular photo */
+  object-fit: cover;
+  margin-top: -10rem;
+}
+
+/* Carousel of photos for SPP */
+.photo-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.carousel-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: absolute;
+  top: 20%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.carousel-btn.left {
+  left: -30px;
+}
+
+.carousel-btn.right {
+  right: -30px;
+}
+
+.carousel-btn i {
+  font-size: 1.5rem;
+  color: #523D35;
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 1);
+}
+/* ---- */
+
+.edit-button {
+  background: #fff;
+  border: 0.1px solid #D9D9D9;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  position: relative;
+  bottom: 0;
+  left: 32%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: #523D35;
+  border-radius: 5px;
+  font-family: 'Petrona', serif;
+}
+
+.edit-button-photos {
+  background: #fff;
+  border: 0.1px solid #D9D9D9;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  bottom: 15%;
+  left: 20%;
+  z-index: 2;
+  color: #523D35;
+  border-radius: 5px;
+  font-family: 'Petrona', serif;
+}
+
+.edit-button:hover {
+  background-color: #D9D9D9;
+}
+
+.edit-button-photos:hover {
+  background-color: #D9D9D9;
+}
+
+.profile-info {
+  flex-grow: 1; /* Occupy remaining space */
+  width: 60%;
+  text-align: left;
+  padding-top: 0;
+  position: relative;
+  top: -40%;
+  bottom: 30%;
+  display: flex;
+  flex-direction: column;
+  left: -10%;
+}
+
+/* name */
+.profile-info h3 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+/* role */
+.profile-info p {
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* info */
+.profile-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.profile-info ul li {
+  margin-bottom: 0.5rem;
+}
+
+.profile-actions {
+  position: absolute; /* Allows precise positioning */
+  top: 1rem; /* Aligns to the top of the container */
+  right: 0rem; /* Adds spacing from the right edge */
+  display: flex; /* Enables flexbox for alignment */
+  gap: 1rem; /* Adds spacing between buttons */
+}
+
+.profile-actions button {
+  padding: 0.3rem 0.5rem;
+  font-family: 'Petrona', serif;
+  border-radius: 20px;
+}
+
+.profile-actions .edit-info {
+  color: #523D35;
+  background-color: #fff;
+  border: 0.1px solid #D9D9D9;
+
+}
+
+.profile-actions .edit-info:hover {
+  background-color: #D9D9D9;
+}
+
+.profile-actions .change-password {
+  background: #523D35;
+  color: #D9D9D9;
+  border: none;
+}
+
+.profile-actions .change-password:hover {
+  background-color: #412c26;
+}
+
+.profile-actions .deactivate {
+  background: #523D35;
+  color: #D9D9D9;
+  border: none;
+}
+
+.profile-actions .deactivate:hover {
+  background-color: #412c26;
+}
+
+/* MODALS ----------------------------------------------- */
+.update-modal-overlay,
+.change-password-modal-overlay {
+  font-family: 'Petrona', serif;
+  color: #523D35;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark background to highlight the popup */
+  z-index: 999; /* Ensure it's above other components */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update-modal-overlay,
+.change-password-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Overlay to darken the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal box */
+.update-modal-content,
+.change-password-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Modal button */
+.update-modal-content button,
+.change-password-modal-content button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #6c4c4c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.update-modal-content button:hover,
+.change-password-modal-content button:hover {
+  background-color: #5a3e3e;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  text-align: center;
+  color: #523D35;
+  align-items: center;
+}
+
+.form-group input {
+  width: 100%;
+  max-width: 60%;
+  padding: 0.4rem;
+  border: 1px solid #523D35;
+  border-radius: 4px;
+  background: transparent;
+  color: #523D35; /* Set text color */
+  z-index: -1; /* Keep the input fields above the circles */
+}
+
+/* Add circles in the background - UPDATE */
+/* Top green */
+.circle-one-update {
+  content: '';
+  position: absolute;
+  top: -5%;
+  right: -5%;
+  width: 150px;
+  height: 150px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+  z-index: -1;
+}
+/* Bottom green */
+.circle-two-update {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  left: -10%;
+  width: 200px;
+  height: 200px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+/* Bottom beige */
+.circle-three-update {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: -5%;
+  width: 150px;
+  height: 150px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+/* Top beige */
+.circle-four-update {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: -5%;
+  width: 120px;
+  height: 120px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+/* Add circles in the background */
+/* Top green */
+.circle-one-password {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 150px;
+  height: 150px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+  z-index: -1;
+}
+/* Bottom green */
+.circle-two-password {
+  content: '';
+  position: absolute;
+  bottom: -25%;
+  left: -5%;
+  width: 200px;
+  height: 200px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+/* Bottom beige */
+.circle-three-password {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: -5%;
+  width: 150px;
+  height: 150px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+/* Top beige */
+.circle-four-password {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: -5%;
+  width: 120px;
+  height: 120px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: -1;
+}

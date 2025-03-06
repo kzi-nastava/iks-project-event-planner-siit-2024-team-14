@@ -1,0 +1,253 @@
+.events-section {
+  text-align: center;
+  padding: 20px 10px; /* Manji padding */
+  background-color: #f9f9f9;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Pseudo-elementi za krugove */
+.events-section::before,
+.events-section::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.events-section::before {
+  width: 300px; /* Manja širina kruga */
+  height: 300px; /* Manja visina kruga */
+  background-color: rgba(82, 61, 53, 0.1);
+  top: -80px;
+  left: -120px;
+}
+
+.events-section::after {
+  width: 400px; /* Manja širina kruga */
+  height: 400px; /* Manja visina kruga */
+  background-color: rgba(149, 157, 144, 0.5);
+  bottom: -120px;
+  right: -150px;
+}
+
+.section-title, .section-title2 {
+  font-size: 1.4em; /* Manji font */
+  font-weight: bold;
+  color: #523D35;
+  margin-bottom: 10px; /* Manja margina */
+}
+
+.section-title2 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 75%; /* Manja širina */
+  margin: auto;
+}
+
+.carousel-container {
+  overflow: hidden;
+  width: 75%; /* Manja širina */
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  padding-bottom: 5px;
+}
+
+/* Strelice */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4em; /* Manji font */
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 40px; /* Manja širina */
+  height: 40px; /* Manja visina */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+.arrow.left {
+  left: 8px;
+}
+
+.arrow.right {
+  right: 8px;
+}
+
+/* Kartice */
+.card {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 29%; /* Manja širina kartica */
+  height: 450px; /* Manja visina kartica */
+  margin: 0 5px; /* Manje margine */
+  background-color: #fff;
+  border-radius: 8px; /* Manji border-radius */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 10px; /* Manji padding */
+  background-color: #f5f5f5;
+}
+
+.profile-img {
+  width: 40px; /* Manja slika */
+  height: 40px; /* Manja slika */
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.organizer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.organizer-name {
+  font-size: 0.9em; /* Manji font */
+  font-weight: bold;
+  margin: 0;
+}
+
+.organizer-role {
+  font-size: 0.75em; /* Manji font */
+  color: #888;
+  margin: 0;
+}
+
+.divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.event-image {
+  width: 100%;
+  height: 150px; /* Manja visina slike */
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 10px; /* Manji padding */
+}
+
+small span {
+  margin-right: 5px;
+  color: #523D35;
+}
+
+.view-more-btn {
+  background-color: #523D35;
+  color: #fff;
+  width: 70%;
+  padding: 6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: absolute; /* Pozicioniranje dugmeta unutar kartice */
+  bottom: 25px; /* Razmak od donje ivice */
+  left: 50%; /* Pozicionira dugme u sredinu kartice */
+  transform: translateX(-50%); /* Pomera dugme tačno u centar */
+}
+
+.view-more-btn:hover {
+  background-color: #704d3a;
+}
+
+/* Responsivni dizajn */
+@media (max-width: 1024px) {
+  .events-section::before,
+  .events-section::after {
+    width: 200px; /* Manja širina kruga */
+    height: 200px; /* Manja visina kruga */
+  }
+
+  .arrow {
+    font-size: 1.3em; /* Manji font */
+    width: 35px; /* Manja širina strelice */
+    height: 35px; /* Manja visina strelice */
+  }
+
+  .card {
+    max-width: 250px; /* Manja širina kartica */
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title, .section-title2 {
+    font-size: 1.2em; /* Manji font */
+  }
+
+  .carousel-wrapper {
+    padding: 0 5px; /* Manji padding */
+  }
+
+  .card {
+    max-width: 200px; /* Manja širina kartica */
+    margin: 6px 3px; /* Manje margine */
+  }
+
+  .arrow {
+    font-size: 1em; /* Manji font */
+    width: 30px; /* Manja širina strelice */
+    height: 30px; /* Manja visina strelice */
+  }
+}
+
+@media (max-width: 480px) {
+  .arrow {
+    font-size: 0.9em; /* Manji font */
+    width: 24px; /* Manja širina strelice */
+    height: 24px; /* Manja visina strelice */
+  }
+
+  .events-section::before,
+  .events-section::after {
+    display: none;
+  }
+
+  .section-title, .section-title2 {
+    font-size: 1em; /* Manji font */
+  }
+
+  .card {
+    max-width: 160px; /* Manja širina kartica */
+    margin: 6px auto; /* Manje margine */
+  }
+
+  .view-more-btn {
+    width: 100%; /* Širina dugmeta na 100% */
+    padding: 6px; /* Manji padding */
+  }
+}
