@@ -9,7 +9,7 @@ import {EventModel} from '../../../interfaces/event.model';
 })
 export class HottestEventsComponent implements OnInit {
   hottestEvents: EventModel[] = [];
-
+  blockedUserIds: number[] = [];
   currentSlide = 0;
 
   constructor(private eventsService: HottestEventsService) {}
@@ -19,15 +19,37 @@ export class HottestEventsComponent implements OnInit {
   }
 
   loadTopEvents(): void {
-    this.eventsService.getTopEvents().subscribe(
-      (data) => {
-        this.hottestEvents = data;
+    this.eventsService.getBlockedUsers().subscribe(
+      (blockedUsers) => {
+        this.blockedUserIds = blockedUsers;
+        if (this.blockedUserIds && this.blockedUserIds.length > 1) {
+          this.eventsService.getTopEvents().subscribe(
+            (data) => {
+              this.hottestEvents = data.filter(event =>
+                !this.blockedUserIds.includes(event.organizerId)
+              );
+            },
+            (error) => {
+              console.error('Error loading events:', error);
+            }
+          );
+        } else {
+          this.eventsService.getTopEvents().subscribe(
+            (data) => {
+              this.hottestEvents = data;
+            },
+            (error) => {
+              console.error('Error loading events:', error);
+            }
+          );
+        }
       },
       (error) => {
-        console.error('Error loading events:', error);
+        console.error('Error loading blocked users:', error);
       }
     );
   }
+
 
   nextSlide() {
     if (this.currentSlide < this.hottestEvents.length - 4) {

@@ -9,6 +9,7 @@ import {SolutionModel} from '../../../interfaces/solution.model';
 export class HottestServicesComponent implements OnInit {
 
   hottestSolutions: SolutionModel[] = [];
+  blockedUserIds: number[] = [];
 
   currentSlide = 0;
 
@@ -19,15 +20,37 @@ export class HottestServicesComponent implements OnInit {
   }
 
   loadTopSolutions(): void {
-    this.solutionsService.getTopSolutions().subscribe(
-      (data) => {
-        this.hottestSolutions = data;
+    this.solutionsService.getBlockedUsers().subscribe(
+      (blockedUsers) => {
+        this.blockedUserIds = blockedUsers;
+        if (this.blockedUserIds && this.blockedUserIds.length > 1) {
+          this.solutionsService.getTopSolutions().subscribe(
+            (data) => {
+              this.hottestSolutions = data.filter(solution =>
+                !this.blockedUserIds.includes(solution.providerId) // Filtrira rešenja od blokiranih korisnika
+              );
+            },
+            (error) => {
+              console.error('Error loading solutions:', error);
+            }
+          );
+        }else {
+          this.solutionsService.getTopSolutions().subscribe(
+            (data) => {
+              this.hottestSolutions = data;
+            },
+            (error) => {
+              console.error('Error loading solutions:', error);
+            }
+          );
+        }
       },
       (error) => {
-        console.error('Error loading events:', error);
+        console.error('Error loading blocked users:', error);
       }
     );
   }
+
 
   nextSlide() {
     if (this.currentSlide < this.hottestSolutions.length - 4) {

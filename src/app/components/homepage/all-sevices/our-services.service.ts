@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {SolutionModel} from '../../../interfaces/solution.model';
 
 @Injectable({
@@ -9,6 +9,8 @@ import {SolutionModel} from '../../../interfaces/solution.model';
 export class SolutionService {
   private apiUrl = 'http://localhost:8080/api/solutions/all';
   private filterUrl = 'http://localhost:8080/api/solutions/filter';
+  private blockedUsersUrl = 'http://localhost:8080/api/chat/blocked-users'; // URL za blokirane korisnike
+
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +28,15 @@ export class SolutionService {
 
   getAllCategories(): Observable<string[]> {
     return this.http.get<string[]>('http://localhost:8080/api/solutions/categories');
+  }
+
+  getBlockedUsers(): Observable<number[]> {
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      return of([]);
+    }
+
+    return this.http.get<number[]>(`${this.blockedUsersUrl}?userId=${userId}`);
   }
 }

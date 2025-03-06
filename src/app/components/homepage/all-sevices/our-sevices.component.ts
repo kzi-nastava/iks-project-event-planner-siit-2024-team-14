@@ -10,6 +10,7 @@ import { HttpParams } from '@angular/common/http';
 
 export class OurSevicesComponent implements OnInit {
   solutionsList: any[] = [];
+  blockedUserIds: number[] = [];
   filteredSolutions: any[] = [];
   searchTerm: string = '';
   category: string = '';
@@ -37,14 +38,30 @@ export class OurSevicesComponent implements OnInit {
   }
 
   loadSolutions() {
-    this.solutionService.getAllSolutions()
-      .subscribe(response => {
-        this.solutionsList = response;
-        this.totalSolutions = response.length;
-        this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
-        this.filteredSolutions = [...this.solutionsList];
-      });
+    this.solutionService.getBlockedUsers().subscribe(
+      (blockedUsers) => {
+        this.blockedUserIds = blockedUsers;
+
+        this.solutionService.getAllSolutions().subscribe(
+          (response) => {
+            this.solutionsList = response.filter(solution =>
+              !this.blockedUserIds.includes(solution.providerId) // Filtrira usluge čiji je pružalac usluga blokiran
+            );
+            this.totalSolutions = this.solutionsList.length;
+            this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
+            this.filteredSolutions = [...this.solutionsList];
+          },
+          (error) => {
+            console.error('Error loading solutions:', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error loading blocked users:', error);
+      }
+    );
   }
+
 
   fetchLocations() {
     this.solutionService.getAllLocations().subscribe(
