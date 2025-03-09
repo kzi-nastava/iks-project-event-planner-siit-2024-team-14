@@ -1,5 +1,92 @@
-<div *ngIf="service" id="service-details">
-  <h3>Showing service details for service with id: {{service.id}}. :)</h3>
-  <h4>{{service.name}}</h4>
-  <p>{{service.description}}</p>
+<article>
+  <h2>{{ service.name }} </h2>
+  <p>{{ service.description }} </p>
+  <dl>
+    <dt>Category:</dt>
+    <dd>
+      <details>
+        <summary> {{ service.category.name }} </summary>
+        {{ service.category.description }}
+      </details>
+    </dd>
+
+    <dt>Applicable event types:</dt>
+    <dd>
+      <ul>
+        <li *ngFor="let type of service.applicableEventTypes"> {{ type.name }} </li>
+      </ul>
+    </dd>
+
+    <dt>Price:</dt>
+    <dd>
+      <span [ngStyle]="service.discount > 0 ? {'text-decoration': 'line-through', 'font-style': 'italic'} : null">
+        {{ service.price | currency }}
+      </span>
+      <b *ngIf="service.discount > 0">
+        {{ service.price * (100 - service.discount) / 100  | currency}} ({{ service.discount }}% off)
+      </b>
+    </dd>
+
+    <dt>Reservation details:</dt>
+    <dd>
+      Reservations for this service must be made {{ service.reservationPeriodInDays }} days in advance, and may be canceled up to {{ service.cancellationPeriodInDays }} days before.
+      {{
+        service.duration ?
+          'Session duration for this service is ' + service.durationInMinutes + ' minutes.'
+          : service.minDurationInMinutes && service.maxDurationInMinutes ?
+            'This service may be reserved for at least ' + service.minDurationInMinutes + ' minutes, and up to ' + service.maxDurationInMinutes + ' minutes.'
+            : 'No duration information available.'
+      }}
+      {{
+        service.reservationType === 'MANUAL' ?
+          'The provider must review reservations before accepting them.'
+          : 'Your reservation will be immediately accepted.'
+      }}
+    </dd>
+
+
+    <dt>Provided by:</dt>
+    <dd>
+      <a [routerLink]="['/view-provider-profile', service.providerId]">
+        <span>{{ (service.provider.companyName | titlecase) || service.provider.email }}</span>
+      </a>
+    </dd>
+  </dl>
+</article>
+
+
+<button *ngIf="role === 'EventOrganizer'" (click)="openReservationPopup()" class="open-popup-btn">
+  Book Service
+</button>
+<div class="modal" [class.show]="isPopupOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeReservationPopup()">&times;</span>
+    <h2>Book Service: {{ service.name }}</h2>
+
+    <form (ngSubmit)="submitReservation()">
+      <label for="event">Select Event:</label>
+      <select id="event" [(ngModel)]="selectedEventId" name="event" required (change)="onEventChange()">
+        <option *ngFor="let event of userEvents" [value]="event.id">{{ event.name }}</option>
+      </select>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" [(ngModel)]="reservation.date" name="date" required readonly>
+
+      <label for="endTime" *ngIf="service.durationInMinutes != null">Duration:</label>
+      <input *ngIf="service.durationInMinutes" id="duration" type="number" [(ngModel)]="reservation.duration" [min]="service.durationInMinutes" [max]="service.durationInMinutes" name="endTime" required readonly>
+
+      <label for="endTime" *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes"></label>
+      <select *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes" id="endTime" [(ngModel)]="reservation.duration" name="endTime" required (change)="onDurationChange()">
+        <option *ngFor="let time of generateDurationOptions(service.minDurationInMinutes, service.maxDurationInMinutes)" [value]="time">{{ time }} minutes</option>
+      </select>
+
+      <label for="startTime">Start Time:</label>
+      <select id="startTime" [(ngModel)]="reservation.startTime" name="startTime" [disabled]="!reservation.duration" required>
+        <option *ngFor="let time of availableStartTimes" [value]="time">{{ time }}</option>
+      </select>
+
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
 </div>

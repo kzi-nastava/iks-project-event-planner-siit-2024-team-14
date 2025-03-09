@@ -1,0 +1,36 @@
+<div class="events-list-section">
+
+  <div class="header-bar">
+    <h2 class="header-title">Upcoming events</h2>
+  </div>
+
+  <div class="events-list">
+    <div *ngFor="let event of events" class="event-card">
+      <div class="event-header">
+        <div class="event-avatar">
+          <span>{{ getInitials(event.organizerName) }}</span>
+        </div>
+        <div class="event-details">
+          <h3>{{ event.organizerName }}</h3>
+          <p>Event organizer</p>
+        </div>
+      </div>
+      <img [src]="event.imageUrl" alt="{{ event.title }}" class="event-image" />
+      <div class="event-content">
+        <h4>{{ event.title }}</h4>
+        <p>{{ event.description }}</p>
+        <small>
+          <span class="fas fa-location-pin"></span> {{ event.location }}
+        </small>
+        <br>
+        <small>
+          <span class="fas fa-calendar-alt"></span> {{ event.date }}
+        </small>
+        <br />
+        <br>
+        <button>View More</button>
+      </div>
+    </div>
+  </div>
+  <button class="view-more-btn">View More</button>
+</div>

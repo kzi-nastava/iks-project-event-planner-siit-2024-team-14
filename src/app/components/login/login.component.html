@@ -28,30 +28,34 @@
         <!-- Form Card -->
         <div class="circle-background">
           <div class="form-card">
-            <form>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="form-group">
-                <input id="email" type="email" placeholder="E-mail address" />
+                <input id="email" formControlName="email" type="email" placeholder="E-mail address" />
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                  <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</span>
+                  <span *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email.</span>
+                </div>
               </div>
               <div class="form-group">
-                <input id="password" type="password" placeholder="Password" />
+                <input id="password" formControlName="password" type="password" placeholder="Password" />
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                  <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</span>
+                </div>
               </div>
               <button type="submit" class="btn-confirm">Confirm</button>
             </form>
+
           </div>
         </div>
 
         <!-- Popup Modal -->
-        <p>
-          You don’t have an account?
-          <a href="#" (click)="openModal($event)">Register here</a>
-        </p>
+        <p> You don’t have an account? <a href="#" (click)="openModal($event)">Register here</a> </p>
 
         <!-- Modal -->
         <div
           id="registerModal"
           class="modal"
-          [ngStyle]="{ display: showModal ? 'flex' : 'none' }"
-        >
+          [ngStyle]="{ display: showModal ? 'flex' : 'none' }">
           <div class="modal-content">
             <h2>Do you want to register as:</h2>
             <button (click)="redirectTo('/registration-eo')">Event Organizer</button>
@@ -59,7 +63,6 @@
             <button id="closeModal" (click)="closeModal()">Close</button>
           </div>
         </div>
-
       </div>
     </div>
   </div>

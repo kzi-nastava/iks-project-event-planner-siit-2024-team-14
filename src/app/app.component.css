@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Petrona:wght@400;700&display=swap');
 
 body {
+  font-family: 'Petrona', sans-serif;
   position: relative;
   background-color: #ffffff; /* Pozadina stranice */
   overflow-x: hidden;
