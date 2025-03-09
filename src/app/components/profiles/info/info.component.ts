@@ -25,6 +25,16 @@ export class InfoComponent implements OnInit {
   editForm!: FormGroup;
 
   ngOnInit(): void {
+    // Retrieve user first
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+      console.log("User retrieved from localStorage:", this.user);
+
+      // Now safely fetch photos
+      this.fetchPhotos();
+    }
+
     this.editForm = new FormGroup({
       name: new FormControl('', Validators.required),
       surname: new FormControl(''),
@@ -33,14 +43,8 @@ export class InfoComponent implements OnInit {
       phoneNumber: new FormControl('', Validators.required),
       description: new FormControl('')
     });
-
-    // get user from local storage
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-      this.fetchPhotos();
-    }
   }
+
 
   // function for name + surname for EO
   get fullName(): string {
@@ -269,34 +273,36 @@ export class InfoComponent implements OnInit {
   }
 
   fetchPhotos(): void {
+    if (!this.user) {
+      console.warn("User is null, skipping fetchPhotos()");
+      return;
+    }
+
     const storedPhotos = localStorage.getItem('photos');
 
-    // Check if photos are already in localStorage
     if (storedPhotos) {
-      // Load the photos from localStorage (immediate)
       this.photos = JSON.parse(storedPhotos);
       this.cdRef.detectChanges();
-    } else {
-      // If no photos in localStorage, fetch from the server
-      if (this.user?.role === 'ServiceAndProductProvider') {
-        this.infoService.getPhotos(this.user.id).subscribe({
-          next: (photos: string[]) => {
-            this.photos = photos; // Store the photo URLs from the server
-            localStorage.setItem('photos', JSON.stringify(this.photos)); // Store in localStorage
-            this.cdRef.detectChanges();
-          },
-          error: (err: any) => console.error('Error fetching photos:', err)
-        });
-      }
+    } else if (this.user.role === 'ServiceAndProductProvider') {
+      console.log("Fetching photos from backend for user ID:", this.user.id);
+
+      this.infoService.getPhotos(this.user.id).subscribe({
+        next: (photos: string[]) => {
+          this.photos = photos;
+          localStorage.setItem('photos', JSON.stringify(this.photos));
+          console.log("PHOTOS from fetchPhotos: ", this.photos);
+          this.cdRef.detectChanges();
+        },
+        error: (err: any) => console.error('Error fetching photos:', err)
+      });
     }
   }
 
-
   openFileInputForSPP(photoIndex: number): void {
-    this.selectedPhotoIndex = photoIndex;  // Fixing typo
+    this.selectedPhotoIndex = photoIndex;
     const fileInput: HTMLInputElement | null = document.getElementById('photo-carousel') as HTMLInputElement;
     if (fileInput) {
-      fileInput.click();  // Trigger the file input
+      fileInput.click();
     }
   }
 
@@ -349,5 +355,4 @@ export class InfoComponent implements OnInit {
       })
     }
   }
-
 }
