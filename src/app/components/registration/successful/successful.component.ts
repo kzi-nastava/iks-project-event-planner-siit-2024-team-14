@@ -11,6 +11,7 @@ export class SuccessfulComponent {
   @Output() close = new EventEmitter<void>();
   @Input() modalTitle: string = 'Registration';
   @Input() isVisible: boolean = false;
+  @Input() showOkButton: boolean = false;  // Handle OK button visibility
 
   constructor(private router: Router) {}
 

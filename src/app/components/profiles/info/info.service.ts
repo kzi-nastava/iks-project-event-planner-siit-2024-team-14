@@ -35,4 +35,11 @@ export class InfoService {
   changePhoto(data: FormData, id: number, photoIndex: number): Observable<any> {
     return this.http.put<any>(`http://localhost:8080/api/providers/update-photo/${id}?photoIndex=${photoIndex}`, data);
   }
+
+  deactivateAccount(id: number, role: string): Observable<any> {
+    if (role === 'ServiceAndProductProvider') {
+      return this.http.put<any>(`http://localhost:8080/api/providers/deactivate/${id}`, {});
+    }
+    return this.http.put<any>(`http://localhost:8080/api/organizers/deactivate/${id}`, {});
+  }
 }
