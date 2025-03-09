@@ -4,6 +4,7 @@ import { EditEO } from '../../../interfaces/edit-eo.model';
 import { InfoService } from './info.service';
 import { ChangePassword } from '../../../interfaces/change-password.model';
 import {EditSPP} from '../../../interfaces/edit-spp.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-info',
@@ -19,8 +20,15 @@ export class InfoComponent implements OnInit {
   selectedFile: File | null = null;
   photos: string[] = [];
   selectedPhotoIndex: number = -1;
+  // Deactivate modal variables
+  isDeactivateModalVisible: boolean = false;
+  modalTitle: string = 'Are you sure you want to deactivate your account?';
+  modalMessage: string = 'This action cannot be undone.';
+  okButtonDeactivate: boolean = false;
+  noButton: boolean = false;
+  yesButton: boolean = false;
 
-  constructor(private infoService: InfoService, private cdRef: ChangeDetectorRef) {}
+  constructor(private infoService: InfoService, private cdRef: ChangeDetectorRef, private router: Router) {}
 
   editForm!: FormGroup;
 
@@ -354,5 +362,46 @@ export class InfoComponent implements OnInit {
         }
       })
     }
+  }
+
+  // Deactivation logic ----------------------
+
+  openDeactivateModal(event: MouseEvent): void {
+    event.preventDefault();
+    this.yesButton = true;
+    this.noButton = true;
+    this.isDeactivateModalVisible = true;
+  }
+
+  cancelDeactivation(): void {
+    this.isDeactivateModalVisible = false;
+  }
+
+  confirmDeactivation(): void {
+    console.log("Deactivating account...");
+    this.yesButton = false;
+    this.noButton = false;
+
+    this.infoService.deactivateAccount(this.user.id, this.user.role).subscribe({
+      next: (response) => {
+        console.log("ROLE in deactivate: ", this.user.role);
+        this.modalTitle = 'Your account has been deactivated!';
+        this.modalMessage = '';
+        this.okButtonDeactivate = true;
+
+        this.isDeactivateModalVisible = true;
+      },
+      error: (err) => {
+        console.error('Error deactivating account:', err);
+      }
+    });
+
+    this.isDeactivateModalVisible = false;
+  }
+
+  okButtonDeactivationClicked(): void {
+      localStorage.clear();
+      this.router.navigate(['home-guest']);
+      this.isDeactivateModalVisible = false;
   }
 }

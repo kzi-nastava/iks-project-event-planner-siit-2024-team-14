@@ -194,7 +194,8 @@
 
 /* MODALS ----------------------------------------------- */
 .update-modal-overlay,
-.change-password-modal-overlay {
+.change-password-modal-overlay,
+.deactivate-modal-overlay{
   font-family: 'Petrona', serif;
   color: #523D35;
   position: fixed;
@@ -210,7 +211,8 @@
 }
 
 .update-modal-overlay,
-.change-password-modal-overlay {
+.change-password-modal-overlay,
+.deactivate-modal-overlay{
   position: fixed;
   top: 0;
   left: 0;
@@ -224,7 +226,8 @@
 
 /* Modal box */
 .update-modal-content,
-.change-password-modal-content {
+.change-password-modal-content,
+.deactivate-modal-content{
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -237,7 +240,8 @@
 
 /* Modal button */
 .update-modal-content button,
-.change-password-modal-content button {
+.change-password-modal-content button,
+.deactivate-yes-button, .deactivate-no-button, .deactivate-ok-button{
   margin: 10px;
   padding: 10px 20px;
   background-color: #6c4c4c;
@@ -248,7 +252,8 @@
 }
 
 .update-modal-content button:hover,
-.change-password-modal-content button:hover {
+.change-password-modal-content button:hover,
+.deactivate-modal-content button:hover {
   background-color: #5a3e3e;
 }
 
@@ -370,6 +375,63 @@
 
 /* Top beige */
 .circle-four-password {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: -5%;
+  width: 120px;
+  height: 120px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+
+/* Add circles in the background */
+/* Top green */
+.circle-one-deactivate {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -5%;
+  width: 150px;
+  height: 150px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+  z-index: -1;
+}
+/* Bottom green */
+.circle-two-deactivate {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -5%;
+  width: 200px;
+  height: 200px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+/* Bottom beige */
+.circle-three-deactivate {
+  content: '';
+  position: absolute;
+  bottom: 5%;
+  left: -5%;
+  width: 150px;
+  height: 150px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+/* Top beige */
+.circle-four-deactivate {
   content: '';
   position: absolute;
   top: 15%;

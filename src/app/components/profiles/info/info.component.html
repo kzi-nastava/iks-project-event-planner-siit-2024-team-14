@@ -41,7 +41,6 @@
         <h3>{{ user?.role === 'EventOrganizer' ? (fullName || 'User Name') : (user?.name || 'Company Name') }}</h3>
         <p>{{ user?.role === 'EventOrganizer' ? 'Event Organizer' : 'Service and Product Provider' }}</p>
         <ul>
-            <li *ngIf="user?.role === 'ServiceAndProductProvider'"><strong>Name:</strong> {{ user?.name || 'No name provided' }}</li>
             <li *ngIf="user?.role === 'ServiceAndProductProvider'"><strong>Description:</strong> {{ user?.description || 'No description provided' }}</li>
             <li><strong>Email:</strong> {{ user?.email || 'No email available' }}</li>
             <li><strong>Address:</strong> {{ user?.address || 'No address provided' }}</li>
@@ -53,7 +52,7 @@
                 <i class="fa fa-pencil"></i> Edit Profile
             </button>
             <button class="change-password" (click)="openPasswordModal($event)">Change password</button>
-            <button class="deactivate">Deactivate account</button>
+            <button class="deactivate" (click)="openDeactivateModal($event)">Deactivate account</button>
         </div>
     </div>
 </div>
@@ -72,9 +71,6 @@
             </div>
             <div *ngIf="user?.role === 'EventOrganizer'" class="form-group">
                 <input formControlName="surname" type="text" placeholder="Enter your surname" />
-            </div>
-            <div *ngIf="user?.role === 'ServiceAndProductProvider'" class="form-group">
-                <input formControlName="name" type="text" placeholder="Enter your company name" />
             </div>
             <div *ngIf="user?.role === 'ServiceAndProductProvider'" class="form-group">
                 <input formControlName="description" type="text" placeholder="Enter your description" />
@@ -123,3 +119,21 @@
         </form>
     </div>
 </div>
+
+<!-- Deactivate Modal Popup -->
+<div class="deactivate-modal-overlay" *ngIf="isDeactivateModalVisible">
+  <div class="deactivate-modal-content">
+      <div class="circle-one-deactivate"></div>
+      <div class="circle-two-deactivate"></div>
+      <div class="circle-three-deactivate"></div>
+      <div class="circle-four-deactivate"></div>
+    <h2>{{ modalTitle }}</h2>
+    <p>{{ modalMessage }}</p>
+    <div class="deactivate-modal-actions">
+      <button *ngIf="yesButton" (click)="confirmDeactivation()" class="deactivate-yes-button">Yes</button>
+      <button *ngIf="noButton" (click)="cancelDeactivation()" class="deactivate-no-button">No</button>
+        <button *ngIf="okButtonDeactivate" (click)="okButtonDeactivationClicked()" class="deactivate-ok-button">OK</button>
+    </div>
+  </div>
+</div>
+
