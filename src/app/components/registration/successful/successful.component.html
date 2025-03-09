@@ -2,6 +2,6 @@
   <div class="modal-content">
     <h2>{{ modalTitle }}</h2>
     <p>{{ message }}</p>
-    <button (click)="closeModal()">OK</button>
+    <button *ngIf="showOkButton" (click)="closeModal()">OK</button>
   </div>
 </div>
