@@ -1,0 +1,18 @@
+<!-- Navigation Sidebar -->
+<div class="sidebar" [class.open]="isSidebarOpen">
+  <ul>
+    <li>Home</li>
+    <li>User Management</li>
+    <li (click)="navigateToEventTypeManagement()">Event Types</li>
+    <li>Categories</li>
+    <li (click)="toggleCommentsSidebar()">Comments & reviews requests</li>
+    <li (click)="toggleReportsSidebar()">Reports</li>
+    <li (click)="toggleNotificationsSidebar()">Notifications</li>
+    <li>Profile</li>
+    <li>Log out</li>
+  </ul>
+</div>
+
+<app-admin-comments [isCommentsOpen]="isCommentsOpen"></app-admin-comments>
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+<app-admin-reports [isReportsOpen] = "isReportsOpen"></app-admin-reports>

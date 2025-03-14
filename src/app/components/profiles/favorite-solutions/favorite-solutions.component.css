@@ -1,0 +1,153 @@
+/* Apply Petrona font globally */
+body {
+  font-family: 'Petrona', serif;
+}
+
+.solutions-list-section {
+  font-family: 'Petrona', serif;
+  text-align: center;  /* Centers the entire section */
+  padding: 0px 20px;
+  background-color: #fff;
+  position: relative; /* Potrebno za pozicioniranje pseudo-elemenata */
+  overflow: hidden; /* Sakriva delove krugova koji izlaze izvan sekcije */
+  z-index: 0;
+  padding-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 2em;
+  font-weight: bold;
+  font-family: 'Petrona', sans-serif;
+  color: #523D35;
+  margin-bottom: 20px;
+  text-align: left;  /* Align the title to the left */
+}
+
+.solutions-list {
+  display: flex;
+  justify-content: center; /* Center the cards horizontally */
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.solution-card {
+  width: 300px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.solution-header {
+  display: flex;
+  padding: 16px;
+  width: 100%;
+}
+
+.solution-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #523D35; /* Tamno braon pozadina */
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.solution-details h3 {
+  font-size: 1.2em;
+  margin: 0;
+  color: #523D35;
+}
+
+.solution-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #8c7364;
+}
+
+.solution-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.solution-content {
+  padding: 10px;
+  text-align: left;
+}
+
+.solution-content h4 {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  color: #523D35;
+}
+
+.solution-content p {
+  font-size: 0.9em;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.solution-content small span {
+  margin-right: 5px; /* Razmak između ikone i teksta */
+  color: #523D35; /* Boja ikone, možeš promeniti po želji */
+}
+
+button {
+  background-color: #523D35;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Petrona', serif;
+}
+
+button:hover {
+  background-color: #412c26;
+}
+
+.view-more-btn {
+  margin-top: 20px;
+  background-color: #523D35;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1em;
+  font-weight: normal;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Petrona', serif;
+}
+
+.view-more-btn:hover {
+  background-color: #412c26;
+}
+
+.header-bar {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 4rem;
+  justify-content: flex-start; /* Align the content to the left */
+  left: 0; /* Optionally adjust this if you want a slight offset from the left */
+}
+
+.header-title {
+  font-size: 2rem;              /* Veličina fonta naslova */
+  font-family: 'Petrona', serif; /* Font po uzoru na sliku */
+  color: #523D35;               /* Boja naslova */
+  position: absolute;           /* Apsolutno pozicioniranje */
+  left: 50%;                    /* Pomeri na 50% širine */
+  transform: translateX(-50%);  /* Centriraj na osnovu sredine elementa */
+  margin: 0;                    /* Ukloni margine */
+}

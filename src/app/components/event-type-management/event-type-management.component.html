@@ -1,0 +1,99 @@
+<header>
+  <!-- Background image -->
+  <div class="header-background">
+    <!-- Rectangle with opacity and color -->
+    <div class="header-overlay">
+      <!-- Left burger icon for drawer navbar -->
+      <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
+
+      <!-- Right profile, notifications, and messages icons -->
+      <div class="header-icons">
+        <div class="notifications-container">
+          <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
+          <span *ngIf="unreadCount > 0" class="unread-count">{{ unreadCount }}</span>
+        </div>
+        <mat-icon class="messages-icon" routerLink="/messages">message</mat-icon>
+        <mat-icon class="profile-icon" routerLink="/login">account_circle</mat-icon>
+      </div>
+
+      <!-- Centered logo -->
+      <div class="logo-container">
+        <img class="logo">
+      </div>
+
+      <!-- "Event Planner" text -->
+      <div class="event-planner">
+        <h1>Event Planner</h1>
+      </div>
+
+      <!-- Navigation links -->
+      <div class="nav-links">
+        <a href="#">HOME</a> | <a href="#">PROFILE</a> | <a href="#">SETTINGS</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="event-type-management">
+  <h2 class="section-title">Event types</h2>
+
+  <div class="carousel">
+    <!-- Previous Button -->
+    <button class="carousel-button left" (click)="prevEventType()">&#9664;</button>
+
+    <!-- Event Cards Wrapper -->
+    <div class="event-cards-wrapper">
+      <div class="event-cards" [style.transform]="'translateX(-' + (currentIndex * 30) + '%)'">
+        <div class="event-card" *ngFor="let event of eventTypes">
+          <!--<img class="event-image" [src]="event.image" alt="{{ event.name }}">-->
+          <div class="event-details">
+            <h3>{{ event.name }}</h3>
+            <p class="event-description">{{ event.description }}</p> <!-- Added description -->
+            <div class="event-actions">
+              <button class="btn" (click)="editEventType(event)">Edit</button>
+              <button class="btn" (click)="activationStatus(event)">
+                {{ event.isActive ? 'Activate' : 'Deactivate' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next Button -->
+    <button class="carousel-button right" (click)="nextEventType()">&#9654;</button>
+  </div>
+
+  <!-- Add Event Button -->
+  <div class="add-button">
+    <button class="add-event-button" (click)="createEventType()">+</button>
+  </div>
+</div>
+
+<!-- Create Popup -->
+<div *ngIf="showCreatePopup" class="popup-overlay">
+  <div class="popup">
+    <app-add
+      (save)="refreshEventTypes($event)">
+    </app-add>
+
+    <button class="close-popup-button" (click)="closePopup()">✖</button>
+  </div>
+</div>
+
+<!-- Edit Popup -->
+<div *ngIf="showEditPopup" class="popup-overlay">
+  <div class="popup">
+    <app-edit
+      [eventData]="selectedEvent"
+      (save)="refreshEventTypes($event)"
+      (delete)="deleteEvent()">
+    </app-edit>
+    <button class="close-popup-button" (click)="closePopup()">✖</button>
+  </div>
+</div>
+
+
+<div class="footer">
+  <app-footer></app-footer>
+</div>

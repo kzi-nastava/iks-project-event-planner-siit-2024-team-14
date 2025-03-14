@@ -1,0 +1,19 @@
+<!-- Navigation Sidebar -->
+<div class="sidebar" [class.open]="isSidebarOpen">
+  <ul>
+    <li>My services/products</li>
+    <li (click)="toggleBookingsSidebar()">All Bookings</li>
+    <li (click)="toggleBookingRequestsSidebar()">Booking service requests</li>
+    <li>Reviews and ratings</li>
+    <li>Categories</li>
+    <li>Price list</li>
+    <li (click)="toggleNotificationsSidebar()">Notifications</li>
+    <li>Messages</li>
+    <li>Log out</li>
+  </ul>
+</div>
+
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+<app-booking-service-requests [isBookingRequestsOpen] = "isBookingRequestsOpen"></app-booking-service-requests>
+<app-all-bookings-provider [isBookingsOpen] = "isBookingsOpen"></app-all-bookings-provider>
+

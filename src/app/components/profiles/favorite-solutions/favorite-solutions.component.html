@@ -1,0 +1,33 @@
+<div class="solutions-list-section">
+
+  <div class="header-bar">
+    <h2 class="header-title">Favorite services and products</h2>
+  </div>
+
+  <div class="solutions-list">
+    <div *ngFor="let solution of solutions" class="solution-card">
+      <div class="solution-header">
+        <div class="solution-avatar">
+          <span>{{ getInitials(solution.organizerName) }}</span>
+        </div>
+        <div class="solution-details">
+          <h3>{{ solution.organizerName }}</h3>
+          <p>Service and product provider</p>
+        </div>
+      </div>
+      <img [src]="solution.imageUrl" alt="{{ solution.title }}" class="solution-image" />
+      <div class="solution-content">
+        <h4>{{ solution.title }}</h4>
+        <p>{{ solution.description }}</p>
+        <small>
+          <span class="fas fa-location-pin"></span> {{ solution.location }}
+        </small>
+        <br>
+        <br />
+        <br>
+        <button>View More</button>
+      </div>
+    </div>
+  </div>
+  <button class="view-more-btn">View More</button>
+</div>

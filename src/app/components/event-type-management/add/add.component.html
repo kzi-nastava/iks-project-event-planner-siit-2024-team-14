@@ -1,0 +1,52 @@
+<div class="popup">
+  <h1>New event type</h1>
+
+  <!-- Error Message Display -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Success Message Display -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <form class="form" (ngSubmit)="createEventType()">
+
+    <div class="form-section">
+      <div class="circle-one"></div>
+      <div class="circle-two"></div>
+      <div class="circle-three"></div>
+      <div class="circle-four"></div>
+    </div>
+
+    <div class="form-group">
+      <textarea id="name" type="text" placeholder="Name" [(ngModel)]="eventData.name" name="name" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <textarea id="description" type="text" placeholder="Description" [(ngModel)]="eventData.description" name="description" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <fieldset class="form-group">
+        <legend>Choose services and products</legend>
+
+        <div *ngFor="let category of categories">
+          <label>
+            <input
+              type="checkbox"
+              name="services"
+              [value]="category.name"
+              (change)="onCategoryChange($event, category)"
+            />
+            {{ category.name }}
+          </label>
+        </div>
+
+      </fieldset>
+    </div>
+
+    <button type="submit" class="create-button">Create</button>
+  </form>
+</div>

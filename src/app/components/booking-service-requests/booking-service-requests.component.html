@@ -1,0 +1,29 @@
+<!-- Booking Service Requests Sidebar -->
+<div class="sidebar booking-service-requests-sidebar" [class.open]="isBookingRequestsOpen">
+  <div class="sidebar-header">
+    <h2>Booking Requests</h2>
+    <button class="close-sidebar" (click)="closeRequests()">&times;</button>
+  </div>
+
+  <div class="cards-container">
+    <div *ngFor="let request of requests">
+      <div class="card request-card" *ngIf="request.confirmed === 'PENDING'">
+        <div class="request-info">
+          <p><strong>Service:</strong> {{ request.service }}</p>
+          <p><strong>Event:</strong> {{ request.event }}</p>
+          <p><strong>Date:</strong> {{ request.bookingDate }}</p>
+          <p><strong>Time:</strong> {{ request.startTime }}</p>
+          <p><strong>Duration:</strong> {{ request.duration }} min</p>
+        </div>
+
+        <div class="actions">
+          <button class="approve-btn" (click)="approveRequest(request)">✔ Approve</button>
+          <button class="delete-btn" (click)="deleteRequest(request)">🗑 Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" *ngIf="isBookingRequestsOpen" (click)="closeRequests()"></div>

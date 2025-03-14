@@ -1,0 +1,10 @@
+<div *ngIf="event" class="event-details-container">
+  <h2>{{ event.name }}</h2>
+  <p><strong>Location:</strong> {{ event.location }}</p>
+  <p><strong>Date:</strong> From {{ event.startDate }} to {{ event.endDate }}</p>
+  <p>{{ event.description }}</p>
+  <p>Organizer:</p>
+  <a [routerLink]="['/view-organizer-profile', event.organizerId]">
+      <span>{{ (event.organizerFirstName + " " + event.organizerLastName | titlecase) || 'organizer not found' }}</span>
+    </a>
+</div>
