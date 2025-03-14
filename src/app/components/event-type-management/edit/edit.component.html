@@ -1,6 +1,12 @@
 <div class="popup">
   <h1>Edit Event Type</h1>
-  <form class="form" (ngSubmit)="saveEvent()">
+
+    <!-- Error Message Display -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+  <form class="form" (ngSubmit)="editEventType()">
 
     <div class="form-section">
       <div class="circle-one"></div>
@@ -13,76 +19,29 @@
       <input id="name" type="text" placeholder="Name" [(ngModel)]="eventData.name" name="name" required readonly class="readonly-input"/>
     </div>
     <div class="form-group">
-      <textarea id="description" placeholder="Description" [(ngModel)]="eventData.description" name="description"></textarea>
+      <textarea id="description" placeholder="Description" [(ngModel)]="eventData.description" name="description" required></textarea>
     </div>
 
     <div class="form-group">
       <fieldset class="form-group">
         <legend>Choose services and products</legend>
-        <label>
-          <input
-            type="checkbox"
-            name="services"
-            value="decoration"
-            (change)="toggleService('decoration', $event)"
-            [checked]="eventData.services.includes('decoration')"
-          />
-          Decoration
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="services"
-            value="drinks"
-            (change)="toggleService('drinks', $event)"
-            [checked]="eventData.services.includes('drinks')"
-          />
-          Drinks
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="services"
-            value="food"
-            (change)="toggleService('food', $event)"
-            [checked]="eventData.services.includes('food')"
-          />
-          Food
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="services"
-            value="fireworks"
-            (change)="toggleService('fireworks', $event)"
-            [checked]="eventData.services.includes('fireworks')"
-          />
-          Fireworks
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="services"
-            value="band"
-            (change)="toggleService('band', $event)"
-            [checked]="eventData.services.includes('band')"
-          />
-          Band
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="services"
-            value="waiters"
-            (change)="toggleService('waiters', $event)"
-            [checked]="eventData.services.includes('waiters')"
-          />
-          Waiters
-        </label>
+
+        <div *ngFor="let category of categories">
+          <label>
+            <input
+              type="checkbox"
+              name="services"
+              [value]="category.name"
+              [checked]="isCategorySelected(category)"
+              (change)="toggleService(category, $event)"/>
+            {{ category.name }}
+          </label>
+        </div>
+
       </fieldset>
     </div>
 
-    <button type="submit" class="create-button">Save</button>
+    <button type="submit" class="create-button" (click)="editEventType()">Save</button>
 
   </form>
 </div>

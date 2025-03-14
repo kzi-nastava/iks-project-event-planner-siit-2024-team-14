@@ -45,6 +45,9 @@ import { BookingServiceRequestsComponent } from './components/booking-service-re
 import { AllBookingsProviderComponent } from './components/all-bookings-provider/all-bookings-provider.component';
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
 import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
+import { EventTypeManagementComponent } from './components/event-type-management/event-type-management.component'
+import { AddEventTypeComponent } from './components/event-type-management/add/add.component'
+import { EditEventTypeComponent} from './components/event-type-management/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +88,10 @@ import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
     EventDetailsComponent,
     ViewProviderProfileComponent,
     ProviderProfileComponent,
-    ChatSidebarComponent
+    ChatSidebarComponent,
+    EventTypeManagementComponent,
+    AddEventTypeComponent,
+    EditEventTypeComponent
   ],
   imports: [
     BrowserModule,

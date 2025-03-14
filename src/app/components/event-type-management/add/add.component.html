@@ -1,6 +1,17 @@
 <div class="popup">
   <h1>New event type</h1>
-  <form class="form">
+
+  <!-- Error Message Display -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Success Message Display -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <form class="form" (ngSubmit)="createEventType()">
 
     <div class="form-section">
       <div class="circle-one"></div>
@@ -10,21 +21,29 @@
     </div>
 
     <div class="form-group">
-      <input id="name" type="text" placeholder="Name" />
+      <textarea id="name" type="text" placeholder="Name" [(ngModel)]="eventData.name" name="name" required></textarea>
     </div>
+
     <div class="form-group">
-      <textarea id="description" type="text" placeholder="Description"></textarea>
+      <textarea id="description" type="text" placeholder="Description" [(ngModel)]="eventData.description" name="description" required></textarea>
     </div>
 
     <div class="form-group">
       <fieldset class="form-group">
         <legend>Choose services and products</legend>
-        <label><input type="checkbox" name="services" value="decoration"> Decoration</label>
-        <label><input type="checkbox" name="services" value="drinks"> Drinks</label>
-        <label><input type="checkbox" name="services" value="food"> Food</label>
-        <label><input type="checkbox" name="services" value="fireworks"> Fireworks</label>
-        <label><input type="checkbox" name="services" value="band"> Band</label>
-        <label><input type="checkbox" name="services" value="waiters"> Waiters</label>
+
+        <div *ngFor="let category of categories">
+          <label>
+            <input
+              type="checkbox"
+              name="services"
+              [value]="category.name"
+              (change)="onCategoryChange($event, category)"
+            />
+            {{ category.name }}
+          </label>
+        </div>
+
       </fieldset>
     </div>
 

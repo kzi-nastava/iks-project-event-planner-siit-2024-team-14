@@ -21,6 +21,11 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* Center elements horizontally */
+  z-index: 100;
+}
+
+h1 {
+  z-index: 100;
 }
 
 .form {
@@ -78,7 +83,7 @@ legend {
   justify-content: center; /* Center the button within its container */
 }
 
-.create-button, .delete-button {
+.create-button {
   background-color: #523D35;
   color: white;
   padding: 10px 20px;
@@ -89,7 +94,7 @@ legend {
   margin-bottom: 1rem;
 }
 
-.create-button:hover, .delete-button:hover {
+.create-button:hover {
   background-color: #412c26;
 }
 
@@ -164,7 +169,9 @@ legend {
   opacity: 0.8;
 }
 
-.readonly-input {
-  background-color: #f0f0f0; /* Light grey background */
-  cursor: not-allowed; /* Change the cursor to show it's not editable */
+
+.error-message {
+  z-index: 100;
+  text-align: center;
+  padding: 5px;
 }
