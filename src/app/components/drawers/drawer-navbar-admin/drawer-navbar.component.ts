@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-drawer-navbar-admin',
   templateUrl: './drawer-navbar.component.html',
@@ -6,6 +8,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 
 export class DrawerNavbarComponent {
+
+  constructor(private router: Router) {}
+
   @Input() isSidebarOpen: boolean = false;
   isCommentsOpen = false;
   @Output() toggleComments = new EventEmitter<boolean>();
@@ -30,5 +35,9 @@ export class DrawerNavbarComponent {
   toggleReportsSidebar() {
     this.isReportsOpen = !this.isReportsOpen;
     this.toggleReports.emit(this.isReportsOpen);
+  }
+
+  navigateToEventTypeManagement() {
+    this.router.navigate(['event-type-management']);
   }
 }

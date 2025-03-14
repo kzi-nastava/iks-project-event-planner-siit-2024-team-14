@@ -1,0 +1,177 @@
+.popup {
+  background-color: white;
+  border-radius: 10px;
+  width: 400px;
+  margin: 0 auto;
+  position: relative; /* Centering the popup in the viewport */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-family: 'Petrona', serif;
+  color: #523D35;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center elements horizontally */
+  overflow: hidden;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center elements horizontally */
+  z-index: 100;
+}
+
+h1 {
+  z-index: 100;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center elements horizontally */
+}
+
+input[type="checkbox"] {
+  margin-right: 10px; /* Adds space between checkbox and text */
+}
+
+label {
+  display: inline-flex;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  resize: none;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #523D35;
+  border-radius: 5px;
+  font-family: 'Petrona', serif;
+  color: #523D35;
+  box-sizing: border-box;
+}
+
+/* Focus state for inputs and textareas */
+input:focus, textarea:focus {
+  border-color: #412c26;
+  outline: none;
+}
+
+fieldset {
+  width: 90%;
+  margin-top: 10px;
+  border: 1px solid #523D35;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+legend {
+  font-weight: normal;
+  text-align: center;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the button within its container */
+}
+
+.create-button {
+  background-color: #523D35;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Petrona', serif;
+  margin-bottom: 1rem;
+}
+
+.create-button:hover {
+  background-color: #412c26;
+}
+
+/* Placeholder styling */
+::placeholder {
+  color: #523D35;
+  opacity: 1;
+}
+
+:-moz-placeholder {
+  color: #523D35;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #523D35;
+}
+
+::-webkit-input-placeholder {
+  color: #523D35;
+}
+
+/* Add circles in the background */
+/* Top green */
+.circle-one {
+  content: '';
+  position: absolute;
+  top: -10%; /* Adjust position to place below the form */
+  right: -8%;
+  width: 150px;
+  height: 150px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+/* Bottom green */
+.circle-two {
+  content: '';
+  position: absolute;
+  bottom: -3%; /* Place this circle closer to the bottom */
+  left: -15%;
+  width: 200px;
+  height: 200px;
+  background-color: #959D90;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+/* Bottom beige */
+.circle-three {
+  content: '';
+  position: absolute;
+  bottom: -10%; /* Place this circle closer to the bottom */
+  left: 0%;
+  width: 150px;
+  height: 150px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* Top beige */
+.circle-four {
+  content: '';
+  position: absolute;
+  top: 5%; /* Place this circle closer to the bottom */
+  right: -10%;
+  width: 120px;
+  height: 120px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+
+.error-message {
+  z-index: 100;
+  text-align: center;
+  padding: 5px;
+}
