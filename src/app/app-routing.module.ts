@@ -19,6 +19,7 @@ import {ViewOrganizerProfileComponent} from './components/profiles/view-organize
 import {ViewProviderProfileComponent} from './components/profiles/view-provider-profile/view-provider-profile.component';
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
 import {EventTypeManagementComponent} from './components/event-type-management/event-type-management.component';
+import {MyEventsOdComponent} from './components/event-management/my-events-od/my-events-od.component';
 
 
 const routes: Routes = [
@@ -35,13 +36,14 @@ const routes: Routes = [
   { path: 'products/:id', component: ProductDetailsComponent },
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },
-  { path: 'activate', component: ActivationComponent }, // Ensure this route exists
+  { path: 'activate', component: ActivationComponent },
   { path: 'organizer-profile', component: OrganizerProfileComponent },
   { path: 'events/:id', component: EventDetailsComponent },
-  {path: 'view-organizer-profile/:id', component: ViewOrganizerProfileComponent },
-  {path: 'view-provider-profile/:id', component: ViewProviderProfileComponent },
+  { path: 'view-organizer-profile/:id', component: ViewOrganizerProfileComponent },
+  { path: 'view-provider-profile/:id', component: ViewProviderProfileComponent },
   { path: 'provider-profile', component: ProviderProfileComponent },
   { path: 'event-type-management', component: EventTypeManagementComponent },
+  { path: 'my-events-od', component: MyEventsOdComponent },
   { path: '**', redirectTo: '/home-guest' }
 ];
 
