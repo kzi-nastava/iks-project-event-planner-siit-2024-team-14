@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-event-management',
-  templateUrl: './event-management.component.html',
-  styleUrl: './event-management.component.css'
+  templateUrl: './event-page.component.html',
+  styleUrl: './event-page.component.css'
 })
-export class EventManagementComponent {
+export class EventPageComponent {
   isFavorite: boolean = false; // Tracks whether the event is favorited
 
   event = {
