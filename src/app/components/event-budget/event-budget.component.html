@@ -1,0 +1,39 @@
+<article>
+  <h3>Budget</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Planned</th>
+        <th>Spent</th>
+        <th>
+          <button mat-icon-button title="Add new budget plan to event's budget."><mat-icon>add</mat-icon></button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of event.budget?.items; let i = index">
+        <td>{{ item.category }}</td>
+        <td>
+          @if (editing_index == i) {
+            <input #amountInput type="number" value="{{item.amount}}" (keyup.enter)="updateBudgetItem(item, Number(amountInput.value)); editing_index = -1" (focusout)="editing_index = -1"/>
+          } @else {
+            <p (click)="editing_index = i">{{ item.amount | currency }}</p>
+          }
+        </td>
+        <td>{{ item.spent | currency }}</td>
+        <td>
+          <button (click)="editing_index = editing_index == i ? -1 : i" mat-icon-button title='Edit planned budget amount for "{{item.category || ""}}".'><mat-icon>edit</mat-icon></button>
+          <button (click)="deleteBudgetItem(item)" mat-icon-button title='Remove budget plan for "{{item.category || ""}}"'><mat-icon>delete</mat-icon></button>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>{{ event.budget?.amount | currency }}</td>
+        <td>{{ event.budget?.spent | currency }}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
