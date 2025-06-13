@@ -8,16 +8,20 @@
         <th>Planned</th>
         <th>Spent</th>
         <th>
-          <button mat-icon-button title="Add new budget plan to event's budget."><mat-icon>add</mat-icon></button>
+          <button mat-icon-button title="Add new budget plan to event's budget." (click)="showAddBudgetItem = true"><mat-icon>add</mat-icon></button>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of event.budget?.items; let i = index">
-        <td>{{ item.category }}</td>
+      <tr *ngFor="let item of budget.items; let i = index">
+        <td>{{ item.category.name | titlecase }}</td>
         <td>
           @if (editing_index == i) {
-            <input #amountInput type="number" value="{{item.amount}}" (keyup.enter)="updateBudgetItem(item, Number(amountInput.value)); editing_index = -1" (focusout)="editing_index = -1"/>
+            <input #amountInput type="number"
+                   value="{{item.amount}}"
+                   min="0" required
+                   (keyup.enter)="updateBudgetItem(item, Number(amountInput.value)); editing_index = -1"
+                   (focusout)="editing_index = -1"/>
           } @else {
             <p (click)="editing_index = i">{{ item.amount | currency }}</p>
           }
@@ -30,10 +34,20 @@
       </tr>
       <tr>
         <td></td>
-        <td>{{ event.budget?.amount | currency }}</td>
-        <td>{{ event.budget?.spent | currency }}</td>
+        <td>{{ budget.amount || 0 | currency }}</td>
+        <td>{{ budget.spent || 0 | currency }}</td>
         <td></td>
       </tr>
     </tbody>
   </table>
+
+  <div class="popup-overlay" *ngIf="showAddBudgetItem">
+    <div class="popup-container">
+      <app-add-event-budget-item
+        [event]="event"
+        (budgetItemSubmit)="onBudgetItemAdded($event); showAddBudgetItem = false"
+        (cancel)="showAddBudgetItem = false"
+      />
+    </div>
+  </div>
 </article>

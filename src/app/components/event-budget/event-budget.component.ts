@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {EventBudgetService} from './event-budget.service';
+import {Budget} from './model/budget.model';
 
 @Component({
   selector: 'app-event-budget',
@@ -7,18 +8,17 @@ import {EventBudgetService} from './event-budget.service';
   styleUrl: './event-budget.component.css'
 })
 export class EventBudgetComponent {
-  @Input({required: false})
-  event: { id: number, budget: { amount: number, spent: number, items: { amount: number, spent: number, category: any}[] } } = { id: -1, budget: { items: [{ category: "Catering", amount: 0, spent: 0 }, { category: "Sth", amount: 1, spent: 0 }], amount: 0, spent: 0 } } as any;
+  @Input({required: true})
+  event!: any;
 
 
-  constructor(private budgetService: EventBudgetService) {
-  }
+  constructor(private budgetService: EventBudgetService) { }
 
 
   deleteBudgetItem(item: any): void {
     this.budgetService.deleteEventBudgetItem(this.event.id, item.category.id).subscribe({
       next: () => {
-        let items = this.event.budget?.items;
+        let items = this.budget.items;
         const i = items.indexOf(item);
         if (i != -1) {
           items.splice(i, 1);
@@ -38,6 +38,20 @@ export class EventBudgetComponent {
   }
 
 
+  onBudgetItemAdded(item: any) {
+    this.budget.items.push(item);
+    this.budget.amount += item.amount;
+    this.budget.spent += item.spent;
+    this.showAddBudgetItem &&= false;
+  }
+
+
   protected readonly Number = Number;
-  protected editing_index: number = -1;
+  protected editing_index = -1;
+  protected showAddBudgetItem = false;
+
+  get budget(): Budget {
+    return this.event.budget;
+  }
+
 }
