@@ -7,4 +7,6 @@
   <a [routerLink]="['/view-organizer-profile', event.organizerId]">
       <span>{{ (event.organizerFirstName + " " + event.organizerLastName | titlecase) || 'organizer not found' }}</span>
     </a>
+
+  <app-event-budget [event]="event"/>
 </div>

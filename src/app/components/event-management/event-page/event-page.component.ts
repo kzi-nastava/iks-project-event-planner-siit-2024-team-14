@@ -30,6 +30,9 @@ export class EventPageComponent {
           'Amazing service! The team was punctual, professional, and exceeded all our expectations to make our event remarkable. The level of dedication they put into every detail amazed us! Highly recommend them for any special occasion!',
       },
     ],
+    budget: {
+      items: []
+    }
   };
 
   chatWithOrganizer() {
