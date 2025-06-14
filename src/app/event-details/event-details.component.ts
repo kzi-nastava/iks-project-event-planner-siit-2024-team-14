@@ -9,7 +9,7 @@ import {EventModel} from '../interfaces/event.model';
   styleUrls: ['./event-details.component.css']
 })
 export class EventDetailsComponent implements OnInit {
-  event: EventModel = { id: -1, budget: { items: [] } } as any as EventModel;
+  event: EventModel = { id: -1 } as any as EventModel;
 
   constructor(private route: ActivatedRoute, private eventService: EventDetailsService) {}
 

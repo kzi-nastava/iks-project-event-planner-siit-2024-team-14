@@ -35,7 +35,7 @@ export class ServiceDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.role = localStorage.getItem('role');
+    this.role = localStorage.getItem('role') || 'EventOrganizer';
     const userId = localStorage.getItem('userId');
     if (userId) this.fetchUserEvents(+userId);
 

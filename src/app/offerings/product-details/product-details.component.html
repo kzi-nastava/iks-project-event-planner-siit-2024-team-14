@@ -1,3 +1,4 @@
+@if (product.id != -1) {
 <article>
   <h2> {{ product.name }} </h2>
   <p> {{ product.description }} </p>
@@ -39,3 +40,6 @@
     <span>{{ (product.provider.name | titlecase) || product.provider.email }}</span>
   </dd>
 </article>
+} @else {
+  <div style="width: 100%; height: 100%; cursor: progress !important;"></div>
+}
