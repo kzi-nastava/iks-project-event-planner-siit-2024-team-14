@@ -63,6 +63,9 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { MessagePopupComponent } from './components/event-management/message-popup/message-popup.component';
+import { EventBudgetComponent } from './components/event-budget/event-budget.component';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import { AddEventBudgetItemComponent } from './components/event-budget/add-event-budget-item/add-event-budget-item.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +112,9 @@ import { MessagePopupComponent } from './components/event-management/message-pop
     EditEventTypeComponent,
     MyEventsOdComponent,
     CreateEventComponent,
-    MessagePopupComponent
+    MessagePopupComponent,
+    EventBudgetComponent,
+    AddEventBudgetItemComponent
   ],
   imports: [
     BrowserModule,
@@ -136,7 +141,9 @@ import { MessagePopupComponent } from './components/event-management/message-pop
     MatSelectModule,
     MatCheckboxModule,
     MatNativeDateModule,
-    CommonModule
+    CommonModule,
+    MatIconButton,
+    MatButton
   ],
   providers: [
     provideAnimationsAsync(),
