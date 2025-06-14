@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of budget.items; let i = index">
+      <tr *ngFor="let item of budget?.items; let i = index">
         <td>{{ item.category.name | titlecase }}</td>
         <td>
           @if (editing_index == i) {
@@ -34,8 +34,8 @@
       </tr>
       <tr>
         <td></td>
-        <td>{{ budget.amount || 0 | currency }}</td>
-        <td>{{ budget.spent || 0 | currency }}</td>
+        <td>{{ budget?.amount || 0 | currency }}</td>
+        <td>{{ budget?.spent || 0 | currency }}</td>
         <td></td>
       </tr>
     </tbody>

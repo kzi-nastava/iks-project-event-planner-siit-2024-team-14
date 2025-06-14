@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {EventBudgetService} from './event-budget.service';
 import {Budget} from './model/budget.model';
 
@@ -7,10 +7,9 @@ import {Budget} from './model/budget.model';
   templateUrl: './event-budget.component.html',
   styleUrl: './event-budget.component.css'
 })
-export class EventBudgetComponent {
+export class EventBudgetComponent implements OnInit {
   @Input({required: true})
-  event!: any;
-
+  event: any = { id: null, budget: { items: [] } };
 
   constructor(private budgetService: EventBudgetService) { }
 
@@ -22,6 +21,7 @@ export class EventBudgetComponent {
         const i = items.indexOf(item);
         if (i != -1) {
           items.splice(i, 1);
+          this.budget.amount -= item.amount;
         }
       },
       error: console.error
@@ -32,17 +32,17 @@ export class EventBudgetComponent {
   updateBudgetItem(item: any, newAmount: number) {
     // maybe should change the amount immediately and then recover it if error occurs
     this.budgetService.updateEventBudgetItem(this.event.id, item.category.id, newAmount).subscribe({
-      next: () => item.amount = newAmount,
+      next: () => this.budget.amount += -item.amount + (item.amount = newAmount),
       error: console.error
     })
   }
 
 
   onBudgetItemAdded(item: any) {
+    this.showAddBudgetItem &&= false;
     this.budget.items.push(item);
     this.budget.amount += item.amount;
     this.budget.spent += item.spent;
-    this.showAddBudgetItem &&= false;
   }
 
 
@@ -52,6 +52,14 @@ export class EventBudgetComponent {
 
   get budget(): Budget {
     return this.event.budget;
+  }
+
+  ngOnInit(): void {
+    this.budgetService.getEventBudget(this.event.id)
+      .subscribe({
+        next: budget => this.event.budget = budget,
+        error: console.error,
+      })
   }
 
 }
