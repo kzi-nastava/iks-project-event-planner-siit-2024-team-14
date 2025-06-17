@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Login } from '../../interfaces/login.model';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent {
   // State for modal visibility
   showModal = false;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router, private authService: AuthService) {}
 
   // Reactive Form Definition
   loginForm = new FormGroup({
@@ -30,7 +31,7 @@ export class LoginComponent {
       };
 
       // Send login data to the backend
-      this.loginService.login(loginData).subscribe({
+      this.authService.login(loginData.email, loginData.password).subscribe({
         next: (response: any) => {
           // Print the response in the console
           console.log('Login successful:', response);
