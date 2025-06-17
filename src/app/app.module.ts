@@ -1,4 +1,4 @@
-import {NgModule, PACKAGE_ROOT_URL} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -23,7 +23,7 @@ import { RegistrationEoComponent } from './components/registration/registration-
 import { RegistrationSppComponent } from './components/registration/registration-spp/registration-spp.component';
 import { ActivationComponent } from './components/registration/activation/activation.component';
 import { SuccessfulComponent } from './components/registration/successful/successful.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AdminCommentsComponent} from './components/admin-comments/admin-comments.component';
 import {HomeAdminComponent} from './components/home/home-admin/home-admin.component';
 import {HomeOrganizerComponent} from './components/home/home-organizer/home-organizer.component';
@@ -66,6 +66,7 @@ import { MessagePopupComponent } from './components/event-management/message-pop
 import { EventBudgetComponent } from './components/event-budget/event-budget.component';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import { AddEventBudgetItemComponent } from './components/event-budget/add-event-budget-item/add-event-budget-item.component';
+import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -147,6 +148,11 @@ import { AddEventBudgetItemComponent } from './components/event-budget/add-event
   ],
   providers: [
     provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     DatePipe
   ],
   bootstrap: [AppComponent]  // Root component that Angular bootstraps
