@@ -28,7 +28,8 @@
     "slick-carousel": "^1.8.1",
     "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.14.10",
+    "@auth0/angular-jwt": "^5.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.11",
