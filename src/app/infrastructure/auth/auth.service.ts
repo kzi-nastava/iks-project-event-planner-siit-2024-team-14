@@ -62,29 +62,39 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  private removeToken() {
+    localStorage.removeItem('token');
+  }
+
 
   private loadUserFromToken() {
     const token = this.getToken();
     const jwtHelper = new JwtHelperService();
 
-    if (token && !jwtHelper.isTokenExpired(token)) {
-      const decoded = jwtHelper.decodeToken(token);
-      console.log("[AuthService] Loaded user from token:", decoded);
+    if (!token || jwtHelper.isTokenExpired(token)) {
+      if (token) {
+        console.log('[AuthService] Token expired or invalid');
+        this.removeToken();
+      }
+      else console.log('[AuthService] No token found');
 
-      const user: User = {
-        id: decoded.id,
-        email: decoded.sub,
-        role: decoded.role
-      };
-
-      this.userSubject.next(user);
-    } else {
-      console.log("[AuthService] Valid token not found");
       if (this.userSubject.value)
         this.userSubject.next(null);
+
+      return;
     }
 
+    const decoded = jwtHelper.decodeToken(token);
+    const user: User = {
+      id: NaN,
+      email: decoded.sub,
+      ...decoded
+    };
+
+    console.log('[AuthService] Loaded user from token:', user);
+    this.userSubject.next(user);
   }
+
 
   public whoAmI() {
     return this.http.get(`${environment.apiUrl}/users/whoami`);
