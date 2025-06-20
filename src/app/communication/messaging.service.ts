@@ -108,12 +108,22 @@ export class MessagingService implements OnDestroy {
 
 
 
-  getChat(otherUserId: number) {
+  getChat(chatterId: number) {
     return this.http.get<Chat>(
-      environment.apiUrl + `/chat/${otherUserId}`,
+      environment.apiUrl + `/chat/${chatterId}`,
       { params: { userId: this.loggedInUserId } }
     );
   }
+
+
+
+  block(chatterId: number) {
+    return this.http.post<void>(
+      environment.apiUrl + `/chat/${this.loggedInUserId}/${chatterId}`,
+      {}
+    );
+  }
+
 
 
   disconnect() {
