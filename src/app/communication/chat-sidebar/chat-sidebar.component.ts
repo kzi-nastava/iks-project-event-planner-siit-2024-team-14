@@ -1,14 +1,29 @@
-import { Component, Input } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ChatSidebarService} from './chat-sidebar.service';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {Message} from '../model/message.model';
+import {AuthService} from '../../infrastructure/auth/auth.service';
+import {MessagingService} from '../messaging.service';
 
 @Component({
   selector: 'app-chat-sidebar',
   templateUrl: './chat-sidebar.component.html',
   styleUrls: ['./chat-sidebar.component.css']
 })
-export class ChatSidebarComponent {
+export class ChatSidebarComponent implements OnInit, OnDestroy {
+  c = { id: NaN } as any;
+
+  get chatter(): any { return this.c; }
+
+  @Input({required: true})
+  set chatter(chatter: number | { id: number }) {
+    if (chatter) {
+      this.c = typeof chatter === 'number' ? { id: chatter } : chatter;
+      this.loadMessages();
+    }
+  }
+
   @Input() chaterName: string = 'Organizer Name';
   @Input() isOpen: boolean = false;
   @Input() chaterPhotoUrl: string = " ";
@@ -18,21 +33,18 @@ export class ChatSidebarComponent {
   newMessage: string = '';
   role: string | null = '';
 
-  messages = [
-    { text: "Hi, I'm interested in booking your service!", sender: "me" },
-    { text: "Hello! Thank you for reaching out. What details do you need?", sender: "organizer" }
-  ];
+  protected messages: Message[] = [];
 
-  constructor(private http: HttpClient, private chatService : ChatSidebarService, private router: Router) {}
+  constructor(protected auth: AuthService, private chatService : ChatSidebarService, private router: Router, private messagingService: MessagingService) {}
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
   }
 
   blockUser() {
-    const loggedUserId = localStorage.getItem("userId");
+    const loggedUserId = this.auth.user?.id;
     if (loggedUserId) {
-      this.chatService.block(Number(loggedUserId), this.chaterId)
+      this.messagingService.block(this.c.id)
         .subscribe(response => {
           console.log('User blocked successfully', response);
           alert("User blocked successfully!");
@@ -61,12 +73,11 @@ export class ChatSidebarComponent {
   }
 
   sendMessage() {
-    if (this.newMessage.trim()) {
-      this.messages.push({ text: this.newMessage, sender: "me" });
+    this.newMessage = this.newMessage.trim();
+
+    if (this.newMessage) {
+      this.messagingService.sendMessage(this.c.id, this.newMessage);
       this.newMessage = '';
-      setTimeout(() => {
-        this.messages.push({ text: "Thank you for your message!", sender: "organizer" });
-      }, 1000);
     }
   }
 
@@ -86,4 +97,35 @@ export class ChatSidebarComponent {
         this.router.navigate(['home-guest']);
     }
   }
+
+  private messagesSub?: Subscription;
+
+  private loadMessages() {
+    this.messages = [];
+
+    this.messagingService.getChat(this.chatter.id).subscribe({
+      next: chat => {
+        this.c = chat.sender.id === this.c.id ? chat.sender : chat.recipient;
+        this.messages.push(...chat.messages);
+
+        this.messagesSub = this.messagingService.chat$(chat.id)
+          .subscribe(msg => this.messages.unshift(msg));
+      },
+      error: console.log
+    });
+
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.messagesSub) {
+      this.messagesSub.unsubscribe();
+      delete this.messagesSub;
+    }
+  }
+
+  ngOnInit(): void {
+
+  }
+
 }

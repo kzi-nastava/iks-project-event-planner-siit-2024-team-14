@@ -1,11 +1,12 @@
 <div class="chat-sidebar" *ngIf="isOpen">
   <!-- Header sa slikom, imenom i opcijama -->
-  <div class="chat-header">
+  <div class="chat-header" *ngIf="chatter as chatter">
     <div class="user-info">
-      <img [src]="chaterPhotoUrl" alt="Profile photo" class="profile-photo">
+      <img [src]="chatter.profilePhoto" alt="Profile photo" class="profile-photo">
       <div>
-        <h3>{{ chaterName }}</h3>
-        <p>Event organizer</p>
+        <h3>{{ chatter.name }}</h3>
+        <p *ngIf="chatter.role as role">{{ role }}</p>
+        <small>{{ chatter.email }}</small>
       </div>
     </div>
     <div class="options-menu">
@@ -20,14 +21,18 @@
 
   <!-- Chat konverzacija -->
   <div class="chat-messages">
-    <div *ngFor="let message of messages" [class]="message.sender === 'me' ? 'message sent' : 'message received'">
-      {{ message.text }}
-    </div>
+    <article *ngFor="let message of messages" [class]="message.senderId !== chatter.id  ? 'message sent' : 'message received'">
+      <p>{{ message.content }}</p>
+
+      <footer style="text-align: right; font-style: italic; opacity: .6; font-size: .7rem">
+        <time [dateTime]="message.timestamp">{{ message.timestamp | date:'d.M.yyyy, H:mm' }}</time>
+      </footer>
+    </article>
   </div>
 
   <!-- Input za slanje poruke -->
   <div class="chat-input">
-    <input type="text" placeholder="Write a message..." [(ngModel)]="newMessage">
+    <input type="text" placeholder="Write a message..." autofocus [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
     <button (click)="sendMessage()">📩</button>
   </div>
 </div>
