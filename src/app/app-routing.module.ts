@@ -20,6 +20,7 @@ import {ViewProviderProfileComponent} from './components/profiles/view-provider-
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
 import {EventTypeManagementComponent} from './components/event-type-management/event-type-management.component';
 import {MyEventsOdComponent} from './components/event-management/my-events-od/my-events-od.component';
+import {InboxComponent} from './communication/inbox/inbox.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'home-organizer', component: HomeOrganizerComponent },
   { path: 'home-admin', component: HomeAdminComponent },
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
+  { path: 'chat', component: InboxComponent },
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },

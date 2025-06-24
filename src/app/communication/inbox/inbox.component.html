@@ -1,0 +1,20 @@
+<main>
+  <section>
+    <div *ngFor="let chat of inbox" (click)="selectedChat = chat">
+      <ng-container *ngIf="getChatter(chat) as chatter">
+        <img
+          [src]="chatter.profilePhoto || 'https://ui-avatars.com/api/?name=' + chatter.name + ' ' + chatter.surname"
+          alt="{{chatter.email}} profile photo"
+          height="50px" width="50px"
+        />
+        <strong>{{ ((chatter.name + ' ' + chatter.surname).trim() || "imenko prezimic") | titlecase }}</strong>
+      </ng-container>
+    </div>
+  </section>
+
+  @if (selectedChat) {
+    <section>
+      <app-chat-sidebar [chatter]="selectedChatter" [isOpen]="true"/>
+    </section>
+  }
+</main>
