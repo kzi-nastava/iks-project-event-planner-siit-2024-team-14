@@ -37,7 +37,12 @@ export class InboxComponent implements OnInit, OnDestroy {
       this.loadInbox();
     });
 
-    this.subs.push(sub1);
+    let sub2 = this.messagingService.message$.subscribe(msg => {
+      if (!this.inbox.some(chat => chat.id === msg.chatId))
+        this.loadInbox();
+    })
+
+    this.subs.push(sub1, sub2);
   }
 
   ngOnDestroy() {
