@@ -67,6 +67,7 @@ import { EventBudgetComponent } from './components/event-budget/event-budget.com
 import {MatButton, MatIconButton} from '@angular/material/button';
 import { AddEventBudgetItemComponent } from './components/event-budget/add-event-budget-item/add-event-budget-item.component';
 import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
+import {InvitationPopupComponent} from './components/invitations/invitation-popup.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
     CreateEventComponent,
     MessagePopupComponent,
     EventBudgetComponent,
-    AddEventBudgetItemComponent
+    AddEventBudgetItemComponent,
+    InvitationPopupComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,9 @@ import { DatePipe } from '@angular/common';
 import { GetEtNamesModel } from '../../../interfaces/get-et-names.model';
 import { CreateEvent } from '../../../interfaces/create-event.model';
 import {MyEventsOdComponent} from '../../../components/event-management/my-events-od/my-events-od.component';
+import { MatDialog } from '@angular/material/dialog';
+import {InvitationPopupComponent} from '../../invitations/invitation-popup.component';
+
 
 @Component({
   selector: 'app-create-event',
@@ -12,7 +15,7 @@ import {MyEventsOdComponent} from '../../../components/event-management/my-event
   styleUrls: ['./create-event.component.css'],
 })
 export class CreateEventComponent implements OnInit {
-  constructor(private eventService: EventManagementService, private datePipe: DatePipe) {}
+  constructor(private eventService: EventManagementService, private datePipe: DatePipe, private dialog: MatDialog) {}
 
   @Output() closePopupEvent = new EventEmitter<void>();
 
@@ -149,7 +152,6 @@ export class CreateEventComponent implements OnInit {
     return true;
   }
 
-
   isFormValid(): boolean {
     return !!(
       this.eventData.name &&
@@ -204,6 +206,14 @@ export class CreateEventComponent implements OnInit {
 
         this.showModal = true;
         this.showOkButton = true;
+
+        if (this.eventData.type === 'CLOSED' && response?.id) {
+          console.log('otvaram pozivnice');
+          this.dialog.open(InvitationPopupComponent, {
+            width: '600px',
+            data: { eventId: response.id }
+          });
+        }
 
       },
       error: (err) => {

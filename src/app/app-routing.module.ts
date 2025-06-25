@@ -20,6 +20,7 @@ import {ViewProviderProfileComponent} from './components/profiles/view-provider-
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
 import {EventTypeManagementComponent} from './components/event-type-management/event-type-management.component';
 import {MyEventsOdComponent} from './components/event-management/my-events-od/my-events-od.component';
+import {InvitationPopupComponent} from './components/invitations/invitation-popup.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'provider-profile', component: ProviderProfileComponent },
   { path: 'event-type-management', component: EventTypeManagementComponent },
   { path: 'my-events-od', component: MyEventsOdComponent },
+  {path: 'invitation-popup', component: InvitationPopupComponent },
   { path: '**', redirectTo: '/home-guest' }
 ];
 

@@ -1,0 +1,29 @@
+<div class="popup-container">
+  <div class="popup">
+    <h1>Create invitations for a private event</h1>
+    <p>
+      Invite desired participants to the event by entering their email addresses.
+      The invitations will include all details and instructions for following the event.
+    </p>
+
+    <div class="email-list">
+      <label><mat-icon>group_add</mat-icon> Add email addresses of people you are inviting</label>
+
+      <div *ngFor="let email of emails; let i = index" class="email-item">
+        <input [(ngModel)]="emails[i]" type="email" placeholder="email address" />
+        <button mat-icon-button (click)="validateEmail(i)"><mat-icon>check</mat-icon></button>
+        <button mat-icon-button (click)="removeEmail(i)"><mat-icon>delete</mat-icon></button>
+      </div>
+
+      <div class="add-email">
+        <input [(ngModel)]="newEmail" placeholder="email address" type="email" />
+        <button mat-icon-button (click)="addEmail()"><mat-icon>add</mat-icon></button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="send-btn" (click)="sendInvitations()">Send invitations</button>
+      <button class="later-btn" (click)="closePopup()">Do it later</button>
+    </div>
+  </div>
+</div>

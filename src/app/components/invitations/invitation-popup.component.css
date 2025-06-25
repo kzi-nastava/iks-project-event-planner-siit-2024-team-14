@@ -1,0 +1,89 @@
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.popup h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.popup p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.email-list label {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.email-item,
+.add-email {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+input[type="email"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+button[mat-icon-button] {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.send-btn,
+.later-btn {
+  padding: 10px 24px;
+  border-radius: 24px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.send-btn {
+  background-color: #3b2f2f;
+  color: white;
+}
+
+.later-btn {
+  background-color: #b2a49d;
+  color: white;
+}
