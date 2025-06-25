@@ -9,12 +9,12 @@ import {EventModel} from '../../../interfaces/event.model';
 export class EventService {
   private apiUrl = 'http://localhost:8080/api/events/all';
   private filterUrl = 'http://localhost:8080/api/events/filter';
-  private blockedUsersUrl = 'http://localhost:8080/api/chat/blocked-users'; // URL za blokirane korisnike
+  private blockedUsersUrl = 'http://localhost:8080/api/chat/blocked-users';
 
 
   constructor(private http: HttpClient) {}
 
-  getAllEvents(): Observable<EventModel[]> { // Takođe promenjen tip
+  getAllEvents(): Observable<EventModel[]> {
     return this.http.get<EventModel[]>(this.apiUrl);
   }
 
@@ -32,6 +32,7 @@ export class EventService {
 
   getBlockedUsers(): Observable<number[]> {
     const userId = localStorage.getItem('userId');
+    console.log(userId);
 
     if (!userId) {
       return  of([]); // Ako korisnik nije ulogovan, vrati prazan niz

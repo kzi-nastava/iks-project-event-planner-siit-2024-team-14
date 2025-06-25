@@ -33,7 +33,6 @@ export class OurEventsComponent implements OnInit {
     this.fetchCategories();
   }
 
-  // Učitavanje svih događaja sa servera
   loadEvents() {
     this.eventService.getBlockedUsers().subscribe(
       (blockedUsers) => {

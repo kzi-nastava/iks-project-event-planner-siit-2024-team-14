@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import { NotificationModel } from '../../interfaces/notification.model'; // Definiši model notifikacije
+import { NotificationModel } from '../../interfaces/notification.model';
 
 @Injectable({
   providedIn: 'root'
