@@ -102,6 +102,7 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
 
   private loadMessages() {
     this.messages = [];
+    this.messagesSub?.unsubscribe();
 
     this.messagingService.getChat(this.chatter.id).subscribe({
       next: chat => {

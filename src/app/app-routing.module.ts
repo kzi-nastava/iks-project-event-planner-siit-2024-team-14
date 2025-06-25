@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'home-admin', component: HomeAdminComponent },
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'chat', component: InboxComponent },
+  { path: 'chat/:email', component: InboxComponent },
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },
