@@ -37,7 +37,10 @@ export class InboxComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let sub1 = this.auth.user$.subscribe(u => {
       this.selectedChat = undefined;
-      this.loadInbox(u);
+      if (u)
+        this.loadInbox(u)
+      else
+        this.router.navigate(['/login']).then();
     });
 
     let sub2 = this.messagingService.message$.subscribe(msg => {
