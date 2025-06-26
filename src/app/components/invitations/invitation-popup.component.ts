@@ -10,12 +10,15 @@ import {InvitationService} from './invitation.service';
 export class InvitationPopupComponent {
   emails: string[] = [''];
   maxGuests: number;
+  eventId: number;
 
   constructor(
+    private invitationService: InvitationService,
     public dialogRef: MatDialogRef<InvitationPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { eventId: number, maxGuests: number }
   ) {
     this.maxGuests = data.maxGuests;
+    this.eventId = data.eventId;
   }
 
   trackByIndex(index: number, item: any): number {
@@ -45,14 +48,29 @@ export class InvitationPopupComponent {
     }
   }
 
+
   sendInvitations(): void {
-    const validEmails = this.emails.filter(email => email.trim() !== '');
-    console.log('Sending invites to:', validEmails, 'for event', this.data.eventId);
+    const validEmails = this.emails
+      .map(email => email.trim())
+      .filter(email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
 
-    // Ovde ide poziv servisa ka bekendu
+    if (validEmails.length === 0) {
+      alert('Please enter at least one valid email.');
+      return;
+    }
 
-    this.dialogRef.close();
+    this.invitationService.sendInvitations(this.eventId, validEmails).subscribe({
+      next: () => {
+        alert('Invitations sent successfully!');
+        this.dialogRef.close();
+      },
+      error: err => {
+        console.error('Error sending invitations', err, this.eventId, validEmails);
+        alert('Failed to send invitations.');
+      }
+    });
   }
+
 
   closePopup(): void {
     this.dialogRef.close();

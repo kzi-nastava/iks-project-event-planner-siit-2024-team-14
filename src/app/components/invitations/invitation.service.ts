@@ -1,25 +1,26 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class InvitationService {
-  private baseUrl = 'http://localhost:8080/api/invitations';
+
+  private apiUrl = 'http://localhost:8080/api/invitations';
 
   constructor(private http: HttpClient) {}
 
-  // Provera da li je email registrovan korisnik
-  checkUserByEmail(email: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/check?email=${encodeURIComponent(email)}`);
+  sendInvitations(eventId: number, emails: string[]): Observable<any> {
+    return this.http.post(`${this.apiUrl}/bulk`, {
+      eventId: eventId,
+      guestEmails: emails
+    });
   }
 
-  // Slanje pozivnica
-  sendInvitations(emails: string[], eventId: number): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/send`, {
-      eventId,
-      emails
-    });
+  getInvitationsForEvent(eventId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/event/${eventId}`);
+  }
+
+  updateInvitationStatus(id: number, status: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}/status`, null, { params: { status } });
   }
 }
