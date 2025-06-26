@@ -6,11 +6,11 @@
                [class.selected]="chat === selectedChat"
       >
         <img
-          [src]="chatter.profilePhoto || 'https://ui-avatars.com/api/?name=' + chatter.name + ' ' + chatter.surname"
+          [src]="chatter.profilePhoto || 'https://ui-avatars.com/api/?name=' + (chatter.name || '') + ' ' + (chatter.surname || '')"
           alt="{{chatter.email}} profile photo"
           height="50px" width="50px"
         />
-        <strong>{{ ((chatter.name + ' ' + chatter.surname).trim() || "imenko prezimic") | titlecase }}</strong>
+        <strong>{{ (((chatter.name || '') + ' ' + (chatter.surname || '')).trim() || chatter.email) | titlecase }}</strong>
       </article>
     </ng-container>
   </section>
