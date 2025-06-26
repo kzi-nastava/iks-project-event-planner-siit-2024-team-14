@@ -21,17 +21,18 @@ import {ProviderProfileComponent} from './components/profiles/provider-profile/p
 import {EventTypeManagementComponent} from './components/event-type-management/event-type-management.component';
 import {MyEventsOdComponent} from './components/event-management/my-events-od/my-events-od.component';
 import {InboxComponent} from './communication/inbox/inbox.component';
+import {authGuard} from './infrastructure/auth/auth.guard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
   { path: 'home-guest', component: HomeComponent },  // Home component route
-  { path: 'home-provider', component: HomeProviderComponent },
-  { path: 'home-organizer', component: HomeOrganizerComponent },
-  { path: 'home-admin', component: HomeAdminComponent },
+  { path: 'home-provider', component: HomeProviderComponent, canActivate: [authGuard], data: { roles: ['ServiceAndProductProvider'] } },
+  { path: 'home-organizer', component: HomeOrganizerComponent, canActivate: [authGuard], data: { roles: ['EventOrganizer'] } },
+  { path: 'home-admin', component: HomeAdminComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
-  { path: 'chat', component: InboxComponent },
-  { path: 'chat/:email', component: InboxComponent },
+  { path: 'chat', redirectTo: 'chat/', pathMatch: "full" },
+  { path: 'chat/:email', component: InboxComponent, canActivate: [authGuard] },
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },
