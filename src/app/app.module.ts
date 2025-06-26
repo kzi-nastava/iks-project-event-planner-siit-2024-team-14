@@ -47,7 +47,6 @@ import { OccupancyCalendarComponent } from './components/profiles/occupancy-cale
 import { BookingServiceRequestsComponent } from './components/booking-service-requests/booking-service-requests.component';
 import { AllBookingsProviderComponent } from './components/all-bookings-provider/all-bookings-provider.component';
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
-import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
 import { EventTypeManagementComponent } from './components/event-type-management/event-type-management.component'
 import { AddEventTypeComponent } from './components/event-type-management/add/add.component'
 import { EditEventTypeComponent} from './components/event-type-management/edit/edit.component';
@@ -67,6 +66,7 @@ import { EventBudgetComponent } from './components/event-budget/event-budget.com
 import {MatButton, MatIconButton} from '@angular/material/button';
 import { AddEventBudgetItemComponent } from './components/event-budget/add-event-budget-item/add-event-budget-item.component';
 import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
+import {CommunicationModule} from './communication/communication.module';
 
 @NgModule({
   declarations: [
@@ -107,7 +107,6 @@ import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
     EventDetailsComponent,
     ViewProviderProfileComponent,
     ProviderProfileComponent,
-    ChatSidebarComponent,
     EventTypeManagementComponent,
     AddEventTypeComponent,
     EditEventTypeComponent,
@@ -144,7 +143,8 @@ import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
     MatNativeDateModule,
     CommonModule,
     MatIconButton,
-    MatButton
+    MatButton,
+    CommunicationModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -1,0 +1,38 @@
+<div class="chat-sidebar" *ngIf="isOpen">
+  <!-- Header sa slikom, imenom i opcijama -->
+  <div class="chat-header" *ngIf="chatter as chatter">
+    <div class="user-info">
+      <img [src]="chatter.profilePhoto" alt="Profile photo" class="profile-photo">
+      <div>
+        <h3>{{ chatter.name }}</h3>
+        <p *ngIf="chatter.role as role">{{ role }}</p>
+        <small>{{ chatter.email }}</small>
+      </div>
+    </div>
+    <div class="options-menu">
+      <button (click)="toggleOptions()">⋮</button>
+      <ul *ngIf="showOptions" class="dropdown-menu">
+        <li (click)="blockUser()">Block user</li>
+        <li (click)="viewProfile()">View user profile</li>
+        <li (click)="deleteMessages()">Delete messages</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Chat konverzacija -->
+  <div class="chat-messages">
+    <article *ngFor="let message of messages" [class]="message.senderId !== chatter.id  ? 'message sent' : 'message received'">
+      <p>{{ message.content }}</p>
+
+      <footer style="text-align: right; font-style: italic; opacity: .6; font-size: .7rem">
+        <time [dateTime]="message.timestamp">{{ message.timestamp | date:'d.M.yyyy, H:mm' }}</time>
+      </footer>
+    </article>
+  </div>
+
+  <!-- Input za slanje poruke -->
+  <div class="chat-input">
+    <input type="text" placeholder="Write a message..." autofocus [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
+    <button (click)="sendMessage()">📩</button>
+  </div>
+</div>
