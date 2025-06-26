@@ -208,10 +208,9 @@ export class CreateEventComponent implements OnInit {
         this.showOkButton = true;
 
         if (this.eventData.type === 'CLOSED' && response?.id) {
-          console.log('otvaram pozivnice');
           this.dialog.open(InvitationPopupComponent, {
             width: '600px',
-            data: { eventId: response.id }
+            data: { eventId: response.id, maxGuests: Number(this.eventData.guestNumber) }
           });
         }
 
