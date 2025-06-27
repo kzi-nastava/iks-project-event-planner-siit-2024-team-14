@@ -19,6 +19,8 @@ export class AuthService {
     return this.userSubject.asObservable();
   }
 
+  public get user() { return this.userSubject.value }
+
 
   constructor(private http: HttpClient) {
     this.loadUserFromToken();

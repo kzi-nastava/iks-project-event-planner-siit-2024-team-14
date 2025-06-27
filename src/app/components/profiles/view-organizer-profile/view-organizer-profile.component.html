@@ -86,7 +86,7 @@
 </div>
 
 
-<app-chat-sidebar [chaterName]="fullName" [chaterPhotoUrl] = getProfilePhotoUrl() [chaterId]=user.id [isOpen]="isChatOpen"></app-chat-sidebar>
+<app-chat-sidebar [chatter]="user" [chaterName]="fullName" [chaterPhotoUrl] = getProfilePhotoUrl() [chaterId]=user.id [isOpen]="isChatOpen && !!user"></app-chat-sidebar>
 
 
 
