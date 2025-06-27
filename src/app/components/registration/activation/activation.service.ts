@@ -13,6 +13,8 @@ export class ActivationService {
   activateAccount(token: string, role: string): Observable<any> {
     if (role === "ServiceAndProductProvider") {
       return this.http.get(`${this.baseUrl}/providers/activate?token=${token}`);
+    }else if (role === "User") {
+      return this.http.get(`${this.baseUrl}/invitations/activate?token=${token}`);
     }
     return this.http.get(`${this.baseUrl}/organizers/activate?token=${token}`);
   }

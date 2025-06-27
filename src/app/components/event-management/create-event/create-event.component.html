@@ -92,16 +92,16 @@
     <!-- Privacy Type -->
     <div class="button-container">
       <button
-        class="custom-radio-btn"
-        [class.selected]="eventData.type === '1'"
-        (click)="eventData.type = '1'"
+        class="custom-radio-btn1"
+        [class.selected]="eventData.type === 'OPEN'"
+        (click)="eventData.type = 'OPEN'"
         type="button">Open
       </button>
 
       <button
-        class="custom-radio-btn"
-        [class.selected]="eventData.type === '2'"
-        (click)="eventData.type = '2'"
+        class="custom-radio-btn2"
+        [class.selected]="eventData.type === 'CLOSED'"
+        (click)="eventData.type = 'CLOSED'"
         type="button">Closed
       </button>
     </div>
@@ -114,22 +114,30 @@
 
     <!-- Group the Date Pickers together in one row -->
     <div class="form-group date-picker-group">
+      <!-- START DATE -->
       <mat-form-field appearance="outline" class="custom-date-picker">
-        <ng-container *ngIf="!eventData.startDate">
-          <label>Start Date</label>
-        </ng-container>
-        <input matInput [matDatepicker]="startPicker" [(ngModel)]="eventData.startDate" (change)="onStartDateChange()" [min]="minDate" name="startDate" readonly (ngModelChange)="onStartDateChange()">
+        <mat-label>Start Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="startPicker"
+          [(ngModel)]="eventData.startDate"
+          name="startDate"
+          (dateChange)="onStartDateChange()">
         <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
-        <mat-datepicker #startPicker startView="year"></mat-datepicker>
+        <mat-datepicker #startPicker></mat-datepicker>
       </mat-form-field>
 
+      <!-- END DATE -->
       <mat-form-field appearance="outline" class="custom-date-picker">
-        <ng-container *ngIf="!eventData.endDate">
-          <label>End Date</label>
-        </ng-container>
-        <input matInput [matDatepicker]="endPicker" [(ngModel)]="eventData.endDate" name="endDate" readonly (ngModelChange)="onEndDateChange()">
+        <mat-label>End Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="endPicker"
+          [(ngModel)]="eventData.endDate"
+          name="endDate"
+          (dateChange)="onEndDateChange()">
         <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
-        <mat-datepicker #endPicker startView="year"></mat-datepicker>
+        <mat-datepicker #endPicker></mat-datepicker>
       </mat-form-field>
     </div>
 

@@ -1,0 +1,45 @@
+<div class="popup-container">
+  <div class="popup">
+    <div class="circle-one"></div>
+    <div class="circle-two"></div>
+    <div class="circle-three"></div>
+    <div class="circle-four"></div>
+    <h1>Create invitations for a private event</h1>
+    <p>
+      Invite participants to the event by entering their email addresses.
+    </p>
+
+    <div class="email-list">
+      <label><mat-icon>group_add</mat-icon> Add invitee email addresses</label>
+
+      <div *ngFor="let email of emails; let i = index; trackBy: trackByIndex" class="email-item">
+        <input [(ngModel)]="emails[i]" type="email" placeholder="email address" />
+        <button mat-icon-button color="primary" (click)="validateEmail(i)">
+          <mat-icon>check</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="removeEmail(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <!-- Plus dugme samo na poslednjem inputu -->
+        <button
+          *ngIf="i === emails.length - 1 && emails.length < maxGuests"
+          mat-icon-button
+          (click)="addEmail()"
+          color="accent"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <div class="limit-message" *ngIf="emails.length >= maxGuests">
+        You have reached the maximum number of guests ({{ maxGuests }}).
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="send-btn" (click)="sendInvitations()">Send invitations</button>
+      <button class="later-btn" (click)="closePopup()">Do it later</button>
+    </div>
+  </div>
+</div>
