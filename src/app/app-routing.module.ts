@@ -21,6 +21,7 @@ import {ProviderProfileComponent} from './components/profiles/provider-profile/p
 import {EventTypeManagementComponent} from './components/event-type-management/event-type-management.component';
 import {MyEventsOdComponent} from './components/event-management/my-events-od/my-events-od.component';
 import {InvitationPopupComponent} from './components/invitations/invitation-popup.component';
+import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'event-type-management', component: EventTypeManagementComponent },
   { path: 'my-events-od', component: MyEventsOdComponent },
   {path: 'invitation-popup', component: InvitationPopupComponent },
+  {path: 'invitation/register', component: InvitationRegisterComponent },
   { path: '**', redirectTo: '/home-guest' }
 ];
 

@@ -68,6 +68,7 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 import { AddEventBudgetItemComponent } from './components/event-budget/add-event-budget-item/add-event-budget-item.component';
 import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
 import {InvitationPopupComponent} from './components/invitations/invitation-popup.component';
+import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import {InvitationPopupComponent} from './components/invitations/invitation-popu
     MessagePopupComponent,
     EventBudgetComponent,
     AddEventBudgetItemComponent,
-    InvitationPopupComponent
+    InvitationPopupComponent,
+    InvitationRegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,67 @@
+<div class="registration-container">
+  <div class="decorative-lines top-lines"></div>
+
+  <div class="content-container">
+    <div class="image-section">
+      <div class="overlay-text">
+        <div class="logo-container">
+          <div class="logo"></div>
+        </div>
+        <h1>Event Planner</h1>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="circle-one"></div>
+      <div class="circle-two"></div>
+      <div class="circle-three"></div>
+      <div class="circle-four"></div>
+
+      <div class="form-container">
+        <h2>Quick Registration</h2>
+
+        <div class="circle-background">
+          <div class="form-card">
+            <form [formGroup]="form" (ngSubmit)="submitForm()">
+              <!-- Email (read-only) -->
+              <div class="form-group">
+                <input id="email" formControlName="email" type="email" placeholder="E-mail address" />
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <input id="password" formControlName="password" type="password" placeholder="Password" />
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group">
+                <input id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Confirm password" />
+              </div>
+
+              <!-- Full Name -->
+              <div class="form-group">
+                <input id="fullName" formControlName="fullName" type="text" placeholder="Full name" />
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn-confirm">Register and Follow Event</button>
+            </form>
+          </div>
+        </div>
+
+        <p>You already have an account? <a [routerLink]="['/login']">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="decorative-lines bottom-lines"></div>
+</div>
+
+<app-successful
+  *ngIf="showModal"
+  [isVisible]="showModal"
+  [modalTitle]="modalTitle"
+  [message]="modalMessage"
+  [showOkButton]="showOkButton"
+  (close)="closeModal()">
+</app-successful>
