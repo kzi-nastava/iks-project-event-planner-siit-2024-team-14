@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./registration-au.component.css']
 })
 export class InvitationRegisterComponent implements OnInit {
-  form!: FormGroup;
+  registrationForm!: FormGroup;
   emailFromUrl: string = '';
   eventIdFromUrl!: number;
 
   showModal = false;
-  modalTitle = '';
-  modalMessage = '';
+  modalTitle: string = 'Registration in progress...';
+  modalMessage: string = 'Please wait while we process your registration.';
   showOkButton = false;
 
   constructor(
@@ -25,11 +25,11 @@ export class InvitationRegisterComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.emailFromUrl = this.route.snapshot.queryParamMap.get('email') || '';
     this.eventIdFromUrl = Number(this.route.snapshot.queryParamMap.get('eventId'));
 
-    this.form = this.fb.group({
+    this.registrationForm = this.fb.group({
       email: [{ value: this.emailFromUrl, disabled: true }, [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
@@ -37,35 +37,47 @@ export class InvitationRegisterComponent implements OnInit {
     });
   }
 
-  submitForm() {
-    if (this.form.invalid) {
+  register(): void {
+    if (this.registrationForm.invalid) {
       alert('Please fill out all required fields.');
       return;
     }
 
+    this.modalTitle = 'Registration in progress...';
+    this.modalMessage = 'Please wait while we process your registration.';
+    this.showOkButton = false;
+    this.showModal = true;
+
     const data = {
       email: this.emailFromUrl,
-      password: this.form.getRawValue().password,
-      confirmPassword: this.form.getRawValue().confirmPassword,
-      fullName: this.form.getRawValue().fullName,
+      password: this.registrationForm.getRawValue().password,
+      confirmPassword: this.registrationForm.getRawValue().confirmPassword,
+      fullName: this.registrationForm.getRawValue().fullName,
       eventId: this.eventIdFromUrl
     };
 
-    this.http.post('http://localhost:8080/api/invitations/register', data).subscribe({
-      next: () => {
+    this.http.post<any>('http://localhost:8080/api/invitations/register', data).subscribe({
+      next: (res) => {
         this.modalTitle = 'Registration Successful';
-        this.modalMessage = 'You are now following the event. Enjoy!';
+        this.modalMessage = res.message || 'Check your email to activate your account.';
         this.showOkButton = true;
-        this.showModal = true;
       },
-      error: () => {
-        alert('Something went wrong. Please try again.');
+      error: (err) => {
+        console.error('Registration failed:', err);
+        this.modalTitle = 'Registration Issue';
+
+        if (err.status === 409) {
+          this.modalMessage = 'User with that email address already exists.';
+        } else {
+          this.modalMessage = 'There was a problem sending the activation email, but your account was created. Try requesting activation again.';
+        }
+
+        this.showOkButton = true;
       }
     });
   }
 
-  closeModal() {
+  closeModal(): void {
     this.showModal = false;
-    this.router.navigate(['/']);
   }
 }

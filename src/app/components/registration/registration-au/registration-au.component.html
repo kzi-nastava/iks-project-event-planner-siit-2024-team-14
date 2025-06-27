@@ -22,25 +22,45 @@
 
         <div class="circle-background">
           <div class="form-card">
-            <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <form [formGroup]="registrationForm" (ngSubmit)="register()">
               <!-- Email (read-only) -->
               <div class="form-group">
-                <input id="email" formControlName="email" type="email" placeholder="E-mail address" />
+                <input
+                  id="email"
+                  formControlName="email"
+                  type="email"
+                  placeholder="E-mail address"
+                />
               </div>
 
               <!-- Password -->
               <div class="form-group">
-                <input id="password" formControlName="password" type="password" placeholder="Password" />
+                <input
+                  id="password"
+                  formControlName="password"
+                  type="password"
+                  placeholder="Password"
+                />
               </div>
 
               <!-- Confirm Password -->
               <div class="form-group">
-                <input id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Confirm password" />
+                <input
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                  type="password"
+                  placeholder="Confirm password"
+                />
               </div>
 
               <!-- Full Name -->
               <div class="form-group">
-                <input id="fullName" formControlName="fullName" type="text" placeholder="Full name" />
+                <input
+                  id="fullName"
+                  formControlName="fullName"
+                  type="text"
+                  placeholder="Full name"
+                />
               </div>
 
               <!-- Submit Button -->
@@ -57,11 +77,12 @@
   <div class="decorative-lines bottom-lines"></div>
 </div>
 
+<!-- Modal for feedback -->
 <app-successful
   *ngIf="showModal"
   [isVisible]="showModal"
   [modalTitle]="modalTitle"
   [message]="modalMessage"
   [showOkButton]="showOkButton"
-  (close)="closeModal()">
-</app-successful>
+  (close)="closeModal()"
+></app-successful>
