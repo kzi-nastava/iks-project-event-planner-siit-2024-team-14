@@ -22,6 +22,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.loadUserFromToken();
+
+    (window as any).auth = this;
   }
 
 
@@ -109,5 +111,10 @@ export class AuthService {
   public whoAmI() {
     return this.http.get(`${environment.apiUrl}/users/whoami`);
   }
+
+  loginAdmin = () => this.login('admin@gmail.com', 'admin');
+  loginOrganizer = () => this.login('milicabosancic03@gmail.com', 'ana123');
+  loginProvider = () => this.login('food@example.com', 'securepassword');
+  // loginUser = () => this.login('', '');
 
 }
