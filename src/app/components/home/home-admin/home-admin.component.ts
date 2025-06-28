@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NotificationService} from "../../notifications/notifications.service";
 
 @Component({
-  selector: 'app-home-guest-admin',
+  selector: 'app-home-admin',
   templateUrl: './home-admin.component.html',
   styleUrls: ['./home-admin.component.css']
 })
@@ -11,7 +11,7 @@ export class HomeAdminComponent implements OnInit{
   isSidebarOpen: boolean = false;
   isNotificationsOpen: boolean = false;
 
-  unreadCount: number = 0;  // Dodajemo varijablu za broj nepročitanih
+  unreadCount: number = 0;
 
   constructor(private notificationService: NotificationService) {}
 
