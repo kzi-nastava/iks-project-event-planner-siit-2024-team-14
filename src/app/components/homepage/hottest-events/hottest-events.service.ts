@@ -9,7 +9,7 @@ import {EventModel} from '../../../interfaces/event.model';
 export class HottestEventsService {
   private apiUrl = 'http://localhost:8080/api/events/top5';
 
-  private blockedUsersUrl = 'http://localhost:8080/api/chat/blocked-users'; // URL za blokirane korisnike
+  private blockedUsersUrl = 'http://localhost:8080/api/chat/blocked-users'; //url for blocked users
 
   constructor(private http: HttpClient) {}
 
