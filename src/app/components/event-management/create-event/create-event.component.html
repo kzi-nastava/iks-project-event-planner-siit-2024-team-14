@@ -106,11 +106,22 @@
       </button>
     </div>
 
+    <div class="form-group location-autocomplete-group">
+      <input
+        [(ngModel)]="locationSearch"
+        name="locationSearch"
+        (input)="onLocationInputChange()"
+        placeholder="Enter city"
+        required
+      />
 
-    <!-- Dates -->
-    <div class="form-group">
-      <textarea id="location" type="text" placeholder="Location" [(ngModel)]="eventData.location" name="location" required></textarea>
+      <ul class="autocomplete-dropdown" *ngIf="locationResults.length > 0">
+        <li *ngFor="let result of locationResults" (click)="selectLocation(result)">
+          {{ result.display_name }}
+        </li>
+      </ul>
     </div>
+
 
     <!-- Group the Date Pickers together in one row -->
     <div class="form-group date-picker-group">
