@@ -32,12 +32,16 @@ export class EventService {
 
   getBlockedUsers(): Observable<number[]> {
     const userId = localStorage.getItem('userId');
-    console.log(userId);
-
     if (!userId) {
-      return  of([]); // Ako korisnik nije ulogovan, vrati prazan niz
+      return  of([]);
     }
 
     return this.http.get<number[]>(`${this.blockedUsersUrl}?userId=${userId}`);
   }
+
+  getEventsByOrganizer(): Observable<EventModel[]> {
+    const organizerId = Number(localStorage.getItem('userId'));
+    return this.http.get<EventModel[]>(`http://localhost:8080/api/events/by-organizer/${organizerId}`);
+  }
+
 }

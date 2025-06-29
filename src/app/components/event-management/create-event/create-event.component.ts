@@ -8,8 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import {InvitationPopupComponent} from '../../invitations/invitation-popup.component';
 import { HttpClient } from '@angular/common/http';
 
-
-
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
@@ -25,8 +23,6 @@ export class CreateEventComponent implements OnInit {
   selectedCategory: string | null = null;
   selectedEventType: string | null = null;
   selectedFile: File | null = null;
-  suggestions: any[] = [];
-  showDropdown = false;
 
   eventData: CreateEvent = {
     name: '',
