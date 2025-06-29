@@ -34,14 +34,6 @@
   </div>
 </header>
 
-<!-- Create Button -->
-<div class="event-management">
-  <!-- Add Event Button -->
-  <div class="add-button">
-    <button class="add-event-button" (click)="createEvent()">Create Event</button>
-  </div>
-</div>
-
 <!-- Create Popup -->
 <div *ngIf="showCreatePopup" class="popup-overlay">
   <div class="popup">
@@ -50,3 +42,47 @@
     <button class="close-popup-button" (click)="closePopup()">✖</button>
   </div>
 </div>
+
+<div class="events-list-section">
+  <div class="header-bar">
+    <h2 class="header-title">MY EVENTS</h2>
+    <button class="create-event-button" (click)="createEvent()">
+      <mat-icon>add</mat-icon> Create new event
+    </button>
+  </div>
+
+
+  <div class="events-list">
+    <div *ngFor="let event of filteredEvents" class="event-card">
+      <div class="card-header">
+        <img [src]="event.organizerProfilePicture" alt="{{event.name}}" class="event-avatar">
+        <div class="organizer-info">
+          <h3 class="organizer-name">{{ event.organizerFirstName }} {{ event.organizerLastName }}</h3>
+          <p class="organizer-role">Event organizer</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <img [src]="event.imageUrl" alt="{{ event.name }}" class="event-image" />
+      <div class="event-content">
+        <h4>{{ event.name }}</h4>
+        <p>{{ event.description }}</p>
+        <small><span class="fas fa-location-pin"></span> {{ event.location }}</small><br />
+        <small><span class="fas fa-calendar-alt"></span> from {{ event.startDate }} to {{ event.endDate }}</small><br /><br />
+        <button [routerLink]="['/events', event.id]">View More</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="pagination">
+    <button (click)="onPageChange(page - 1)" [disabled]="page <= 0">Previous</button>
+    <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+    <button (click)="onPageChange(page + 1)" [disabled]="page >= totalPages - 1">Next</button>
+  </div>
+</div>
+
+<app-drawer-navbar-organizer [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-organizer>
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+<app-footer></app-footer>

@@ -189,3 +189,281 @@ header {
   cursor: pointer;
   color: #523D35;
 }
+
+.events-list-section {
+  text-align: center;
+  padding: 30px 15px; /* Smanjen padding */
+  background-color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.events-list-section::before,
+.events-list-section::after,
+.events-list-section .extra-circle,
+.events-list-section .extra-circle-two,
+.events-list-section .extra-circle-three {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Veći krug gore levo */
+.events-list-section::before {
+  width: 300px; /* Manji krug */
+  height: 300px;
+  background-color: rgba(149, 157, 144, 0.6);
+  top: -50px;
+  left: -100px;
+}
+
+/* Srednji krug dole desno */
+.events-list-section::after {
+  width: 250px; /* Manji krug */
+  height: 250px;
+  background-color: rgba(82, 61, 53, 0.15);
+  bottom: -70px;
+  right: -40px;
+}
+
+/* Dodatni manji krug na sredini */
+.events-list-section .extra-circle {
+  width: 120px; /* Manji krug */
+  height: 120px;
+  background-color: rgba(82, 61, 53, 0.12);
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Novi manji krug gore desno */
+.events-list-section .extra-circle-two {
+  width: 100px; /* Manji krug */
+  height: 100px;
+  background-color: rgba(149, 157, 144, 0.6);
+  top: -40px;
+  right: -60px;
+}
+
+/* Novi manji krug dole levo */
+.events-list-section .extra-circle-three {
+  width: 80px; /* Manji krug */
+  height: 80px;
+  background-color: rgba(82, 61, 53, 0.1);
+  bottom: -100px;
+  left: -60px;
+}
+
+.section-title {
+  font-size: 10px; /* Manji naslov */
+  font-weight: bold;
+  font-family: 'Petrona', sans-serif;
+  color: #523D35;
+  margin-bottom: 15px; /* Manja margina */
+}
+
+.events-list-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.header-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-title {
+  font-size: 2rem;
+  font-family: 'Petrona', serif;
+  color: #523D35;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+}
+
+.events-list {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.event-card {
+  width: 17%; /* Kartice zauzimaju 30% širine (70% ukupno) */
+  height: 380px; /* Veća visina kartica */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px; /* Manji razmak između kartica */
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 8px; /* Umereniji padding */
+  background-color: #f5f5f5;
+}
+
+.event-avatar {
+  width: 40px; /* Malo veća avatar slika */
+  height: 40px; /* Malo veća avatar slika */
+  background-color: #523D35;
+  color: white;
+  font-size: 0.9em;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.organizer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.organizer-name {
+  font-size: 0.9em; /* Font za ime */
+  font-weight: bold;
+  margin: 0;
+}
+
+.organizer-role {
+  font-size: 0.8em; /* Font za ulogu */
+  color: #888;
+  margin: 0;
+}
+
+.divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.event-image {
+  width: 100%;
+  height: 150px; /* Smanjena visina slike */
+  object-fit: cover;
+}
+
+.event-content {
+  padding: 8px; /* Umereniji padding */
+  text-align: left;
+  flex-grow: 1; /* Ovaj deo omogućava da sadržaj popuni preostali prostor */
+}
+
+.event-content h4 {
+  font-size: 1em; /* Veći font za naziv događaja */
+  margin-bottom: 8px;
+  color: #523D35;
+}
+
+.event-content p {
+  font-size: 0.85em; /* Umeren font za opis */
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.event-content small span {
+  margin-right: 5px;
+  color: #523D35;
+}
+
+button {
+  background-color: #523D35;
+  color: white;
+  border: none;
+  padding: 6px 12px; /* Manji padding za dugme */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #412c26;
+}
+
+.view-more-btn {
+  background-color: #523D35;
+  color: white;
+  width: 60%; /* Manja širina dugmeta */
+  padding: 6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative; /* Pozicioniranje dugmeta unutar kartice */
+  bottom: 20px; /* Manji razmak od donje ivice */
+  left: 50%; /* Pozicionira dugme u sredinu kartice */
+  transform: translateX(-50%); /* Pomera dugme tačno u centar */
+}
+
+.view-more-btn:hover {
+  background-color: #704d3a;
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #523D35;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #412c26;
+}
+
+.header-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px; /* povećan desni padding zbog dugmeta */
+  margin-bottom: 10px;
+}
+
+.create-event-button {
+  display: flex;
+  align-items: center;
+  background-color: #523D35;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Petrona', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-event-button mat-icon {
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.create-event-button:hover {
+  background-color: #412c26;
+}

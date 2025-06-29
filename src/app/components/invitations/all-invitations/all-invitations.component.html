@@ -1,0 +1,84 @@
+<header>
+  <!-- Background image -->
+  <div class="header-background">
+    <!-- Rectangle with opacity and color -->
+    <div class="header-overlay">
+      <!-- Left burger icon for drawer navbar -->
+      <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
+
+      <!-- Right profile, notifications, and messages icons -->
+      <div class="header-icons">
+        <div class="notifications-container">
+          <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
+          <span *ngIf="unreadCount > 0" class="unread-count">{{ unreadCount }}</span>
+        </div>
+        <mat-icon class="messages-icon" routerLink="/messages">message</mat-icon>
+        <mat-icon class="profile-icon" routerLink="/organizer-profile">account_circle</mat-icon>
+      </div>
+
+      <!-- Centered logo -->
+      <div class="logo-container">
+        <img class="logo">
+      </div>
+
+      <!-- "Event Planner" text -->
+      <div class="event-planner">
+        <h1>Event Planner</h1>
+      </div>
+
+      <!-- Navigation links -->
+      <div class="nav-links">
+        <a routerLink="/home-organizer">HOME</a> | <a routerLink="/organizer-profile">PROFILE</a> | <a href="#">SETTINGS</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<div class="invitation-table-section">
+  <h2 class="table-title">Invitations Overview</h2>
+
+  <table class="invitation-table" *ngIf="groupedInvitations.length > 0">
+    <thead>
+    <tr>
+      <th>Event</th>
+      <th>Invited Guests</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let group of groupedInvitations">
+      <td>{{ group.event.name }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let inv of group.invitations">{{ inv.guestEmail }}</li>
+          <li *ngFor="let i of [].constructor(group.emptySlots)" class="empty-slot">[ Empty ]</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let inv of group.invitations">{{ inv.status }}</li>
+          <li *ngFor="let i of [].constructor(group.emptySlots)">-</li>
+        </ul>
+      </td>
+      <td>
+        <button class="add-invite-button"
+                [disabled]="group.invitations.length >= group.event.maxParticipants"
+                (click)="addInvitation(group.event.id, group.event.maxParticipants, group.invitations)">
+          + Add
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="groupedInvitations.length === 0">
+    <p>No invitations found for your events.</p>
+  </div>
+</div>
+
+
+<app-drawer-navbar-organizer [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-organizer>
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+<app-footer></app-footer>

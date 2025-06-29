@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BlockedUserModel } from '../interfaces/BlockedUser';
+import { BlockedUserModel } from '../../interfaces/BlockedUser';
 
 @Injectable({
   providedIn: 'root'

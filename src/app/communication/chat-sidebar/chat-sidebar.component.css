@@ -68,9 +68,12 @@
 .chat-messages {
   flex: 1;
   padding: 15px;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: flex;
-  flex-direction: column;
+  flex-flow: column-reverse nowrap;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .message {

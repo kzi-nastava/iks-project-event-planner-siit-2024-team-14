@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, tap, throwError} from 'rxjs';
+import {BehaviorSubject, ReplaySubject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginResponse} from './model/login-response.model';
 import {User} from './model/user.model';
@@ -19,9 +19,13 @@ export class AuthService {
     return this.userSubject.asObservable();
   }
 
+  public get user() { return this.userSubject.value }
+
 
   constructor(private http: HttpClient) {
     this.loadUserFromToken();
+
+    (window as any).auth = this;
   }
 
 
@@ -32,28 +36,34 @@ export class AuthService {
     })
 
     console.log('[AuthService] Logging in...');
+    const subject = new ReplaySubject<LoginResponse>(1);
 
-    return this.http.post<LoginResponse>(
+    this.http.post<LoginResponse>(
       `${environment.apiUrl}/users/login`,
       { email, password },
       { headers }
-    ).pipe(
-      tap(res => {
-        localStorage.setItem('token', res.token);
-        this.loadUserFromToken();
-        //this.userSubject.next(res.user);
-      }),
-      catchError(err => {
+    ).subscribe({
+      next: response => {
+        console.log('[AuthService] Login successful.');
+        const token = response.token;
+        this.setToken(token);
+        this.loadUserFromToken(token);
+        subject.next(response);
+        subject.complete();
+      },
+      error: err => {
         console.log('[AuthService] Login failed:', err);
-        return throwError(() => err);
-      })
-    );
+        subject.error(err);
+      }
+    });
+
+    return subject.asObservable();
   }
 
 
   public logout() {
     console.log("[AuthService] Logging out...");
-    localStorage.removeItem('token');
+    this.removeToken();
     this.userSubject.next(null);
   }
 
@@ -66,9 +76,13 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
+  private setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
 
-  private loadUserFromToken() {
-    const token = this.getToken();
+
+  private loadUserFromToken(_token?: string) {
+    const token = _token ?? this.getToken();
     const jwtHelper = new JwtHelperService();
 
     if (!token || jwtHelper.isTokenExpired(token)) {
@@ -99,5 +113,10 @@ export class AuthService {
   public whoAmI() {
     return this.http.get(`${environment.apiUrl}/users/whoami`);
   }
+
+  loginAdmin = () => this.login('admin@gmail.com', 'admin');
+  loginOrganizer = () => this.login('milicabosancic03@gmail.com', 'ana123');
+  loginProvider = () => this.login('food@example.com', 'securepassword');
+  // loginUser = () => this.login('', '');
 
 }

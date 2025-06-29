@@ -47,7 +47,6 @@ import { OccupancyCalendarComponent } from './components/profiles/occupancy-cale
 import { BookingServiceRequestsComponent } from './components/booking-service-requests/booking-service-requests.component';
 import { AllBookingsProviderComponent } from './components/all-bookings-provider/all-bookings-provider.component';
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
-import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
 import { EventTypeManagementComponent } from './components/event-type-management/event-type-management.component'
 import { AddEventTypeComponent } from './components/event-type-management/add/add.component'
 import { EditEventTypeComponent} from './components/event-type-management/edit/edit.component';
@@ -67,8 +66,10 @@ import { EventBudgetComponent } from './components/event-budget/event-budget.com
 import {MatButton, MatIconButton} from '@angular/material/button';
 import { AddEventBudgetItemComponent } from './components/event-budget/add-event-budget-item/add-event-budget-item.component';
 import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
-import {InvitationPopupComponent} from './components/invitations/invitation-popup.component';
+import {InvitationPopupComponent} from './components/invitations/invitation-popup/invitation-popup.component';
 import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
+import {CommunicationModule} from './communication/communication.module';
+import {AllInvitationsComponent} from './components/invitations/all-invitations/all-invitations.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,6 @@ import {InvitationRegisterComponent} from './components/registration/registratio
     EventDetailsComponent,
     ViewProviderProfileComponent,
     ProviderProfileComponent,
-    ChatSidebarComponent,
     EventTypeManagementComponent,
     AddEventTypeComponent,
     EditEventTypeComponent,
@@ -119,7 +119,8 @@ import {InvitationRegisterComponent} from './components/registration/registratio
     EventBudgetComponent,
     AddEventBudgetItemComponent,
     InvitationPopupComponent,
-    InvitationRegisterComponent
+    InvitationRegisterComponent,
+    AllInvitationsComponent
   ],
   imports: [
     BrowserModule,
@@ -148,7 +149,8 @@ import {InvitationRegisterComponent} from './components/registration/registratio
     MatNativeDateModule,
     CommonModule,
     MatIconButton,
-    MatButton
+    MatButton,
+    CommunicationModule
   ],
   providers: [
     provideAnimationsAsync(),

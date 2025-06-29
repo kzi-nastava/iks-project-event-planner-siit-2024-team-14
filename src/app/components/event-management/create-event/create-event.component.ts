@@ -4,10 +4,9 @@ import { EventManagementService } from '../event-management.service';
 import { DatePipe } from '@angular/common';
 import { GetEtNamesModel } from '../../../interfaces/get-et-names.model';
 import { CreateEvent } from '../../../interfaces/create-event.model';
-import {MyEventsOdComponent} from '../../../components/event-management/my-events-od/my-events-od.component';
 import { MatDialog } from '@angular/material/dialog';
-import {InvitationPopupComponent} from '../../invitations/invitation-popup.component';
-
+import {InvitationPopupComponent} from '../../invitations/invitation-popup/invitation-popup.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-event',
@@ -15,7 +14,7 @@ import {InvitationPopupComponent} from '../../invitations/invitation-popup.compo
   styleUrls: ['./create-event.component.css'],
 })
 export class CreateEventComponent implements OnInit {
-  constructor(private eventService: EventManagementService, private datePipe: DatePipe, private dialog: MatDialog) {}
+  constructor(private http: HttpClient, private eventService: EventManagementService, private datePipe: DatePipe, private dialog: MatDialog) {}
 
   @Output() closePopupEvent = new EventEmitter<void>();
 
@@ -48,6 +47,10 @@ export class CreateEventComponent implements OnInit {
 
   formattedStartDate: string | null = null;
   formattedEndDate: string | null = null;
+
+  locationSearch: string = '';
+  locationResults: any[] = [];
+
 
   ngOnInit() {
     this.loadCategories();
@@ -113,6 +116,22 @@ export class CreateEventComponent implements OnInit {
         }
       });
     }
+  }
+
+  onLocationInputChange(): void {
+    if (this.locationSearch.length < 2) return;
+
+    this.http.get<any[]>(`http://localhost:8080/api/location/search?query=${this.locationSearch}`)
+      .subscribe({
+        next: (results) => this.locationResults = results,
+        error: (err) => console.error("Location search error", err)
+      });
+  }
+
+  selectLocation(result: any): void {
+    this.locationSearch = result.display_name;
+    this.locationResults = [];
+    this.eventData.location = result.display_name;
   }
 
   onStartDateChange() {
@@ -210,7 +229,7 @@ export class CreateEventComponent implements OnInit {
           this.dialog.open(InvitationPopupComponent, {
             width: '600px',
 
-            data: { eventId: Number(response.id), maxGuests: Number(this.eventData.guestNumber) }
+            data: { eventId: Number(response.id), maxGuests: Number(this.eventData.guestNumber), existingEmails: [] }
           });
         }
 
