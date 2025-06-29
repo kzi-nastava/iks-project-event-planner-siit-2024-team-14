@@ -25,6 +25,10 @@ import {InvitationRegisterComponent} from './components/registration/registratio
 import {InboxComponent} from './communication/inbox/inbox.component';
 import {authGuard} from './infrastructure/auth/auth.guard';
 import {AllInvitationsComponent} from './components/invitations/all-invitations/all-invitations.component';
+import {
+  HomeAuthenticatedUserComponent
+} from './components/home/home-authenticated-user/home-authenticated-user.component';
+import {AuProfileComponent} from './components/profiles/au-profile/au-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -32,6 +36,7 @@ const routes: Routes = [
   { path: 'home-provider', component: HomeProviderComponent, canActivate: [authGuard], data: { roles: ['ServiceAndProductProvider'] } },
   { path: 'home-organizer', component: HomeOrganizerComponent, canActivate: [authGuard], data: { roles: ['EventOrganizer'] } },
   { path: 'home-admin', component: HomeAdminComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+  { path: 'home-authenticated-user', component: HomeAuthenticatedUserComponent, canActivate: [authGuard], data: { roles: ['User'] } },
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'chat', redirectTo: 'chat/', pathMatch: "full" },
   { path: 'chat/:email', component: InboxComponent, canActivate: [authGuard] },
@@ -44,6 +49,7 @@ const routes: Routes = [
   { path: 'registration-spp', component: RegistrationSppComponent },
   { path: 'activate', component: ActivationComponent },
   { path: 'organizer-profile', component: OrganizerProfileComponent },
+  { path: 'au-profile', component: AuProfileComponent },
   { path: 'events/:id', component: EventDetailsComponent },
   { path: 'view-organizer-profile/:id', component: ViewOrganizerProfileComponent },
   { path: 'view-provider-profile/:id', component: ViewProviderProfileComponent },

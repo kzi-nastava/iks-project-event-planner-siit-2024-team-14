@@ -70,6 +70,14 @@ import {InvitationPopupComponent} from './components/invitations/invitation-popu
 import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
 import {CommunicationModule} from './communication/communication.module';
 import {AllInvitationsComponent} from './components/invitations/all-invitations/all-invitations.component';
+import {
+  HomeAuthenticatedUserComponent
+} from './components/home/home-authenticated-user/home-authenticated-user.component';
+import {DrawerNavbarAuComponent} from './components/drawers/drawer-navbar-au/drawer-navbar-au.component';
+import {AuProfileComponent} from './components/profiles/au-profile/au-profile.component';
+import {
+  UpdateAsProviderComponent
+} from './components/profiles/au-profile/update-as-provider/update-as-provider.component';
 
 @NgModule({
   declarations: [
@@ -78,12 +86,14 @@ import {AllInvitationsComponent} from './components/invitations/all-invitations/
     HomeAdminComponent,
     HomeOrganizerComponent,
     HomeProviderComponent,
+    HomeAuthenticatedUserComponent,
     AboutComponent,
     ServicesComponent,
     DrawerNavbarComponent,
     DrawerNavbarOrganizerComponent,
     DrawerNavbarProviderComponent,
     DrawerNavbarGuestComponent,
+    DrawerNavbarAuComponent,
     AdminCommentsComponent,
     AdminReportsComponent,
     BookingServiceRequestsComponent,
@@ -110,6 +120,8 @@ import {AllInvitationsComponent} from './components/invitations/all-invitations/
     EventDetailsComponent,
     ViewProviderProfileComponent,
     ProviderProfileComponent,
+    AuProfileComponent,
+    UpdateAsProviderComponent,
     EventTypeManagementComponent,
     AddEventTypeComponent,
     EditEventTypeComponent,

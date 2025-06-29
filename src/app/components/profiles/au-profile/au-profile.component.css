@@ -1,0 +1,291 @@
+/* GLOBAL SETTINGS ------------------------------------------------------------- */
+body {
+  font-family: 'Petrona', serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+/* DECORATIVE LINE ------------------------------------------------------------- */
+.decorative-lines {
+  align-self: flex-start;
+  width: 100%;
+  border-top: 2px solid #ddd;
+  margin: 20px 0;
+}
+
+/* HEADER ---------------------------------------------------------------------- */
+header {
+  position: relative;
+}
+
+.header-background {
+  background-image: url('../../../../assets/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+  width: 100%;
+}
+
+.header-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 120px;
+  background-color: #959D90;
+  opacity: 0.85;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 0 20px;
+  z-index: 100;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Icons */
+.burger-icon, .profile-icon {
+  position: absolute;
+  top: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #523D35;
+  padding: 5px;
+  z-index: 110;
+}
+
+.burger-icon {
+  left: 20px;
+}
+
+.profile-icon {
+  right: 20px;
+}
+
+.profile-icon:hover {
+  color: #d9d9d9;
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.logo {
+  background-image: url('../../../../assets/images/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+}
+
+/* Text */
+.event-planner h1 {
+  font-family: 'Petit Formal Script', cursive;
+  font-size: 30px;
+  margin: 5px 0;
+  color: #523D35;
+}
+
+/* Navigation Links */
+.nav-links {
+  font-family: 'Petrona', serif;
+  font-size: 14px;
+  margin-top: 5px;
+  color: #523D35;
+  z-index: 1;
+}
+
+.nav-links a {
+  color: #523D35;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* PROFILE CONTAINER ---------------------------------------------------------- */
+.profile-container {
+  margin-top: 280px; /* ensure it's below the fixed header */
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
+}
+
+.profile-photo-container {
+  flex: 0 0 250px;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info ul {
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+  color: #523D35;
+}
+
+.profile-actions {
+  margin-top: 20px;
+}
+
+.profile-actions button {
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Petrona', serif;
+  cursor: pointer;
+  background-color: #523D35;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.profile-actions button:hover {
+  background-color: #7a5e52;
+}
+
+/* MODALS ---------------------------------------------------------------------- */
+.change-password-modal-overlay,
+.deactivate-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(82, 61, 53, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+.change-password-modal-content,
+.deactivate-modal-content {
+  position: relative;
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  font-family: 'Petrona', serif;
+  z-index: 210;
+}
+
+/* Circles for popup */
+.circle-one-password,
+.circle-two-password,
+.circle-three-password,
+.circle-four-password,
+.circle-one-deactivate,
+.circle-two-deactivate,
+.circle-three-deactivate,
+.circle-four-deactivate {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.circle-one-password,
+.circle-one-deactivate {
+  width: 100px;
+  height: 100px;
+  background-color: #523D35;
+  top: -40px;
+  left: -40px;
+}
+
+.circle-two-password,
+.circle-two-deactivate {
+  width: 60px;
+  height: 60px;
+  background-color: #BFAE9C;
+  top: -30px;
+  right: -30px;
+}
+
+.circle-three-password,
+.circle-three-deactivate {
+  width: 80px;
+  height: 80px;
+  background-color: #959D90;
+  bottom: -40px;
+  left: -40px;
+}
+
+.circle-four-password,
+.circle-four-deactivate {
+  width: 50px;
+  height: 50px;
+  background-color: #CFC0B7;
+  bottom: -20px;
+  right: -20px;
+}
+
+/* Form styles */
+.form-group {
+  margin: 15px 0;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-family: 'Petrona', serif;
+}
+
+/* Buttons in modals */
+.btn-confirm,
+.btn-close,
+.deactivate-yes-button,
+.deactivate-no-button,
+.deactivate-ok-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background-color: #523D35;
+  color: white;
+  font-family: 'Petrona', serif;
+  cursor: pointer;
+}
+
+.btn-close,
+.deactivate-no-button {
+  background-color: #888;
+}
+
+.btn-confirm:hover,
+.btn-close:hover,
+.deactivate-yes-button:hover,
+.deactivate-no-button:hover,
+.deactivate-ok-button:hover {
+  background-color: #6f4e44;
+}
+
+/* Error messages */
+.error-message {
+  color: #b80000;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
