@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import { GetEtNamesModel } from '../../../interfaces/get-et-names.model';
 import { CreateEvent } from '../../../interfaces/create-event.model';
 import { MatDialog } from '@angular/material/dialog';
-import {InvitationPopupComponent} from '../../invitations/invitation-popup.component';
+import {InvitationPopupComponent} from '../../invitations/invitation-popup/invitation-popup.component';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -229,7 +229,7 @@ export class CreateEventComponent implements OnInit {
           this.dialog.open(InvitationPopupComponent, {
             width: '600px',
 
-            data: { eventId: Number(response.id), maxGuests: Number(this.eventData.guestNumber) }
+            data: { eventId: Number(response.id), maxGuests: Number(this.eventData.guestNumber), existingEmails: [] }
           });
         }
 

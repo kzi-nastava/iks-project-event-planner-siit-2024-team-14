@@ -10,4 +10,5 @@ export interface EventModel {
   endDate: string;
   imageUrl: string;
   organizerProfilePicture: string;
+  maxParticipants: number;
 }

@@ -1,6 +1,6 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {InvitationService} from './invitation.service';
+import {InvitationService} from '../invitation.service';
 
 @Component({
   selector: 'app-invitation-popup',
@@ -11,14 +11,21 @@ export class InvitationPopupComponent {
   emails: string[] = [''];
   maxGuests: number;
   eventId: number;
+  @Input() existingEmails: string[] = [];
+
 
   constructor(
     private invitationService: InvitationService,
     public dialogRef: MatDialogRef<InvitationPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { eventId: number, maxGuests: number }
+    @Inject(MAT_DIALOG_DATA) public data: { eventId: number, maxGuests: number, existingEmails: string[] }
   ) {
     this.maxGuests = data.maxGuests;
     this.eventId = data.eventId;
+    this.existingEmails = data.existingEmails || [];
+  }
+
+  totalCount(): number {
+    return this.existingEmails.length + this.emails.length;
   }
 
   trackByIndex(index: number, item: any): number {
@@ -26,7 +33,8 @@ export class InvitationPopupComponent {
   }
 
   addEmail(): void {
-    if (this.emails.length < this.maxGuests) {
+    const total = this.existingEmails.length + this.emails.length;
+    if (total < this.maxGuests) {
       this.emails.push('');
     }
   }

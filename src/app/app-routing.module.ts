@@ -20,10 +20,11 @@ import {ViewProviderProfileComponent} from './components/profiles/view-provider-
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
 import {EventTypeManagementComponent} from './components/event-type-management/event-type-management.component';
 import {MyEventsOdComponent} from './components/event-management/my-events-od/my-events-od.component';
-import {InvitationPopupComponent} from './components/invitations/invitation-popup.component';
+import {InvitationPopupComponent} from './components/invitations/invitation-popup/invitation-popup.component';
 import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
 import {InboxComponent} from './communication/inbox/inbox.component';
 import {authGuard} from './infrastructure/auth/auth.guard';
+import {AllInvitationsComponent} from './components/invitations/all-invitations/all-invitations.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -51,6 +52,7 @@ const routes: Routes = [
   { path: 'my-events-od', component: MyEventsOdComponent },
   {path: 'invitation-popup', component: InvitationPopupComponent },
   {path: 'invitation/register', component: InvitationRegisterComponent },
+  {path: 'all-invitation', component: AllInvitationsComponent },
   { path: '**', redirectTo: '/home-guest' }
 ];
 

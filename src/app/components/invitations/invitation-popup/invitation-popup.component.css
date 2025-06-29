@@ -185,3 +185,12 @@ button[mat-icon-button]:hover {
   text-align: center;
   z-index: 100;
 }
+
+.readonly-icon {
+  color: #aaa;
+  margin-left: 8px;
+}
+.email-item input:disabled {
+  background-color: #f3f3f3;
+  color: #666;
+}
