@@ -82,3 +82,7 @@
     <button (click)="onPageChange(page + 1)" [disabled]="page >= totalPages - 1">Next</button>
   </div>
 </div>
+
+<app-drawer-navbar-organizer [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-organizer>
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+<app-footer></app-footer>
