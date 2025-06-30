@@ -18,8 +18,20 @@ export class EventService {
     return this.http.get<EventModel[]>(this.apiUrl);
   }
 
+  private joinedEventsApiUrl = 'http://localhost:8080/api/events/joined';
+
   getJoinedEvents(): Observable<EventModel[]> {
-    return this.http.get<EventModel[]>(this.apiUrl);
+    const userIdStr = localStorage.getItem('userId');
+    if (!userIdStr) {
+      return of([]);
+    }
+
+    const userId = Number(userIdStr);
+    if (isNaN(userId)) {
+      return of([]);
+    }
+    const url = `${this.joinedEventsApiUrl}/${userId}`;
+    return this.http.get<EventModel[]>(url);
   }
 
   getFilteredEvents(params: HttpParams): Observable<any> {
