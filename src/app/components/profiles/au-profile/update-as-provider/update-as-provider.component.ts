@@ -5,7 +5,7 @@ import {
   FormControl
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {AuService} from '../au.service';
+import { AuService } from '../au.service';
 
 @Component({
   selector: 'app-update-as-provider',
@@ -18,6 +18,7 @@ export class UpdateAsProviderComponent {
   modalMessage: string = 'Please wait while we process your registration.';
   showOkButton = false;
   selectedFiles: File[] = [];
+  user: any = null;
 
   registrationForm: FormGroup;
 
@@ -44,6 +45,11 @@ export class UpdateAsProviderComponent {
       phoneNumber: new FormControl('', [Validators.required]),
       photos: new FormControl(null)
     });
+
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
   }
 
   onFilesSelected(event: any) {
@@ -64,13 +70,12 @@ export class UpdateAsProviderComponent {
   register() {
     if (this.registrationForm.valid) {
       this.showModal = true;
-      this.showOkButton = false;
       this.modalTitle = 'Registration as provider in progress...';
       this.modalMessage = 'Please wait while we process your registration.';
-
-      const formData = new FormData();
+      this.showOkButton = false;
 
       const dto = {
+        id: this.user?.id,
         email: this.data.email,
         password: this.data.password,
         confirmPassword: this.registrationForm.value.confirmPassword || '',
@@ -81,25 +86,40 @@ export class UpdateAsProviderComponent {
         phoneNumber: this.registrationForm.value.phoneNumber || ''
       };
 
-      formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
+      const formData = new FormData();
+      const dtoBlob = new Blob([JSON.stringify(dto)], { type: 'application/json' });
+      formData.append('dto', dtoBlob);
 
-      this.selectedFiles.forEach(file => {
-        const filename = `${this.data.email}-${file.name}`;
-        formData.append('photos', file, filename);
+      this.selectedFiles.forEach((file) => {
+        formData.append('photos', file, file.name);
       });
 
+      console.log('Sending FormData:', dto);
+      console.log('Selected files:', this.selectedFiles);
+
       this.auService.updateAsProvider(formData).subscribe({
-        next: () => {
+        next: (response) => {
+          console.log('Success response:', response);
           this.modalTitle = 'Registration Successful';
+          this.modalMessage = 'Upgrade successful. Please log in again to continue as a provider.';
           this.showOkButton = true;
         },
         error: (err) => {
-          this.showModal = false;
-          alert('Registration failed. Please check your credentials.');
+          console.error('Registration error:', err);
+          this.modalTitle = 'Registration Failed';
+          this.modalMessage = 'An error occurred. Please check your data or try again later.';
+          this.showModal = true;
+          this.showOkButton = true;
         }
       });
     } else {
       alert('Please fill out the form correctly.');
     }
+  }
+
+  onOkClick(): void {
+    this.dialogRef.close();
+    localStorage.clear();
+    window.location.href = '/login';
   }
 }

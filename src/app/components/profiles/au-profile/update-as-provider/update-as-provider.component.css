@@ -1,51 +1,231 @@
+/* GLOBAL -------------------------------------------------------------- */
+body {
+  font-family: 'Petrona', serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+/* POPUP CONTAINER ---------------------------------------------------- */
 .popup-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(82, 61, 53, 0.3);
+  background-color: rgba(82, 61, 53, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 40px 20px; /* malo manje paddinga od gore i dole */
+  box-sizing: border-box;
 }
 
 .popup {
-  background: white;
-  border-radius: 20px;
-  padding: 40px;
   position: relative;
-  width: 600px;
-  max-width: 90%;
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  max-height: 85vh; /* koristi visinu, ali fiksnu */
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
   font-family: 'Petrona', serif;
-  color: #523D35;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden; /* ukloni auto scroll sa popupa */
 }
 
-.popup h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
 
-.circle-one, .circle-two, .circle-three, .circle-four {
+
+/* CIRCLES BACKGROUND ------------------------------------------------- */
+.circle-one,
+.circle-two,
+.circle-three,
+.circle-four {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.15;
-  background-color: #523D35;
+  opacity: 0.2;
+  z-index: 0;
 }
 
-.circle-one { width: 100px; height: 100px; top: -50px; left: -50px; }
-.circle-two { width: 60px; height: 60px; bottom: -30px; right: -30px; }
-.circle-three { width: 80px; height: 80px; top: -40px; right: 30px; }
-.circle-four { width: 40px; height: 40px; bottom: 20px; left: 20px; }
+.circle-one {
+  width: 280px;
+  height: 280px;
+  background-color: #523D35;
+  top: -100px;
+  left: -100px;
+}
+
+.circle-two {
+  width: 240px;
+  height: 240px;
+  background-color: #BFAE9C;
+  top: -90px;
+  right: -90px;
+}
+
+.circle-three {
+  width: 260px;
+  height: 260px;
+  background-color: #959D90;
+  bottom: -120px;
+  left: -100px;
+}
+
+.circle-four {
+  width: 220px;
+  height: 220px;
+  background-color: #CFC0B7;
+  bottom: -80px;
+  right: -80px;
+}
+
+/* HEADINGS ----------------------------------------------------------- */
+.popup h1 {
+  font-family: 'Petrona', serif;
+  color: #523D35;
+  font-size: 30px;
+  margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
+}
+
+.popup p {
+  font-size: 16px;
+  color: #6e6e6e;
+  margin-bottom: 25px;
+  z-index: 1;
+  position: relative;
+}
+
+/* FORM --------------------------------------------------------------- */
+.form {
+  width: 80%;
+  max-width: 460px;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 25px;
+  margin: 0 auto;
+
+}
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
-input[readonly] {
-  background-color: #f1f1f1;
-  color: #999;
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="tel"],
+.form-group input[type="file"] {
+  width: 80%;
+  max-width: 400px;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: 'Petrona', serif;
+  transition: border 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #523D35;
+}
+
+.form-group input[readonly] {
+  background-color: #f2f2f2;
+  color: #666;
   cursor: not-allowed;
+}
+
+/* SELECTED FILES ----------------------------------------------------- */
+.form-group p {
+  font-size: 13px;
+  color: #555;
+  margin-top: 6px;
+}
+
+/* BUTTON ------------------------------------------------------------- */
+.btn-confirm {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-radius: 12px;
+  background-color: #523D35;
+  color: white;
+  font-size: 16px;
+  font-family: 'Petrona', serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-confirm:hover {
+  background-color: #7a5e52;
+}
+
+.popup-scroll-content {
+  width: 100%;
+  padding: 30px 25px;
+  overflow-y: auto;
+  max-height: 85vh;
+  box-sizing: border-box;
+}
+
+
+/* VALIDATION MESSAGES ----------------------------------------------- */
+span {
+  color: #b80000;
+  font-size: 13px;
+}
+
+/* ANIMACIJA ---------------------------------------------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(82, 61, 53, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* više od popup-a */
+}
+
+.success-modal {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out;
+  max-width: 400px;
+}
+
+.success-modal h2 {
+  color: #523D35;
+  margin-bottom: 12px;
+}
+
+.success-modal p {
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 20px;
 }

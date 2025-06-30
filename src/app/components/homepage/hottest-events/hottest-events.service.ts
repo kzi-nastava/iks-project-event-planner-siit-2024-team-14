@@ -15,8 +15,7 @@ export class HottestEventsService {
 
   getTopEvents(): Observable<EventModel[]> {
     const userCity = localStorage.getItem('userCity');
-    const city = userCity ? encodeURIComponent(userCity) : 'Novi Sad';
-
+    const city = !userCity || userCity === 'null' ? 'Novi Sad' : userCity;
     const url = `${this.apiUrl}?city=${city}`;
 
     return this.http.get<EventModel[]>(url);

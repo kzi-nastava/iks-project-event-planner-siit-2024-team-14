@@ -5,61 +5,74 @@
     <div class="circle-three"></div>
     <div class="circle-four"></div>
 
-    <h1>Complete Provider Registration</h1>
-    <p>Please complete the rest of your profile.</p>
+    <div class="popup-scroll-content">
 
-    <form [formGroup]="registrationForm" (ngSubmit)="register()" class="form">
+      <h1>Complete Provider Registration</h1>
+      <p>Please complete the rest of your profile.</p>
 
-      <!-- Email (readonly) -->
-      <div class="form-group">
-        <input id="email" formControlName="email" type="email" readonly />
-      </div>
+      <form [formGroup]="registrationForm" (ngSubmit)="register()" class="form">
 
-      <!-- Password (readonly) -->
-      <div class="form-group">
-        <input id="password" formControlName="password" type="password" readonly />
-      </div>
-
-      <!-- Confirm Password -->
-      <div class="form-group">
-        <input id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Confirm password" />
-        <div *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched">
-          <span *ngIf="registrationForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</span>
+        <!-- Email (readonly) -->
+        <div class="form-group">
+          <input id="email" formControlName="email" type="email" readonly />
         </div>
-      </div>
 
-      <!-- Company Name -->
-      <div class="form-group">
-        <input id="companyName" formControlName="companyName" type="text" placeholder="Company name" />
-      </div>
+        <!-- Password (readonly) -->
+        <div class="form-group">
+          <input id="password" formControlName="password" type="password" readonly />
+        </div>
 
-      <!-- Description -->
-      <div class="form-group">
-        <input id="companyDescription" formControlName="companyDescription" type="text" placeholder="Company description" />
-      </div>
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <input id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Confirm password" />
+          <div *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched">
+            <span *ngIf="registrationForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</span>
+          </div>
+        </div>
 
-      <!-- Address -->
-      <div class="form-group">
-        <input id="address" formControlName="address" type="text" placeholder="Address" />
-      </div>
+        <!-- Company Name -->
+        <div class="form-group">
+          <input id="companyName" formControlName="companyName" type="text" placeholder="Company name" />
+        </div>
 
-      <!-- City -->
-      <div class="form-group">
-        <input id="city" formControlName="city" type="text" placeholder="City" />
-      </div>
+        <!-- Description -->
+        <div class="form-group">
+          <input id="companyDescription" formControlName="companyDescription" type="text" placeholder="Company description" />
+        </div>
 
-      <!-- Phone Number -->
-      <div class="form-group">
-        <input id="phoneNumber" formControlName="phoneNumber" type="tel" placeholder="Phone number" />
-      </div>
+        <!-- Address -->
+        <div class="form-group">
+          <input id="address" formControlName="address" type="text" placeholder="Address" />
+        </div>
 
-      <!-- Photo -->
-      <div class="form-group">
-        <input id="photo" formControlName="file" type="file" accept="image/*" (change)="onFilesSelected($event)" multiple />
-        <p *ngIf="selectedFiles.length > 0">Selected files: {{ selectedFiles.length }} of 3</p>
-      </div>
+        <!-- City -->
+        <div class="form-group">
+          <input id="city" formControlName="city" type="text" placeholder="City" />
+        </div>
 
-      <button type="submit" class="btn-confirm">Confirm</button>
-    </form>
+        <!-- Phone Number -->
+        <div class="form-group">
+          <input id="phoneNumber" formControlName="phoneNumber" type="tel" placeholder="Phone number" />
+        </div>
+
+        <!-- Photo -->
+        <div class="form-group">
+          <input id="photo" formControlName="file" type="file" accept="image/*" (change)="onFilesSelected($event)" multiple />
+          <p *ngIf="selectedFiles.length > 0">Selected files: {{ selectedFiles.length }} of 3</p>
+        </div>
+
+        <button type="submit" class="btn-confirm">Confirm</button>
+      </form>
+    </div>
   </div>
 </div>
+
+<!-- SUCCESS MODAL OVERLAY -->
+<div *ngIf="showModal" class="success-modal-overlay">
+  <div class="success-modal">
+    <h2>{{ modalTitle }}</h2>
+    <p>{{ modalMessage }}</p>
+    <button *ngIf="showOkButton" class="btn-confirm" (click)="onOkClick()">OK</button>
+  </div>
+</div>
+

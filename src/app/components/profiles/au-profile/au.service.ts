@@ -13,10 +13,10 @@ export class AuService {
   constructor(private http: HttpClient) {}
 
   updateAsProvider(formData: FormData): Observable<any> {
-    return this.http.post(this.providerUrl, formData);
+    return this.http.post(this.providerUrl, formData, { responseType: 'text' });
   }
 
   updateAsOrganizer(formData: FormData): Observable<any> {
-    return this.http.post(this.organizerUrl, formData);
+    return this.http.post(this.organizerUrl, formData, { responseType: 'text' });
   }
 }

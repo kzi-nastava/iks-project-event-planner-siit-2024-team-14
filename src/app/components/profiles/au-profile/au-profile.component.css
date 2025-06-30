@@ -115,8 +115,8 @@ header {
 
 /* PROFILE CONTAINER ---------------------------------------------------------- */
 .profile-container {
-  margin-top: 280px; /* ensure it's below the fixed header */
-  padding: 20px;
+  margin-top: 20px; /* ensure it's below the fixed header */
+  padding: 10px;
   display: flex;
   flex-direction: row;
   gap: 40px;
