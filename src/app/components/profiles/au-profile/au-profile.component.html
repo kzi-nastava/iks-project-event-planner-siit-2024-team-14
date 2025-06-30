@@ -3,6 +3,16 @@
     <div class="header-overlay">
       <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
 
+      <!-- Right profile, notifications, and messages icons -->
+      <div class="header-icons">
+        <div class="notifications-container">
+          <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
+          <span *ngIf="unreadCount > 0" class="unread-count">{{ unreadCount }}</span>
+        </div>
+        <mat-icon class="messages-icon" routerLink="/messages">message</mat-icon>
+        <mat-icon class="profile-icon" routerLink="/au-profile">account_circle</mat-icon>
+      </div>
+
       <mat-icon class="profile-icon" routerLink="/au-profile">account_circle</mat-icon>
 
       <div class="logo-container">
@@ -82,6 +92,8 @@
   </div>
 </div>
 
+<app-drawer-navbar-au [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-au>
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
 
 <div class="decorative-lines">
   <app-lines></app-lines>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home-guest/home.component';
-import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
@@ -40,7 +39,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'chat', redirectTo: 'chat/', pathMatch: "full" },
   { path: 'chat/:email', component: InboxComponent, canActivate: [authGuard] },
-  { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },
   { path: 'services/:id', component: ServiceDetailsComponent },

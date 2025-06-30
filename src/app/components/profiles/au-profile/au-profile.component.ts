@@ -6,6 +6,8 @@ import {ChangePassword} from '../../../interfaces/change-password.model';
 import {UpdateAsProviderComponent} from './update-as-provider/update-as-provider.component';
 import { MatDialog } from '@angular/material/dialog';
 import {UpdateAsOrganizerComponent} from './update-as-organizer/update-as-organizer.component';
+import {NotificationService} from '../../notifications/notifications.service';
+import {HomeOrganizerService} from '../../home/home-organizer/home-organizer.service';
 
 @Component({
   selector: 'app-au-profile',
@@ -14,6 +16,8 @@ import {UpdateAsOrganizerComponent} from './update-as-organizer/update-as-organi
 })
 export class AuProfileComponent implements OnInit {
   isSidebarOpen: boolean = false;
+  isNotificationsOpen: boolean = false;
+  unreadCount: number = 0;
   user: any = null;
   showPasswordModal = false;
   passwordsDoNotMatch: boolean = false;
@@ -27,7 +31,7 @@ export class AuProfileComponent implements OnInit {
   noButton: boolean = false;
   yesButton: boolean = false;
 
-  constructor(private infoService: InfoService, private router: Router, private dialog: MatDialog) {}
+  constructor(private infoService: InfoService, private router: Router, private dialog: MatDialog, private notificationService: NotificationService, private userService: HomeOrganizerService) {}
 
   ngOnInit(): void {
     // Retrieve user first
@@ -35,6 +39,21 @@ export class AuProfileComponent implements OnInit {
     if (storedUser) {
       this.user = JSON.parse(storedUser);
     }
+
+    if (this.user.id !== null) {
+      this.loadUnreadNotificationCount(this.user.id);
+      this.notificationService.unreadNotificationCount$.subscribe(count => {
+        this.unreadCount = count;
+      });
+    }
+  }
+
+  loadUnreadNotificationCount(userId: number): void {
+    this.notificationService.loadUnreadNotificationsCount(userId);
+  }
+
+  openNotifications() : void {
+    this.isNotificationsOpen = !this.isNotificationsOpen;
   }
 
   // CHANGE PASSWORD ---------------------------------------------------------------

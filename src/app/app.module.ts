@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home-guest/home.component';
-import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIcon } from '@angular/material/icon';
@@ -81,6 +80,8 @@ import {
 import {
   UpdateAsOrganizerComponent
 } from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
+import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog';
+import {MatDialogActions, MatDialogContent} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,6 @@ import {
     HomeOrganizerComponent,
     HomeProviderComponent,
     HomeAuthenticatedUserComponent,
-    AboutComponent,
     ServicesComponent,
     DrawerNavbarComponent,
     DrawerNavbarOrganizerComponent,
@@ -136,7 +136,8 @@ import {
     AddEventBudgetItemComponent,
     InvitationPopupComponent,
     InvitationRegisterComponent,
-    AllInvitationsComponent
+    AllInvitationsComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -166,7 +167,9 @@ import {
     CommonModule,
     MatIconButton,
     MatButton,
-    CommunicationModule
+    CommunicationModule,
+    MatDialogContent,
+    MatDialogActions
   ],
   providers: [
     provideAnimationsAsync(),
