@@ -68,7 +68,7 @@ import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
 import {InvitationPopupComponent} from './components/invitations/invitation-popup/invitation-popup.component';
 import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
 import {CommunicationModule} from './communication/communication.module';
-import {AllInvitationsComponent} from './components/invitations/all-invitations/all-invitations.component';
+import {AllInvitationsComponent} from './components/invitations/all-invitations-review-eo/all-invitations.component';
 import {
   HomeAuthenticatedUserComponent
 } from './components/home/home-authenticated-user/home-authenticated-user.component';
@@ -82,6 +82,7 @@ import {
 } from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog';
 import {MatDialogActions, MatDialogContent} from '@angular/material/dialog';
+import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
 
 @NgModule({
   declarations: [
@@ -137,7 +138,8 @@ import {MatDialogActions, MatDialogContent} from '@angular/material/dialog';
     InvitationPopupComponent,
     InvitationRegisterComponent,
     AllInvitationsComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    JoinedEventsComponent
   ],
   imports: [
     BrowserModule,

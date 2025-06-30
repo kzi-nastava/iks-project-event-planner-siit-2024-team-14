@@ -18,6 +18,10 @@ export class EventService {
     return this.http.get<EventModel[]>(this.apiUrl);
   }
 
+  getJoinedEvents(): Observable<EventModel[]> {
+    return this.http.get<EventModel[]>(this.apiUrl);
+  }
+
   getFilteredEvents(params: HttpParams): Observable<any> {
     return this.http.get<any>(this.filterUrl, { params });
   }
