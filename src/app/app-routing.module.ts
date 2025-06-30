@@ -23,11 +23,12 @@ import {InvitationPopupComponent} from './components/invitations/invitation-popu
 import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
 import {InboxComponent} from './communication/inbox/inbox.component';
 import {authGuard} from './infrastructure/auth/auth.guard';
-import {AllInvitationsComponent} from './components/invitations/all-invitations/all-invitations.component';
+import {AllInvitationsComponent} from './components/invitations/all-invitations-review-eo/all-invitations.component';
 import {
   HomeAuthenticatedUserComponent
 } from './components/home/home-authenticated-user/home-authenticated-user.component';
 import {AuProfileComponent} from './components/profiles/au-profile/au-profile.component';
+import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -57,6 +58,7 @@ const routes: Routes = [
   {path: 'invitation-popup', component: InvitationPopupComponent },
   {path: 'invitation/register', component: InvitationRegisterComponent },
   {path: 'all-invitation', component: AllInvitationsComponent },
+  {path: 'joined-events', component: JoinedEventsComponent },
   { path: '**', redirectTo: '/home-guest' }
 ];
 

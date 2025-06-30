@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
-  selector: 'app-all-invitations',
+  selector: 'app-all-invitations-review-eo',
   templateUrl: './all-invitations.component.html',
   styleUrls: ['./all-invitations.component.css']
 })
