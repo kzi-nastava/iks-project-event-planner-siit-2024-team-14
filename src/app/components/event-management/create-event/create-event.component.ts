@@ -204,8 +204,8 @@ export class CreateEventComponent implements OnInit {
       guestNumber: Number(this.eventData.guestNumber),
       type: this.eventData.type,
       location: this.eventData.location,
-      startDate: this.eventData.startDate,
-      endDate: this.eventData.endDate,
+      startDate: this.datePipe.transform(this.eventData.startDate, 'yyyy-MM-dd'),
+      endDate: this.datePipe.transform(this.eventData.endDate, 'yyyy-MM-dd'),
       eventType: this.selectedEventType ?? '',
       organizer: this.eventData.organizer
     };
