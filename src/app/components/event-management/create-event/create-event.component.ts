@@ -23,6 +23,7 @@ export class CreateEventComponent implements OnInit {
   selectedCategory: string | null = null;
   selectedEventType: string | null = null;
   selectedFile: File | null = null;
+  today: Date | undefined;
 
   eventData: CreateEvent = {
     name: '',
@@ -57,6 +58,8 @@ export class CreateEventComponent implements OnInit {
     this.loadEventTypes();
     this.eventData.organizer = localStorage.getItem('userId') || '';
     this.minDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    this.today = new Date();
+    this.today.setHours(0, 0, 0, 0);
   }
 
   loadCategories() {
