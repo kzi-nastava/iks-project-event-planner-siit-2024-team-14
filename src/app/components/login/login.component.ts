@@ -41,6 +41,8 @@ export class LoginComponent {
           localStorage.setItem('user', JSON.stringify(response.user));
           localStorage.setItem('userCity', response.user.city);
           localStorage.setItem('userId', response.user.id);
+          localStorage.setItem('userPassword', response.user.password);
+
           localStorage.setItem('role', response.user.role);
 
           this.redirectUser(response.user.role);
@@ -84,6 +86,9 @@ export class LoginComponent {
         break;
       case 'ServiceAndProductProvider':
         this.router.navigate(['home-provider']);
+        break;
+      case 'User':
+        this.router.navigate(['home-authenticated-user']);
         break;
       default:
         this.router.navigate(['home-guest']);

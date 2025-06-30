@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home-guest/home.component';
-import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
@@ -25,6 +24,10 @@ import {InvitationRegisterComponent} from './components/registration/registratio
 import {InboxComponent} from './communication/inbox/inbox.component';
 import {authGuard} from './infrastructure/auth/auth.guard';
 import {AllInvitationsComponent} from './components/invitations/all-invitations/all-invitations.component';
+import {
+  HomeAuthenticatedUserComponent
+} from './components/home/home-authenticated-user/home-authenticated-user.component';
+import {AuProfileComponent} from './components/profiles/au-profile/au-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -32,10 +35,10 @@ const routes: Routes = [
   { path: 'home-provider', component: HomeProviderComponent, canActivate: [authGuard], data: { roles: ['ServiceAndProductProvider'] } },
   { path: 'home-organizer', component: HomeOrganizerComponent, canActivate: [authGuard], data: { roles: ['EventOrganizer'] } },
   { path: 'home-admin', component: HomeAdminComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
+  { path: 'home-authenticated-user', component: HomeAuthenticatedUserComponent, canActivate: [authGuard], data: { roles: ['User'] } },
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'chat', redirectTo: 'chat/', pathMatch: "full" },
   { path: 'chat/:email', component: InboxComponent, canActivate: [authGuard] },
-  { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },
   { path: 'services/:id', component: ServiceDetailsComponent },
@@ -44,6 +47,7 @@ const routes: Routes = [
   { path: 'registration-spp', component: RegistrationSppComponent },
   { path: 'activate', component: ActivationComponent },
   { path: 'organizer-profile', component: OrganizerProfileComponent },
+  { path: 'au-profile', component: AuProfileComponent },
   { path: 'events/:id', component: EventDetailsComponent },
   { path: 'view-organizer-profile/:id', component: ViewOrganizerProfileComponent },
   { path: 'view-provider-profile/:id', component: ViewProviderProfileComponent },

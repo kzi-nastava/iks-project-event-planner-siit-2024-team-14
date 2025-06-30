@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home-guest/home.component';
-import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIcon } from '@angular/material/icon';
@@ -70,6 +69,19 @@ import {InvitationPopupComponent} from './components/invitations/invitation-popu
 import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
 import {CommunicationModule} from './communication/communication.module';
 import {AllInvitationsComponent} from './components/invitations/all-invitations/all-invitations.component';
+import {
+  HomeAuthenticatedUserComponent
+} from './components/home/home-authenticated-user/home-authenticated-user.component';
+import {DrawerNavbarAuComponent} from './components/drawers/drawer-navbar-au/drawer-navbar-au.component';
+import {AuProfileComponent} from './components/profiles/au-profile/au-profile.component';
+import {
+  UpdateAsProviderComponent
+} from './components/profiles/au-profile/update-as-provider/update-as-provider.component';
+import {
+  UpdateAsOrganizerComponent
+} from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
+import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog';
+import {MatDialogActions, MatDialogContent} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -78,12 +90,13 @@ import {AllInvitationsComponent} from './components/invitations/all-invitations/
     HomeAdminComponent,
     HomeOrganizerComponent,
     HomeProviderComponent,
-    AboutComponent,
+    HomeAuthenticatedUserComponent,
     ServicesComponent,
     DrawerNavbarComponent,
     DrawerNavbarOrganizerComponent,
     DrawerNavbarProviderComponent,
     DrawerNavbarGuestComponent,
+    DrawerNavbarAuComponent,
     AdminCommentsComponent,
     AdminReportsComponent,
     BookingServiceRequestsComponent,
@@ -110,6 +123,9 @@ import {AllInvitationsComponent} from './components/invitations/all-invitations/
     EventDetailsComponent,
     ViewProviderProfileComponent,
     ProviderProfileComponent,
+    AuProfileComponent,
+    UpdateAsProviderComponent,
+    UpdateAsOrganizerComponent,
     EventTypeManagementComponent,
     AddEventTypeComponent,
     EditEventTypeComponent,
@@ -120,7 +136,8 @@ import {AllInvitationsComponent} from './components/invitations/all-invitations/
     AddEventBudgetItemComponent,
     InvitationPopupComponent,
     InvitationRegisterComponent,
-    AllInvitationsComponent
+    AllInvitationsComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -150,7 +167,9 @@ import {AllInvitationsComponent} from './components/invitations/all-invitations/
     CommonModule,
     MatIconButton,
     MatButton,
-    CommunicationModule
+    CommunicationModule,
+    MatDialogContent,
+    MatDialogActions
   ],
   providers: [
     provideAnimationsAsync(),
