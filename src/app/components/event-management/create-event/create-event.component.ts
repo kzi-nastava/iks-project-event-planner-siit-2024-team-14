@@ -23,6 +23,7 @@ export class CreateEventComponent implements OnInit {
   selectedCategory: string | null = null;
   selectedEventType: string | null = null;
   selectedFile: File | null = null;
+  today: Date | undefined;
 
   eventData: CreateEvent = {
     name: '',
@@ -57,6 +58,8 @@ export class CreateEventComponent implements OnInit {
     this.loadEventTypes();
     this.eventData.organizer = localStorage.getItem('userId') || '';
     this.minDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    this.today = new Date();
+    this.today.setHours(0, 0, 0, 0);
   }
 
   loadCategories() {
@@ -204,8 +207,8 @@ export class CreateEventComponent implements OnInit {
       guestNumber: Number(this.eventData.guestNumber),
       type: this.eventData.type,
       location: this.eventData.location,
-      startDate: this.eventData.startDate,
-      endDate: this.eventData.endDate,
+      startDate: this.datePipe.transform(this.eventData.startDate, 'yyyy-MM-dd'),
+      endDate: this.datePipe.transform(this.eventData.endDate, 'yyyy-MM-dd'),
       eventType: this.selectedEventType ?? '',
       organizer: this.eventData.organizer
     };
