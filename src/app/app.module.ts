@@ -78,6 +78,9 @@ import {AuProfileComponent} from './components/profiles/au-profile/au-profile.co
 import {
   UpdateAsProviderComponent
 } from './components/profiles/au-profile/update-as-provider/update-as-provider.component';
+import {
+  UpdateAsOrganizerComponent
+} from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +125,7 @@ import {
     ProviderProfileComponent,
     AuProfileComponent,
     UpdateAsProviderComponent,
+    UpdateAsOrganizerComponent,
     EventTypeManagementComponent,
     AddEventTypeComponent,
     EditEventTypeComponent,

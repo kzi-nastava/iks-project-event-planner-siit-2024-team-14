@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<!-- update-as-organizer.component.html -->
+<div class="popup-container">
+  <div class="popup">
+    <div class="circle-one"></div>
+    <div class="circle-two"></div>
+    <div class="circle-three"></div>
+    <div class="circle-four"></div>
 
-</body>
-</html>
+    <div class="popup-scroll-content">
+      <h1>Complete Organizer Registration</h1>
+      <p>Please complete the form to upgrade your role.</p>
+
+      <div *ngIf="showModal" class="modal">
+        <h2>{{ modalTitle }}</h2>
+        <p>{{ modalMessage }}</p>
+        <button *ngIf="showOkButton" class="btn-confirm" (click)="onOkClick()">OK</button>
+      </div>
+
+      <form [formGroup]="registrationForm" (ngSubmit)="register()" class="form">
+        <!-- Email -->
+        <div class="form-group">
+          <input id="email" formControlName="email" type="email" readonly />
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <input id="password" formControlName="password" type="password" readonly />
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <input id="confirmPassword" formControlName="confirmPassword" type="password" placeholder="Confirm password" />
+        </div>
+
+        <!-- Name -->
+        <div class="form-group">
+          <input id="name" formControlName="name" type="text" placeholder="Name" />
+        </div>
+
+        <!-- Surname -->
+        <div class="form-group">
+          <input id="surname" formControlName="surname" type="text" placeholder="Surname" />
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+          <input id="address" formControlName="address" type="text" placeholder="Address" />
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+          <input id="city" formControlName="city" type="text" placeholder="City" />
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+          <input id="phoneNumber" formControlName="phoneNumber" type="tel" placeholder="Phone number" />
+        </div>
+
+        <!-- Photo Upload -->
+        <div class="form-group">
+          <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" />
+        </div>
+
+        <button type="submit" class="btn-confirm">Confirm</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL OVERLAY -->
+<div *ngIf="showModal" class="success-modal-overlay">
+  <div class="success-modal">
+    <h2>{{ modalTitle }}</h2>
+    <p>{{ modalMessage }}</p>
+    <button *ngIf="showOkButton" class="btn-confirm" (click)="onOkClick()">OK</button>
+  </div>
+</div>

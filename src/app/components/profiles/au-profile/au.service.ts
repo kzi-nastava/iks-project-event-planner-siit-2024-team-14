@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AuService {
 
   private providerUrl = 'http://localhost:8080/api/providers/upgrade-to-provider';
-  private organizerUrl = 'http://localhost:8080/api/organizers/update';
+  private organizerUrl = 'http://localhost:8080/api/organizers/upgrade-to-organizer';
 
   constructor(private http: HttpClient) {}
 

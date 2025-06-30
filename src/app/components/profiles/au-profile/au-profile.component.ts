@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ChangePassword} from '../../../interfaces/change-password.model';
 import {UpdateAsProviderComponent} from './update-as-provider/update-as-provider.component';
 import { MatDialog } from '@angular/material/dialog';
+import {UpdateAsOrganizerComponent} from './update-as-organizer/update-as-organizer.component';
 
 @Component({
   selector: 'app-au-profile',
@@ -123,6 +124,13 @@ export class AuProfileComponent implements OnInit {
   }
 
   updateAuAsOrganizer() {
+    this.dialog.open(UpdateAsOrganizerComponent, {
+      width: '700px',
+      data: {
+        email: this.user.email,
+        password: this.user.password
+      }
+    });
 
   }
 
@@ -131,7 +139,7 @@ export class AuProfileComponent implements OnInit {
       width: '700px',
       data: {
         email: this.user.email,
-        password: this.user.password,
+        password: this.user.password
       }
     });
   }
