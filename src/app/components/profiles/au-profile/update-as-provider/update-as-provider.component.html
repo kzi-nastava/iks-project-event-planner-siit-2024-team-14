@@ -45,9 +45,22 @@
           <input id="address" formControlName="address" type="text" placeholder="Address" />
         </div>
 
-        <!-- City -->
-        <div class="form-group">
-          <input id="city" formControlName="city" type="text" placeholder="City" />
+        <!-- City with autocomplete dropdown -->
+        <div class="form-group location-autocomplete-group">
+          <input
+            type="text"
+            placeholder="City"
+            [value]="locationSearch"
+            (input)="onLocationInputChange($event)"
+            autocomplete="off"
+            required
+          />
+
+          <ul class="autocomplete-dropdown" *ngIf="locationResults.length > 0">
+            <li *ngFor="let result of locationResults" (click)="selectLocation(result)">
+              {{ result.display_name }}
+            </li>
+          </ul>
         </div>
 
         <!-- Phone Number -->

@@ -145,16 +145,11 @@ export class CreateEventComponent implements OnInit {
 
   onLocationInputChange(): void {
     const query = this.locationSearch.trim();
-
-    // Resetuj rezultate odmah da ne prikazuje stare
     this.locationResults = [];
 
     if (query.length === 0) {
-      // Ako je input prazan, ne traži ništa
       return;
     }
-
-    // Posalji query u debounce subject
     this.searchSubject.next(query);
   }
 
@@ -162,7 +157,6 @@ export class CreateEventComponent implements OnInit {
     this.http.get<any[]>(`http://localhost:8080/api/location/search?query=${encodeURIComponent(query)}`)
       .subscribe({
         next: (results) => {
-          // Uzmi rezultate samo ako je query isti (da se ne prikazuju stari rezultati ako je query promenjen)
           if (this.locationSearch.trim() === query) {
             this.locationResults = results;
           }

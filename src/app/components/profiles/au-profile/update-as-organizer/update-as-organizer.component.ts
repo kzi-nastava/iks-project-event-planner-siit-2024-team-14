@@ -6,6 +6,8 @@ import {
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuService } from '../au.service';
+import {HttpClient} from '@angular/common/http';
+import {debounceTime, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-update-as-organizer',
@@ -17,18 +19,27 @@ export class UpdateAsOrganizerComponent {
   modalTitle: string = 'Registration in progress...';
   modalMessage: string = 'Please wait while we process your registration.';
   showOkButton = false;
-
   selectedFile: File | null = null;
   user: any = null;
+
+  locationSearch: string = '';
+  locationResults: any[] = [];
+  private searchSubject = new Subject<string>();
 
   registrationForm: FormGroup;
 
   constructor(
+    private http: HttpClient,
     private auService: AuService,
     private dialogRef: MatDialogRef<UpdateAsOrganizerComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: { email: string; password: string }
   ) {
+
+    this.searchSubject.pipe(debounceTime(300)).subscribe((query) => {
+      this.performSearch(query);
+    });
+
     this.registrationForm = new FormGroup({
       email: new FormControl(
         { value: this.data.email, disabled: true },
@@ -57,6 +68,41 @@ export class UpdateAsOrganizerComponent {
     if (file) {
       this.selectedFile = file;
     }
+  }
+
+  onLocationInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const query = input.value.trim();
+    this.locationSearch = query;
+
+    if (query.length < 2) {
+      this.locationResults = [];
+      return;
+    }
+
+    this.searchSubject.next(query);
+  }
+
+  performSearch(query: string): void {
+    this.http.get<any[]>(`http://localhost:8080/api/location/search?query=${encodeURIComponent(query)}`)
+      .subscribe({
+        next: (results) => {
+          if (this.locationSearch.trim() === query) {
+            this.locationResults = results;
+          }
+        },
+        error: (err) => {
+          console.error('Location search error', err);
+          this.locationResults = [];
+        }
+      });
+  }
+
+  selectLocation(result: any): void {
+    this.locationSearch = result.display_name;
+    this.locationResults = [];
+
+    this.registrationForm.get('city')?.setValue(result.display_name);
   }
 
   register() {
