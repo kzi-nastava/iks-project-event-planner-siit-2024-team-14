@@ -59,6 +59,7 @@ const routes: Routes = [
   {path: 'invitation/register', component: InvitationRegisterComponent },
   {path: 'all-invitation', component: AllInvitationsComponent },
   {path: 'joined-events', component: JoinedEventsComponent },
+  {path: 'inbox', component: InboxComponent },
   { path: '**', redirectTo: '/home-guest' }
 ];
 

@@ -9,7 +9,7 @@
         <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
         <span *ngIf="unreadCount > 0" class="unread-count">{{ unreadCount }}</span>
       </div>
-      <mat-icon class="messages-icon" *ngIf="role" routerLink="/messages">message</mat-icon>
+      <mat-icon class="messages-icon" *ngIf="role" routerLink="/inbox">message</mat-icon>
       <mat-icon class="profile-icon" [routerLink]="profileRoute">account_circle</mat-icon>
     </div>
 
