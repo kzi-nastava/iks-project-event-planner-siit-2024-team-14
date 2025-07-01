@@ -1,12 +1,20 @@
-import {AfterViewInit, Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewChild,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { CategoriesEtModel } from '../../../interfaces/categories-et.model';
 import { EventManagementService } from '../event-management.service';
 import { DatePipe } from '@angular/common';
 import { GetEtNamesModel } from '../../../interfaces/get-et-names.model';
 import { CreateEvent } from '../../../interfaces/create-event.model';
 import { MatDialog } from '@angular/material/dialog';
-import {InvitationPopupComponent} from '../../invitations/invitation-popup/invitation-popup.component';
+import { InvitationPopupComponent } from '../../invitations/invitation-popup/invitation-popup.component';
 import { HttpClient } from '@angular/common/http';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create-event',
@@ -14,7 +22,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./create-event.component.css'],
 })
 export class CreateEventComponent implements OnInit {
-  constructor(private http: HttpClient, private eventService: EventManagementService, private datePipe: DatePipe, private dialog: MatDialog) {}
+  constructor(
+    private http: HttpClient,
+    private eventService: EventManagementService,
+    private datePipe: DatePipe,
+    private dialog: MatDialog
+  ) {}
 
   @Output() closePopupEvent = new EventEmitter<void>();
 
@@ -36,7 +49,7 @@ export class CreateEventComponent implements OnInit {
     endDate: null,
     eventType: '',
     organizer: '',
-    photo: null
+    photo: null,
   };
 
   showModal = false;
@@ -51,15 +64,22 @@ export class CreateEventComponent implements OnInit {
 
   locationSearch: string = '';
   locationResults: any[] = [];
+  private searchSubject = new Subject<string>();
 
 
   ngOnInit() {
     this.loadCategories();
     this.loadEventTypes();
     this.eventData.organizer = localStorage.getItem('userId') || '';
-    this.minDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    this.minDate = new Date().toISOString().split('T')[0];
     this.today = new Date();
     this.today.setHours(0, 0, 0, 0);
+
+    this.searchSubject.pipe(
+      debounceTime(300)
+    ).subscribe(query => {
+      this.performSearch(query);
+    });
   }
 
   loadCategories() {
@@ -82,7 +102,7 @@ export class CreateEventComponent implements OnInit {
       error: (err) => {
         this.errorMessage = 'Error fetching event types. Please try again.';
         console.error('Error fetching event types', err);
-      }
+      },
     });
   }
 
@@ -93,7 +113,9 @@ export class CreateEventComponent implements OnInit {
         this.eventData.categories.push(category.name);
       }
     } else {
-      this.eventData.categories = this.eventData.categories.filter(c => c !== category.name);
+      this.eventData.categories = this.eventData.categories.filter(
+        (c) => c !== category.name
+      );
     }
   }
 
@@ -116,18 +138,39 @@ export class CreateEventComponent implements OnInit {
         error: (err) => {
           console.error('Error fetching categories', err);
           this.categories = [];
-        }
+        },
       });
     }
   }
 
   onLocationInputChange(): void {
-    if (this.locationSearch.length < 2) return;
+    const query = this.locationSearch.trim();
 
-    this.http.get<any[]>(`http://localhost:8080/api/location/search?query=${this.locationSearch}`)
+    // Resetuj rezultate odmah da ne prikazuje stare
+    this.locationResults = [];
+
+    if (query.length === 0) {
+      // Ako je input prazan, ne traži ništa
+      return;
+    }
+
+    // Posalji query u debounce subject
+    this.searchSubject.next(query);
+  }
+
+  private performSearch(query: string): void {
+    this.http.get<any[]>(`http://localhost:8080/api/location/search?query=${encodeURIComponent(query)}`)
       .subscribe({
-        next: (results) => this.locationResults = results,
-        error: (err) => console.error("Location search error", err)
+        next: (results) => {
+          // Uzmi rezultate samo ako je query isti (da se ne prikazuju stari rezultati ako je query promenjen)
+          if (this.locationSearch.trim() === query) {
+            this.locationResults = results;
+          }
+        },
+        error: (err) => {
+          console.error('Location search error', err);
+          this.locationResults = [];
+        }
       });
   }
 
@@ -135,25 +178,32 @@ export class CreateEventComponent implements OnInit {
     this.locationSearch = result.display_name;
     this.locationResults = [];
     this.eventData.location = result.display_name;
+
   }
 
   onStartDateChange() {
     if (this.eventData.startDate) {
-      this.formattedStartDate = this.datePipe.transform(this.eventData.startDate, 'dd/MM/yyyy');
+      this.formattedStartDate = this.datePipe.transform(
+        this.eventData.startDate,
+        'dd/MM/yyyy'
+      );
       this.validateDateOrder();
     }
   }
 
   onEndDateChange() {
     if (this.eventData.endDate) {
-      this.formattedEndDate = this.datePipe.transform(this.eventData.endDate, 'dd/MM/yyyy');
+      this.formattedEndDate = this.datePipe.transform(
+        this.eventData.endDate,
+        'dd/MM/yyyy'
+      );
       this.validateDateOrder();
     }
   }
 
   validateDateOrder(): boolean {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // reset time to midnight for accurate comparison
+    today.setHours(0, 0, 0, 0);
 
     if (this.eventData.startDate) {
       const start = new Date(this.eventData.startDate);
@@ -207,13 +257,19 @@ export class CreateEventComponent implements OnInit {
       guestNumber: Number(this.eventData.guestNumber),
       type: this.eventData.type,
       location: this.eventData.location,
-      startDate: this.datePipe.transform(this.eventData.startDate, 'yyyy-MM-dd'),
+      startDate: this.datePipe.transform(
+        this.eventData.startDate,
+        'yyyy-MM-dd'
+      ),
       endDate: this.datePipe.transform(this.eventData.endDate, 'yyyy-MM-dd'),
       eventType: this.selectedEventType ?? '',
-      organizer: this.eventData.organizer
+      organizer: this.eventData.organizer,
     };
 
-    formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
+    formData.append(
+      'dto',
+      new Blob([JSON.stringify(dto)], { type: 'application/json' })
+    );
 
     if (this.selectedFile) {
       const name = this.eventData.name;
@@ -225,17 +281,19 @@ export class CreateEventComponent implements OnInit {
       next: (response: any) => {
         console.log('Creating event successful: ', response);
         this.errorMessage = '';
-
         this.showModal = true;
         this.showOkButton = true;
+
         if (this.eventData.type === 'CLOSED' && response?.id) {
           this.dialog.open(InvitationPopupComponent, {
             width: '600px',
-
-            data: { eventId: Number(response.id), maxGuests: Number(this.eventData.guestNumber), existingEmails: [] }
+            data: {
+              eventId: Number(response.id),
+              maxGuests: Number(this.eventData.guestNumber),
+              existingEmails: [],
+            },
           });
         }
-
       },
       error: (err) => {
         if (err.status === 409) {
@@ -244,7 +302,7 @@ export class CreateEventComponent implements OnInit {
           this.errorMessage = 'Error creating event. Please try again.';
         }
         console.error(err);
-      }
+      },
     });
   }
 

@@ -381,23 +381,24 @@ legend {
   border: 1px solid #523D35;
   border-radius: 5px;
   width: 100%;
-  max-height: 150px;
   overflow-y: auto;
-  margin-top: 2px;
   padding: 0;
   list-style: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   font-family: 'Petrona', serif;
   color: #523D35;
+  margin-top: 5px;
+  top: 100%; /* dropdown odmah ispod inputa */
+  left: 0;
+  max-height: 200px;
 }
 
 .autocomplete-dropdown li {
-  padding: 10px 12px;
+  padding: 8px 12px;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: background 0.2s;
 }
 
-.autocomplete-dropdown li:hover {
-  background-color: #f0eae4;
-}
+
+
