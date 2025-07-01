@@ -8,7 +8,6 @@ import { RegistrationSppComponent } from './components/registration/registration
 import { ActivationComponent } from './components/registration/activation/activation.component';
 import {HomeProviderComponent} from './components/home/home-provider/home-provider.component';
 import {HomeOrganizerComponent} from './components/home/home-organizer/home-organizer.component';
-import {HomeAdminComponent} from './components/home/home-admin/home-admin.component'; // Make sure this is correctly imported
 import {AddServiceComponent} from './offerings/add-service/add-service.component';
 import {ServiceDetailsComponent} from './offerings/service-details/service-details.component';
 import {ProductDetailsComponent} from './offerings/product-details/product-details.component';
@@ -18,7 +17,7 @@ import {ViewOrganizerProfileComponent} from './components/profiles/view-organize
 import {ViewProviderProfileComponent} from './components/profiles/view-provider-profile/view-provider-profile.component';
 import {ProviderProfileComponent} from './components/profiles/provider-profile/provider-profile.component';
 import {EventTypeManagementComponent} from './components/event-type-management/event-type-management.component';
-import {MyEventsOdComponent} from './components/event-management/my-events-od/my-events-od.component';
+import {MyEventsEoComponent} from './components/event-management/my-events-eo/my-events-eo.component';
 import {InvitationPopupComponent} from './components/invitations/invitation-popup/invitation-popup.component';
 import {InvitationRegisterComponent} from './components/registration/registration-au/registration-au.component';
 import {InboxComponent} from './communication/inbox/inbox.component';
@@ -29,6 +28,7 @@ import {
 } from './components/home/home-authenticated-user/home-authenticated-user.component';
 import {AuProfileComponent} from './components/profiles/au-profile/au-profile.component';
 import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
+import {HomeAdminComponent} from './components/home/home-admin/home-admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -54,7 +54,7 @@ const routes: Routes = [
   { path: 'view-provider-profile/:id', component: ViewProviderProfileComponent },
   { path: 'provider-profile', component: ProviderProfileComponent },
   { path: 'event-type-management', component: EventTypeManagementComponent },
-  { path: 'my-events-od', component: MyEventsOdComponent },
+  { path: 'my-events-eo', component: MyEventsEoComponent },
   {path: 'invitation-popup', component: InvitationPopupComponent },
   {path: 'invitation/register', component: InvitationRegisterComponent },
   {path: 'all-invitation', component: AllInvitationsComponent },

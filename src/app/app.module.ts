@@ -49,7 +49,7 @@ import {ProviderProfileComponent} from './components/profiles/provider-profile/p
 import { EventTypeManagementComponent } from './components/event-type-management/event-type-management.component'
 import { AddEventTypeComponent } from './components/event-type-management/add/add.component'
 import { EditEventTypeComponent} from './components/event-type-management/edit/edit.component';
-import { MyEventsOdComponent } from './components/event-management/my-events-od/my-events-od.component';
+import { MyEventsEoComponent } from './components/event-management/my-events-eo/my-events-eo.component';
 import { CreateEventComponent } from './components/event-management/create-event/create-event.component';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
@@ -83,6 +83,8 @@ import {
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog';
 import {MatDialogActions, MatDialogContent} from '@angular/material/dialog';
 import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
+import {HeaderComponent} from './components/header/header.component';
+import {EventPageComponent} from './components/event-management/event-page/event-page.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +132,8 @@ import {JoinedEventsComponent} from './components/joined-events/joined-events.co
     EventTypeManagementComponent,
     AddEventTypeComponent,
     EditEventTypeComponent,
-    MyEventsOdComponent,
+    MyEventsEoComponent,
+    EventPageComponent,
     CreateEventComponent,
     MessagePopupComponent,
     EventBudgetComponent,
@@ -139,7 +142,8 @@ import {JoinedEventsComponent} from './components/joined-events/joined-events.co
     InvitationRegisterComponent,
     AllInvitationsComponent,
     ConfirmDialogComponent,
-    JoinedEventsComponent
+    JoinedEventsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

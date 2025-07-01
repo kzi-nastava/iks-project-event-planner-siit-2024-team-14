@@ -23,7 +23,7 @@ export class DrawerNavbarOrganizerComponent {
   }
 
   navigateToMyEvents() {
-    this.router.navigate(['my-events-od']);
+    this.router.navigate(['my-events-eo']);
   }
 
   navigateToMyInvitations() {

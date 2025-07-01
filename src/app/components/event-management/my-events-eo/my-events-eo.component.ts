@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../homepage/all-events/our-events.service';
 
 @Component({
-  selector: 'my-events-od',
-  templateUrl: './my-events-od.component.html',
-  styleUrl: './my-events-od.component.css'
+  selector: 'my-events-eo',
+  templateUrl: './my-events-eo.component.html',
+  styleUrl: './my-events-eo.component.css'
 })
-export class MyEventsOdComponent implements OnInit {
+export class MyEventsEoComponent implements OnInit {
   showCreatePopup = false;
 
   eventsList: any[] = [];
