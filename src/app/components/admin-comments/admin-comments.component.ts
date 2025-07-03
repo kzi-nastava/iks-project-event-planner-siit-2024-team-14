@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommentService} from './admin-comments.service';
-import {CommentModel} from '../../interfaces/comment.model';
+import { CommentService } from './admin-comments.service';
+import { CommentModel } from '../../interfaces/comment.model';
 
 @Component({
   selector: 'app-admin-comments',
@@ -11,16 +11,17 @@ export class AdminCommentsComponent implements OnInit {
   @Input() isCommentsOpen: boolean = false;
   comments: CommentModel[] = [];
 
+  baseUrl = 'http://localhost:8080/';
+
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {
     this.loadPendingComments();
   }
 
-  // Metoda za učitavanje komentara
   loadPendingComments() {
     this.commentService.getAllComments().subscribe((comments) => {
-      this.comments = comments;
+      this.comments = comments.map(comment => this.addFullProfilePicUrl(comment));
     });
   }
 
@@ -33,7 +34,6 @@ export class AdminCommentsComponent implements OnInit {
       comment.status = 'accepted';
       alert('Comment approved!');
     });
-
   }
 
   deleteComment(comment: CommentModel) {
@@ -45,5 +45,14 @@ export class AdminCommentsComponent implements OnInit {
 
   closeComments() {
     this.isCommentsOpen = false;
+  }
+
+  private addFullProfilePicUrl(comment: CommentModel): CommentModel {
+    return {
+      ...comment,
+      commenterProfilePicture: comment.commenterProfilePicture && !comment.commenterProfilePicture.startsWith('http')
+        ? this.baseUrl + comment.commenterProfilePicture
+        : comment.commenterProfilePicture
+    };
   }
 }

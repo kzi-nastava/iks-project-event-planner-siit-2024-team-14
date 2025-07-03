@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {ViewProviderProfileService} from './view-provider-profile.service';
-import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {ProviderModel} from '../../../interfaces/provider.model';
+import { Component, OnInit } from '@angular/core';
+import { ViewProviderProfileService } from './view-provider-profile.service';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { ProviderModel } from '../../../interfaces/provider.model';
 
 @Component({
   selector: 'app-view-provider-profile',
   templateUrl: './view-provider-profile.component.html',
   styleUrls: ['./view-provider-profile.component.css']
 })
-export class ViewProviderProfileComponent implements OnInit{
+export class ViewProviderProfileComponent implements OnInit {
   user: ProviderModel = { id: -1 } as ProviderModel;
   isSidebarOpen: boolean = false;
   showReportForm = false;
@@ -17,13 +17,19 @@ export class ViewProviderProfileComponent implements OnInit{
   isChatOpen: boolean = false;
   loggedUserId: number | null = null;
 
-  constructor(private route: ActivatedRoute, private viewProviderProfileService: ViewProviderProfileService, private http: HttpClient) {}
+  baseUrl = 'http://localhost:8080/';
+
+  constructor(
+    private route: ActivatedRoute,
+    private viewProviderProfileService: ViewProviderProfileService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
       this.viewProviderProfileService.getOrganizerById(userId).subscribe(user => {
-        this.user = user;
+        this.user = this.addFullImageUrl(user);
       });
     }
 
@@ -35,13 +41,6 @@ export class ViewProviderProfileComponent implements OnInit{
 
   toggleChat() {
     this.isChatOpen = !this.isChatOpen;
-  }
-
-  // Method to get profile photo URL
-  getProfilePhotoUrl(): string {
-    const photoFileName = this.user?.profilePhoto;
-    console.log(photoFileName);
-    return photoFileName ? `http://localhost:8080/api/providers/get-photo/${photoFileName}` : '../../../../../assets/images/profile6.jpg';
   }
 
   toggleSidebar(): void {
@@ -65,17 +64,35 @@ export class ViewProviderProfileComponent implements OnInit{
     }
 
     const reportData = {
-      senderId: localStorage.getItem("userId"),  // ID korisnika koji šalje prijavu
-      reportedUserId: this.user.id,  // ID korisnika koji je prijavljen
-      reason: this.reportReason  // Razlog prijave
+      senderId: localStorage.getItem("userId"),
+      reportedUserId: this.user.id,
+      reason: this.reportReason
     };
 
-    this.http.post('http://localhost:8080/api/reports', reportData).subscribe(response => {
-      alert("Report submitted successfully!");
-      this.closeReportForm();
-    }, error => {
-      alert("Error submitting report.");
+    this.http.post('http://localhost:8080/api/reports', reportData).subscribe({
+      next: () => {
+        alert("Report submitted successfully!");
+        this.closeReportForm();
+      },
+      error: () => {
+        alert("Error submitting report.");
+      }
     });
+  }
+
+  // Dodavanje punog URL-a za profilnu sliku
+  private addFullImageUrl(user: ProviderModel): ProviderModel {
+    return {
+      ...user,
+      profilePhoto: user.profilePhoto && !user.profilePhoto.startsWith('http')
+        ? this.baseUrl + 'profile-photos/' + user.profilePhoto
+        : user.profilePhoto
+    };
+  }
+
+  // Vraća pun URL za prikaz slike
+  getProfilePhotoUrl(): string {
+    return this.user?.profilePhoto || '../../../../../assets/images/profile6.jpg';
   }
 
   protected readonly localStorage = localStorage;

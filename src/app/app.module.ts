@@ -15,7 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HottestEventsComponent } from './components/homepage/hottest-events/hottest-events.component';
 import { OurEventsComponent } from './components/homepage/all-events/our-events.component';
 import { HottestServicesComponent } from './components/homepage/hottest-services/hottest-services.component';
-import { OurSevicesComponent } from './components/homepage/all-sevices/our-sevices.component';
+import { OurServicesComponent } from './components/homepage/all-services/our-services.component';
 import {FooterComponent} from './components/homepage/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
@@ -83,7 +83,7 @@ import {
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog';
 import {MatDialogActions, MatDialogContent} from '@angular/material/dialog';
 import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
-import {HeaderComponent} from './components/header/header.component';
+import {HeaderComponent} from './components/homepage/header/header.component';
 import {EventPageComponent} from './components/event-management/event-page/event-page.component';
 
 @NgModule({
@@ -106,7 +106,7 @@ import {EventPageComponent} from './components/event-management/event-page/event
     AllBookingsProviderComponent,
     HottestEventsComponent,
     HottestServicesComponent,
-    OurSevicesComponent,
+    OurServicesComponent,
     OurEventsComponent,
     FooterComponent,
     LoginComponent,
