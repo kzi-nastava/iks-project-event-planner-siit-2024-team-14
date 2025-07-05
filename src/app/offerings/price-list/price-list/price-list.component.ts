@@ -46,7 +46,7 @@ export class PriceListComponent implements AfterViewInit {
     }
 
     this.priceListService.updateSolutionPrice(solution, price)
-      .subscribe(() => solution.price = price);
+      .subscribe(s => Object.assign(solution, s));
   }
 
 
