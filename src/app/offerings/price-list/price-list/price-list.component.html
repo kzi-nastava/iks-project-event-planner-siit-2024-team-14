@@ -16,7 +16,18 @@
 
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef>Price</th>
-      <td mat-cell *matCellDef="let row">{{row.price | currency}}</td>
+      <td mat-cell *matCellDef="let row">
+        @if (row.isEditing) {
+          <input #inputRef
+            matInput type="number" min="0"
+            [value]="row.price" required
+            (focusout)="row.isEditing = false"
+            (keydown.enter)="updatePrice(row, inputRef.validity.valid ? +inputRef.value : -1); row.isEditing = false;"
+          />
+        } @else {
+          <p (click)="row.isEditing = true">{{ row.price | currency }}</p>
+        }
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="discount">

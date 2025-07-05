@@ -32,7 +32,7 @@ export class ServiceService {
   }
 
   update(service: Partial<Service> & Pick<Service, 'id'>) {
-    return this.httpClient.put<Service>(this.baseURL + service.id, service);
+    return this.httpClient.put<Service>(`${this.baseURL}/${service.id}`, service);
   }
 
 }

@@ -22,7 +22,7 @@ export class ProductService {
   }
 
   update(product: Partial<Product> & Pick<Product, 'id'>) {
-    return this.httpClient.put<Product>(this.baseURL + product.id, product);
+    return this.httpClient.put<Product>(`${this.baseURL}/${product.id}`, product);
   }
 
 }

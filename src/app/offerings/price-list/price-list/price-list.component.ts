@@ -40,5 +40,16 @@ export class PriceListComponent implements AfterViewInit {
   }
 
 
+  updatePrice(solution: any, price: number) {
+    if (isNaN(price) || price < 0) {
+      return;
+    }
+
+    this.priceListService.updateSolutionPrice(solution, price)
+      .subscribe(() => solution.price = price);
+  }
+
+
   priceListService = inject(PriceListService);
+  protected readonly Number = Number;
 }
