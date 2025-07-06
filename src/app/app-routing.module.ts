@@ -29,6 +29,7 @@ import {
 import {AuProfileComponent} from './components/profiles/au-profile/au-profile.component';
 import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
 import {HomeAdminComponent} from './components/home/home-admin/home-admin.component';
+import {PriceListComponent} from './offerings/price-list/price-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'services/add', component: AddServiceComponent },
   { path: 'services/:id', component: ServiceDetailsComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'price-list', component: PriceListComponent, canActivate: [authGuard], data: { roles: ['ServiceAndProductProvider'] }},
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },
   { path: 'activate', component: ActivationComponent },
