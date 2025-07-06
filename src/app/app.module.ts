@@ -1,14 +1,10 @@
 import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home-guest/home.component';
 import { ServicesComponent } from './components/services/services.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MatIcon } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common';
 import { DrawerNavbarComponent } from './components/drawers/drawer-navbar-admin/drawer-navbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -51,18 +47,10 @@ import { AddEventTypeComponent } from './components/event-type-management/add/ad
 import { EditEventTypeComponent} from './components/event-type-management/edit/edit.component';
 import { MyEventsEoComponent } from './components/event-management/my-events-eo/my-events-eo.component';
 import { CreateEventComponent } from './components/event-management/create-event/create-event.component';
-import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
-import {MatInput} from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import {MatNativeDateModule} from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { MessagePopupComponent } from './components/event-management/message-popup/message-popup.component';
 import { EventBudgetComponent } from './components/event-budget/event-budget.component';
-import {MatButton, MatIconButton} from '@angular/material/button';
 import { AddEventBudgetItemComponent } from './components/event-budget/add-event-budget-item/add-event-budget-item.component';
 import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
 import {InvitationPopupComponent} from './components/invitations/invitation-popup/invitation-popup.component';
@@ -81,10 +69,10 @@ import {
   UpdateAsOrganizerComponent
 } from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog';
-import {MatDialogActions, MatDialogContent} from '@angular/material/dialog';
 import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
 import {HeaderComponent} from './components/header/header.component';
 import {EventPageComponent} from './components/event-management/event-page/event-page.component';
+import {MaterialModule} from './infrastructure/material/material.module';
 
 @NgModule({
   declarations: [
@@ -148,34 +136,14 @@ import {EventPageComponent} from './components/event-management/event-page/event
   imports: [
     BrowserModule,
     HttpClientModule,
-    MatIcon,
     NgOptimizedImage,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     OfferingsModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatRadioGroup,
-    MatRadioButton,
-    MatDatepickerInput,
-    MatDatepickerToggle,
-    MatDatepicker,
-    MatInput,
-    MatDatepickerModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatNativeDateModule,
     CommonModule,
-    MatIconButton,
-    MatButton,
     CommunicationModule,
-    MatDialogContent,
-    MatDialogActions
+    MaterialModule,
   ],
   providers: [
     provideAnimationsAsync(),

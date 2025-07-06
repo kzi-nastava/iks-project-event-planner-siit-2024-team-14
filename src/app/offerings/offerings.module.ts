@@ -4,14 +4,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ServiceDetailsComponent } from "./service-details/service-details.component";
 import { AddServiceComponent } from "./add-service/add-service.component";
 import {ProductDetailsComponent} from './product-details/product-details.component';
-import {MatToolbar} from '@angular/material/toolbar';
-import {MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
-import {MatListItemAvatar} from '@angular/material/list';
 import {RouterLink} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {BrowserModule} from '@angular/platform-browser';
+import {MaterialModule} from '../infrastructure/material/material.module';
 
 @NgModule({
   declarations: [
@@ -23,14 +20,11 @@ import {BrowserModule} from '@angular/platform-browser';
     CommonModule,
     ReactiveFormsModule,
     NgOptimizedImage,
-    MatToolbar,
-    MatIconButton,
-    MatIcon,
-    MatListItemAvatar,
     RouterLink,
     FormsModule,
     HttpClientModule,
-    BrowserModule
+    BrowserModule,
+    MaterialModule,
   ],
   providers: [
     provideAnimationsAsync()
