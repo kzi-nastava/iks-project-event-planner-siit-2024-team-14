@@ -59,7 +59,7 @@ export class MessagingService implements OnDestroy {
 
     this.ss = this.stompService.subscribe(
       `/queue/${this.loggedInUserId}`,
-      this.onMessageReceived.bind(this)
+      msg => this.onMessageReceived(msg),
     );
   }
 
@@ -84,7 +84,7 @@ export class MessagingService implements OnDestroy {
         { content },
         { params: { userId: this.loggedInUserId } } // for testing purposes until server auth works properly
       ).subscribe({
-        next: this.messageSubject.next.bind(this),
+        next: msg => console.log("[MessagingService] Message sent via http successfully:", msg),
         error: console.error
       });
 
@@ -118,8 +118,8 @@ export class MessagingService implements OnDestroy {
 
 
   block(chatterId: number) {
-    return this.http.post<void>(
-      environment.apiUrl + `/chat/${this.loggedInUserId}/${chatterId}`,
+    return this.http.post(
+      environment.apiUrl + `/chat/${this.loggedInUserId}/block/${chatterId}`,
       {}
     );
   }
