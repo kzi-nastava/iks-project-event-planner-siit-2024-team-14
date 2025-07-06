@@ -10,11 +10,16 @@ import {EventModel} from '../interfaces/event.model';
 })
 export class EventDetailsComponent implements OnInit {
   event: EventModel = { id: -1 } as any as EventModel;
+  loggedUserId: number | null = null;
 
   constructor(private route: ActivatedRoute, private eventService: EventDetailsService) {}
 
   ngOnInit(): void {
     const eventId = this.route.snapshot.paramMap.get('id');
+    const storedId = localStorage.getItem('userId');
+    if (storedId) {
+      this.loggedUserId = parseInt(storedId, 10);
+    }
     console.log("Event ID:", eventId); // Proveri da li dobija ID iz URL-a
     if (eventId) {
       this.eventService.getEventById(eventId).subscribe(event => {

@@ -120,7 +120,8 @@ export class MessagingService implements OnDestroy {
   block(chatterId: number) {
     return this.http.post(
       environment.apiUrl + `/chat/${this.loggedInUserId}/block/${chatterId}`,
-      {}
+      {},
+      { responseType: 'text' }
     );
   }
 

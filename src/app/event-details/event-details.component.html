@@ -5,9 +5,15 @@
   <p><strong>Date:</strong> From {{ event.startDate }} to {{ event.endDate }}</p>
   <p>{{ event.description }}</p>
   <p>Organizer:</p>
-  <a [routerLink]="['/view-organizer-profile', event.organizerId]">
+  <ng-container *ngIf="event.organizerId !== loggedUserId; else plainText">
+    <a [routerLink]="['/view-organizer-profile', event.organizerId]">
       <span>{{ (event.organizerFirstName + " " + event.organizerLastName | titlecase) || 'organizer not found' }}</span>
     </a>
+  </ng-container>
+
+  <ng-template #plainText>
+    <span>{{ (event.organizerFirstName + " " + event.organizerLastName | titlecase) || 'organizer not found' }}</span>
+  </ng-template>
 
   <app-event-budget [event]="event"/>
 </div>
