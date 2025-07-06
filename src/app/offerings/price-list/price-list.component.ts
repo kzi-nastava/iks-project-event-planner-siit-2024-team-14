@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, inject, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
-import {PriceListService} from '../../price-list.service';
+import {PriceListService} from '../price-list.service';
 import {merge, startWith, switchMap, tap} from 'rxjs';
 
 @Component({

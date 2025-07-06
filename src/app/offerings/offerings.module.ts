@@ -26,7 +26,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatOption, MatSelect} from '@angular/material/select';
-import { PriceListComponent } from './price-list/price-list/price-list.component';
+import { PriceListComponent } from './price-list/price-list.component';
 import {
   MatCell,
   MatCellDef,
