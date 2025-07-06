@@ -14,6 +14,10 @@ import {MessagingService} from '../messaging.service';
 export class ChatSidebarComponent implements OnInit, OnDestroy {
   c = { id: NaN } as any;
 
+  successMessage: string = '';
+  isPopupVisible: boolean = false;
+  isErrorPopup: boolean = false;
+
   get chatter(): any { return this.c; }
 
   @Input({required: true})
@@ -47,22 +51,29 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
       this.messagingService.block(this.c.id)
         .subscribe(response => {
           console.log('User blocked successfully', response);
-          alert("User blocked successfully!");
-          this.showOptions = false;
-          this.isOpen = false;
-          this.role = localStorage.getItem("role");
-          if(this.role != null) {
-            this.redirectUser(this.role);
-          }
+
+          this.successMessage = 'User blocked successfully!';
+          this.isErrorPopup = false;
+          this.isPopupVisible = true;
 
         }, error => {
           console.error('Error blocking user', error);
-          alert("User blocked unsuccessfully!");
-
+          this.successMessage = 'User could not be blocked!';
+          this.isErrorPopup = true;
+          this.isPopupVisible = true;
         });
     }
 
   }
+
+  onPopupClose() {
+    this.isPopupVisible = false;
+    this.role = localStorage.getItem("role");
+    if (!this.isErrorPopup && this.role) {
+      this.redirectUser(this.role);
+    }
+  }
+
 
   viewProfile(){
 

@@ -49,7 +49,6 @@ import { MyEventsEoComponent } from './components/event-management/my-events-eo/
 import { CreateEventComponent } from './components/event-management/create-event/create-event.component';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
-import { MessagePopupComponent } from './components/event-management/message-popup/message-popup.component';
 import { EventBudgetComponent } from './components/event-budget/event-budget.component';
 import { AddEventBudgetItemComponent } from './components/event-budget/add-event-budget-item/add-event-budget-item.component';
 import {AuthInterceptor} from './infrastructure/auth/auth.interceptor';
@@ -68,11 +67,13 @@ import {
 import {
   UpdateAsOrganizerComponent
 } from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
-import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog';
+import {ConfirmDialogComponent} from './dialogs/confirm-dialog/confirm-dialog';
 import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
 import {HeaderComponent} from './components/homepage/header/header.component';
 import {EventPageComponent} from './components/event-management/event-page/event-page.component';
 import {MaterialModule} from './infrastructure/material/material.module';
+import {MessagePopupComponent} from './dialogs/message-popup/message-popup.component';
+import {SharedModule} from './shared.module';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,6 @@ import {MaterialModule} from './infrastructure/material/material.module';
     MyEventsEoComponent,
     EventPageComponent,
     CreateEventComponent,
-    MessagePopupComponent,
     EventBudgetComponent,
     AddEventBudgetItemComponent,
     InvitationPopupComponent,
@@ -131,7 +131,7 @@ import {MaterialModule} from './infrastructure/material/material.module';
     AllInvitationsComponent,
     ConfirmDialogComponent,
     JoinedEventsComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -144,6 +144,7 @@ import {MaterialModule} from './infrastructure/material/material.module';
     CommonModule,
     CommunicationModule,
     MaterialModule,
+    SharedModule,
   ],
   providers: [
     provideAnimationsAsync(),
@@ -154,6 +155,10 @@ import {MaterialModule} from './infrastructure/material/material.module';
     },
     DatePipe
   ],
+  exports: [
+    SuccessfulComponent
+  ],
   bootstrap: [AppComponent]  // Root component that Angular bootstraps
 })
 export class AppModule { }
+

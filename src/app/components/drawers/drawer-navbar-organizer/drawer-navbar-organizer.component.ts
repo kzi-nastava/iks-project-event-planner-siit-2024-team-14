@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Router} from '@angular/router';
-import {ConfirmDialogComponent} from '../../../confirm-dialog/confirm-dialog';
+import {ConfirmDialogComponent} from '../../../dialogs/confirm-dialog/confirm-dialog';
 import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-drawer-navbar-organizer',

@@ -2,11 +2,11 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-message-popup',
-  templateUrl: './message-popup.component.html',
-  styleUrl: './message-popup.component.css'
+  selector: 'app-message-modal',
+  templateUrl: './message-modal.component.html',
+  styleUrl: './message-modal.component.css'
 })
-export class MessagePopupComponent {
+export class MessageModalComponent {
   @Input() message: string = 'Operation Successful';
   @Output() close = new EventEmitter<void>();
   @Input() modalTitle: string = 'Successfully created event';

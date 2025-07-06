@@ -36,3 +36,11 @@
     <button (click)="sendMessage()">📩</button>
   </div>
 </div>
+
+<app-message-popup
+  [message]="successMessage"
+  [title]="isErrorPopup ? 'Error' : 'Success'"
+  [isVisible]="isPopupVisible"
+  [isError]="isErrorPopup"
+  (close)="onPopupClose()">
+</app-message-popup>

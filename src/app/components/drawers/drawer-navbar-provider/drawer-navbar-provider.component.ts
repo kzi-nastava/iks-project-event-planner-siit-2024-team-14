@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ConfirmDialogComponent} from '../../../confirm-dialog/confirm-dialog';
+import {ConfirmDialogComponent} from '../../../dialogs/confirm-dialog/confirm-dialog';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 @Component({

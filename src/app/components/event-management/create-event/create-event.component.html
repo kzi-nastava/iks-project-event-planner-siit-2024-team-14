@@ -171,11 +171,11 @@
 </div>
 
 <!-- Success Modal -->
-<app-message-popup
+<app-message-modal
   *ngIf="showModal"
   [isVisible]="showModal"
   [modalTitle]="modalTitle"
   [message]="modalMessage"
   [showOkButton]="showOkButton"
   (close)="closeModal()"
-></app-message-popup>
+></app-message-modal>

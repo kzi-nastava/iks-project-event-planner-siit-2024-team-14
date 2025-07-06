@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import { InboxComponent } from './inbox/inbox.component';
 import {ChatSidebarComponent} from './chat-sidebar/chat-sidebar.component';
 import {FormsModule} from '@angular/forms';
+import {SharedModule} from '../shared.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
   ],
   exports: [
     InboxComponent,
