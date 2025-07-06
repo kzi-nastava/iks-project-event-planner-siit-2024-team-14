@@ -5,7 +5,7 @@ header {
 
 /* The background image covering the top of the screen */
 .header-background {
-  background-image: url('../../../assets/images/background.jpg');
+  background-image: url('../../../../assets/images/background.jpg');
   background-size: cover;
   background-position: center center;
   height: 250px;  /* Fixed height for background */
@@ -99,7 +99,7 @@ header {
 
 /* Logo styling (adjusted to ensure visibility) */
 .logo {
-  background-image: url('../../../assets/images/logo.png');
+  background-image: url('../../../../assets/images/logo.png');
   background-size: contain;  /* Ensure the logo fits the container */
   background-repeat: no-repeat;
   width: 50px; /* Adjust logo size */

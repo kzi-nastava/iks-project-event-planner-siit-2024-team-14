@@ -3,12 +3,11 @@ import { SolutionService } from './our-services.service';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
-  selector: 'app-all-sevices',
-  templateUrl: './our-sevices.component.html',
-  styleUrl: './our-sevices.component.css'
+  selector: 'app-all-services',
+  templateUrl: './our-services.component.html',
+  styleUrls: ['./our-services.component.css']
 })
-
-export class OurSevicesComponent implements OnInit {
+export class OurServicesComponent implements OnInit {
   solutionsList: any[] = [];
   blockedUserIds: number[] = [];
   filteredSolutions: any[] = [];
@@ -26,8 +25,10 @@ export class OurSevicesComponent implements OnInit {
   totalPages: number = 0;
   showFilters: boolean = false;
 
-  locations: string[] = []; // Lista gradova
-  categories: string[] = []; // Lista za filter
+  locations: string[] = [];
+  categories: string[] = [];
+
+  baseUrl = 'http://localhost:8080/';
 
   constructor(private solutionService: SolutionService) {}
 
@@ -43,10 +44,12 @@ export class OurSevicesComponent implements OnInit {
         this.blockedUserIds = blockedUsers;
 
         this.solutionService.getAllSolutions().subscribe(
-          (response) => {
-            this.solutionsList = response.filter(solution =>
-              !this.blockedUserIds.includes(solution.providerId) // Filtrira usluge čiji je pružalac usluga blokiran
-            );
+          (response: any[]) => {
+            // Dodaj puni URL za slike i filtriraj po blokiranim korisnicima
+            const solutionsWithFullUrls = response
+              .map(solution => this.addFullImageUrl(solution))
+              .filter(solution => !this.blockedUserIds.includes(solution.providerId));
+            this.solutionsList = solutionsWithFullUrls;
             this.totalSolutions = this.solutionsList.length;
             this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
             this.filteredSolutions = [...this.solutionsList];
@@ -61,7 +64,6 @@ export class OurSevicesComponent implements OnInit {
       }
     );
   }
-
 
   fetchLocations() {
     this.solutionService.getAllLocations().subscribe(
@@ -95,7 +97,6 @@ export class OurSevicesComponent implements OnInit {
     );
   }
 
-
   applyFilters() {
     this.page = 0;
 
@@ -108,16 +109,15 @@ export class OurSevicesComponent implements OnInit {
     if (this.endDate) params = params.set('endDate', this.endDate);
     if (this.minPrice != null) params = params.set('minPrice', this.minPrice.toString());
     if (this.maxPrice != null) params = params.set('maxPrice', this.maxPrice.toString());
-    if (this.location && this.location.trim() !== '') {
-      params = params.set('location', this.location);
-    }
-
+    if (this.location && this.location.trim() !== '') params = params.set('location', this.location);
     if (this.solutionType && this.solutionType.trim() !== '') params = params.set('type', this.solutionType);
 
     this.solutionService.getFilteredSolutions(params).subscribe(
-      response => {
-        this.solutionsList = response.content;
-        this.totalSolutions = response.totalElements;
+      (response: any[]) => {
+        // Dodaj puni URL za slike
+        const solutionsWithFullUrls = response.map(solution => this.addFullImageUrl(solution));
+        this.solutionsList = solutionsWithFullUrls;
+        this.totalSolutions = this.solutionsList.length;
         this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
         this.filteredSolutions = [...this.solutionsList];
       },
@@ -136,5 +136,12 @@ export class OurSevicesComponent implements OnInit {
 
   toggleFilters() {
     this.showFilters = !this.showFilters;
+  }
+
+  private addFullImageUrl(solution: any): any {
+    return {
+      ...solution,
+      imageUrl: solution.imageUrl && !solution.imageUrl.startsWith('http') ? this.baseUrl + solution.imageUrl : solution.imageUrl
+    };
   }
 }

@@ -149,7 +149,7 @@ export class EventTypeManagementComponent implements OnInit {
   eventTypes = [
     {
       name: 'Birthday party',
-      image: '../../../assets/images/event1.png',
+      image: '../../../assets/images/vent1.png',
       description: 'Unforgettable birthday party.',
       services: ['decoration', 'drinks', 'food'],
       active: true

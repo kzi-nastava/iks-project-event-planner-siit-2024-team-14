@@ -9,12 +9,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {BrowserModule} from '@angular/platform-browser';
 import {MaterialModule} from '../infrastructure/material/material.module';
+import { PriceListComponent } from './price-list/price-list.component';
+
 
 @NgModule({
   declarations: [
     ServiceDetailsComponent,
     ProductDetailsComponent,
     AddServiceComponent,
+    PriceListComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +36,7 @@ import {MaterialModule} from '../infrastructure/material/material.module';
     ServiceDetailsComponent,
     ProductDetailsComponent,
     AddServiceComponent,
+    PriceListComponent,
   ]
 })
 export class OfferingsModule { }

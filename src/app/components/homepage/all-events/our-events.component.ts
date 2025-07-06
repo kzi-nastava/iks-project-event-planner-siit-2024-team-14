@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from './our-events.service';
-import {HttpParams} from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-all-events',
@@ -25,6 +25,8 @@ export class OurEventsComponent implements OnInit {
   locations: string[] = [];
   categories: string[] = [];
 
+  baseUrl = 'http://localhost:8080/';
+
   constructor(private eventService: EventService) {}
 
   ngOnInit() {
@@ -39,8 +41,10 @@ export class OurEventsComponent implements OnInit {
         this.blockedUserIds = blockedUsers;
 
         this.eventService.getAllEvents().subscribe(
-          (response) => {
-            this.eventsList = response.filter(event =>
+          (response: any[]) => {
+            // Dodaj puni URL za slike pre dodeljivanja
+            const eventsWithFullUrls = response.map(event => this.addFullImageUrl(event));
+            this.eventsList = eventsWithFullUrls.filter(event =>
               !this.blockedUserIds.includes(event.organizerId)
             );
             this.totalEvents = this.eventsList.length;
@@ -92,7 +96,6 @@ export class OurEventsComponent implements OnInit {
   applyFilters() {
     this.page = 0;
 
-    // Kreiranje HttpParams samo sa postojećim parametrima
     let params = new HttpParams()
       .set('page', this.page.toString())
       .set('size', this.pageSize.toString());
@@ -113,9 +116,11 @@ export class OurEventsComponent implements OnInit {
 
     this.eventService.getFilteredEvents(params)
       .subscribe(
-        response => {
-          this.eventsList = response.content;
-          this.totalEvents = response.totalElements;
+        (response: any[]) => {
+          // Dodaj puni URL za slike
+          const eventsWithFullUrls = response.map(event => this.addFullImageUrl(event));
+          this.eventsList = eventsWithFullUrls;
+          this.totalEvents = this.eventsList.length;
           this.totalPages = Math.ceil(this.totalEvents / this.pageSize);
           this.filteredEvents = [...this.eventsList];
         },
@@ -132,5 +137,13 @@ export class OurEventsComponent implements OnInit {
 
   toggleFilters() {
     this.showFilters = !this.showFilters;
+  }
+
+  private addFullImageUrl(event: any): any {
+    return {
+      ...event,
+      imageUrl: event.imageUrl && !event.imageUrl.startsWith('http') ? this.baseUrl + event.imageUrl : event.imageUrl,
+      organizerProfilePicture: event.organizerProfilePicture && !event.organizerProfilePicture.startsWith('http') ? this.baseUrl + event.organizerProfilePicture : event.organizerProfilePicture
+    };
   }
 }

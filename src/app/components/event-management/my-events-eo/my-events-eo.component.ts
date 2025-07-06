@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {EventService} from '../../homepage/all-events/our-events.service';
+import { Component, OnInit } from '@angular/core';
+import { EventService } from '../../homepage/all-events/our-events.service';
 
 @Component({
   selector: 'my-events-eo',
@@ -20,22 +20,9 @@ export class MyEventsEoComponent implements OnInit {
   pageSize: number = 10;
   totalPages: number = 0;
 
+  baseUrl = 'http://localhost:8080/';
+
   constructor(private eventService: EventService) {}
-
-  // HEADER ----------------------------------------------------------------------
-  isSidebarOpen: boolean = false;
-  isNotificationsOpen: boolean = false;
-  unreadCount: number = 0;
-
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    console.log('Sidebar toggled!', this.isSidebarOpen);
-  }
-
-  openNotifications() : void {
-    this.isNotificationsOpen = !this.isNotificationsOpen;
-  }
-  //------------------------------------------------------------------------
 
   // get selected event and open popup
   createEvent(): void {
@@ -53,10 +40,12 @@ export class MyEventsEoComponent implements OnInit {
   loadMyEvents(): void {
     this.eventService.getEventsByOrganizer().subscribe({
       next: (events) => {
-        this.eventsList = events;
+        // Dodaj puni URL za slike pre dodeljivanja
+        const eventsWithFullUrls = events.map(event => this.addFullImageUrl(event));
+        this.eventsList = eventsWithFullUrls;
         this.totalEvents = events.length;
         this.totalPages = Math.ceil(this.totalEvents / this.pageSize);
-        this.filteredEvents = [...events];
+        this.filteredEvents = [...this.eventsList];
       },
       error: (err) => {
         console.error('Error loading events:', err);
@@ -67,5 +56,13 @@ export class MyEventsEoComponent implements OnInit {
   onPageChange(page: number) {
     this.page = page;
     this.loadMyEvents();
+  }
+
+  private addFullImageUrl(event: any): any {
+    return {
+      ...event,
+      imageUrl: event.imageUrl && !event.imageUrl.startsWith('http') ? this.baseUrl + event.imageUrl : event.imageUrl,
+      organizerProfilePicture: event.organizerProfilePicture && !event.organizerProfilePicture.startsWith('http') ? this.baseUrl + event.organizerProfilePicture : event.organizerProfilePicture
+    };
   }
 }

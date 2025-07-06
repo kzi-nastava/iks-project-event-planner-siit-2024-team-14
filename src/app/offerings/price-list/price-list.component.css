@@ -1,0 +1,43 @@
+* {
+  color: #412c26;
+}
+
+/* Limit content width and center */
+main, .price-list-toolbar {
+  max-width: 900px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+/* Toolbar layout */
+.price-list-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 3rem;
+}
+
+/* Title style */
+.price-list-toolbar h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Table styling */
+table.mat-table {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 10px;
+  max-height: 800px;
+  overflow-y: scroll;
+}
+
+/* Paginator centering */
+mat-paginator {
+  display: block;
+  margin: .8rem auto 0;
+  border-radius: 10px;
+}

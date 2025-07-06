@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpParams} from '@angular/common/http';
-import {EventService} from '../homepage/all-events/our-events.service';
+import { HttpParams } from '@angular/common/http';
+import { EventService } from '../homepage/all-events/our-events.service';
 
 @Component({
   selector: 'app-joined-events',
@@ -21,6 +21,8 @@ export class JoinedEventsComponent implements OnInit {
   totalPages: number = 0;
   categories: string[] = [];
 
+  baseUrl = 'http://localhost:8080/';
+
   constructor(private eventService: EventService) {}
 
   ngOnInit() {
@@ -34,7 +36,10 @@ export class JoinedEventsComponent implements OnInit {
 
         this.eventService.getJoinedEvents().subscribe(
           (response) => {
-            this.eventsList = response.filter(event =>
+            // Dodaj puni URL za slike pre filtriranja i dodeljivanja
+            const eventsWithFullUrls = response.map(event => this.addFullImageUrl(event));
+
+            this.eventsList = eventsWithFullUrls.filter(event =>
               !this.blockedUserIds.includes(event.organizerId)
             );
             this.totalEvents = this.eventsList.length;
@@ -57,4 +62,11 @@ export class JoinedEventsComponent implements OnInit {
     this.loadEvents();
   }
 
+  private addFullImageUrl(event: any): any {
+    return {
+      ...event,
+      imageUrl: event.imageUrl && !event.imageUrl.startsWith('http') ? this.baseUrl + event.imageUrl : event.imageUrl,
+      organizerProfilePicture: event.organizerProfilePicture && !event.organizerProfilePicture.startsWith('http') ? this.baseUrl + event.organizerProfilePicture : event.organizerProfilePicture
+    };
+  }
 }
