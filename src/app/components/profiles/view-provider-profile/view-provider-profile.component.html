@@ -1,8 +1,7 @@
 <app-header></app-header>
 <div class="profile-container">
   <div class="profile-photo-container" >
-    <img [src]="getProfilePhotoUrl()"
-         alt="Profile photo"
+    <img [src]="user.profilePhoto" alt="{{user.companyName}}" >
          class="profile-photo">
   </div>
 

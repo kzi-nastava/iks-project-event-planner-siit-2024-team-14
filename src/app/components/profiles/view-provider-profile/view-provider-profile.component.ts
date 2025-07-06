@@ -80,19 +80,13 @@ export class ViewProviderProfileComponent implements OnInit {
     });
   }
 
-  // Dodavanje punog URL-a za profilnu sliku
   private addFullImageUrl(user: ProviderModel): ProviderModel {
     return {
       ...user,
       profilePhoto: user.profilePhoto && !user.profilePhoto.startsWith('http')
-        ? this.baseUrl + 'profile-photos/' + user.profilePhoto
+        ? this.baseUrl + user.profilePhoto
         : user.profilePhoto
     };
-  }
-
-  // Vraća pun URL za prikaz slike
-  getProfilePhotoUrl(): string {
-    return this.user?.profilePhoto || '../../../../../assets/images/profile6.jpg';
   }
 
   protected readonly localStorage = localStorage;

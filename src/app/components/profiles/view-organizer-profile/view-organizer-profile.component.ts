@@ -44,12 +44,11 @@ export class ViewOrganizerProfileComponent implements OnInit {
     return this.user ? `${this.user.name} ${this.user.surname}` : 'User Name';
   }
 
-  // Dodavanje punog URL-a za sliku
   private addFullImageUrl(user: OrganizerModel): OrganizerModel {
     return {
       ...user,
       profilePhoto: user.profilePhoto && !user.profilePhoto.startsWith('http')
-        ? this.baseUrl + 'profile-photos/' + user.profilePhoto
+        ? this.baseUrl + user.profilePhoto
         : user.profilePhoto
     };
   }
