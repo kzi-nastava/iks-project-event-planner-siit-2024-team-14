@@ -42,7 +42,6 @@ export class OurEventsComponent implements OnInit {
 
         this.eventService.getAllEvents().subscribe(
           (response: any[]) => {
-            // Dodaj puni URL za slike pre dodeljivanja
             const eventsWithFullUrls = response.map(event => this.addFullImageUrl(event));
             this.eventsList = eventsWithFullUrls.filter(event =>
               !this.blockedUserIds.includes(event.organizerId)
@@ -130,7 +129,6 @@ export class OurEventsComponent implements OnInit {
       }
     );
   }
-
 
   onPageChange(page: number) {
     this.page = page;
