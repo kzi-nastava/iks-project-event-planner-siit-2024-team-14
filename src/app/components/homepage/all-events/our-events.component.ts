@@ -108,27 +108,29 @@ export class OurEventsComponent implements OnInit {
       params = params.set('endDate', this.endDate);
     }
 
-    if (this.category && this.category.trim() !== '') params = params.set('category', this.category);
+    if (this.category && this.category.trim() !== '') {
+      params = params.set('category', this.category);
+    }
 
     if (this.location && this.location.trim() !== '') {
       params = params.set('location', this.location);
     }
 
-    this.eventService.getFilteredEvents(params)
-      .subscribe(
-        (response: any[]) => {
-          // Dodaj puni URL za slike
-          const eventsWithFullUrls = response.map(event => this.addFullImageUrl(event));
-          this.eventsList = eventsWithFullUrls;
-          this.totalEvents = this.eventsList.length;
-          this.totalPages = Math.ceil(this.totalEvents / this.pageSize);
-          this.filteredEvents = [...this.eventsList];
-        },
-        error => {
-          console.error('Error applying filters:', error);
-        }
-      );
+    this.eventService.getFilteredEvents(params).subscribe(
+      response => {
+        const events = (response.content || []) as any[];
+        const eventsWithFullUrls = events.map(event => this.addFullImageUrl(event));
+        this.eventsList = eventsWithFullUrls;
+        this.totalEvents = response.totalElements;
+        this.totalPages = Math.ceil(this.totalEvents / this.pageSize);
+        this.filteredEvents = [...this.eventsList];
+      },
+      error => {
+        console.error('Error applying filters:', error);
+      }
+    );
   }
+
 
   onPageChange(page: number) {
     this.page = page;

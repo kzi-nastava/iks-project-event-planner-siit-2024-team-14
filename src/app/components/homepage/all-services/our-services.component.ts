@@ -113,11 +113,11 @@ export class OurServicesComponent implements OnInit {
     if (this.solutionType && this.solutionType.trim() !== '') params = params.set('type', this.solutionType);
 
     this.solutionService.getFilteredSolutions(params).subscribe(
-      (response: any[]) => {
-        // Dodaj puni URL za slike
-        const solutionsWithFullUrls = response.map(solution => this.addFullImageUrl(solution));
+      response => {
+        const solutions = (response.content || []) as any[];
+        const solutionsWithFullUrls = solutions.map(solution => this.addFullImageUrl(solution));
         this.solutionsList = solutionsWithFullUrls;
-        this.totalSolutions = this.solutionsList.length;
+        this.totalSolutions = response.totalElements;
         this.totalPages = Math.ceil(this.totalSolutions / this.pageSize);
         this.filteredSolutions = [...this.solutionsList];
       },
