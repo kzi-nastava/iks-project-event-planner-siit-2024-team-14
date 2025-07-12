@@ -116,7 +116,7 @@ export class AuthService {
 
   loginAdmin = () => this.login('admin@gmail.com', 'admin');
   loginOrganizer = () => this.login('milicabosancic03@gmail.com', 'ana123');
-  loginProvider = () => this.login('food@example.com', 'securepassword');
+  loginProvider = () => this.login('milicabosancic1612@gmail.com', 'securepassword');
   // loginUser = () => this.login('', '');
 
 }

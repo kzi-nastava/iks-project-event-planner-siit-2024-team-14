@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  max-width: 240px;
+  flex: 0 0 auto;
+}
+
+
+.image-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+button {
+  background-color: #523D35;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+mat-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 0.25rem;
+  column-gap: 0.5rem;
+}
+
+dt {
+  font-weight: 500;
+  color: #412c26;
+}
+
+dd {
+  margin: 0;
+}

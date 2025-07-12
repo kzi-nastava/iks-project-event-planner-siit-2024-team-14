@@ -10,6 +10,10 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {BrowserModule} from '@angular/platform-browser';
 import {MaterialModule} from '../infrastructure/material/material.module';
 import { PriceListComponent } from './price-list/price-list.component';
+import { SolutionFiltersComponent } from './solution-filters/solution-filters.component';
+import { SolutionListComponent } from './solution-list/solution-list.component';
+import { ProviderSolutionsComponent } from './provider-solutions/provider-solutions.component';
+import { SolutionCardComponent } from './solution-card/solution-card.component';
 
 
 @NgModule({
@@ -18,6 +22,10 @@ import { PriceListComponent } from './price-list/price-list.component';
     ProductDetailsComponent,
     AddServiceComponent,
     PriceListComponent,
+    SolutionFiltersComponent,
+    SolutionListComponent,
+    ProviderSolutionsComponent,
+    SolutionCardComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +45,10 @@ import { PriceListComponent } from './price-list/price-list.component';
     ProductDetailsComponent,
     AddServiceComponent,
     PriceListComponent,
+    SolutionFiltersComponent,
+    SolutionListComponent,
+    ProviderSolutionsComponent,
+    SolutionCardComponent,
   ]
 })
 export class OfferingsModule { }

@@ -1,0 +1,47 @@
+* {
+  color: #412c26;
+}
+
+article {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: .8rem;
+  max-width: 400px;
+  justify-content: space-between;
+  gap: .8rem;
+
+  border-radius: 20px;
+  background: #f9f9f9;
+}
+
+article form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  gap: .6rem;
+  padding: .8rem;
+  justify-self: center;
+}
+
+article footer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+}
+
+section.price-section {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: .5rem;
+}
+
+.toggles-section {
+  display: flex;
+  padding: 0 .8rem;
+  gap: .3rem;
+}
+
+
+
+

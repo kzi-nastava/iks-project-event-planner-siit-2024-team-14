@@ -30,6 +30,7 @@ import {AuProfileComponent} from './components/profiles/au-profile/au-profile.co
 import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
 import {HomeAdminComponent} from './components/home/home-admin/home-admin.component';
 import {PriceListComponent} from './offerings/price-list/price-list.component';
+import {ProviderSolutionsComponent} from './offerings/provider-solutions/provider-solutions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'chat', redirectTo: 'chat/', pathMatch: "full" },
   { path: 'chat/:email', component: InboxComponent, canActivate: [authGuard] },
+  { path: 'solutions', component: ProviderSolutionsComponent, canActivate: [authGuard], data: { roles: 'ServiceAndProductProvider' }},
   { path: 'services', component: ServicesComponent },
   { path: 'services/add', component: AddServiceComponent },
   { path: 'services/:id', component: ServiceDetailsComponent },
@@ -61,7 +63,7 @@ const routes: Routes = [
   {path: 'invitation/register', component: InvitationRegisterComponent },
   {path: 'all-invitation', component: AllInvitationsComponent },
   {path: 'joined-events', component: JoinedEventsComponent },
-  {path: 'inbox', component: InboxComponent },
+  {path: 'inbox', redirectTo: 'chat' },
   { path: '**', redirectTo: '/home-guest' }
 ];
 

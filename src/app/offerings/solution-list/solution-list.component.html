@@ -1,0 +1,52 @@
+<article>
+  <header class="mat-elevation-z3">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        type="search"
+        [(ngModel)]="params.q"
+        (keydown.enter)="onSearch()"
+      />
+    </mat-form-field>
+    <button
+      #filterMenuTrigger="matMenuTrigger"
+      mat-icon-button
+      aria-label="Filter"
+      [matMenuTriggerFor]="filterMenu"
+    >
+      <span class="fas fa-sliders-h"></span>
+    </button>
+  </header>
+
+  <section class="mat-elevation-z2 solutions-section">
+    @for (solution of (page$ | async)?.content; track solution.id) {
+      <app-solution-card
+        [solution]="solution"
+      />
+    } @empty {
+      <p>
+        <i>Nothing to show.</i>
+      </p>
+    }
+  </section>
+
+  <footer class="mat-elevation-z3">
+    <mat-paginator
+      [pageSizeOptions]="[2, 5, 10, 20]"
+      [length]="page.totalElements"
+      (page)="onPageChange($event)"
+    />
+  </footer>
+</article>
+
+<mat-menu #filterMenu>
+  <ng-template matMenuContent>
+    <div (click)="$event.stopPropagation()">
+      <app-solution-filters
+        [filters]="params"
+        (onFilter)="onFilter($event); filterMenuTrigger.closeMenu()"
+      />
+    </div>
+  </ng-template>
+</mat-menu>
