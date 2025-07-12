@@ -5,9 +5,8 @@
     <li>Calendar</li>
     <li>Categories</li>
     <li (click)="navigateToMyInvitations()">Invitations</li>
-    <li>Budget planning</li>
     <li>Favourite services/products</li>
-    <li>Messages</li>
+    <li [routerLink]="['/chat']">Messages</li>
     <li (click)="toggleNotificationsSidebar()">Notifications </li>
     <li (click)="logOut()">Log out</li>
   </ul>
