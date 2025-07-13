@@ -3,7 +3,7 @@
     @if (showType) {
       <!-- Type -->
       <mat-button-toggle-group
-        [(ngModel)]="params.type"
+        [(value)]="params.type"
       >
         <mat-button-toggle value="service">Service</mat-button-toggle>
         <mat-button-toggle value="product">Product</mat-button-toggle>
@@ -12,7 +12,7 @@
 
     <!-- Availability -->
     <mat-button-toggle-group
-      [(ngModel)]="params.status"
+      [(value)]="params.status"
     >
       <mat-button-toggle value="available">Available</mat-button-toggle>
       <mat-button-toggle value="unavailable">Unavailable</mat-button-toggle>

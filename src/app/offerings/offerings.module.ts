@@ -14,6 +14,7 @@ import { SolutionFiltersComponent } from './solution-filters/solution-filters.co
 import { SolutionListComponent } from './solution-list/solution-list.component';
 import { ProviderSolutionsComponent } from './provider-solutions/provider-solutions.component';
 import { SolutionCardComponent } from './solution-card/solution-card.component';
+import {SharedModule} from '../shared.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { SolutionCardComponent } from './solution-card/solution-card.component';
     HttpClientModule,
     BrowserModule,
     MaterialModule,
+    SharedModule,
   ],
   providers: [
     provideAnimationsAsync()
