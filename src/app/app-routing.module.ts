@@ -8,8 +8,8 @@ import { RegistrationSppComponent } from './components/registration/registration
 import { ActivationComponent } from './components/registration/activation/activation.component';
 import {HomeProviderComponent} from './components/home/home-provider/home-provider.component';
 import {HomeOrganizerComponent} from './components/home/home-organizer/home-organizer.component';
-import {AddServiceComponent} from './offerings/add-service/add-service.component';
-import {ServiceDetailsComponent} from './offerings/service-details/service-details.component';
+import {AddServiceComponent} from './offerings/services/add-service/add-service.component';
+import {ServiceDetailsComponent} from './offerings/services/service-details/service-details.component';
 import {ProductDetailsComponent} from './offerings/product-details/product-details.component';
 import {OrganizerProfileComponent} from './components/profiles/organizer-profile/organizer-profile.component';
 import {EventDetailsComponent} from './event-details/event-details.component';
@@ -31,23 +31,32 @@ import {JoinedEventsComponent} from './components/joined-events/joined-events.co
 import {HomeAdminComponent} from './components/home/home-admin/home-admin.component';
 import {PriceListComponent} from './offerings/price-list/price-list.component';
 import {ProviderSolutionsComponent} from './offerings/provider-solutions/provider-solutions.component';
+import {EditServiceComponent} from './offerings/services/edit-service/edit-service.component';
+
+enum Role {
+  ADMIN = 'Admin',
+  PROVIDER = 'ServiceAndProductProvider',
+  ORGANIZER = 'EventOrganizer',
+  USER = 'User',
+}
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-guest', pathMatch: 'full' },  // Default redirect to /home-guest
   { path: 'home-guest', component: HomeComponent },  // Home component route
-  { path: 'home-provider', component: HomeProviderComponent, canActivate: [authGuard], data: { roles: ['ServiceAndProductProvider'] } },
-  { path: 'home-organizer', component: HomeOrganizerComponent, canActivate: [authGuard], data: { roles: ['EventOrganizer'] } },
-  { path: 'home-admin', component: HomeAdminComponent, canActivate: [authGuard], data: { roles: ['Admin'] } },
-  { path: 'home-authenticated-user', component: HomeAuthenticatedUserComponent, canActivate: [authGuard], data: { roles: ['User'] } },
+  { path: 'home-provider', component: HomeProviderComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] } },
+  { path: 'home-organizer', component: HomeOrganizerComponent, canActivate: [authGuard], data: { roles: [Role.ORGANIZER] } },
+  { path: 'home-admin', component: HomeAdminComponent, canActivate: [authGuard], data: { roles: [Role.ADMIN] } },
+  { path: 'home-authenticated-user', component: HomeAuthenticatedUserComponent, canActivate: [authGuard], data: { roles: [Role.USER] } },
   { path: 'login', component: LoginComponent },         // Login route (no duplication)
   { path: 'chat', redirectTo: 'chat/', pathMatch: "full" },
   { path: 'chat/:email', component: InboxComponent, canActivate: [authGuard] },
-  { path: 'solutions', component: ProviderSolutionsComponent, canActivate: [authGuard], data: { roles: 'ServiceAndProductProvider' }},
+  { path: 'solutions', component: ProviderSolutionsComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] }},
   { path: 'services', component: ServicesComponent },
-  { path: 'services/add', component: AddServiceComponent },
+  { path: 'services/add', component: AddServiceComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] } },
   { path: 'services/:id', component: ServiceDetailsComponent },
+  { path: 'services/:id/edit', component: EditServiceComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] } },
   { path: 'products/:id', component: ProductDetailsComponent },
-  { path: 'price-list', component: PriceListComponent, canActivate: [authGuard], data: { roles: ['ServiceAndProductProvider'] }},
+  { path: 'price-list', component: PriceListComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] }},
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },
   { path: 'activate', component: ActivationComponent },

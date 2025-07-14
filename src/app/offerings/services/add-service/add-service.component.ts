@@ -1,10 +1,10 @@
 import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import {EventTypeManagementService} from '../../components/event-type-management/event-type-management.service';
-import {CategoryService} from '../category.service';
-import {ServiceService} from '../service.service';
-import {MessagePopupComponent} from '../../dialogs/message-popup/message-popup.component';
+import {EventTypeManagementService} from '../../../components/event-type-management/event-type-management.service';
+import {CategoryService} from '../../category.service';
+import {ServiceService} from '../../service.service';
+import {MessagePopupComponent} from '../../../dialogs/message-popup/message-popup.component';
 import {Router} from '@angular/router';
 
 @Component({

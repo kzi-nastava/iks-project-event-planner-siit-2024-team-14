@@ -1,9 +1,9 @@
-import { Service } from '../model/service.model';
+import { Service } from '../../model/service.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ServiceService } from '../service.service';
+import { ServiceService } from '../../service.service';
 import { HttpClient } from '@angular/common/http';
-import { EventModel } from '../../interfaces/event.model';
+import { EventModel } from '../../../interfaces/event.model';
 
 @Component({
   selector: 'app-service-details',

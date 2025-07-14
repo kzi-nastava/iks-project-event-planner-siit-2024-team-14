@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ServiceDetailsComponent } from "./service-details/service-details.component";
-import { AddServiceComponent } from "./add-service/add-service.component";
+import { ServiceDetailsComponent } from "./services/service-details/service-details.component";
+import { AddServiceComponent } from "./services/add-service/add-service.component";
 import {ProductDetailsComponent} from './product-details/product-details.component';
 import {RouterLink} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
@@ -15,6 +15,7 @@ import { SolutionListComponent } from './solution-list/solution-list.component';
 import { ProviderSolutionsComponent } from './provider-solutions/provider-solutions.component';
 import { SolutionCardComponent } from './solution-card/solution-card.component';
 import {SharedModule} from '../shared.module';
+import { EditServiceComponent } from './services/edit-service/edit-service.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {SharedModule} from '../shared.module';
     SolutionListComponent,
     ProviderSolutionsComponent,
     SolutionCardComponent,
+    EditServiceComponent,
   ],
   imports: [
     CommonModule,

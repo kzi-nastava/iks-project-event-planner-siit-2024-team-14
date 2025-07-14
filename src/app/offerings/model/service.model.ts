@@ -11,8 +11,8 @@ export interface Service extends Offering {
   discount: number;
   imageURLs: string[];
 
-  visibility: string;
-  reservationType: string;
+  visibility: 'PUBLIC' | 'PRIVATE' | 'PENDING';
+  reservationType: 'AUTOMATIC' | 'MANUAL';
   isAvailable: boolean;
 
   duration?: string;

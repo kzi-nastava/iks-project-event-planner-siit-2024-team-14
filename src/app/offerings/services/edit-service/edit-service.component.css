@@ -1,0 +1,19 @@
+form {
+  position: relative;
+  margin: 2% auto 0;
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 600px;
+}
+
+.price-discount-section {
+  display: flex;
+  gap: 1rem;
+}
+
+.actions-section {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 5%;
+}
