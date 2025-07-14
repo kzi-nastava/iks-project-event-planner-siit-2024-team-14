@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ServiceService} from '../../service.service';
 import {EventTypeManagementService} from '../../../components/event-type-management/event-type-management.service';
 import {CategoryService} from '../../category.service';
+import {ConfirmDialogComponent} from '../../../dialogs/confirm-dialog/confirm-dialog';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-service',
@@ -76,7 +78,6 @@ export class EditServiceComponent implements OnInit {
             next: service => {
               this.service = service;
               this.reset();
-              console.log(service)
             },
             error: err => {
               console.error('[EditServiceComponent] Failed to fetch service', err);
@@ -138,10 +139,28 @@ export class EditServiceComponent implements OnInit {
   }
 
 
+  delete() {
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `Confirmation`,
+        message: `Are you sure you want to delete "${this.service.name}"`
+      }
+    })
+      .afterClosed().subscribe(result => {
+        if (result) {
+          this.serviceService.delete(this.service)
+            .subscribe(_ => this.router.navigate(['/solutions']));
+        }
+      })
+
+  }
+
+
 
   route = inject(ActivatedRoute);
   router = inject(Router);
   serviceService = inject(ServiceService);
   eventTypeService = inject(EventTypeManagementService);
   categoryService = inject(CategoryService);
+  dialog = inject(MatDialog);
 }

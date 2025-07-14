@@ -39,4 +39,8 @@ export class ServiceService {
     return this.httpClient.post<Service>(this.baseURL, service);
   }
 
+  delete(service: Pick<Service, 'id'> | Service['id']) {
+    return this.httpClient.delete<void>(`${this.baseURL}/${typeof service === 'number' ? service : service.id}`);
+  }
+
 }

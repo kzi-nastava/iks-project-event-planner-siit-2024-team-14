@@ -17,7 +17,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration/registration-spp/registration-spp.component';
 import { ActivationComponent } from './components/registration/activation/activation.component';
-import { SuccessfulComponent } from './components/registration/successful/successful.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AdminCommentsComponent} from './components/admin-comments/admin-comments.component';
 import {HomeAdminComponent} from './components/home/home-admin/home-admin.component';
@@ -67,12 +66,10 @@ import {
 import {
   UpdateAsOrganizerComponent
 } from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
-import {ConfirmDialogComponent} from './dialogs/confirm-dialog/confirm-dialog';
 import {JoinedEventsComponent} from './components/joined-events/joined-events.component';
 import {HeaderComponent} from './components/homepage/header/header.component';
 import {EventPageComponent} from './components/event-management/event-page/event-page.component';
 import {MaterialModule} from './infrastructure/material/material.module';
-import {MessagePopupComponent} from './dialogs/message-popup/message-popup.component';
 import {SharedModule} from './shared.module';
 
 @NgModule({
@@ -102,7 +99,6 @@ import {SharedModule} from './shared.module';
     RegistrationEoComponent,
     RegistrationSppComponent,
     ActivationComponent,
-    SuccessfulComponent,
     NotificationsComponent,
     OrganizerProfileComponent,
     InfoComponent,
@@ -129,7 +125,6 @@ import {SharedModule} from './shared.module';
     InvitationPopupComponent,
     InvitationRegisterComponent,
     AllInvitationsComponent,
-    ConfirmDialogComponent,
     JoinedEventsComponent,
     HeaderComponent,
   ],
@@ -156,7 +151,6 @@ import {SharedModule} from './shared.module';
     DatePipe
   ],
   exports: [
-    SuccessfulComponent
   ],
   bootstrap: [AppComponent]  // Root component that Angular bootstraps
 })
