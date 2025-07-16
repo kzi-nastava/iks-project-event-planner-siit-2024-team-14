@@ -2,8 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CategoryService} from '../../category.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Category} from '../../model/category.model';
-import {Observable, Subscription} from 'rxjs';
-import {HasId} from '../model/has-id.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-edit-category',
@@ -12,7 +11,7 @@ import {HasId} from '../model/has-id.model';
 })
 export class EditCategoryComponent implements OnInit {
 
-  model: Category & HasId = {} as Category & HasId;
+  model = {} as Category;
 
 
   constructor(private categoryService: CategoryService, private router: Router, private route: ActivatedRoute) {}
