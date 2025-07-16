@@ -70,7 +70,7 @@ export class NotificationsComponent implements OnInit {
   closeNotifications(): void {
     if (this.userId !== null) {
       this.notificationService.markAllAsRead(this.userId).subscribe(() => {
-        this.notifications.forEach(notification => notification.isRead = true);
+        this.notifications.forEach(notification => notification.read = true);
 
         // Ažuriramo broj nepročitanih, ali samo ako userId postoji
         if (this.userId !== null) {

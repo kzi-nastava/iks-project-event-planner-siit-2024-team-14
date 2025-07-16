@@ -10,7 +10,7 @@
 
   <!-- Scrollable section for cards -->
   <div class="cards-container">
-    <div class="card" *ngFor="let notification of notifications" [class.unread]="!notification.isRead">
+    <div class="card" *ngFor="let notification of notifications" [class.unread]="!notification.read">
       <div class="card-content">
         <!--<img [src]="notification.image" alt="User profile" class="user-image" />-->
         <div class="text-content">
