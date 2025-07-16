@@ -10,7 +10,7 @@ import {HomeProviderComponent} from './components/home/home-provider/home-provid
 import {HomeOrganizerComponent} from './components/home/home-organizer/home-organizer.component';
 import {AddServiceComponent} from './offerings/services/add-service/add-service.component';
 import {ServiceDetailsComponent} from './offerings/services/service-details/service-details.component';
-import {ProductDetailsComponent} from './offerings/product-details/product-details.component';
+import {ProductDetailsComponent} from './offerings/products/product-details/product-details.component';
 import {OrganizerProfileComponent} from './components/profiles/organizer-profile/organizer-profile.component';
 import {EventDetailsComponent} from './event-details/event-details.component';
 import {ViewOrganizerProfileComponent} from './components/profiles/view-organizer-profile/view-organizer-profile.component';

@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from '../../service.service';
 import { HttpClient } from '@angular/common/http';
 import { EventModel } from '../../../interfaces/event.model';
+import {User} from '../../../infrastructure/auth/model/user.model';
+import {AuthService} from '../../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-service-details',
@@ -12,7 +14,8 @@ import { EventModel } from '../../../interfaces/event.model';
 })
 export class ServiceDetailsComponent implements OnInit {
   service: Service = { id: -1 } as Service;
-  role: string | null | undefined;
+  user: User | null = null;
+  get role() { return this.user?.role; }
   isPopupOpen = false;
   userEvents: EventModel[] = [];
   selectedEventId: number | null = null;
@@ -31,11 +34,13 @@ export class ServiceDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private serviceService: ServiceService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    auth: AuthService,
+  ) {
+    auth.user$.subscribe(user => this.user = user);
+  }
 
   ngOnInit(): void {
-    this.role = localStorage.getItem('role');
     const userId = localStorage.getItem('userId');
     if (userId) this.fetchUserEvents(+userId);
 
@@ -51,13 +56,7 @@ export class ServiceDetailsComponent implements OnInit {
       next: service => {
         this.service = service;
         this.reservation.serviceId = service.id;
-
-        this.service.durationInMinutes = this.convertDurationToMinutes(service.duration);
-        this.service.minDurationInMinutes = this.convertDurationToMinutes(service.minDuration);
-        this.service.maxDurationInMinutes = this.convertDurationToMinutes(service.maxDuration);
-        this.service.reservationPeriodInDays = this.convertDurationToDays(service.reservationPeriod);
-        this.service.cancellationPeriodInDays = this.convertDurationToDays(service.cancellationPeriod);
-        this.reservation.duration = this.service.durationInMinutes;
+        this.reservation.duration = this.service.durationMinutes;
         this.reservation.reservationType = this.service.reservationType;
       },
       error: () => console.log('Failed to fetch service data.')
@@ -132,7 +131,7 @@ export class ServiceDetailsComponent implements OnInit {
   onDateChange(): void {
     if (!this.reservation.date) return;
 
-    const durationParam = this.service.durationInMinutes || null;
+    const durationParam = this.service.durationMinutes || null;
     this.serviceService.getAvailableStartTimes(this.service.id, this.reservation.date, durationParam)
       .subscribe(times => this.availableStartTimes = times);
   }
@@ -179,7 +178,7 @@ export class ServiceDetailsComponent implements OnInit {
       serviceId: this.service.id,
       date: '',
       startTime: '',
-      duration: this.service.durationInMinutes || 0,
+      duration: this.service.durationMinutes || 0,
       eventId: -1,
       reservationType: ''
     };

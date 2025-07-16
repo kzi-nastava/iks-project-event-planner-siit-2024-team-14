@@ -2,7 +2,7 @@
   <section>
     <ng-container *ngFor="let chat of inbox">
       <article *ngIf="getChatter(chat) as chatter"
-               (click)="selectedChat = chat; this.router.navigate(['/chat', chatter.email])"
+               (click)="selectedChat = chat; this.router.navigate(['/chat', chatter.email], { skipLocationChange: true })"
                [class.selected]="chat === selectedChat"
       >
         <img

@@ -3,7 +3,7 @@ import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ServiceDetailsComponent } from "./services/service-details/service-details.component";
 import { AddServiceComponent } from "./services/add-service/add-service.component";
-import {ProductDetailsComponent} from './product-details/product-details.component';
+import {ProductDetailsComponent} from './products/product-details/product-details.component';
 import {RouterLink} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
@@ -16,6 +16,7 @@ import { ProviderSolutionsComponent } from './provider-solutions/provider-soluti
 import { SolutionCardComponent } from './solution-card/solution-card.component';
 import {SharedModule} from '../shared.module';
 import { EditServiceComponent } from './services/edit-service/edit-service.component';
+import { PurchaseProductComponent } from './products/purchase-product/purchase-product.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { EditServiceComponent } from './services/edit-service/edit-service.compo
     ProviderSolutionsComponent,
     SolutionCardComponent,
     EditServiceComponent,
+    PurchaseProductComponent,
   ],
   imports: [
     CommonModule,
