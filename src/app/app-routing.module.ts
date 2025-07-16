@@ -8,9 +8,9 @@ import { RegistrationEoComponent } from './components/registration-eo/registrati
 import { RegistrationSppComponent } from './components/registration-spp/registration-spp.component';
 import { AddServiceComponent } from './offerings/add-service/add-service.component';
 import { ServiceDetailsComponent } from './offerings/service-details/service-details.component';
-import {CategoriesDashboardComponent} from './offerings/categories-dashboard/categories-dashboard.component';
-import {AddCategoryComponent} from './offerings/add-category/add-category.component';
-import {EditCategoryComponent} from './offerings/edit-category/edit-category.component';
+import {CategoriesDashboardComponent} from './offerings/categories/categories-dashboard/categories-dashboard.component';
+import {AddCategoryComponent} from './offerings/categories/add-category/add-category.component';
+import {EditCategoryComponent} from './offerings/categories/edit-category/edit-category.component';
 
 
 const routes: Routes = [

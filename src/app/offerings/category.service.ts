@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Category} from './model/category.model';
-import {Observable} from 'rxjs';
 import {environment} from '../../env/environment'
-import {HasId} from './model/has-id.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,24 +12,25 @@ export class CategoryService {
   constructor(private httpClient: HttpClient) { }
 
 
-  add(category: Category): Observable<Category & HasId> {
-    return this.httpClient.post<Category & HasId>(this.baseURL, category);
+  add(category: Category) {
+    return this.httpClient.post<Category>(this.baseURL, category);
   }
 
-  getAll(): Observable<(Category & HasId)[]> {
-    return this.httpClient.get<(Category & HasId)[]>(this.baseURL);
+  getAll() {
+    return this.httpClient.get<Category[]>(this.baseURL);
   }
 
-  getById(id: number): Observable<Category & HasId> {
-    return this.httpClient.get<Category & HasId>(`${this.baseURL}/${id}`)
+  getById(id: Category['id']) {
+    return this.httpClient.get<Category>(`${this.baseURL}/${id}`)
   }
 
-  delete(identifiable: number | HasId): Observable<any> {
-    const resolvedId = typeof identifiable === 'number' ? identifiable : identifiable.id;
-    return this.httpClient.delete(`${this.baseURL}/${resolvedId}`);
+  delete(categoryOrId: Pick<Category, 'id'> | Category['id']) {
+    const id = typeof categoryOrId === 'object' ? categoryOrId.id : categoryOrId;
+    return this.httpClient.delete<void>(`${this.baseURL}/${id}`);
   }
 
-  update(category: Category & HasId): Observable<Category & HasId> {
-    return this.httpClient.put<Category & HasId>(this.baseURL, category);
+  update(category: Partial<Category> & Pick<Category, 'id'>) {
+    return this.httpClient.put<Category>(this.baseURL, category);
   }
+
 }

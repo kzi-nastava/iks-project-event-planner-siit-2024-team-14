@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryService} from '../category.service';
+import {CategoryService} from '../../category.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Category} from '../model/category.model';
+import {Category} from '../../model/category.model';
 import {Observable, Subscription} from 'rxjs';
 import {HasId} from '../model/has-id.model';
 

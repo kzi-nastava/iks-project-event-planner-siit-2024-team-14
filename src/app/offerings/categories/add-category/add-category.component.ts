@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Category} from '../model/category.model';
-import {CategoryService} from '../category.service';
+import {Category} from '../../model/category.model';
+import {CategoryService} from '../../category.service';
 import {isFunction} from 'rxjs/internal/util/isFunction';
 
 

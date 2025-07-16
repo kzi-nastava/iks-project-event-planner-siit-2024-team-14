@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Category} from '../model/category.model';
+import {Category} from '../../model/category.model';
 import {HasId} from '../model/has-id.model';
 
 

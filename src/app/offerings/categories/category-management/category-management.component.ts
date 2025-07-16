@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Category } from '../model/category.model';
-import {CategoryService} from '../category.service';
+import { Category } from '../../model/category.model';
+import {CategoryService} from '../../category.service';
 import {Observable, Subscription} from 'rxjs';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {HasId} from '../model/has-id.model';

@@ -4,14 +4,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ServiceDetailsComponent } from "./service-details/service-details.component";
 import { AddServiceComponent } from "./add-service/add-service.component";
 import {MaterialModule} from '../infrastructure/material/material.module';
-import {CategoryExpansionPanelComponent} from './category-expansion-panel/category-expansion-panel.component';
+import {CategoryExpansionPanelComponent} from './categories/category-expansion-panel/category-expansion-panel.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
-import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddCategoryComponent } from './categories/add-category/add-category.component';
 import {RouterLink, RouterOutlet} from "@angular/router";
-import {CategoriesDashboardComponent} from './categories-dashboard/categories-dashboard.component';
-import {CategoryManagementComponent} from './category-management/category-management.component';
-import { EditCategoryComponent } from './edit-category/edit-category.component';
+import {CategoriesDashboardComponent} from './categories/categories-dashboard/categories-dashboard.component';
+import {CategoryManagementComponent} from './categories/category-management/category-management.component';
+import { EditCategoryComponent } from './categories/edit-category/edit-category.component';
 
 
 
