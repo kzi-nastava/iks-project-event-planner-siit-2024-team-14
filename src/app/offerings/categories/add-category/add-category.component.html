@@ -1,3 +1,5 @@
+<h3>Add category</h3>
+
 <ng-container [ngSwitch]="status">
 
   <!-- -->
@@ -12,9 +14,9 @@
   </div>
 
 
-  <form *ngSwitchDefault (ngSubmit)="onSubmit(categoryForm)" #categoryForm="ngForm" class="mat-elevation-z1 mat-display-small" [class.loading]="status === 'submitted'">
+  <form *ngSwitchDefault (ngSubmit)="onSubmit(categoryForm)" #categoryForm="ngForm" class="mat-display-small" [class.loading]="status === 'submitted'">
     <!-- Name -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <!-- Maybe add validation for alphanumeric only name? -->
       <input matInput type="text"
@@ -34,7 +36,7 @@
     </mat-form-field>
 
     <!-- Description -->
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <textarea matInput
                 id="add-category-description"

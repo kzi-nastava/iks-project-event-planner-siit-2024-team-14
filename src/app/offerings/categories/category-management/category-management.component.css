@@ -17,12 +17,14 @@ mat-accordion {
 
 .popup-container {
   background-color: #fff; /* White background for the popup */
-  padding: 20px; /* Add padding inside the popup */
+  padding: 1rem; /* Add padding inside the popup */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   max-width: 500px; /* Limit the width */
   width: 90%; /* Responsive width */
   position: relative; /* For positioning the close button */
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 .popup-overlay button {

@@ -1,6 +1,31 @@
-<details open>
-  <summary>Editing category [{{model.id}}]</summary>
-  <pre>
-    <code>{{ model | json }}</code>
-  </pre>
-</details>
+<h3>Edit <i><q>{{category.name | titlecase}}</q></i> category</h3>
+
+<form (ngSubmit)="submit()" [formGroup]="categoryFormGroup">
+  <!-- Name -->
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      type="text"
+      formControlName="name"
+      minLength="3"
+      maxLength="100"
+    />
+  </mat-form-field>
+
+  <!-- Description -->
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      maxlength="500"
+      rows="3"
+    ></textarea>
+  </mat-form-field>
+
+  <div>
+    <button mat-button type="button" (click)="reset()">Reset</button>
+    <button mat-raised-button type="submit" [disabled]="categoryFormGroup.invalid">Save</button>
+  </div>
+</form>

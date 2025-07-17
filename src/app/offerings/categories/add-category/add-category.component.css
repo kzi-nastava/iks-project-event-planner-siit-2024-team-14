@@ -5,12 +5,17 @@ form {
   align-items: center;
 
   max-width: 400px;
-  padding: 3%;
+  padding: 1rem;
+  width: 100%;
 
 
   & div {
     display: flex;
     flex-flow: row-reverse wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: 0 1rem;
+    margin-top: 1rem;
   }
 }
