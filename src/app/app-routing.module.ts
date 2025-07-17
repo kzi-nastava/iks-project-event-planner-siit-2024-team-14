@@ -62,7 +62,8 @@ const routes: Routes = [
   {
     path: 'categories',
     component: CategoriesDashboardComponent,
-    canActivate: [], // TODO: add guard to allow only admin role to access this
+    canActivate: [authGuard],
+    data: { roles: [Role.ADMIN] },
     children: [
       { path: 'add', component: AddCategoryComponent, outlet: 'popup'},
       { path: ':id/edit', component: EditCategoryComponent, outlet: 'popup'},
