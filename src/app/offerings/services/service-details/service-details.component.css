@@ -1,10 +1,11 @@
 article {
   max-width: 700px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 3rem;
   border-radius: 8px;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 h2 {
@@ -158,6 +159,10 @@ button {
   transition: 0.3s;
   width: 50%; /* Povećana širina dugmeta */
   display: block;
+  max-width: 11em;
+}
+
+form button {
   margin: 20px auto 0;
 }
 
@@ -169,4 +174,14 @@ button:hover {
 form {
   display: flex;
   flex-direction: column;
+}
+
+footer {
+  display: flex;
+  flex-flow: row wrap-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 15%;
 }

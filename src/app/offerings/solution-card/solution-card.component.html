@@ -1,0 +1,37 @@
+<mat-card appearance="raised">
+  <mat-card-header>
+    <mat-card-title>
+      {{ solution.name }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ (type | titlecase) || 'Solution' }} provided by {{ solution.provider.name | titlecase }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  @if (imageUrl) {
+    <div class="image-wrapper">
+      <img
+        [src]="imageUrl"
+        alt="Solution-cover"
+      />
+    </div>
+  }
+
+  <mat-card-content>
+    <p>{{ solution.description }}</p>
+    <hr>
+    <dl>
+      <dt>Category</dt>
+      <dd>{{ solution.category.name }}</dd>
+
+      <dt>Price</dt>
+      <dd>{{ solution.price | currency }}</dd>
+    </dl>
+  </mat-card-content>
+
+  <mat-card-actions>
+    @let rootPath = isService ? '/services' : '/products';
+
+    <button [routerLink]="[rootPath, solution.id]">View More</button>
+  </mat-card-actions>
+</mat-card>

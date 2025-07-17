@@ -17,6 +17,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 const matModules = [
@@ -28,6 +30,7 @@ const matModules = [
   MatInputModule,
   MatNativeDateModule,
   MatButtonModule,
+  MatButtonToggleModule,
   MatDialogModule,
   MatIconModule,
   MatToolbarModule,
@@ -36,6 +39,7 @@ const matModules = [
   MatMenuModule,
   MatTableModule,
   MatListModule,
+  MatStepperModule,
 ];
 
 

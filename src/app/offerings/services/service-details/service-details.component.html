@@ -30,12 +30,12 @@
 
     <dt>Reservation details:</dt>
     <dd>
-      Reservations for this service must be made {{ service.reservationPeriodInDays }} days in advance, and may be canceled up to {{ service.cancellationPeriodInDays }} days before.
+      Reservations for this service must be made {{ service.reservationPeriodDays }} days in advance, and may be canceled up to {{ service.cancellationPeriodDays }} days before.
       {{
         service.duration ?
-          'Session duration for this service is ' + service.durationInMinutes + ' minutes.'
-          : service.minDurationInMinutes && service.maxDurationInMinutes ?
-            'This service may be reserved for at least ' + service.minDurationInMinutes + ' minutes, and up to ' + service.maxDurationInMinutes + ' minutes.'
+          'Session duration for this service is ' + service.durationMinutes + ' minutes.'
+          : service.minDurationMinutes && service.maxDurationMinutes ?
+            'This service may be reserved for at least ' + service.minDurationMinutes + ' minutes, and up to ' + service.maxDurationMinutes + ' minutes.'
             : 'No duration information available.'
       }}
       {{
@@ -53,12 +53,29 @@
       </a>
     </dd>
   </dl>
+
+  <footer>
+    @switch (user?.role) {
+      @case ('EventOrganizer') {
+        <button [routerLink]="['/chat', service.provider.email]">
+          Chat with provider
+        </button>
+        <button (click)="openReservationPopup()" class="open-popup-btn">
+          Book Service
+        </button>
+      }
+      @case ('ServiceAndProductProvider') {
+        @if (user!.id === service.provider.id) {
+          <button [routerLink]="['edit']">
+            Edit
+          </button>
+        }
+      }
+    }
+  </footer>
 </article>
 
 
-<button *ngIf="role === 'EventOrganizer'" (click)="openReservationPopup()" class="open-popup-btn">
-  Book Service
-</button>
 <div class="modal" [class.show]="isPopupOpen">
   <div class="modal-content">
     <span class="close" (click)="closeReservationPopup()">&times;</span>
@@ -73,12 +90,12 @@
       <label for="date">Date:</label>
       <input type="date" id="date" [(ngModel)]="reservation.date" name="date" required readonly>
 
-      <label for="endTime" *ngIf="service.durationInMinutes != null">Duration:</label>
-      <input *ngIf="service.durationInMinutes" id="duration" type="number" [(ngModel)]="reservation.duration" [min]="service.durationInMinutes" [max]="service.durationInMinutes" name="endTime" required readonly>
+      <label for="endTime" *ngIf="service.durationMinutes != null">Duration:</label>
+      <input *ngIf="service.durationMinutes" id="duration" type="number" [(ngModel)]="reservation.duration" [min]="service.durationMinutes" [max]="service.durationMinutes" name="endTime" required readonly>
 
-      <label for="endTime" *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes"></label>
-      <select *ngIf="!service.durationInMinutes && service.minDurationInMinutes && service.maxDurationInMinutes" id="endTime" [(ngModel)]="reservation.duration" name="endTime" required (change)="onDurationChange()">
-        <option *ngFor="let time of generateDurationOptions(service.minDurationInMinutes, service.maxDurationInMinutes)" [value]="time">{{ time }} minutes</option>
+      <label for="endTime" *ngIf="!service.durationMinutes && service.minDurationMinutes && service.maxDurationMinutes"></label>
+      <select *ngIf="!service.durationMinutes && service.minDurationMinutes && service.maxDurationMinutes" id="endTime" [(ngModel)]="reservation.duration" name="endTime" required (change)="onDurationChange()">
+        <option *ngFor="let time of generateDurationOptions(service.minDurationMinutes, service.maxDurationMinutes)" [value]="time">{{ time }} minutes</option>
       </select>
 
       <label for="startTime">Start Time:</label>

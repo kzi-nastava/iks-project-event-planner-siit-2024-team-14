@@ -1,0 +1,256 @@
+<div class="popup-overlay">
+  <!-- Top Decorative Lines -->
+  <div class="decorative-lines top-lines"></div>
+
+  <div class="popup-container">
+    <h1>Create a Service</h1>
+
+    <button class="close-btn" mat-icon-button aria-label="Close" (click)="location.back()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+
+    <mat-stepper linear labelPosition="bottom" #stepper>
+      <mat-step [stepControl]="infoFormGroup">
+        <form [formGroup]="infoFormGroup">
+          <!-- Name -->
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              formControlName="name"
+              type="text"
+              required
+              autofocus
+            />
+          </mat-form-field>
+          <!-- Description -->
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              formControlName="description"
+              rows="2"
+            ></textarea>
+          </mat-form-field>
+          <section class="price-discount-section">
+            <!-- Price -->
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input
+                matInput
+                formControlName="price"
+                type="number"
+                step="0.5"
+                min="0"
+                required
+              />
+            </mat-form-field>
+            <!-- Discount -->
+            <mat-form-field appearance="outline">
+              <mat-label>Discount</mat-label>
+              <input
+                matInput
+                formControlName="discount"
+                step="1"
+                min="0"
+                max="100"
+                type="number"
+              />
+              <mat-icon matSuffix>percent</mat-icon>
+            </mat-form-field>
+          </section>
+          <!-- TODO: Add image upload -->
+        </form>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <!-- Category -->
+          <section [formGroup]="categoryFormGroup" class="category-section">
+            <mat-form-field appearance="outline">
+              <mat-label>Category</mat-label>
+              <mat-select
+                formControlName="id"
+                required
+              >
+                @for (category of allCategories; track category.id) {
+                  <mat-option [value]="category.id">{{category.name}}</mat-option>
+                }
+
+                <mat-option
+                  [value]="-1"
+                  (onSelectionChange)="isAddingNewCategory = $event.source.selected"
+                >
+                  <mat-icon>add</mat-icon>
+                  <span>New Category</span>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            @if (isAddingNewCategory) {
+              <div class="new-category-section">
+                <mat-form-field appearance="outline">
+                  <mat-label>Category Name</mat-label>
+                  <input
+                    matInput
+                    formControlName="name"
+                    type="text"
+                    [required]="isAddingNewCategory"
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Category Description</mat-label>
+                  <textarea
+                    matInput
+                    formControlName="description"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            }
+          </section>
+
+          <!-- Applicable event types -->
+          <mat-form-field appearance="outline">
+            <mat-label>Applicable event types</mat-label>
+            <mat-select
+              formControlName="applicableEventTypeIds"
+              multiple
+              required
+            >
+              @for (type of allEventTypes; track type.id) {
+                <mat-option [value]="type.id">{{type.name}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </form>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="reservationFormGroup">
+        <form [formGroup]="reservationFormGroup">
+          <section class="duration-section">
+            @switch (durationMode) {
+              @case ('fixed') {
+                <!-- Duration -->
+                <mat-form-field appearance="outline">
+                  <mat-label>Duration</mat-label>
+                  <input
+                    matInput
+                    formControlName="durationMinutes"
+                    type="number"
+                    min="0"
+                    step="5"
+                    required
+                  />
+                  <small matSuffix>min</small>
+                </mat-form-field>
+              }
+              @case ('range') {
+                <div class="duration-range-section">
+                  <!-- Min duration -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>Min duration</mat-label>
+                    <input
+                      matInput
+                      formControlName="minDurationMinutes"
+                      type="number"
+                      min="0"
+                      step="5"
+                      required
+                    />
+                    <small matSuffix>min</small>
+                  </mat-form-field>
+                  <!-- Max duration -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>Max duration</mat-label>
+                    <input
+                      matInput
+                      formControlName="maxDurationMinutes"
+                      type="number"
+                      min="0"
+                      step="5"
+                      required
+                    />
+                    <small matSuffix>min</small>
+                  </mat-form-field>
+                </div>
+              }
+            }
+
+            <mat-button-toggle-group
+              appearance="legacy"
+              [(value)]="durationMode"
+            >
+              <mat-button-toggle value="fixed">Fixed duration</mat-button-toggle>
+              <mat-button-toggle value="range">Duration range</mat-button-toggle>
+            </mat-button-toggle-group>
+          </section>
+          <!-- Reservation period -->
+          <mat-form-field appearance="outline">
+            <mat-label>Reservation period</mat-label>
+            <input
+              matInput
+              formControlName="reservationPeriodDays"
+              type="number"
+              step="1"
+              min="0"
+              required
+            />
+            <small matSuffix>days</small>
+          </mat-form-field>
+          <!-- Cancellation period -->
+          <mat-form-field appearance="outline">
+            <mat-label>Cancellation period</mat-label>
+            <input
+              matInput
+              formControlName="cancellationPeriodDays"
+              type="number"
+              step="1"
+              min="0"
+              required
+            />
+            <small matSuffix>days</small>
+          </mat-form-field>
+
+          <mat-checkbox
+            [checked]="autoAcceptReservations"
+            (change)="autoAcceptReservations = $event.checked"
+          >Automatically accept reservations
+          </mat-checkbox>
+        </form>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-raised-button (click)="onSubmit()">Create</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+
+    <div class="circle-one"></div>
+    <div class="circle-two"></div>
+    <div class="circle-three"></div>
+    <div class="circle-four"></div>
+  </div>
+
+  <!-- Bottom Decorative Lines -->
+  <div class="decorative-lines bottom-lines"></div>
+</div>
+
+<app-message-popup
+  #successPopup
+  [isError]="false"
+  title="Success"
+  (close)="successPopup.isVisible = false; router.navigate(['solutions'])"
+/>
+
+<app-message-popup
+  #errorPopup
+  [isError]="true"
+  title="Error"
+  (close)="errorPopup.isVisible = false"
+/>

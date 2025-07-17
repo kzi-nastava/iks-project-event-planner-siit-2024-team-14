@@ -1,0 +1,39 @@
+article {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  overflow: hidden;
+}
+
+header {
+  flex: 0 0 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  gap: 2rem;
+  padding: .3rem;
+  background-color: #faf9fd;
+}
+
+.solutions-section {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+
+
+  flex: 1 1 auto;
+}
+
+.solutions-section::-webkit-scrollbar {
+  display: none;
+}
+
+footer {
+  flex: 0 0 auto;
+}
+
