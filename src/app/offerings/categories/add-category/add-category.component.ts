@@ -24,6 +24,7 @@ export class AddCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.model = {
+      id: NaN,
       name: "",
       description: ""
     };

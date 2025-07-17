@@ -7,7 +7,7 @@
 
   <app-category-expansion-panel *ngFor="let category of categories"
     [category]="category"
-    (delete)="deleteCategory($event)"
+    (delete)="deleteCategory(category)"
     (edit)="showEditCategory($event)">
   </app-category-expansion-panel>
 </mat-accordion>

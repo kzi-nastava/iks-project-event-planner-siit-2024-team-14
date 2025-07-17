@@ -4,7 +4,7 @@
     <li>Home</li>
     <li>User Management</li>
     <li (click)="navigateToEventTypeManagement()">Event Types</li>
-    <li>Categories</li>
+    <li [routerLink]="['/categories']">Categories</li>
     <li (click)="toggleCommentsSidebar()">Comments & reviews requests</li>
     <li (click)="toggleReportsSidebar()">Reports</li>
     <li (click)="toggleNotificationsSidebar()">Notifications</li>

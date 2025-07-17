@@ -3,6 +3,8 @@ import { Category } from '../../model/category.model';
 import {CategoryService} from '../../category.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ConfirmDialogComponent} from '../../../dialogs/confirm-dialog/confirm-dialog';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-category-management',
@@ -18,7 +20,7 @@ export class CategoryManagementComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private categoryService: CategoryService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private categoryService: CategoryService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -73,8 +75,19 @@ export class CategoryManagementComponent implements OnInit, OnDestroy {
       }).then();
   }
 
-  deleteCategory(id: number) {
-    this.categoryService.delete(id);
+  deleteCategory(category: Category) {
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `Confirmation`,
+        message: `Are you sure you want to delete "${category.name}"`
+      }
+    })
+      .afterClosed().subscribe(result => {
+      if (result) {
+        this.categoryService.delete(category)
+          .subscribe(() => this.categories = this.categories.filter(c => c.id !== category.id));
+      }
+    })
   }
 
   ngOnDestroy(): void {
