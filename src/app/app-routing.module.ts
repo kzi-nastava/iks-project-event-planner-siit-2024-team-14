@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home-guest/home.component';
 import { ServicesComponent } from './components/services/services.component';
 import { LoginComponent } from './components/login/login.component';
+import {CategoriesDashboardComponent} from './offerings/categories/categories-dashboard/categories-dashboard.component';
+import {AddCategoryComponent} from './offerings/categories/add-category/add-category.component';
+import {EditCategoryComponent} from './offerings/categories/edit-category/edit-category.component';
 import { RegistrationEoComponent } from './components/registration/registration-eo/registration-eo.component';
 import { RegistrationSppComponent } from './components/registration/registration-spp/registration-spp.component';
 import { ActivationComponent } from './components/registration/activation/activation.component';
@@ -56,6 +59,16 @@ const routes: Routes = [
   { path: 'services/:id', component: ServiceDetailsComponent },
   { path: 'services/:id/edit', component: EditServiceComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] } },
   { path: 'products/:id', component: ProductDetailsComponent },
+  {
+    path: 'categories',
+    component: CategoriesDashboardComponent,
+    canActivate: [], // TODO: add guard to allow only admin role to access this
+    children: [
+      { path: 'add', component: AddCategoryComponent, outlet: 'popup'},
+      { path: ':id/edit', component: EditCategoryComponent, outlet: 'popup'},
+      { path: '**', redirectTo: ''},
+    ]
+  },
   { path: 'price-list', component: PriceListComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] }},
   { path: 'registration-eo', component: RegistrationEoComponent },
   { path: 'registration-spp', component: RegistrationSppComponent },

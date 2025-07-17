@@ -8,12 +8,30 @@ import {environment} from '../../environment/environment';
   providedIn: 'root'
 })
 export class CategoryService {
-  protected baseUrl = `${environment.apiUrl}/categories`
+  private baseURL = `${environment.apiHost}/api/categories`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getAll(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.baseUrl);
+
+  add(category: Category) {
+    return this.httpClient.post<Category>(this.baseURL, category);
+  }
+
+  getAll() {
+    return this.httpClient.get<Category[]>(this.baseURL);
+  }
+
+  getById(id: Category['id']) {
+    return this.httpClient.get<Category>(`${this.baseURL}/${id}`)
+  }
+
+  delete(categoryOrId: Pick<Category, 'id'> | Category['id']) {
+    const id = typeof categoryOrId === 'object' ? categoryOrId.id : categoryOrId;
+    return this.httpClient.delete<void>(`${this.baseURL}/${id}`);
+  }
+
+  update(category: Partial<Category> & Pick<Category, 'id'>) {
+    return this.httpClient.put<Category>(this.baseURL, category);
   }
 
 }
