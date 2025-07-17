@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div class="profile-container">
+  <div class="profile-photo-container" >
+    <img [src]="getProfilePhotoUrl()"
+         alt="Profile photo"
+         class="profile-photo">
+  </div>
+
+  <div class="profile-info">
+    <h3>{{ fullName || 'User Name' }}</h3>
+    <p>Event Organizer</p>
+    <ul>
+      <li><strong>Email:</strong> {{ user.email || 'No email available' }}</li>
+      <li><strong>Address:</strong> {{ user.address || 'No address provided' }}</li>
+      <li><strong>City:</strong> {{ user.city || 'No city provided' }}</li>
+      <li><strong>Phone number:</strong> {{ user.phoneNumber || 'No phone number' }}</li>
+    </ul>
+    <div class="profile-actions" *ngIf="loggedUserId !== null">
+      <button class="report" (click)="openReportForm()">Report user</button>
+      <button class="chat" (click)="toggleChat()">Chat with organizer</button>
+    </div>
+  </div>
+</div>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-upcoming-events></app-upcoming-events>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-occupancy-calendar></app-occupancy-calendar>
+
+<!-- Footer -->
+<footer>
+  <app-footer></app-footer>
+</footer>
+
+
+<!-- Report User Popup Overlay -->
+<div *ngIf="showReportForm" class="report-popup-overlay" (click)="closeReportForm()"></div>
+
+<!-- Report User Popup -->
+<div class="report-popup" *ngIf="showReportForm">
+  <h2>Report User</h2>
+  <p>Reporting: <strong>{{ fullName || 'User Name' }}</strong></p>
+
+  <textarea [(ngModel)]="reportReason" placeholder="Enter reason for report..."></textarea>
+
+  <div class="popup-buttons">
+    <button (click)="submitReport()">Submit</button>
+    <button (click)="closeReportForm()">Cancel</button>
+  </div>
+</div>
+
+
+<app-chat-sidebar [chatter]="user" [chaterName]="fullName" [chaterPhotoUrl] = getProfilePhotoUrl() [chaterId]=user.id [isOpen]="isChatOpen && !!user"></app-chat-sidebar>
+
+
+

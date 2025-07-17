@@ -3,20 +3,19 @@ import { Category } from './category.model';
 import { EventType } from './event-type.model';
 
 export interface Service extends Offering {
-  // TODO: Revisit.
-  category: Category;
-  applicableEventTypes: EventType[];
-
-  specificities: string;
-  price: number;
-  discount: number;
-  imageURLs: string[];
-
-  visibility: 'public' | 'private' | 'pending';
-  reservationPolicy: 'manual' | 'auto';
+  visibility: 'PUBLIC' | 'PRIVATE' | 'PENDING';
+  reservationType: 'AUTOMATIC' | 'MANUAL';
   isAvailable: boolean;
 
-  sessionDuration: number;
-  reservationPeriod: number;
-  cancellationPeriod: number;
+  duration?: string;
+  minDuration?: string;
+  maxDuration?: string;
+  reservationPeriod: string;
+  cancellationPeriod: string;
+
+  durationMinutes: number;
+  minDurationMinutes: number;
+  maxDurationMinutes: number;
+  reservationPeriodDays: number;
+  cancellationPeriodDays: number;
 }

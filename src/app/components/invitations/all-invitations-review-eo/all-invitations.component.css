@@ -1,0 +1,61 @@
+.invitation-table-section {
+  padding: 40px 30px;
+  background-color: #f5f5f5;
+  color: #523D35;
+  font-family: 'Petrona', sans-serif;
+  margin-top: 40px;
+}
+
+.table-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.invitation-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.invitation-table th,
+.invitation-table td {
+  border: 1px solid #ccc;
+  padding: 16px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.invitation-table th {
+  background-color: #959D90;
+  color: white;
+}
+
+.invitation-table ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.invitation-table li {
+  padding: 4px 0;
+}
+
+.empty-slot {
+  color: #aaa;
+  font-style: italic;
+}
+
+.add-invite-button {
+  background-color: #523D35;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-invite-button:hover {
+  background-color: #412c26;
+}

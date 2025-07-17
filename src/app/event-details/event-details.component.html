@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div *ngIf="event.id != -1; else loadingDiv" class="event-details-container">
+  <h2>{{ event.name }}</h2>
+  <p><strong>Location:</strong> {{ event.location }}</p>
+  <p><strong>Date:</strong> From {{ event.startDate }} to {{ event.endDate }}</p>
+  <p>{{ event.description }}</p>
+  <p>Organizer:</p>
+  <ng-container *ngIf="event.organizerId !== loggedUserId; else plainText">
+    <a [routerLink]="['/view-organizer-profile', event.organizerId]">
+      <span>{{ (event.organizerFirstName + " " + event.organizerLastName | titlecase) || 'organizer not found' }}</span>
+    </a>
+  </ng-container>
+
+  <ng-template #plainText>
+    <span>{{ (event.organizerFirstName + " " + event.organizerLastName | titlecase) || 'organizer not found' }}</span>
+  </ng-template>
+
+  <app-event-budget [event]="event"/>
+</div>
+
+<ng-template #loadingDiv>
+  <div style="width: 100%; height: 100%; cursor: progress !important;"></div>
+</ng-template>
+<app-footer></app-footer>

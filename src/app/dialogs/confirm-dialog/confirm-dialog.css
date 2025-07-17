@@ -1,0 +1,57 @@
+.confirm-dialog-container {
+  font-family: 'Petrona', serif;
+  padding: 24px;
+  background-color: #ffffff;
+  color: #523D35;
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+}
+
+.dialog-title {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #523D35;
+}
+
+.dialog-message {
+  font-size: 16px;
+  margin-bottom: 24px;
+  color: #6e6e6e;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.cancel-button,
+.confirm-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Petrona', serif;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-button {
+  background-color: #BFAE9C;
+  color: #ffffff;
+}
+
+.cancel-button:hover {
+  background-color: #a89a8a;
+}
+
+.confirm-button {
+  background-color: #523D35;
+  color: #ffffff;
+}
+
+.confirm-button:hover {
+  background-color: #3f2d28;
+}

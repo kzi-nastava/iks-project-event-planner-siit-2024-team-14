@@ -1,4 +1,4 @@
 export interface BaseEntity {
-  id?: number
+  id: number
   isDeleted?: boolean
 }

@@ -1,0 +1,10 @@
+/* Apply Petrona font globally */
+body {
+  font-family: 'Petrona', serif;
+}
+
+.decorative-lines {
+  align-self: flex-start; /* Align the lines element */
+  width: 100%; /* Make it span the full width */
+  border-top: 2px solid #ddd; /* Optional: Add a visual line */
+}

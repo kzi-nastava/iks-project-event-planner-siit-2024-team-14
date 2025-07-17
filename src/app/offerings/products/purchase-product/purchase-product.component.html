@@ -1,0 +1,17 @@
+<h3>Purchase "{{ product.name | titlecase }}"</h3>
+<form (ngSubmit)="purchase(selectEvent.value)">
+  <mat-form-field appearance="outline">
+    <mat-label>Event</mat-label>
+    <mat-select #selectEvent
+      required
+    >
+      @for (event of organizerEvents; track event.id) {
+        <mat-option [value]="event">{{event.name}}</mat-option>
+      }
+    </mat-select>
+    <mat-hint>Select an event for which you want to purchase the product.</mat-hint>
+  </mat-form-field>
+  <div>
+    <button mat-raised-button type="submit">Purchase</button>
+  </div>
+</form>

@@ -1,0 +1,38 @@
+<article>
+  <h4>New budget item</h4>
+
+  <form #itemForm="ngForm" (ngSubmit)="submitBudgetItem()">
+
+    <!-- Category -->
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select name="category" [(ngModel)]="item.category.id" required #categoryCtrl="ngModel">
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+
+      <mat-error *ngIf="categoryCtrl.touched && categoryCtrl.invalid">
+        Category is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Amount -->
+    <mat-form-field appearance="fill">
+      <mat-label>Amount</mat-label>
+      <input matInput name="amount" type="number" min="0" value="0" [(ngModel)]="item.amount" required #amountCtrl="ngModel" />
+
+      <mat-error *ngIf="amountCtrl.errors?.['required'] && amountCtrl.touched">
+        Amount is required.
+      </mat-error>
+      <mat-error *ngIf="amountCtrl.errors?.['min'] && amountCtrl.touched">
+        Amount must be non-negative.
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <button mat-button type="reset" (click)="itemForm.reset(); cancel.emit()">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="itemForm.invalid">Add</button>
+    </div>
+  </form>
+</article>

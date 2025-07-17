@@ -1,0 +1,181 @@
+<div class="popup">
+  <h1>New event</h1>
+
+  <form class="form" (ngSubmit)="createEvent()">
+
+    <div class="form-section">
+      <div class="circle-one"></div>
+      <div class="circle-two"></div>
+      <div class="circle-three"></div>
+      <div class="circle-four"></div>
+      <div class="circle-five"></div>
+      <div class="circle-six"></div>
+    </div>
+
+    <!-- Name -->
+    <div class="form-group">
+      <textarea id="name" type="text" placeholder="Name" [(ngModel)]="eventData.name" name="name" required></textarea>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <textarea id="description" type="text" placeholder="Description" [(ngModel)]="eventData.description" name="description" required></textarea>
+    </div>
+
+    <!-- Event Type -->
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="custom-dropdown">
+        <mat-label>Event Type</mat-label>
+        <mat-select [(value)]="selectedCategory" name="selectedCategory" (selectionChange)="onEventTypeChange($event.value)">
+          <mat-option *ngFor="let eventType of eventTypes" [value]="eventType.name">
+            {{ eventType.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Categories -->
+    <div class="form-group">
+      <fieldset class="form-group">
+        <legend>Choose services and products</legend>
+
+        <!-- Show message if no event type is selected -->
+        <div *ngIf="!selectedCategory" class="placeholder-message">
+          Choose an event type, then services and products will appear.
+        </div>
+
+        <!-- Show categories when "All" is selected -->
+        <div *ngIf="selectedCategory === 'All'">
+          <div *ngFor="let category of categories">
+            <label>
+              <input
+                type="checkbox"
+                name="services"
+                [value]="category.name"
+                (change)="onCategoryChange($event, category)"
+              />
+              {{ category.name }}
+            </label>
+          </div>
+        </div>
+
+        <!-- Show categories dynamically when a specific event type is selected -->
+        <div *ngIf="selectedCategory && selectedCategory !== 'All'">
+          <div *ngFor="let category of categories">
+            <label>
+              <input
+                type="checkbox"
+                name="services"
+                [value]="category.name"
+                (change)="onCategoryChange($event, category)"
+              />
+              {{ category.name }}
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Guest Number -->
+    <div class="form-group">
+      <input
+        id="guest-number"
+        type="number"
+        min="1"
+        placeholder="Maximal number of guests"
+        [(ngModel)]="eventData.guestNumber"
+        name="guest-number"
+        required
+      />
+    </div>
+
+    <!-- Privacy Type -->
+    <div class="button-container">
+      <button
+        class="custom-radio-btn1"
+        [class.selected]="eventData.type === 'OPEN'"
+        (click)="eventData.type = 'OPEN'"
+        type="button">Open
+      </button>
+
+      <button
+        class="custom-radio-btn2"
+        [class.selected]="eventData.type === 'CLOSED'"
+        (click)="eventData.type = 'CLOSED'"
+        type="button">Closed
+      </button>
+    </div>
+
+    <!-- Location -->
+    <div class="form-group location-autocomplete-group">
+      <input
+        [(ngModel)]="locationSearch"
+        name="locationSearch"
+        (input)="onLocationInputChange()"
+        placeholder="Enter city"
+        required
+      />
+
+      <ul class="autocomplete-dropdown" *ngIf="locationResults.length > 0">
+        <li *ngFor="let result of locationResults" (click)="selectLocation(result)">
+          {{ result.display_name }}
+        </li>
+      </ul>
+    </div>
+
+
+    <!-- Group the Date Pickers together in one row -->
+    <div class="form-group date-picker-group">
+      <!-- START DATE -->
+      <mat-form-field appearance="outline" class="custom-date-picker">
+        <mat-label>Start Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="startPicker"
+          [(ngModel)]="eventData.startDate"
+          name="startDate"
+          [min]="today"
+          (dateChange)="onStartDateChange()">
+        <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- END DATE -->
+      <mat-form-field appearance="outline" class="custom-date-picker">
+        <mat-label>End Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="endPicker"
+          [(ngModel)]="eventData.endDate"
+          name="endDate"
+          [min]="today"
+          (dateChange)="onEndDateChange()">
+        <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Photo Upload -->
+    <div class="form-group">
+      <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" />
+    </div>
+
+    <!-- Error Message Display -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <button type="submit" class="create-button">Create</button>
+
+  </form>
+</div>
+
+<!-- Success Modal -->
+<app-message-modal
+  *ngIf="showModal"
+  [isVisible]="showModal"
+  [modalTitle]="modalTitle"
+  [message]="modalMessage"
+  [showOkButton]="showOkButton"
+  (close)="closeModal()"
+></app-message-modal>

@@ -1,0 +1,24 @@
+<div class="sidebar booking-services-sidebar" [class.open]="isBookingsOpen">
+  <div class="sidebar-header">
+    <h2>All Bookings</h2>
+    <button class="close-sidebar" (click)="closeRequests()">&times;</button>
+  </div>
+
+  <div class="cards-container">
+    <div *ngFor="let request of bookings" class="card request-card">
+      <div class="request-info">
+        <p><span>Service:</span> {{ request.service }}</p>
+        <p><span>Event:</span> {{ request.event }}</p>
+        <p><span>Date:</span> {{ request.bookingDate }}</p>
+        <p><span>Time:</span> {{ request.startTime }}</p>
+        <p><span>Duration:</span> {{ request.duration }} min</p>
+        <p [class]="getStatusClass(request.confirmed)">
+          <span> Status:</span> {{ request.confirmed }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" *ngIf="isBookingsOpen" (click)="closeRequests()"></div>

@@ -1,0 +1,7 @@
+<div class="popup-overlay" *ngIf="isVisible">
+  <div class="popup-box" [ngClass]="{ 'error': isError, 'success': !isError }">
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+    <button (click)="onClose()">OK</button>
+  </div>
+</div>

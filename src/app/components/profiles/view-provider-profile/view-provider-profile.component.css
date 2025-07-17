@@ -1,0 +1,190 @@
+/* GLOBAL STYLES */
+body {
+  font-family: 'Petrona', serif;
+}
+
+/* PROFILE CONTAINER */
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 20%;
+  position: relative;
+  font-family: 'Petrona', serif;
+  color: #523D35;
+}
+
+/* PROFILE PHOTO */
+.profile-photo-container {
+  position: relative;
+  left: 12%;
+}
+
+.profile-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 35%;
+  object-fit: cover;
+}
+
+/* PROFILE INFO */
+.profile-info {
+  flex-grow: 1;
+  width: 60%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  left: -10%;
+}
+
+.profile-info h3 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.profile-info p {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.profile-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.profile-info ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* PROFILE ACTIONS */
+.profile-actions {
+  display: flex;
+  margin-top: 10px;
+}
+
+.profile-actions .report {
+  padding: 10px 15px;
+  margin: 2px;
+  font-family: 'Petrona', serif;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  background: #523D35;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-actions .report:hover {
+  background-color: #523D28;
+  transform: scale(1.05); /* Blago povećanje */
+}
+
+.profile-actions .report:active {
+  transform: scale(0.95); /* Klik efekat */
+}
+
+.profile-actions .chat {
+  padding: 10px 15px;
+  margin: 2px;
+  font-family: 'Petrona', serif;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  background: #523D35;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-actions .chat:hover {
+  background-color: #523D28;
+  transform: scale(1.05); /* Blago povećanje */
+}
+
+.profile-actions .chat:active {
+  transform: scale(0.95); /* Klik efekat */
+}
+
+
+/* DECORATIVE LINES */
+.decorative-lines {
+  align-self: flex-start; /* Align the lines element */
+  width: 100%; /* Make it span the full width */
+  border-top: 2px solid #ddd; /* Optional: Add a visual line */
+  margin: 2rem 0;
+}
+
+.report-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Polupotamnjena pozadina */
+  z-index: 999; /* Ispod popupa */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+/* Report User Popup */
+.report-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 1000;
+  width: 300px;
+  text-align: center;
+}
+
+.popup-content h2 {
+  margin-bottom: 10px;
+  color: #523D35;
+}
+
+textarea {
+  width: 95%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.popup-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-buttons button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.popup-buttons button:first-child {
+  background-color: #523D35;
+  color: white;
+}
+
+.popup-buttons button:last-child {
+  background-color: #ddd;
+}
+
+.popup-buttons button:hover {
+  opacity: 0.8;
+}
+

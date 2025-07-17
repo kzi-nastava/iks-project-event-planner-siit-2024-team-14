@@ -1,0 +1,7 @@
+<div class="modal-overlay" *ngIf="isVisible">
+  <div class="modal-content">
+    <h2>{{ modalTitle }}</h2>
+    <p>{{ message }}</p>
+    <button *ngIf="showOkButton" (click)="closeModal()">OK</button>
+  </div>
+</div>

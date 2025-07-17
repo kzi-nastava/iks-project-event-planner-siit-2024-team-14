@@ -1,0 +1,60 @@
+<article>
+  <section class="toggles-section">
+    @if (showType) {
+      <!-- Type -->
+      <mat-button-toggle-group
+        [(value)]="params.type"
+      >
+        <mat-button-toggle value="service">Service</mat-button-toggle>
+        <mat-button-toggle value="product">Product</mat-button-toggle>
+      </mat-button-toggle-group>
+    }
+
+    <!-- Availability -->
+    <mat-button-toggle-group
+      [(value)]="params.status"
+    >
+      <mat-button-toggle value="available">Available</mat-button-toggle>
+      <mat-button-toggle value="unavailable">Unavailable</mat-button-toggle>
+    </mat-button-toggle-group>
+  </section>
+
+  <form #filterForm="ngForm">
+    <!-- Price -->
+    <section class="price-section">
+      <mat-form-field [appearance]="formFieldAppearance">
+        <mat-label>Min Price</mat-label>
+        <input matInput name="minPrice" type="number" min="0" step=".05" [(ngModel)]="params.minPrice">
+      </mat-form-field>
+
+      <mat-form-field [appearance]="formFieldAppearance">
+        <mat-label>Max Price</mat-label>
+        <input matInput name="maxPrice" type="number" min="0" step=".05" [(ngModel)]="params.maxPrice">
+      </mat-form-field>
+    </section>
+
+    <!-- Categories -->
+    <mat-form-field [appearance]="formFieldAppearance">
+      <mat-label>Category</mat-label>
+      <mat-select name="category" [(ngModel)]="params.category" multiple>
+        @for (category of allCategories; track category.id) {
+          <mat-option [value]="category.id">{{category.name | titlecase}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <!-- Event types -->
+    <mat-form-field [appearance]="formFieldAppearance">
+      <mat-label>Event type</mat-label>
+      <mat-select name="eventType" [(ngModel)]="params.eventType" multiple>
+        @for (type of allEventTypes; track type.id) {
+          <mat-option [value]="type.id">{{type.name | titlecase}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <footer>
+    <button mat-stroked-button type="reset" (click)="clear()">Clear</button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="!filterForm.valid">Apply</button>
+  </footer>
+</article>
