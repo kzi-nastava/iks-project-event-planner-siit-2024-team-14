@@ -18,7 +18,7 @@ export class AddServiceComponent implements OnInit {
   infoFormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: [''],
-    price: ['', [Validators.required, Validators.min(0)]],
+    price: [NaN, [Validators.required, Validators.min(0)]],
     discount: [0, [Validators.min(0), Validators.max(100)]],
   });
 
@@ -30,16 +30,16 @@ export class AddServiceComponent implements OnInit {
 
   secondFormGroup = this.formBuilder.group({
     category: this.categoryFormGroup,
-    applicableEventTypeIds: [[]],
+    applicableEventTypeIds: [] as number[][],
   });
 
   reservationFormGroup = this.formBuilder.group({
     reservationType: ['AUTOMATIC', [Validators.required]],
-    durationMinutes: ['', [Validators.min(0)]],
-    minDurationMinutes: ['', [Validators.min(0)]],
-    maxDurationMinutes: ['', [Validators.min(0)]],
-    reservationPeriodDays: ['', [Validators.required, Validators.min(0)]],
-    cancellationPeriodDays: ['', [Validators.required, Validators.min(0)]],
+    durationMinutes: [NaN, [Validators.min(0)]],
+    minDurationMinutes: [NaN, [Validators.min(0)]],
+    maxDurationMinutes: [NaN, [Validators.min(0)]],
+    reservationPeriodDays: [NaN, [Validators.required, Validators.min(0)]],
+    cancellationPeriodDays: [NaN, [Validators.required, Validators.min(0)]],
   });
 
   durationMode: 'fixed' | 'range' = 'fixed';
