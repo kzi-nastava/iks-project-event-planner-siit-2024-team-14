@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NotificationService} from '../../notifications/notifications.service';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +15,19 @@ export class HeaderComponent implements OnInit {
   isSidebarOpen: boolean = false;
   isNotificationsOpen: boolean = false;
 
+  constructor(private notificationService: NotificationService) {}
+
+
   ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
+    const userId = this.getUserIdFromLocalStorage();
+
+    if (userId !== null) {
+      this.loadUnreadNotificationCount(userId);
+      this.notificationService.unreadNotificationCount$.subscribe(count => {
+        this.unreadCount = count;
+      });
+    }
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
@@ -48,6 +60,18 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  getUserIdFromLocalStorage(): number | null {
+    const userIdFromStorage = localStorage.getItem("userId");
+    if (userIdFromStorage) {
+      const parsedUserId = parseInt(userIdFromStorage, 10);
+      return isNaN(parsedUserId) ? null : parsedUserId;
+    }
+    return null;
+  }
+
+  loadUnreadNotificationCount(userId: number): void {
+    this.notificationService.loadUnreadNotificationsCount(userId);
+  }
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
   }

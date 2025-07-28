@@ -35,6 +35,12 @@ import {HomeAdminComponent} from './components/home/home-admin/home-admin.compon
 import {PriceListComponent} from './offerings/price-list/price-list.component';
 import {ProviderSolutionsComponent} from './offerings/provider-solutions/provider-solutions.component';
 import {EditServiceComponent} from './offerings/services/edit-service/edit-service.component';
+import {
+  UpdateAsOrganizerComponent
+} from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
+import {
+  UpdateAsProviderComponent
+} from './components/profiles/au-profile/update-as-provider/update-as-provider.component';
 
 enum Role {
   ADMIN = 'Admin',
