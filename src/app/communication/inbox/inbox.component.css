@@ -1,0 +1,58 @@
+main {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+section {
+  flex: 1;
+  max-width: 300px;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+article  {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+article:hover {
+  background-color: #f0f0f0;
+}
+
+section img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+section strong {
+  font-size: 1rem;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+app-chat-sidebar {
+  flex: 3;
+  padding: 1rem;
+  background: #fafafa;
+  overflow-y: auto;
+}
+
+.selected {
+  background-color: #e0e0e0; /* dim background */
+  opacity: 0.8;              /* make it appear slightly faded */
+  border-left: 4px solid #412c26; /* optional: visual marker */
+}
+

@@ -1,0 +1,85 @@
+<div class="profile-container">
+  <div class="profile-info">
+   <ul>
+      <li><strong>Email:</strong> {{ user.email || 'No email available' }}</li>
+    </ul>
+    <div class="profile-actions">
+
+      <button class="organizer" (click)="updateAuAsOrganizer()">Become an organizer</button>
+      <button class="organizer" (click)="updateAuAsProvider()">Become a service provider</button>
+      <button class="change-password" (click)="openPasswordModal($event)">Change password</button>
+      <button class="deactivate" (click)="openDeactivateModal($event)">Deactivate account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Password Modal Popup -->
+<div class="change-password-modal-overlay" *ngIf="showPasswordModal" (click)="closePasswordModal()">
+  <div class="change-password-modal-content" (click)="$event.stopPropagation()">
+    <div class="circle-one-password"></div>
+    <div class="circle-two-password"></div>
+    <div class="circle-three-password"></div>
+    <div class="circle-four-password"></div>
+    <h2> Change Password </h2>
+    <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+      <div class="form-group">
+        <input formControlName="oldPassword" type="password" placeholder="Enter old password" />
+      </div>
+      <div *ngIf="oldPasswordDoesNotMatch" class="error-message">
+        Old password do not match.
+      </div>
+      <div class="form-group">
+        <input formControlName="password" type="password" placeholder="Enter new password" />
+      </div>
+      <div class="form-group">
+        <input formControlName="confirmPassword" type="password" placeholder="Confirm new password" />
+      </div>
+      <div *ngIf="passwordsDoNotMatch" class="error-message">
+        Passwords do not match.
+      </div>
+      <button type="submit" class="btn-confirm" [disabled]="passwordForm.invalid">Confirm</button>
+      <button type="button" class="btn-close" (click)="closePasswordModal()">Close</button>
+    </form>
+  </div>
+</div>
+
+<!-- Deactivate Modal Popup -->
+<div class="deactivate-modal-overlay" *ngIf="isDeactivateModalVisible">
+  <div class="deactivate-modal-content">
+    <div class="circle-one-deactivate"></div>
+    <div class="circle-two-deactivate"></div>
+    <div class="circle-three-deactivate"></div>
+    <div class="circle-four-deactivate"></div>
+    <h2>{{ modalTitle }}</h2>
+    <p>{{ modalMessage }}</p>
+    <div class="deactivate-modal-actions">
+      <button *ngIf="yesButton" (click)="confirmDeactivation()" class="deactivate-yes-button">Yes</button>
+      <button *ngIf="noButton" (click)="cancelDeactivation()" class="deactivate-no-button">No</button>
+      <button *ngIf="okButtonDeactivate" (click)="okButtonDeactivationClicked()" class="deactivate-ok-button">OK</button>
+    </div>
+  </div>
+</div>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-upcoming-events></app-upcoming-events>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-favorite-events></app-favorite-events>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-favorite-solutions></app-favorite-solutions>
+
+<div class="decorative-lines">
+  <app-lines></app-lines>
+</div>
+
+<app-occupancy-calendar></app-occupancy-calendar>

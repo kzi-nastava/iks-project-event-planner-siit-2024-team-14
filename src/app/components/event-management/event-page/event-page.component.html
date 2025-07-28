@@ -1,0 +1,68 @@
+<div class="event-management">
+  <!-- Event Card (Image + Title + Event Details + Chat Button) -->
+  <div class="event-card">
+    <div class="event-image-title-container">
+      <!-- Event Image -->
+      <img [src]="event.image" [alt]="event.title" class="event-image" />
+      <!-- Event Title -->
+      <div class="event-title">
+        <h2>
+          {{ event.title }}
+          <span
+            class="favorite-icon"
+            (click)="toggleFavorite()">
+            {{ isFavorite ? '★' : '☆' }}
+          </span>
+        </h2>
+      </div>
+
+
+    </div>
+
+    <!-- Event Details (Other Info) -->
+    <div class="event-details">
+      <h3>{{ event.details.subtitle }}</h3>
+      <p><strong>Event type:</strong> {{ event.details.type }}</p>
+      <p><strong>Description:</strong> {{ event.details.description }}</p>
+      <p><strong>Maximal number of guests:</strong> {{ event.details.maxGuests }}</p>
+      <p><strong>Open/Closed:</strong> {{ event.details.status }}</p>
+      <p><strong>Location:</strong> {{ event.details.location }}</p>
+      <p><strong>Start date:</strong> {{ event.details.startDate }}</p>
+      <p><strong>End date:</strong> {{ event.details.endDate }}</p>
+
+      <!-- Chat Button -->
+      <button class="chat-button" (click)="chatWithOrganizer()">
+        Chat with event organizer
+      </button>
+    </div>
+  </div>
+
+  <!-- <app-event-budget [event]="event"/> -->
+
+  <!-- Brown Rectangle (Comments & Reviews) -->
+  <div class="brown-rectangle">
+    <h3>Comments & Reviews</h3>
+    <div *ngFor="let review of event.reviews" class="review">
+      <p><strong>{{ review.author }}</strong></p>
+      <p><span *ngFor="let star of [].constructor(review.rating)">⭐</span></p>
+      <p>{{ review.comment }}</p>
+    </div>
+    <form class="comment-form" (ngSubmit)="addReview(commentInput.value, Number(ratingInput.value))">
+      <textarea #commentInput placeholder="Write a comment..."></textarea>
+      <div class="comment-actions">
+        <select #ratingInput class="rating-dropdown">
+          <option value="">Rate:</option>
+          <option value="5">⭐⭐⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="1">⭐</option>
+        </select>
+        <button type="submit" class="send-button">Send</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Green Rectangle -->
+<div class="green-rectangle"></div>

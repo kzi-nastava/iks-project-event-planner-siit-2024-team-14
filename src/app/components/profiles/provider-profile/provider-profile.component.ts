@@ -1,18 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NotificationService} from '../../notifications/notifications.service';
+import {HomeOrganizerService} from '../../home/home-organizer/home-organizer.service';
 
 @Component({
   selector: 'app-provider-profile',
   templateUrl: './provider-profile.component.html',
   styleUrl: './provider-profile.component.css'
 })
-export class ProviderProfileComponent {
+export class ProviderProfileComponent{
   user: any;
-  isSidebarOpen: boolean = false;
 
   constructor() {}
-
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    console.log('Sidebar toggled!', this.isSidebarOpen);
-  }
 }

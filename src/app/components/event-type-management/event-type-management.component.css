@@ -1,0 +1,162 @@
+.event-type-management {
+  font-family: 'Petrona', serif;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #523D35;
+  text-align: center;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.carousel-button {
+  background: #fff;
+  color: #523D35;
+  border: none;
+  padding: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.carousel-button:hover {
+  color: #412c26;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.event-cards-wrapper {
+  display: flex;
+  overflow: hidden;
+  width: 80%;  /* Adjust width to display 3 cards */
+}
+
+.event-cards {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.3s ease-in-out;
+  padding: 1rem;
+}
+
+.event-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgb(82, 61, 53);
+  width: 300px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.event-details {
+  padding: 16px;
+  text-align: left;
+  color: #523D35;
+}
+
+.event-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn {
+  background-color: #523D35;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn:hover {
+  background-color: #412c26;
+}
+
+.add-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 3rem;
+}
+
+.add-event-button {
+  background-color: #fff;
+  color: #523D35;
+  padding: 1px 15px;
+  border-radius: 50px;
+  font-size: 3rem;
+  position: absolute;
+  cursor: pointer;
+  align-content: center;
+  border: #523D35 solid 3px;
+}
+
+.add-event-button:hover {
+  background-color: #D9D9D9;
+}
+
+/* Hide inactive cards */
+.event-card.hidden {
+  display: none;
+}
+
+.footer {
+  padding-top: 3rem;
+}
+
+/* POP UP */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.popup {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+}
+
+.close-popup-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #523D35;
+}

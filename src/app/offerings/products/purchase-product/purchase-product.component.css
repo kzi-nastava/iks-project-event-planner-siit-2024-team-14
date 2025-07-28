@@ -1,0 +1,29 @@
+* {
+  color: #523D35;
+}
+
+form {
+  max-width: 400px;
+  padding: 1rem;
+}
+
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+form div {
+  margin-top: 5%;
+  text-align: end;
+}
+
+button[mat-button] {
+  margin: 0.5rem 0.5rem 0 0;
+  color: #523D35;
+}
+
+button[mat-raised-button] {
+  background-color: #523D35;
+  color: white;
+}

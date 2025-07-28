@@ -1,0 +1,109 @@
+<form [formGroup]="serviceFormGroup" (ngSubmit)="submit()">
+  <!-- Name -->
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      formControlName="name"
+      type="text"
+      autofocus
+    />
+  </mat-form-field>
+  <!-- Description -->
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      rows="2"
+    ></textarea>
+  </mat-form-field>
+  <section class="price-discount-section">
+    <!-- Price -->
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        formControlName="price"
+        type="number"
+        step="0.5"
+        min="0"
+      />
+    </mat-form-field>
+    <!-- Discount -->
+    <mat-form-field appearance="outline">
+      <mat-label>Discount</mat-label>
+      <input
+        matInput
+        formControlName="discount"
+        step="1"
+        min="0"
+        max="100"
+        type="number"
+      />
+      <mat-icon matSuffix>percent</mat-icon>
+    </mat-form-field>
+  </section>
+  <!-- Applicable event types -->
+  <mat-form-field appearance="outline">
+    <mat-label>Applicable event types</mat-label>
+    <mat-select
+      formControlName="applicableEventTypeIds"
+      multiple
+    >
+      @for (type of allEventTypes; track type.id) {
+        <mat-option [value]="type.id">{{type.name}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <!-- Reservation period -->
+  <mat-form-field appearance="outline">
+    <mat-label>Reservation period</mat-label>
+    <input
+      matInput
+      formControlName="reservationPeriodDays"
+      type="number"
+      step="1"
+      min="0"
+    />
+    <small matSuffix>days</small>
+  </mat-form-field>
+  <!-- Cancellation period -->
+  <mat-form-field appearance="outline">
+    <mat-label>Cancellation period</mat-label>
+    <input
+      matInput
+      formControlName="cancellationPeriodDays"
+      type="number"
+      step="1"
+      min="0"
+    />
+    <small matSuffix>days</small>
+  </mat-form-field>
+
+  <div>
+    <mat-checkbox
+      [checked]="isPublic"
+      (change)="isPublic = $event.checked"
+    >
+      Public
+    </mat-checkbox>
+    <mat-checkbox
+      formControlName="available"
+    >
+      Available for reservations
+    </mat-checkbox>
+    <mat-checkbox
+      [checked]="autoAcceptReservations"
+      (change)="autoAcceptReservations = $event.checked"
+    >
+      Automatically accept reservations
+    </mat-checkbox>
+  </div>
+
+  <div class="actions-section">
+    <button mat-button type="button" (click)="delete()">Delete</button>
+    <button mat-button type="button" (click)="reset()">Reset</button>
+    <button mat-raised-button type="submit">Save</button>
+  </div>
+</form>

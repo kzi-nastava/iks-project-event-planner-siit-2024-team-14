@@ -1,0 +1,42 @@
+<div class="header-background">
+  <div class="header-overlay">
+    <!-- Burger menu -->
+    <mat-icon class="burger-icon" (click)="toggleSidebar()">menu</mat-icon>
+
+    <!-- Icons -->
+    <div class="header-icons">
+      <div class="notifications-container" *ngIf="role">
+        <mat-icon class="notifications-icon" (click)="openNotifications()">notifications</mat-icon>
+        <span *ngIf="unreadCount > 0" class="unread-count">{{ unreadCount }}</span>
+      </div>
+      <mat-icon class="messages-icon" *ngIf="role" [routerLink]="['/chat']">message</mat-icon>
+      <mat-icon class="profile-icon" [routerLink]="profileRoute">account_circle</mat-icon>
+    </div>
+
+    <!-- Logo and title -->
+    <div class="logo-container">
+      <img class="logo" />
+    </div>
+
+    <div class="event-planner">
+      <h1>Event Planner</h1>
+    </div>
+
+    <!-- Nav links -->
+    <div class="nav-links">
+      | <a [routerLink]="homeRoute">HOME</a> |
+      <a [routerLink]="profileRoute">PROFILE</a> |
+      <a *ngIf="role" routerLink="/joined-events">JOINED EVENTS  |</a>
+    </div>
+
+  </div>
+</div>
+
+<app-drawer-navbar-organizer *ngIf="role === 'EventOrganizer'" [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-organizer>
+<app-drawer-navbar-admin *ngIf="role === 'Admin'" [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-admin>
+<app-drawer-navbar-au *ngIf="role === 'User'" [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-au>
+<app-drawer-navbar-guest *ngIf="role === ''" [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-guest>
+<app-drawer-navbar-provider *ngIf="role === 'ServiceAndProductProvider'" [isSidebarOpen]="isSidebarOpen"></app-drawer-navbar-provider>
+
+<app-notifications [isNotificationsOpen]="isNotificationsOpen"></app-notifications>
+

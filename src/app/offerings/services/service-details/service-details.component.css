@@ -1,0 +1,187 @@
+article {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 3rem;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+h2 {
+  color: #523D35;
+  text-align: center;
+}
+
+p {
+  color: #666;
+  font-size: 14px;
+}
+
+dl {
+  max-width: 70%;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+dt {
+  font-weight: bold;
+  color: #444;
+}
+
+dd {
+  margin: 0;
+  color: #555;
+}
+
+details {
+  background: #f9f9f9;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #f1f1f1;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+span[ngStyle] {
+  color: #999;
+}
+
+b {
+  color: #d9534f;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+span {
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+/* Poboljšan stil za modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 450px; /* Povećana širina modala */
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  overflow-y: auto; /* Dodato za scroll ako je sadržaj veći */
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #523D35;
+}
+
+h2 {
+  color: #523D35;
+  margin-bottom: 20px;
+  font-size: 22px; /* Povećana veličina fonta */
+}
+
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+  text-align: left;
+  color: #444;
+  font-size: 16px; /* Uvećana veličina fonta za bolje čitanje */
+}
+
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button {
+  background-color: #523D35;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-size: 18px; /* Povećana veličina fonta */
+  cursor: pointer;
+  transition: 0.3s;
+  width: 50%; /* Povećana širina dugmeta */
+  display: block;
+  max-width: 11em;
+}
+
+form button {
+  margin: 20px auto 0;
+}
+
+button:hover {
+  background-color: #3e2b24;
+}
+
+/* Dodato za marginu ispod forme */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  display: flex;
+  flex-flow: row wrap-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 15%;
+}

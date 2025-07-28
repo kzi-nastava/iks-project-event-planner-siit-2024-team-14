@@ -1,0 +1,42 @@
+<div class="invitation-table-section">
+  <h2 class="table-title">Invitations Overview</h2>
+
+  <table class="invitation-table" *ngIf="groupedInvitations.length > 0">
+    <thead>
+    <tr>
+      <th>Event</th>
+      <th>Invited Guests</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let group of groupedInvitations">
+      <td>{{ group.event.name }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let inv of group.invitations">{{ inv.guestEmail }}</li>
+          <li *ngFor="let i of [].constructor(group.emptySlots)" class="empty-slot">[ Empty ]</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let inv of group.invitations">{{ inv.status }}</li>
+          <li *ngFor="let i of [].constructor(group.emptySlots)">-</li>
+        </ul>
+      </td>
+      <td>
+        <button class="add-invite-button"
+                [disabled]="group.invitations.length >= group.event.maxParticipants"
+                (click)="addInvitation(group.event.id, group.event.maxParticipants, group.invitations)">
+          + Add
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="groupedInvitations.length === 0">
+    <p>No invitations found for your events.</p>
+  </div>
+</div>

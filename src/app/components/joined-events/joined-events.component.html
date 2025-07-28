@@ -1,0 +1,35 @@
+<div class="events-list-section">
+  <div class="header-bar">
+    <h2 class="header-title">ALL JOINED EVENTS</h2>
+  </div>
+
+  <div class="events-list">
+    <div *ngFor="let event of filteredEvents" class="event-card">
+      <div class="card-header">
+        <img [src]="event.organizerProfilePicture" alt="{{event.name}}" class="event-avatar">
+        <div class="organizer-info">
+          <h3 class="organizer-name">{{ event.organizerFirstName }} {{ event.organizerLastName }}</h3>
+          <p class="organizer-role">Event organizer</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <img [src]="event.imageUrl" alt="{{ event.name }}" class="event-image" />
+      <div class="event-content">
+        <h4>{{ event.name }}</h4>
+        <p>{{ event.description }}</p>
+        <small><span class="fas fa-location-pin"></span> {{ event.location }}</small><br />
+        <small><span class="fas fa-calendar-alt"></span> from {{ event.startDate }} to {{ event.endDate }}</small><br /><br />
+        <button [routerLink]="['/events', event.id]">View More</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="pagination">
+    <button (click)="onPageChange(page - 1)" [disabled]="page <= 0">Previous</button>
+    <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+    <button (click)="onPageChange(page + 1)" [disabled]="page >= totalPages - 1">Next</button>
+  </div>
+</div>

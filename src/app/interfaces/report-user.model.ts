@@ -4,7 +4,4 @@ export interface ReportUserModel{
   status: string;
   sender: string;
   reportedUser: string;
-
-
-
 }

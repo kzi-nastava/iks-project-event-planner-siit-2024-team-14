@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Login } from '../../interfaces/login.model';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent {
   // State for modal visibility
   showModal = false;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router, private authService: AuthService) {}
 
   // Reactive Form Definition
   loginForm = new FormGroup({
@@ -30,16 +31,18 @@ export class LoginComponent {
       };
 
       // Send login data to the backend
-      this.loginService.login(loginData).subscribe({
+      this.authService.login(loginData.email, loginData.password).subscribe({
         next: (response: any) => {
           // Print the response in the console
           console.log('Login successful:', response);
 
           // Saving token and user data in localStorage
-          localStorage.setItem('token', response.token);
+          //localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
           localStorage.setItem('userCity', response.user.city);
           localStorage.setItem('userId', response.user.id);
+          localStorage.setItem('userPassword', response.user.password);
+
           localStorage.setItem('role', response.user.role);
 
           this.redirectUser(response.user.role);
@@ -83,6 +86,9 @@ export class LoginComponent {
         break;
       case 'ServiceAndProductProvider':
         this.router.navigate(['home-provider']);
+        break;
+      case 'User':
+        this.router.navigate(['home-authenticated-user']);
         break;
       default:
         this.router.navigate(['home-guest']);

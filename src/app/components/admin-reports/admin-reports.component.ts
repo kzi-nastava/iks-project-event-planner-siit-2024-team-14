@@ -20,8 +20,6 @@ export class AdminReportsComponent implements OnInit {
   loadPendingReports() {
     this.reportService.getAllReports().subscribe((reports) => {
       this.reports = reports;
-
-      console.log(reports);
     });
   }
 

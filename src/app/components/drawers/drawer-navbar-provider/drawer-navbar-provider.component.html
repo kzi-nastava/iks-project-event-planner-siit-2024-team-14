@@ -1,15 +1,14 @@
 <!-- Navigation Sidebar -->
 <div class="sidebar" [class.open]="isSidebarOpen">
   <ul>
-    <li>My services/products</li>
+    <li [routerLink]="['/solutions']">My services/products</li>
     <li (click)="toggleBookingsSidebar()">All Bookings</li>
     <li (click)="toggleBookingRequestsSidebar()">Booking service requests</li>
     <li>Reviews and ratings</li>
-    <li>Categories</li>
-    <li>Price list</li>
+    <li [routerLink]="['/price-list']">Price list</li>
     <li (click)="toggleNotificationsSidebar()">Notifications</li>
-    <li>Messages</li>
-    <li>Log out</li>
+    <li [routerLink]="['/chat']">Messages</li>
+    <li (click)="logOut()">Log out</li>
   </ul>
 </div>
 

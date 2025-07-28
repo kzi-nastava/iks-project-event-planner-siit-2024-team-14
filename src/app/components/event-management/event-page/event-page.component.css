@@ -1,0 +1,195 @@
+* {
+  font-family: 'Petrona', serif;
+}
+
+/* Event Management Container */
+.event-management {
+  font-family: Arial, sans-serif;
+  color: #4b4238;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* Event Card - Image + Title + Event Details + Chat Button */
+.event-card {
+  display: flex;
+  flex-direction: column;  /* Stack all items vertically */
+  align-items: flex-start;  /* Align items at the start */
+  background: #fff;
+  border-radius: 8px;
+  width: calc(100% - 300px);  /* Ensure the card does not overflow into brown rectangle */
+}
+
+/* Container for Image and Title (to be side by side) */
+.event-image-title-container {
+  display: flex;
+  flex-direction: row;  /* Set the image and title to be beside each other */
+  width: 100%;  /* Ensure it takes up full width */
+  gap: 20px;  /* Space between the image and title */
+  align-items: flex-start;  /* Align both image and title to the top */
+  background-color: #D9D9D9;
+}
+
+/* Event Image */
+.event-image {
+  width: 30rem; /* Fixed width for the image */
+  height: 15rem;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: -7rem;
+  margin-left: 2rem;
+}
+
+/* Event Title */
+.event-title {
+  font-size: 20px;
+  word-wrap: break-word;
+  display: flex; /* Align title and star in a row */
+  align-items: baseline; /* Align the star with the text baseline */
+  gap: 10px; /* Add spacing between the title and star icon */
+  position: relative; /* Enable positioning adjustments */
+}
+
+.event-title h2 {
+  font-weight: bold;
+  line-height: 1.2;
+  word-break: break-word;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Event Details - Other Info */
+.event-details {
+  background: #fff;
+  border-radius: 8px;
+  width: 100%;
+  position: relative;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.event-details h3 {
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.event-details p {
+  margin: 5px 0;
+}
+
+/* Chat Button */
+.chat-button {
+  background-color: #523d35;
+  color: white;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  bottom: 10px;
+  right: 30px;  /* Positions the button 20px from the right edge */
+}
+
+.chat-button:hover {
+  background-color: #704d3a;
+}
+
+/* Brown Rectangle for Comments and Reviews */
+.brown-rectangle {
+  width: 300px;  /* Fixed width for the brown rectangle */
+  height: 82.5vh;  /* Set height to cover the full viewport height */
+  background-color: #716D64;
+  color: #523d35;
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: absolute;  /* Position relative to the parent container */
+  top: -130px;
+  right: 0;  /* Align it to the right edge of the parent container */
+}
+
+
+/* Comments & Reviews Heading */
+.brown-rectangle h3 {
+  font-size: 18px;
+}
+
+/* Review Styling */
+.review {
+  background: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.review p {
+  margin: 5px 0;
+}
+
+/* Comment Form */
+.comment-form textarea {
+  width: 90%;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  resize: none;
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rating-dropdown {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.send-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #45a049;
+}
+
+/* Green Rectangle */
+.green-rectangle {
+  width: 100%;  /* Full width of the container */
+  height: 50px;  /* Fixed height */
+  background-color: #959D90;  /* Green color */
+  opacity: 0.6;  /* 60% visibility */
+  position: relative; /* Push it to the next "page" */
+}
+
+/* Favorite Icon */
+.favorite-icon {
+  font-size: 30px; /* Size of the star icon */
+  cursor: pointer; /* Make the star clickable */
+  color: #523D35; /* Gold color for the filled star */
+  transition: transform 0.2s ease, color 0.2s ease; /* Smooth hover effect */
+  position: relative;
+  top: -35px;
+  right: 5px; /* Move the star 5px to the right */
+}
+
+.favorite-icon:hover {
+  transform: scale(1.2); /* Slightly enlarge on hover */
+  color: #ffa500; /* Brighten color on hover */
+}

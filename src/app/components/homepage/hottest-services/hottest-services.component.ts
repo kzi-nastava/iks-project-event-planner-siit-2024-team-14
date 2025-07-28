@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import { HottestSolutionsService} from './hottest-services.service';
-import {SolutionModel} from '../../../interfaces/solution.model';
+import { Component, OnInit } from '@angular/core';
+import { HottestSolutionsService } from './hottest-services.service';
+import { SolutionModel } from '../../../interfaces/solution.model';
+
 @Component({
   selector: 'app-hottest-services',
   templateUrl: './hottest-services.component.html',
@@ -10,6 +11,7 @@ export class HottestServicesComponent implements OnInit {
 
   hottestSolutions: SolutionModel[] = [];
   blockedUserIds: number[] = [];
+  baseUrl = 'http://localhost:8080/';
 
   currentSlide = 0;
 
@@ -23,27 +25,19 @@ export class HottestServicesComponent implements OnInit {
     this.solutionsService.getBlockedUsers().subscribe(
       (blockedUsers) => {
         this.blockedUserIds = blockedUsers;
-        if (this.blockedUserIds && this.blockedUserIds.length > 1) {
-          this.solutionsService.getTopSolutions().subscribe(
-            (data) => {
-              this.hottestSolutions = data.filter(solution =>
-                !this.blockedUserIds.includes(solution.providerId) // Filtrira rešenja od blokiranih korisnika
-              );
-            },
-            (error) => {
-              console.error('Error loading solutions:', error);
-            }
-          );
-        }else {
-          this.solutionsService.getTopSolutions().subscribe(
-            (data) => {
-              this.hottestSolutions = data;
-            },
-            (error) => {
-              console.error('Error loading solutions:', error);
-            }
-          );
-        }
+
+        this.solutionsService.getTopSolutions().subscribe(
+          (data) => {
+            // Dodaj puni URL za slike pre filtriranja i dodeljivanja
+            const solutionsWithFullUrls = data.map(solution => this.addFullImageUrl(solution));
+            this.hottestSolutions = solutionsWithFullUrls.filter(solution =>
+              !this.blockedUserIds.includes(solution.providerId)
+            );
+          },
+          (error) => {
+            console.error('Error loading solutions:', error);
+          }
+        );
       },
       (error) => {
         console.error('Error loading blocked users:', error);
@@ -51,6 +45,12 @@ export class HottestServicesComponent implements OnInit {
     );
   }
 
+  private addFullImageUrl(solution: SolutionModel): SolutionModel {
+    return {
+      ...solution,
+      imageUrl: this.baseUrl + solution.imageUrl
+    };
+  }
 
   nextSlide() {
     if (this.currentSlide < this.hottestSolutions.length - 4) {

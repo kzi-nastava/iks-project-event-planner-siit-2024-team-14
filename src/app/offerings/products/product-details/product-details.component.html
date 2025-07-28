@@ -1,0 +1,78 @@
+@if (product) {
+<article>
+  <h2> {{ product.name }} </h2>
+  <p> {{ product.description }} </p>
+
+  <br/>
+
+  <dl>
+    <dt>Category:</dt>
+    <dd>
+      <details>
+        <summary> {{ product.category.name }} </summary>
+        {{ product.category.description }}
+      </details>
+    </dd>
+
+    <dt>Applicable event types:</dt>
+    <dd>
+      <ul>
+        <li *ngFor="let type of product.applicableEventTypes"> {{ type.name }} </li>
+      </ul>
+    </dd>
+
+    <dt>Price:</dt>
+    <dd>
+      <span [ngStyle]="product.discount > 0 ? {'text-decoration': 'line-through', 'font-style': 'italic'} : null">
+        {{ product.price | currency }}
+      </span>
+      <b *ngIf="product.discount > 0">
+        {{ product.price * (1 - product.discount) | currency}} ({{ product.discount | percent }} off)
+      </b>
+    </dd>
+  </dl>
+
+  <dt>Provided by:</dt>
+  <dd>
+    <a [routerLink]="['/view-provider-profile', product.provider.id]">
+      <span>{{ (product.provider.companyName | titlecase) || product.provider.email }}</span>
+    </a>
+  </dd>
+
+  <footer>
+    @switch (user?.role) {
+      @case ('EventOrganizer') {
+        <button [routerLink]="['/chat', product.provider.email]">
+          Chat with provider
+        </button>
+        <button (click)="showPurchasePopup = true">
+          Purchase product
+        </button>
+      }
+      @case ('ServiceAndProductProvider') {
+        @if (user!.id === product.provider.id) {
+          <button [routerLink]="['edit']">
+            Edit
+          </button>
+        }
+      }
+    }
+  </footer>
+</article>
+
+
+  @if (showPurchasePopup) {
+    <div class="popup-overlay">
+      <div class="popup-container">
+        <button class="close-btn" mat-icon-button aria-label="Close" (click)="showPurchasePopup = false">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <app-purchase-product [product]="product" (onPurchased)="this.showPurchasePopup = false"/>
+      </div>
+    </div>
+  }
+
+} @else {
+  <div style="width: 100%; height: 100%; cursor: progress !important;"></div>
+}

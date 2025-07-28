@@ -4,6 +4,7 @@ import { EditEO } from '../../../interfaces/edit-eo.model';
 import { InfoService } from './info.service';
 import { ChangePassword } from '../../../interfaces/change-password.model';
 import {EditSPP} from '../../../interfaces/edit-spp.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-info',
@@ -19,12 +20,29 @@ export class InfoComponent implements OnInit {
   selectedFile: File | null = null;
   photos: string[] = [];
   selectedPhotoIndex: number = -1;
+  // Deactivate modal variables
+  isDeactivateModalVisible: boolean = false;
+  modalTitle: string = 'Are you sure you want to deactivate your account?';
+  modalMessage: string = 'This action cannot be undone.';
+  okButtonDeactivate: boolean = false;
+  noButton: boolean = false;
+  yesButton: boolean = false;
 
-  constructor(private infoService: InfoService, private cdRef: ChangeDetectorRef) {}
+  constructor(private infoService: InfoService, private cdRef: ChangeDetectorRef, private router: Router) {}
 
   editForm!: FormGroup;
 
   ngOnInit(): void {
+    // Retrieve user first
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+      console.log("User retrieved from localStorage:", this.user);
+
+      // Now safely fetch photos
+      this.fetchPhotos();
+    }
+
     this.editForm = new FormGroup({
       name: new FormControl('', Validators.required),
       surname: new FormControl(''),
@@ -33,14 +51,8 @@ export class InfoComponent implements OnInit {
       phoneNumber: new FormControl('', Validators.required),
       description: new FormControl('')
     });
-
-    // get user from local storage
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-      this.fetchPhotos();
-    }
   }
+
 
   // function for name + surname for EO
   get fullName(): string {
@@ -269,34 +281,36 @@ export class InfoComponent implements OnInit {
   }
 
   fetchPhotos(): void {
+    if (!this.user) {
+      console.warn("User is null, skipping fetchPhotos()");
+      return;
+    }
+
     const storedPhotos = localStorage.getItem('photos');
 
-    // Check if photos are already in localStorage
     if (storedPhotos) {
-      // Load the photos from localStorage (immediate)
       this.photos = JSON.parse(storedPhotos);
       this.cdRef.detectChanges();
-    } else {
-      // If no photos in localStorage, fetch from the server
-      if (this.user?.role === 'ServiceAndProductProvider') {
-        this.infoService.getPhotos(this.user.id).subscribe({
-          next: (photos: string[]) => {
-            this.photos = photos; // Store the photo URLs from the server
-            localStorage.setItem('photos', JSON.stringify(this.photos)); // Store in localStorage
-            this.cdRef.detectChanges();
-          },
-          error: (err: any) => console.error('Error fetching photos:', err)
-        });
-      }
+    } else if (this.user.role === 'ServiceAndProductProvider') {
+      console.log("Fetching photos from backend for user ID:", this.user.id);
+
+      this.infoService.getPhotos(this.user.id).subscribe({
+        next: (photos: string[]) => {
+          this.photos = photos;
+          localStorage.setItem('photos', JSON.stringify(this.photos));
+          console.log("PHOTOS from fetchPhotos: ", this.photos);
+          this.cdRef.detectChanges();
+        },
+        error: (err: any) => console.error('Error fetching photos:', err)
+      });
     }
   }
 
-
   openFileInputForSPP(photoIndex: number): void {
-    this.selectedPhotoIndex = photoIndex;  // Fixing typo
+    this.selectedPhotoIndex = photoIndex;
     const fileInput: HTMLInputElement | null = document.getElementById('photo-carousel') as HTMLInputElement;
     if (fileInput) {
-      fileInput.click();  // Trigger the file input
+      fileInput.click();
     }
   }
 
@@ -350,4 +364,44 @@ export class InfoComponent implements OnInit {
     }
   }
 
+  // Deactivation logic ----------------------
+
+  openDeactivateModal(event: MouseEvent): void {
+    event.preventDefault();
+    this.yesButton = true;
+    this.noButton = true;
+    this.isDeactivateModalVisible = true;
+  }
+
+  cancelDeactivation(): void {
+    this.isDeactivateModalVisible = false;
+  }
+
+  confirmDeactivation(): void {
+    console.log("Deactivating account...");
+    this.yesButton = false;
+    this.noButton = false;
+
+    this.infoService.deactivateAccount(this.user.id, this.user.role).subscribe({
+      next: (response) => {
+        console.log("ROLE in deactivate: ", this.user.role);
+        this.modalTitle = 'Your account has been deactivated!';
+        this.modalMessage = '';
+        this.okButtonDeactivate = true;
+
+        this.isDeactivateModalVisible = true;
+      },
+      error: (err) => {
+        console.error('Error deactivating account:', err);
+      }
+    });
+
+    this.isDeactivateModalVisible = false;
+  }
+
+  okButtonDeactivationClicked(): void {
+      localStorage.clear();
+      this.router.navigate(['home-guest']);
+      this.isDeactivateModalVisible = false;
+  }
 }

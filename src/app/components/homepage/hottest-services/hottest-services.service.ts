@@ -9,15 +9,14 @@ import {SolutionModel} from '../../../interfaces/solution.model';
 })
 export class HottestSolutionsService {
   private apiUrl = 'http://localhost:8080/api/solutions/top5';
-  private blockedUsersUrl = 'http://localhost:8080/api/chat/blocked-users'; // URL za blokirane korisnike
+  private blockedUsersUrl = 'http://localhost:8080/api/chat/blocked-users';
 
 
   constructor(private http: HttpClient) {}
 
   getTopSolutions(): Observable<SolutionModel[]> {
     const userCity = localStorage.getItem('userCity');
-    const city = userCity ? encodeURIComponent(userCity) : 'Novi Sad';
-
+    const city = !userCity || userCity === 'null' ? 'Novi Sad' : userCity;
     const url = `${this.apiUrl}?city=${city}`;
 
     return this.http.get<SolutionModel[]>(url);
