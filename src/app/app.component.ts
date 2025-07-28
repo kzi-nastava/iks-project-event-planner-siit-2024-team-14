@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import {Router, NavigationEnd, ActivatedRoute} from '@angular/router';
+import {filter, map} from 'rxjs/operators';
 
 
 @Component({
@@ -10,10 +10,10 @@ import { filter } from 'rxjs/operators';
 })
 
 export class AppComponent implements OnInit {
-  isLoginPage: boolean = false;
-  isRegistrationPage: boolean = false;
+  showFooter = true;
+  showHeader = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     if (!sessionStorage.getItem('appInitialized')) {
@@ -21,14 +21,14 @@ export class AppComponent implements OnInit {
       sessionStorage.setItem('appInitialized', 'true');
     }
 
-    // Check if the current route is 'login' or 'registration-eo'/'registration-spp'
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd) // Only check for when navigation ends
-    ).subscribe(() => {
-      const currentUrl = this.router.url;
-      // Set the flags based on the current route
-      this.isLoginPage = currentUrl.includes('/login');
-      this.isRegistrationPage = currentUrl.includes('/registration-eo') || currentUrl.includes('/registration-spp');
+      filter(event => event instanceof NavigationEnd),
+      map(() => this.route.firstChild),
+      filter(r => r !== null),
+      map(r => r.snapshot.data),
+    ).subscribe(data => {
+      this.showHeader = data['showHeader'] !== false;
+      this.showFooter = data['showFooter'] !== false;
     });
   }
 }

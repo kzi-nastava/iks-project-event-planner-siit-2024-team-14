@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Category} from './model/category.model';
-import {Observable} from 'rxjs';
 import {environment} from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private baseURL = `${environment.apiUrl}/api/categories`;
+  private baseURL = `${environment.apiUrl}/categories`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -31,7 +30,7 @@ export class CategoryService {
   }
 
   update(category: Partial<Category> & Pick<Category, 'id'>) {
-    return this.httpClient.put<Category>(this.baseURL, category);
+    return this.httpClient.put<Category>(`${this.baseURL}/${category.id}`, category);
   }
 
 }

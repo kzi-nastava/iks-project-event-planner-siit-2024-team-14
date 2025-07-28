@@ -1,5 +1,3 @@
-<app-header></app-header>
-
 <!-- Create Popup -->
 <div *ngIf="showCreatePopup" class="popup-overlay">
   <div class="popup">
@@ -48,5 +46,3 @@
     <button (click)="onPageChange(page + 1)" [disabled]="page >= totalPages - 1">Next</button>
   </div>
 </div>
-
-<app-footer></app-footer>
