@@ -73,13 +73,17 @@ export class AllInvitationsComponent implements OnInit {
   addInvitation(eventId: number, maxGuests: number, invitations: any[]): void {
     const existingEmails = invitations.map(inv => inv.guestEmail);
 
-    this.dialog.open(InvitationPopupComponent, {
+    const dialogRef = this.dialog.open(InvitationPopupComponent, {
       width: '500px',
       data: {
         eventId: eventId,
         maxGuests: maxGuests,
         existingEmails: existingEmails
       }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadInvitations();
     });
   }
 
@@ -94,14 +98,6 @@ export class AllInvitationsComponent implements OnInit {
 
   loadUnreadNotificationCount(userId: number): void {
     this.notificationService.loadUnreadNotificationsCount(userId);
-  }
-
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    console.log('Sidebar toggled!', this.isSidebarOpen);
-  }
-  openNotifications() : void {
-    this.isNotificationsOpen = !this.isNotificationsOpen;
   }
 
   fetchUserDetails(userId: number): void {
