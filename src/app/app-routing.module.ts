@@ -35,6 +35,12 @@ import {HomeAdminComponent} from './components/home/home-admin/home-admin.compon
 import {PriceListComponent} from './offerings/price-list/price-list.component';
 import {ProviderSolutionsComponent} from './offerings/provider-solutions/provider-solutions.component';
 import {EditServiceComponent} from './offerings/services/edit-service/edit-service.component';
+import {
+  UpdateAsProviderComponent
+} from './components/profiles/au-profile/update-as-provider/update-as-provider.component';
+import {
+  UpdateAsOrganizerComponent
+} from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
 
 enum Role {
   ADMIN = 'Admin',
@@ -50,12 +56,12 @@ const routes: Routes = [
   { path: 'home-organizer', component: HomeOrganizerComponent, canActivate: [authGuard], data: { roles: [Role.ORGANIZER] } },
   { path: 'home-admin', component: HomeAdminComponent, canActivate: [authGuard], data: { roles: [Role.ADMIN] } },
   { path: 'home-authenticated-user', component: HomeAuthenticatedUserComponent, canActivate: [authGuard], data: { roles: [Role.USER] } },
-  { path: 'login', component: LoginComponent },         // Login route (no duplication)
+  { path: 'login', component: LoginComponent, data: { showHeader: false, showFooter: false } },         // Login route (no duplication)
   { path: 'chat', redirectTo: 'chat/', pathMatch: "full" },
   { path: 'chat/:email', component: InboxComponent, canActivate: [authGuard] },
   { path: 'solutions', component: ProviderSolutionsComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] }},
   { path: 'services', component: ServicesComponent },
-  { path: 'services/add', component: AddServiceComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] } },
+  { path: 'services/add', component: AddServiceComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER], showHeader: false, showFooter: false } },
   { path: 'services/:id', component: ServiceDetailsComponent },
   { path: 'services/:id/edit', component: EditServiceComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] } },
   { path: 'products/:id', component: ProductDetailsComponent },
@@ -71,8 +77,10 @@ const routes: Routes = [
     ]
   },
   { path: 'price-list', component: PriceListComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] }},
-  { path: 'registration-eo', component: RegistrationEoComponent },
-  { path: 'registration-spp', component: RegistrationSppComponent },
+  { path: 'registration-eo', component: RegistrationEoComponent, data: { showHeader: false, showFooter: false } },
+  { path: 'registration-spp', component: RegistrationSppComponent, data: { showHeader: false, showFooter: false } },
+  { path: 'become-eo', component: UpdateAsOrganizerComponent, canActivate: [authGuard], data: {  showHeader: false, showFooter: false } },
+  { path: 'become-spp', component: UpdateAsProviderComponent, canActivate: [authGuard], data: { showHeader: false, showFooter: false } },
   { path: 'activate', component: ActivationComponent },
   { path: 'organizer-profile', component: OrganizerProfileComponent },
   { path: 'au-profile', component: AuProfileComponent },
@@ -83,7 +91,7 @@ const routes: Routes = [
   { path: 'event-type-management', component: EventTypeManagementComponent },
   { path: 'my-events-eo', component: MyEventsEoComponent },
   {path: 'invitation-popup', component: InvitationPopupComponent },
-  {path: 'invitation/register', component: InvitationRegisterComponent },
+  {path: 'invitation/register', component: InvitationRegisterComponent, data: { showHeader: false, showFooter: false } },
   {path: 'all-invitation', component: AllInvitationsComponent },
   {path: 'joined-events', component: JoinedEventsComponent },
   {path: 'inbox', redirectTo: 'chat' },
