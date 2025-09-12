@@ -1,9 +1,9 @@
-<div class="events-list-section">
+<div class="events-list-section" id="all-services-section">
   <div class="header-bar">
     <h2 class="header-title">ALL SERVICES AND PRODUCTS</h2>
     <div class="search-filter">
       <div class="search-box">
-        <input type="text" placeholder="Enter search credentials" class="search-input" [(ngModel)]="searchTerm" (input)="onSearch()" />
+        <input type="text" placeholder="Enter search credentials" class="search-input" [(ngModel)]="searchTerm" (input)="onSearch()" id="search-services"/>
         <span class="fas fa-search"></span>
       </div>
       <div class="filter-icon" (click)="toggleFilters()">
@@ -12,32 +12,32 @@
     </div>
   </div>
 
-  <div class="filter-options" [ngClass]="{'show-filters': showFilters}">
+  <div class="filter-options" [ngClass]="{'show-filters': showFilters}" id="filters-services">
     <div class="filter-option">
-      <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate" [(ngModel)]="startDate" />
+      <label for="startDate-services">Start Date:</label>
+      <input type="date" id="startDate-services" [(ngModel)]="startDate1" />
     </div>
     <div class="filter-option">
-      <label for="endDate">End Date:</label>
-      <input type="date" id="endDate" [(ngModel)]="endDate" />
+      <label for="endDate-services">End Date:</label>
+      <input type="date" id="endDate-services" [(ngModel)]="endDate1" />
     </div>
     <div class="filter-option">
-      <label for="location">City:</label>
-      <select id="location" [(ngModel)]="location">
+      <label for="location-services">City:</label>
+      <select id="location-services" [(ngModel)]="location">
         <option value="">All Cities</option>
         <option *ngFor="let city of locations" [value]="city">{{ city }}</option>
       </select>
     </div>
     <div class="filter-option">
-      <label for="category">Category:</label>
-      <select id="category" [(ngModel)]="category">
+      <label for="category-services">Category:</label>
+      <select id="category-services" [(ngModel)]="category">
         <option value="">All categories</option>
         <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
       </select>
     </div>
     <div class="filter-option">
-      <label for="type">Type:</label>
-      <select id="type" [(ngModel)]="solutionType">
+      <label for="type-services">Type:</label>
+      <select id="type-services" [(ngModel)]="solutionType">
         <option value="">All Types</option>
         <option value="Product">Product</option>
         <option value="Service">Service</option>
@@ -57,7 +57,7 @@
   </div>
 
   <div class="events-list">
-    <div *ngFor="let solution of filteredSolutions" class="event-card">
+    <div *ngFor="let solution of filteredSolutions" class="event-card event-card-services">
       <div class="event-header">
         <div class="event-details">
           <h3 class="organizer-name">{{ solution.providerCompanyName }}</h3>
@@ -68,7 +68,7 @@
       <div class="event-content">
         <h4>{{ solution.name }}</h4>
         <p>{{ solution.description }}</p>
-        <small> <span class="fas fa-map-marker-alt" ></span> {{ solution.location }} </small><br>
+        <small> <span class="fas fa-map-marker-alt"></span> {{ solution.location }} </small><br>
         <small> <span class="fas fa-cogs"></span>{{ solution.solutionType }}</small>  <br>
         <small> <span class="fas fa-tag"></span>{{ solution.price }} din</small><br>
         <br>
@@ -77,8 +77,8 @@
     </div>
   </div>
 
-  <br>
-  <br>
+  <br><br>
+
   <div class="pagination">
     <button (click)="onPageChange(page - 1)" [disabled]="page <= 0">Previous</button>
     <span>Page {{ page + 1 }} of {{ totalPages }}</span>

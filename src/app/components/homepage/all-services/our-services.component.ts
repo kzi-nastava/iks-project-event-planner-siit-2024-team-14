@@ -13,8 +13,8 @@ export class OurServicesComponent implements OnInit {
   filteredSolutions: any[] = [];
   searchTerm: string = '';
   category: string = '';
-  startDate: string = '';
-  endDate: string = '';
+  startDate1: string = '';
+  endDate1: string = '';
   location: string = '';
   minPrice: number | null = null;
   maxPrice: number | null = null;
@@ -105,8 +105,8 @@ export class OurServicesComponent implements OnInit {
       .set('size', this.pageSize.toString());
 
     if (this.category && this.category.trim() !== '') params = params.set('category', this.category);
-    if (this.startDate) params = params.set('startDate', this.startDate);
-    if (this.endDate) params = params.set('endDate', this.endDate);
+    if (this.startDate1) params = params.set('startDate', this.startDate1);
+    if (this.endDate1) params = params.set('endDate', this.endDate1);
     if (this.minPrice != null) params = params.set('minPrice', this.minPrice.toString());
     if (this.maxPrice != null) params = params.set('maxPrice', this.maxPrice.toString());
     if (this.location && this.location.trim() !== '') params = params.set('location', this.location);

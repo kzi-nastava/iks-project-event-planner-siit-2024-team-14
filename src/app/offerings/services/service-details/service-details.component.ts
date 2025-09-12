@@ -54,27 +54,26 @@ export class ServiceDetailsComponent implements OnInit {
   private fetchServiceDetails(serviceId: number): void {
     this.serviceService.getById(serviceId).subscribe({
       next: service => {
+        if (!service || !service.id) {
+          alert('Service not available.');
+          this.service = { id: -1 } as Service;
+          return;
+        }
         this.service = service;
         this.reservation.serviceId = service.id;
         this.reservation.duration = this.service.durationMinutes;
         this.reservation.reservationType = this.service.reservationType;
       },
-      error: () => console.log('Failed to fetch service data.')
+      error: () => {
+        alert('Service not available.');
+        this.service = { id: -1 } as Service;
+      }
     });
   }
 
   private fetchUserEvents(userId: number): void {
     this.http.get<EventModel[]>(`http://localhost:8080/api/events/by-organizer/${userId}`)
       .subscribe(events => this.userEvents = events);
-  }
-
-  private convertDurationToMinutes(duration?: string): number {
-    if (!duration) return 0;
-
-    const match = duration.match(/PT(\d+)(H|M)/);
-    if (!match) return 0;
-
-    return match[2] === 'H' ? parseInt(match[1]) * 60 : parseInt(match[1]);
   }
 
   private convertDurationToDays(duration: string): number {
