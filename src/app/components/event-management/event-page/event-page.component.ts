@@ -1,39 +1,43 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {EventManagementService} from '../event-management.service';
 
 @Component({
   selector: 'app-event-management',
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.css'
 })
-export class EventPageComponent {
-  isFavorite: boolean = false; // Tracks whether the event is favorited
+export class EventPageComponent implements OnInit {
+  event: any = null;
+  user: any = null;
+  isFavorite: boolean = false;
 
-  event = {
-    title: 'Conference on Technological Innovations 2024',
-    image: '../../../assets/images/event9.jpg',
-    details: {
-      subtitle: 'Technological Innovation: Trends and the Future',
-      type: 'Conference',
-      description:
-        'A conference that brings together leading experts in the field technologies to discuss the latest innovations, challenges and opportunities in the technology industry. The event provides an opportunity for networking and exchange experiences between professionals from different sectors.',
-      maxGuests: 300,
-      status: 'Open',
-      location: 'Belgrade, Serbia',
-      startDate: '1/11/2024',
-      endDate: '1/11/2024',
-    },
-    reviews: [
-      {
-        author: 'Milica Milosevic',
-        rating: 5,
-        comment:
-          'Amazing service! The team was punctual, professional, and exceeded all our expectations to make our event remarkable. The level of dedication they put into every detail amazed us! Highly recommend them for any special occasion!',
-      },
-    ],
-    budget: {
-      items: []
+  constructor(
+    private route: ActivatedRoute,
+    private eventManagementService: EventManagementService
+  ) {}
+
+  ngOnInit(): void {
+    // Retrieve the event ID from the URL
+    const eventId = Number(this.route.snapshot.paramMap.get('id'));
+    if (eventId) {
+      this.eventManagementService.getEventById(eventId).subscribe({
+        next: (data) => {
+          this.event = data;
+          console.log("EVENT: ", data);
+        },
+        error: (err) => {
+          console.error('Event not found:', err);
+        }
+      });
     }
-  };
+
+    // Retrieve user from localStorage
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+  }
 
   chatWithOrganizer() {
     alert('Chat functionality is under development!');
@@ -49,9 +53,43 @@ export class EventPageComponent {
     }
   }
 
+  getPhotoUrl(): string {
+    if (!this.event) {
+      return '../../../../../assets/images/no_photos.jpg';
+    }
+
+    // This should call your backend endpoint
+    return `http://localhost:8080/api/events/get-photo/${this.event.id}`;
+  }
+
+
   protected readonly Number = Number;
 
   toggleFavorite(): void {
     this.isFavorite = !this.isFavorite; // Toggle the favorite state
+
+    const userString = localStorage.getItem('user');
+    if (!userString) {
+      console.error("No user found in localStorage!");
+      return;
+    }
+
+    this.user = JSON.parse(userString);
+
+    console.log("this.user:", this.user);
+    console.log("this.user.id:", this.user.id);
+
+    const userId = this.user.id;
+    const eventId = this.event.id;
+
+    this.eventManagementService.setFavoriteEvent(userId, eventId).subscribe({
+      next: (response) => {
+        console.log('Favorite status updated:', response);
+      },
+      error: (error) => {
+        console.error('Error updating favorite status:', error);
+        this.isFavorite = !this.isFavorite;
+      }
+    })
   }
 }

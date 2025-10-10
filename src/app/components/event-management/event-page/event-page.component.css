@@ -25,12 +25,14 @@
 /* Container for Image and Title (to be side by side) */
 .event-image-title-container {
   display: flex;
-  flex-direction: row;  /* Set the image and title to be beside each other */
-  width: 100%;  /* Ensure it takes up full width */
-  gap: 20px;  /* Space between the image and title */
-  align-items: flex-start;  /* Align both image and title to the top */
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  align-items: flex-start;
   background-color: #D9D9D9;
+  padding-bottom: 20px; /* adds space below everything inside the container */
 }
+
 
 /* Event Image */
 .event-image {
@@ -68,8 +70,9 @@
   border-radius: 8px;
   width: 100%;
   position: relative;
-  margin-left: 20px;
-  margin-bottom: 10px;
+  margin-left: 40px;
+  margin-bottom: 42px;
+  margin-top: 41px;
 }
 
 .event-details h3 {
@@ -91,8 +94,8 @@
   cursor: pointer;
   display: block;
   position: absolute;
-  bottom: 10px;
-  right: 30px;  /* Positions the button 20px from the right edge */
+  bottom: -20px;
+  right: 50px;
 }
 
 .chat-button:hover {
@@ -185,7 +188,7 @@
   color: #523D35; /* Gold color for the filled star */
   transition: transform 0.2s ease, color 0.2s ease; /* Smooth hover effect */
   position: relative;
-  top: -35px;
+  top: 0px;
   right: 5px; /* Move the star 5px to the right */
 }
 

@@ -13,6 +13,10 @@ export class EventManagementService {
 
   constructor(private http: HttpClient) {}
 
+  getEventById(eventId: number) {
+    return this.http.get(`${this.baseUrl}/events/${eventId}`);
+  }
+
   getAllCategories(): Observable<CategoriesEtModel[]> {
     return this.http.get<CategoriesEtModel[]>(`${this.baseUrl}/categories/get-all-et`);
   }
@@ -31,5 +35,14 @@ export class EventManagementService {
     console.log(formData);
     return this.http.post<CreateEvent>(`${this.baseUrl}/events/create-event`, formData);
   }
+
+  setFavoriteEvent(userId: number, eventId: number): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/events/${eventId}/toggle-favorite/${userId}`,
+      {},
+      { responseType: 'text' } // <-- important
+    );
+  }
+
 
 }

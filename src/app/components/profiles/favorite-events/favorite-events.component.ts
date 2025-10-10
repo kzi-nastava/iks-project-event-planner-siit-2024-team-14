@@ -13,7 +13,7 @@ export class FavoriteEventsComponent {
       date: '02.12.2024',
       title: 'Bakery Opening',
       description: 'Come with an empty stomach!',
-      imageUrl: '../../../assets/images/event6.png'
+      imageUrl: '../../../assets/images/logo.png'
     },
     {
       organizerName: 'Nina Matijević',
