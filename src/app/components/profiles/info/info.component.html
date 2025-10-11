@@ -2,7 +2,7 @@
     <div class="profile-photo-container">
         <!-- Event Organizer: Single Profile Photo -->
         <ng-container *ngIf="user?.role === 'EventOrganizer'; else sppPhotos">
-            <img [src]="getProfilePhotoUrl()" alt="Profile photo" class="profile-photo">
+          <img [src]="profilePhotoUrl" alt="Profile photo" class="profile-photo">
             <button class="edit-button" (click)="openFileInput()">
                 <i class="fa fa-pencil"></i> Edit profile photo
             </button>
@@ -17,7 +17,7 @@
                 </button>
 
               <!-- Display a default image if no photos exist -->
-              <img *ngIf="photos.length > 0 && photos.length < 4; else noPhotos" [src]="photos[currentPhotoIndex]" alt="Company photo" class="profile-photo">
+              <img *ngIf="photos.length > 0; else noPhotos" [src]="sppPhotoUrl" alt="Company photo" class="profile-photo">
 
               <ng-template #noPhotos>
                 <img src="../../../../../assets/images/no_photos.jpg" alt="No photos available" class="profile-photo">
