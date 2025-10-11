@@ -27,20 +27,23 @@ export class InfoComponent implements OnInit {
   okButtonDeactivate: boolean = false;
   noButton: boolean = false;
   yesButton: boolean = false;
+  profilePhotoUrl: string = '../../../../../assets/images/no_photo.jpg';
+  sppPhotoUrl: string = '../../../../../assets/images/no_photos.jpg';
 
   constructor(private infoService: InfoService, private cdRef: ChangeDetectorRef, private router: Router) {}
 
   editForm!: FormGroup;
 
   ngOnInit(): void {
-    // Retrieve user first
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.user = JSON.parse(storedUser);
-      console.log("User retrieved from localStorage:", this.user);
+      // Profile photo URL (organizer)
+      this.profilePhotoUrl = this.user?.profilePhoto
+          ? `http://localhost:8080/api/organizers/get-photo/${this.user.id}` // single URL
+          : '../../../../../assets/images/no_photo.jpg';
 
-      // Now safely fetch photos
-      this.fetchPhotos();
+      this.fetchPhotos(); // SPP photos (if provider)
     }
 
     this.editForm = new FormGroup({
@@ -58,15 +61,6 @@ export class InfoComponent implements OnInit {
   get fullName(): string {
     return this.user ? `${this.user.name} ${this.user.surname}` : 'User Name';
   }
-
-  getProfilePhotoUrl(): string {
-    const photoFileName = this.user?.profilePhoto;
-    console.log(photoFileName);
-    return photoFileName
-      ? `http://localhost:8080/api/organizers/get-photo/${this.user.id}?timestamp=${new Date().getTime()}`
-      : '../../../../../assets/images/no_photo.jpg';
-  }
-
 
   // UPDATE -------------------------------------------------------------------------
 
@@ -135,7 +129,6 @@ export class InfoComponent implements OnInit {
       });
     }
   }
-
 
   editSPP(): void {
     if (this.editForm.valid) {
@@ -216,7 +209,6 @@ export class InfoComponent implements OnInit {
     }
   }
 
-
   // handle the file selection
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
@@ -250,10 +242,13 @@ export class InfoComponent implements OnInit {
           console.log('Image uploaded successfully:', response);
 
           const updatedImageUrl = response.imageUrl || filename;
-
           this.user.profilePhoto = updatedImageUrl;
 
+          // 🔹 Save updated user
           localStorage.setItem('user', JSON.stringify(this.user));
+
+          // 🔹 Force new image URL with cache-busting timestamp
+          this.profilePhotoUrl = `http://localhost:8080/api/organizers/get-photo/${this.user.id}?t=${Date.now()}`;
 
           this.cdRef.detectChanges();
         },
@@ -264,6 +259,7 @@ export class InfoComponent implements OnInit {
     }
   }
 
+
   // photos - SPP -----
 
   currentPhotoIndex = 0;
@@ -271,37 +267,40 @@ export class InfoComponent implements OnInit {
   prevPhoto(): void {
     if (this.photos.length > 1) {
       this.currentPhotoIndex = (this.currentPhotoIndex - 1 + this.photos.length) % this.photos.length;
+      this.updateSPPPhotoUrl(); // <-- call this
     }
   }
 
   nextPhoto(): void {
     if (this.photos.length > 1) {
       this.currentPhotoIndex = (this.currentPhotoIndex + 1) % this.photos.length;
+      this.updateSPPPhotoUrl(); // <-- call this
     }
   }
 
   fetchPhotos(): void {
-    if (!this.user) {
-      console.warn("User is null, skipping fetchPhotos()");
+    if (!this.user) return;
+
+    // try localStorage cached URLs first
+    const storedPhotos = localStorage.getItem('photos');
+    if (storedPhotos) {
+      this.photos = JSON.parse(storedPhotos);
+      this.updateSPPPhotoUrl();
+      this.cdRef.detectChanges();
       return;
     }
 
-    const storedPhotos = localStorage.getItem('photos');
-
-    if (storedPhotos) {
-      this.photos = JSON.parse(storedPhotos);
-      this.cdRef.detectChanges();
-    } else if (this.user.role === 'ServiceAndProductProvider') {
-      console.log("Fetching photos from backend for user ID:", this.user.id);
-
+    if (this.user.role === 'ServiceAndProductProvider') {
       this.infoService.getPhotos(this.user.id).subscribe({
         next: (photos: string[]) => {
-          this.photos = photos;
+          this.photos = photos; // photos are already full URLs from backend
           localStorage.setItem('photos', JSON.stringify(this.photos));
-          console.log("PHOTOS from fetchPhotos: ", this.photos);
+          this.updateSPPPhotoUrl();
           this.cdRef.detectChanges();
         },
-        error: (err: any) => console.error('Error fetching photos:', err)
+        error: err => {
+          console.error('Error fetching photos:', err);
+        }
       });
     }
   }
@@ -316,53 +315,36 @@ export class InfoComponent implements OnInit {
 
   onFileSelectedForSPP(event: any): void {
     const file: File = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        // Store image URL for preview
-        this.photos[this.selectedPhotoIndex] = e.target.result;  // Use selectedPhotoIndex
+    if (!file) return;
 
-        // Log the photos array before storing in localStorage
-        console.log('Photos array before storing in localStorage:', this.photos);
+    this.selectedFile = file;
 
-        // Store the photos temporarily in localStorage for immediate preview
-        localStorage.setItem('photos', JSON.stringify(this.photos));
-
-        // Log localStorage data to verify it has been updated
-        console.log('Stored photos in localStorage:', localStorage.getItem('photos'));
-
-        // Update the view immediately
-        this.cdRef.detectChanges();
-      };
-      reader.readAsDataURL(file);
-
-      this.changePhotoSPP();
-    }
+    this.changePhotoSPP();
   }
 
   changePhotoSPP(): void {
-    if (this.selectedFile) {
-      const email = this.user.email || '';
-      const filename = `${email}.png`;
+    if (!this.selectedFile) return;
 
-      const photoData = new FormData();
-      photoData.set('photo', this.selectedFile, filename);
+    const filename = `${this.user.email}.png`; // or as you used
+    const photoData = new FormData();
+    photoData.set('photo', this.selectedFile, filename);
 
-      this.infoService.changePhoto(photoData, this.user.id, this.selectedPhotoIndex).subscribe({
-        next: (response: any) => {
-          console.log('Image uploaded successfully:', response);
-          const updatedImageUrl = response.imageUrl || filename;
-          this.user.photos[this.selectedPhotoIndex] = updatedImageUrl;
-          localStorage.setItem('user', JSON.stringify(this.user));
-          this.cdRef.detectChanges();
-        },
-        error: (err: any) => {
-          console.error('Error uploading photo:', err);
-        }
-      })
-    }
+    this.infoService.changePhoto(photoData, this.user.id, this.selectedPhotoIndex).subscribe({
+      next: (response: any) => {
+        const updatedFilename = response.imageUrl || filename;
+        const updatedUrl = `http://localhost:8080/api/providers/get-photo/${this.user.id}/${updatedFilename}`;
+
+        this.photos[this.selectedPhotoIndex] = updatedUrl;
+        localStorage.setItem('photos', JSON.stringify(this.photos));
+
+        this.updateSPPPhotoUrl();
+        this.cdRef.detectChanges();
+      },
+      error: (err: any) => console.error('Error uploading photo:', err)
+    });
   }
+
+
 
   // Deactivation logic ----------------------
 
@@ -404,4 +386,13 @@ export class InfoComponent implements OnInit {
       this.router.navigate(['home-guest']);
       this.isDeactivateModalVisible = false;
   }
+
+  updateSPPPhotoUrl() {
+    if (!this.photos || this.photos.length === 0) {
+      this.sppPhotoUrl = '../../../../../assets/images/no_photos.jpg';
+      return;
+    }
+    this.sppPhotoUrl = this.photos[this.currentPhotoIndex];
+  }
+
 }
