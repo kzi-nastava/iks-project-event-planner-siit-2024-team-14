@@ -22,6 +22,7 @@ import { SolutionFiltersComponent } from './solution-filters/solution-filters.co
 import { SolutionListComponent } from './solution-list/solution-list.component';
 import { ProviderSolutionsComponent } from './provider-solutions/provider-solutions.component';
 import { SolutionCardComponent } from './solution-card/solution-card.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SolutionCardComponent } from './solution-card/solution-card.component';
     SolutionListComponent,
     ProviderSolutionsComponent,
     SolutionCardComponent,
+
   ],
   imports: [
     CommonModule,
@@ -52,6 +54,7 @@ import { SolutionCardComponent } from './solution-card/solution-card.component';
     MaterialModule,
     SharedModule,
     RouterOutlet,
+    AddProductComponent,
   ],
   providers: [
     provideAnimationsAsync()

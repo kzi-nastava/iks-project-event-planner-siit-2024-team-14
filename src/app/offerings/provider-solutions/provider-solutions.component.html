@@ -1,4 +1,9 @@
 <main>
+  <div class="actions">
+    <button class="brown-btn" (click)="onNewProduct()">New Product</button>
+    <button class="brown-btn" (click)="onNewService()">New Service</button>
+  </div>
+
   <h2>My Solutions</h2>
   <app-solution-list [solutionSupplier]="getProviderSolutions.bind(this)" />
 </main>

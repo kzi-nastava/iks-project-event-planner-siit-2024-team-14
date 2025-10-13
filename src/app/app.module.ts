@@ -71,6 +71,7 @@ import {HeaderComponent} from './components/homepage/header/header.component';
 import {EventPageComponent} from './components/event-management/event-page/event-page.component';
 import {MaterialModule} from './infrastructure/material/material.module';
 import {SharedModule} from './shared.module';
+import {AddProductComponent} from './offerings/products/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -140,6 +141,7 @@ import {SharedModule} from './shared.module';
     CommunicationModule,
     MaterialModule,
     SharedModule,
+    AddProductComponent
   ],
   providers: [
     provideAnimationsAsync(),

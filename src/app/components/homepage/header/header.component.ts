@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
             this.homeRoute = '/home-provider';
             break;
           case 'Admin':
-            this.profileRoute = '/admin-profile';
+            this.profileRoute = '/au-profile';
             this.homeRoute = '/home-admin';
             break;
           default:
