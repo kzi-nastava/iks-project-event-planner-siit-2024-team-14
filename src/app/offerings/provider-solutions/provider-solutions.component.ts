@@ -1,41 +1,34 @@
 import { Component, inject } from '@angular/core';
-import {ServiceService} from '../service.service';
-import {AuthService} from '../../infrastructure/auth/auth.service';
-import {OurServicesComponent} from '../../components/homepage/all-services/our-services.component';
-import {SolutionService} from '../../components/homepage/all-services/our-services.service';
-import {HttpParams} from '@angular/common/http';
+import { AuthService } from '../../infrastructure/auth/auth.service';
+import { SolutionService, Offering } from './solution-service';
+import {Router} from '@angular/router';
+import {AddProductComponent} from '../products/add-product/add-product.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-provider-solutions',
   templateUrl: './provider-solutions.component.html',
-  styles: `* {
-    color: #412c26;
-  }
-
-  main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 3rem;
-  }`
+  styleUrls: ['./provider-solutions.component.css']
 })
 export class ProviderSolutionsComponent {
+  constructor(private router: Router,
+              private dialog: MatDialog) {}
 
+  solutionService = inject(SolutionService); // ✅ inject the combined SolutionService
+  auth = inject(AuthService);
 
   protected getProviderSolutions(params: any) {
-    return this.solutionService.getAll({...params, provider: this.auth.user!.id});
+    return this.solutionService.getAll({ ...params, provider: this.auth.user!.id });
   }
 
+  onNewService() {
+    this.router.navigate(['/services/add']);
+  }
 
-  solutionService = inject(ServiceService); // TODO: Use solution service to get services and products, not just services
-  auth = inject(AuthService);
+  onNewProduct() {
+    this.dialog.open(AddProductComponent, {
+      width: '450px',
+      panelClass: 'product-dialog-container'
+    });
+  }
 }

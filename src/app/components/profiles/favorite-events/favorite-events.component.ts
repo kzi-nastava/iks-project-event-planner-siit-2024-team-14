@@ -1,42 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {OrganizerProfileComponent} from '../organizer-profile/organizer-profile.component';
+import {ViewOrganizerProfileService} from '../view-organizer-profile/view-organizer-profile.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-favorite-events',
   templateUrl: './favorite-events.component.html',
-  styleUrl: './favorite-events.component.css'
+  styleUrls: ['./favorite-events.component.css']
 })
-export class FavoriteEventsComponent {
-  events = [
-    {
-      organizerName: 'Dragana Milošević',
-      location: 'Niš, Serbia',
-      date: '02.12.2024',
-      title: 'Bakery Opening',
-      description: 'Come with an empty stomach!',
-      imageUrl: '../../../assets/images/event6.png'
-    },
-    {
-      organizerName: 'Nina Matijević',
-      location: 'Belgrade, Serbia',
-      date: '22.12.2024',
-      title: 'Graduation Party',
-      description: 'All college graduates welcome :)',
-      imageUrl: '../../../assets/images/event7.png'
-    },
-    {
-      organizerName: 'Dušan Kovačević',
-      location: 'Petrovaradin, Serbia',
-      date: '30.11.2024.',
-      title: 'EXIT Festival',
-      description: 'Together, always <3',
-      imageUrl: '../../../assets/images/event8.png'
-    },
-  ];
+export class FavoriteEventsComponent implements OnInit {
 
-  // Method to get initials of the organizer's name
-  getInitials(name: string): string {
-    const names = name.split(' ');
-    return names.length > 1 ? names[0][0] + names[1][0] : names[0][0];
+  favoriteEvents: any[] = [];
+  user: any;
+
+  private baseUrl = 'http://localhost:8080/api';
+
+  constructor(private http: HttpClient,
+              private viewOrganizerProfileService: ViewOrganizerProfileService,
+              private router: Router) {}
+
+  ngOnInit(): void {
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      this.user = JSON.parse(userString);
+      this.loadFavoriteEvents();
+    } else {
+      console.error('No user found in localStorage');
+    }
   }
-}
 
+  loadFavoriteEvents(): void {
+    this.viewOrganizerProfileService.getFavoriteEvents(this.user.id)
+      .subscribe({
+        next: (events) => {
+          console.log('Favorite events loaded:', events);
+          this.favoriteEvents = events;
+        },
+        error: (err) => {
+          console.error('Error fetching favorite events:', err);
+        }
+      });
+  }
+
+  getInitials(name: string): string {
+    if (!name) return '';
+    const parts = name.split(' ');
+    return parts.map(n => n[0]).join('');
+  }
+
+  openEvent(eventId: number) {
+    this.router.navigate(['/events', eventId]);
+  }
+
+
+  getPhotoUrl(eventId: number): string {
+    if (!eventId) {
+      return '../../../assets/images/no_photos.jpg'; // fallback image
+    }
+    return `http://localhost:8080/api/events/get-photo/${eventId}`;
+  }
+
+}

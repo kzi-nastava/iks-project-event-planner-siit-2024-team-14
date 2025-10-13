@@ -12,7 +12,7 @@
       <li><strong>Email:</strong> {{ user.email || 'No email available' }}</li>
       <li><strong>Address:</strong> {{ user.address || 'No address provided' }}</li>
       <li><strong>City:</strong> {{ user.city || 'No city provided' }}</li>
-      <li><strong>Phone number:</strong> {{ user.phoneNumber || 'No phone number' }}</li>
+      <li><strong>Phone number: </strong> {{ user.phoneNumber ? '0' + user.phoneNumber : 'No phone number' }}</li>
     </ul>
     <div class="profile-actions" *ngIf="loggedUserId !== null">
       <button class="report" (click)="openReportForm()">Report user</button>
@@ -25,7 +25,7 @@
   <app-lines></app-lines>
 </div>
 
-<app-upcoming-events></app-upcoming-events>
+<app-favorite-events></app-favorite-events>
 
 <div class="decorative-lines">
   <app-lines></app-lines>

@@ -27,6 +27,8 @@ export class ViewOrganizerProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
       this.viewOrganizerProfileService.getOrganizerById(userId).subscribe(user => {

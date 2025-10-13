@@ -13,4 +13,9 @@ export class ViewOrganizerProfileService {
   getOrganizerById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
+
+  getFavoriteEvents(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${userId}/favorite-events`);
+  }
+
 }

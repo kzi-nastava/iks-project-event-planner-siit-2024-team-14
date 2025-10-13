@@ -75,4 +75,5 @@ export class HottestEventsComponent implements OnInit {
   getTransform() {
     return `translateX(-${this.currentSlide * 33.33}%)`;
   }
+
 }

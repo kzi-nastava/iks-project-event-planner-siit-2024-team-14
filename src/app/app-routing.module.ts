@@ -41,6 +41,7 @@ import {
 import {
   UpdateAsOrganizerComponent
 } from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
+import {EventPageComponent} from './components/event-management/event-page/event-page.component';
 
 enum Role {
   ADMIN = 'Admin',
@@ -84,7 +85,8 @@ const routes: Routes = [
   { path: 'activate', component: ActivationComponent },
   { path: 'organizer-profile', component: OrganizerProfileComponent },
   { path: 'au-profile', component: AuProfileComponent },
-  { path: 'events/:id', component: EventDetailsComponent },
+  { path: 'events/:id', component: EventPageComponent },
+  // { path: 'events/:id', component: EventDetailsComponent },
   { path: 'view-organizer-profile/:id', component: ViewOrganizerProfileComponent },
   { path: 'view-provider-profile/:id', component: ViewProviderProfileComponent },
   { path: 'provider-profile', component: ProviderProfileComponent },
