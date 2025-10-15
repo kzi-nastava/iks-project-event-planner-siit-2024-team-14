@@ -196,3 +196,34 @@
   transform: scale(1.2); /* Slightly enlarge on hover */
   color: #ffa500; /* Brighten color on hover */
 }
+
+
+/* PDF download details */
+/* Centers the button at the bottom */
+.pdf-button-container {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Styles the brown PDF download button */
+.pdf-button {
+  background-color: #5a3e3e; /* brown color */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover and active effects */
+.pdf-button:hover {
+  background-color: #716D64; /* lighter brown on hover */
+  transform: translateY(-2px);
+}
+
+.pdf-button:active {
+  background-color: #5C3317; /* darker brown when pressed */
+  transform: translateY(0);
+}

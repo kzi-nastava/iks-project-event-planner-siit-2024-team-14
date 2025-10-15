@@ -5,6 +5,23 @@ import { CategoriesEtModel } from '../../interfaces/categories-et.model';
 import { GetEtNamesModel } from '../../interfaces/get-et-names.model';
 import { CreateEvent } from '../../interfaces/create-event.model';
 
+export interface CreateActivityDTO {
+  name: string;
+  description: string;
+  startTime: string; // e.g., '2025-10-15T09:00'
+  endTime: string;
+  location: string;
+}
+
+export interface ActivityDTO {
+  id: number;
+  name: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+  location: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,5 +62,13 @@ export class EventManagementService {
   /** ✅ Gets all favorite events for a user */
   getFavoriteEvents(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/organizers/${userId}/favorite-events`);
+  }
+
+  addActivity(eventId: number, dto: CreateActivityDTO): Observable<ActivityDTO> {
+    return this.http.post<ActivityDTO>(`${this.baseUrl}/events/${eventId}/activities`, dto);
+  }
+
+  getActivities(eventId: number): Observable<ActivityDTO[]> {
+    return this.http.get<ActivityDTO[]>(`${this.baseUrl}/events/${eventId}/events/activities`);
   }
 }

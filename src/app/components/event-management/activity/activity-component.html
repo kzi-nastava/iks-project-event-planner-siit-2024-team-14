@@ -1,0 +1,51 @@
+<h3>Event Agenda</h3>
+
+<form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
+  <input formControlName="name" placeholder="Name" required />
+  <input formControlName="description" placeholder="Description" />
+  <input formControlName="startTime" type="datetime-local" placeholder="Start Time" required />
+  <input formControlName="endTime" type="datetime-local" placeholder="End Time" required />
+  <input formControlName="location" placeholder="Location" />
+  <button type="submit">Add Activity</button>
+</form>
+
+<table *ngIf="activities.length > 0" border="1" cellpadding="5" cellspacing="0" style="margin-top: 15px; width: 100%;">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Location</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let activity of activities">
+    <td>{{ activity.name }}</td>
+    <td>{{ activity.description }}</td>
+    <td>{{ activity.startTime }}</td>
+    <td>{{ activity.endTime }}</td>
+    <td>{{ activity.location }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<p *ngIf="activities.length === 0">No activities yet.</p>
+
+<!-- Centered brown button below the table -->
+<div style="text-align: center; margin-top: 20px;">
+  <button
+    type="button"
+    (click)="generatePDF()"
+    style="
+      background-color: #5a3e3e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    ">
+    Download PDF
+  </button>
+</div>
