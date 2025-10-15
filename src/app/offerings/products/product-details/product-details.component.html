@@ -66,8 +66,10 @@
           </button>
         }
         @case ('ServiceAndProductProvider') {
-          @if (user!.id === product.provider?.id) {
-            <button [routerLink]="['edit']">Edit</button>
+          @if (user!.id === product.provider.id) {
+            <button [routerLink]="['edit']">
+              Edit
+            </button>
           }
         }
       }

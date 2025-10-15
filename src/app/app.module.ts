@@ -72,6 +72,7 @@ import {EventPageComponent} from './components/event-management/event-page/event
 import {MaterialModule} from './infrastructure/material/material.module';
 import {SharedModule} from './shared.module';
 import {AddProductComponent} from './offerings/products/add-product/add-product.component';
+import {EditProductComponent} from './offerings/products/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import {AddProductComponent} from './offerings/products/add-product/add-product.
     AllInvitationsComponent,
     JoinedEventsComponent,
     HeaderComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
@@ -141,7 +143,7 @@ import {AddProductComponent} from './offerings/products/add-product/add-product.
     CommunicationModule,
     MaterialModule,
     SharedModule,
-    AddProductComponent
+    AddProductComponent,
   ],
   providers: [
     provideAnimationsAsync(),

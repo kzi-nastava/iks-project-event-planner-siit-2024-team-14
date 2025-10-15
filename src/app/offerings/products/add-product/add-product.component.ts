@@ -14,6 +14,7 @@ import {MockMessagePopupComponent} from '../../services/add-service/__mocks__/mo
 import {MatOptionModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-product',
@@ -35,6 +36,7 @@ import {MatButton} from '@angular/material/button';
 
 
 export class AddProductComponent implements OnInit {
+
   private formBuilder = inject(FormBuilder);
   private categoryService = inject(CategoryService);
   private eventTypeService = inject(EventTypeManagementService);
@@ -42,12 +44,15 @@ export class AddProductComponent implements OnInit {
   protected location = inject(Location);
   protected router = inject(Router);
 
+  constructor(
+      private dialogRef: MatDialogRef<AddProductComponent>
+  ) {}
+
   infoFormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: [''],
     price: [NaN, [Validators.required, Validators.min(0)]],
     discount: [0, [Validators.min(0), Validators.max(100)]],
-    imageUrl: [''], // <-- just one string now
     visible: [true],
     available: [true],
     status: ['PENDING'] // default value
@@ -75,7 +80,7 @@ export class AddProductComponent implements OnInit {
     this.eventTypeService.getAllEventTypes().subscribe(types => this.allEventTypes = types);
     this.categoryService.getAll().subscribe(categories => this.allCategories = categories);
   }
-
+  /*
   onImageSelected(event: any) {
     const file: File = event.target.files[0];
     if (!file) return;
@@ -87,6 +92,7 @@ export class AddProductComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+ */
 
 
   onSubmit() {
@@ -97,7 +103,6 @@ export class AddProductComponent implements OnInit {
 
     if (this.isAddingNewCategory) {
       delete data.category?.id;
-      data.status = 'PENDING';
     } else {
       delete data.category?.name;
       delete data.category?.description;
@@ -105,12 +110,16 @@ export class AddProductComponent implements OnInit {
 
     console.log('[AddProductComponent] Submitting product:', data);
 
+    console.log(data);
     this.productService.create(data).subscribe({
       next: (product) => {
         this.successPopup.message = this.isAddingNewCategory
           ? `Proposed new category "${data.category?.name}". Admin will review your proposal.`
           : `Created product: "${product.name}"`;
         this.successPopup.isVisible = true;
+
+        alert("Product created!");
+        this.dialogRef.close('created'); // ✅ close popup after success
       },
       error: (err) => {
         this.errorPopup.message = `Failed to create product: ${err.message}`;
