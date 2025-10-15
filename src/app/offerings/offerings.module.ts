@@ -23,6 +23,7 @@ import { SolutionListComponent } from './solution-list/solution-list.component';
 import { ProviderSolutionsComponent } from './provider-solutions/provider-solutions.component';
 import { SolutionCardComponent } from './solution-card/solution-card.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
+import { EditProductComponent } from './products/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import { AddProductComponent } from './products/add-product/add-product.componen
     SolutionListComponent,
     ProviderSolutionsComponent,
     SolutionCardComponent,
-
   ],
   imports: [
     CommonModule,

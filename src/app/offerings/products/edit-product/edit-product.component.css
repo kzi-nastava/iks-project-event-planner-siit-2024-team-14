@@ -1,0 +1,30 @@
+form {
+  position: relative;
+  margin: 2% auto 0;
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 600px;
+}
+
+.price-discount-section {
+  display: flex;
+  gap: 1rem;
+}
+
+.actions-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 5%;
+}
+
+button[mat-button] {
+  margin: 0.5rem 0.5rem 0 0;
+  color: #523D35;
+}
+
+button[mat-raised-button] {
+  background-color: #523D35;
+  color: white;
+}

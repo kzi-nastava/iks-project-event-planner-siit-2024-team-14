@@ -42,6 +42,7 @@ import {
   UpdateAsOrganizerComponent
 } from './components/profiles/au-profile/update-as-organizer/update-as-organizer.component';
 import {EventPageComponent} from './components/event-management/event-page/event-page.component';
+import {EditProductComponent} from './offerings/products/edit-product/edit-product.component';
 
 enum Role {
   ADMIN = 'Admin',
@@ -65,6 +66,7 @@ const routes: Routes = [
   { path: 'services/add', component: AddServiceComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER], showHeader: false, showFooter: false } },
   { path: 'services/:id', component: ServiceDetailsComponent },
   { path: 'services/:id/edit', component: EditServiceComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] } },
+  { path: 'products/:id/edit', component: EditProductComponent, canActivate: [authGuard], data: { roles: [Role.PROVIDER] } },
   { path: 'products/:id', component: ProductDetailsComponent },
   {
     path: 'categories',

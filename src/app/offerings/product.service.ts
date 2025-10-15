@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import { environment } from '../../environment/environment';
 import { EventModel } from '../interfaces/event.model';
 import {Product} from './model/product.model';
@@ -11,6 +11,9 @@ import {Page} from '../interfaces/page.model';
 })
 export class ProductService {
   private baseURL = 'http://localhost:8080/api/products';
+
+  private productCreated = new Subject<void>();
+  productCreated$ = this.productCreated.asObservable();
 
   constructor(private httpClient: HttpClient) {}
 
@@ -36,12 +39,16 @@ export class ProductService {
     return this.httpClient.put<Product>(`${this.baseURL}/${product.id}`, product);
   }
 
-  create(product: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.baseURL}`, product);
+  create(product: any){
+    return this.httpClient.post<Product>(this.baseURL, product);
   }
 
   delete(product: Pick<Product, 'id'> | Product['id']) {
     return this.httpClient.delete<void>(`${this.baseURL}/${typeof product === 'number' ? product : product.id}`);
+  }
+
+  notifyProductCreated() {
+    this.productCreated.next();
   }
 
   getCategories(): Observable<any[]> {
