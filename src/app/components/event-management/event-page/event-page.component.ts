@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventManagementService } from '../event-management.service';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-event-management',
@@ -11,6 +13,8 @@ export class EventPageComponent implements OnInit {
   event: any = null;
   user: any = null;
   isFavorite: boolean = false;
+  selectedEventId = 6;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -89,4 +93,40 @@ export class EventPageComponent implements OnInit {
   }
 
   protected readonly Number = Number;
+
+  generateEventPDF(): void {
+    if (!this.event) return;
+
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('Event Details', 14, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Title: ${this.event.name || 'N/A'}`, 14, 35);
+    doc.text(`Description: ${this.event.description || 'N/A'}`, 14, 45);
+    doc.text(`Location: ${this.event.location || 'N/A'}`, 14, 55);
+    doc.text(`Start Date: ${this.event.startDate || 'N/A'}`, 14, 65);
+    doc.text(`End Date: ${this.event.endDate || 'N/A'}`, 14, 75);
+
+    if (this.event.activities && this.event.activities.length > 0) {
+      doc.text('Activities:', 14, 90);
+
+      const tableRows = this.event.activities.map((a: any) => [
+        a.name,
+        a.description,
+        a.startTime,
+        a.endTime,
+        a.location
+      ]);
+
+      autoTable(doc, {
+        head: [['Name', 'Description', 'Start Time', 'End Time', 'Location']],
+        body: tableRows,
+        startY: 95,
+      });
+    }
+
+    doc.save(`${this.event.name || 'event'}-details.pdf`);
+  }
 }

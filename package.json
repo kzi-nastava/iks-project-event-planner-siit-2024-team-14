@@ -25,6 +25,8 @@
     "@ngmodule/material-carousel": "^0.6.0",
     "@stomp/ng2-stompjs": "^8.0.0",
     "@stomp/stompjs": "^7.0.0",
+    "jspdf": "^3.0.3",
+    "jspdf-autotable": "^5.0.2",
     "ngx-slick-carousel": "^17.0.0",
     "rxjs": "~7.8.0",
     "slick-carousel": "^1.8.1",

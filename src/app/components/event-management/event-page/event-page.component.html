@@ -63,5 +63,14 @@
   </div>
 </div>
 
+<div class="pdf-button-container">
+  <button type="button" class="pdf-button" (click)="generateEventPDF()">
+    Download Event PDF
+  </button>
+</div>
+
+
 <!-- Green Rectangle -->
 <div class="green-rectangle"></div>
+
+<app-event-activities [eventId]="selectedEventId"></app-event-activities>
