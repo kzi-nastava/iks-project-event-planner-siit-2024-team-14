@@ -6,7 +6,7 @@ Event Planner is a multi-platform event management system designed to connect ev
 
 This repository contains the **Angular web application**, which provides an interactive interface for event planning, service discovery, bookings, communication, and platform administration.
 
-The application is part of a collaborative university project developed for Server-Layer Engineering course at the Faculty of Technical Sciences, University of Novi Sad.
+The application is part of a collaborative university project developed for Client-Layer Engineering and Software Testing courses at the Faculty of Technical Sciences, University of Novi Sad.
 
 ## Key Features
 
